@@ -1,0 +1,11496 @@
+[
+  {
+    "code": 1111000000,
+    "firstLoc": "서울",
+    "secondLoc": "종로구",
+    "geoX": 60,
+    "geoY": 127
+  },
+  {
+    "code": 1114054000,
+    "firstLoc": "서울",
+    "secondLoc": "중구",
+    "geoX": 60,
+    "geoY": 126
+  },
+  {
+    "code": 1117057000,
+    "firstLoc": "서울",
+    "secondLoc": "마포구",
+    "geoX": 59,
+    "geoY": 126
+  },
+  {
+    "code": 1120000000,
+    "firstLoc": "서울",
+    "secondLoc": "성동구",
+    "geoX": 61,
+    "geoY": 127
+  },
+  {
+    "code": 1120056000,
+    "firstLoc": "서울",
+    "secondLoc": "성동구",
+    "geoX": 61,
+    "geoY": 126
+  },
+  {
+    "code": 1121500000,
+    "firstLoc": "서울",
+    "secondLoc": "광진구",
+    "geoX": 62,
+    "geoY": 126
+  },
+  {
+    "code": 1126000000,
+    "firstLoc": "서울",
+    "secondLoc": "중랑구",
+    "geoX": 62,
+    "geoY": 128
+  },
+  {
+    "code": 1129064000,
+    "firstLoc": "서울",
+    "secondLoc": "성북구",
+    "geoX": 60,
+    "geoY": 128
+  },
+  {
+    "code": 1130500000,
+    "firstLoc": "서울",
+    "secondLoc": "강북구",
+    "geoX": 61,
+    "geoY": 128
+  },
+  {
+    "code": 1132000000,
+    "firstLoc": "서울",
+    "secondLoc": "도봉구",
+    "geoX": 61,
+    "geoY": 129
+  },
+  {
+    "code": 1135062100,
+    "firstLoc": "서울",
+    "secondLoc": "노원구",
+    "geoX": 62,
+    "geoY": 129
+  },
+  {
+    "code": 1138000000,
+    "firstLoc": "서울",
+    "secondLoc": "은평구",
+    "geoX": 59,
+    "geoY": 127
+  },
+  {
+    "code": 1138052000,
+    "firstLoc": "서울",
+    "secondLoc": "은평구",
+    "geoX": 59,
+    "geoY": 128
+  },
+  {
+    "code": 1138065000,
+    "firstLoc": "서울",
+    "secondLoc": "은평구",
+    "geoX": 58,
+    "geoY": 127
+  },
+  {
+    "code": 1147000000,
+    "firstLoc": "서울",
+    "secondLoc": "양천구",
+    "geoX": 58,
+    "geoY": 126
+  },
+  {
+    "code": 1147056000,
+    "firstLoc": "서울",
+    "secondLoc": "양천구",
+    "geoX": 57,
+    "geoY": 126
+  },
+  {
+    "code": 1150060300,
+    "firstLoc": "서울",
+    "secondLoc": "강서구",
+    "geoX": 57,
+    "geoY": 127
+  },
+  {
+    "code": 1153000000,
+    "firstLoc": "서울",
+    "secondLoc": "구로구",
+    "geoX": 58,
+    "geoY": 125
+  },
+  {
+    "code": 1153078000,
+    "firstLoc": "서울",
+    "secondLoc": "구로구",
+    "geoX": 57,
+    "geoY": 125
+  },
+  {
+    "code": 1154500000,
+    "firstLoc": "서울",
+    "secondLoc": "금천구",
+    "geoX": 59,
+    "geoY": 124
+  },
+  {
+    "code": 1154567000,
+    "firstLoc": "서울",
+    "secondLoc": "금천구",
+    "geoX": 58,
+    "geoY": 124
+  },
+  {
+    "code": 1159000000,
+    "firstLoc": "서울",
+    "secondLoc": "동작구",
+    "geoX": 59,
+    "geoY": 125
+  },
+  {
+    "code": 1159060500,
+    "firstLoc": "서울",
+    "secondLoc": "동작구",
+    "geoX": 60,
+    "geoY": 125
+  },
+  {
+    "code": 1165000000,
+    "firstLoc": "서울",
+    "secondLoc": "서초구",
+    "geoX": 61,
+    "geoY": 125
+  },
+  {
+    "code": 1165066000,
+    "firstLoc": "서울",
+    "secondLoc": "서초구",
+    "geoX": 61,
+    "geoY": 124
+  },
+  {
+    "code": 1168067000,
+    "firstLoc": "서울",
+    "secondLoc": "강남구",
+    "geoX": 62,
+    "geoY": 125
+  },
+  {
+    "code": 1171053100,
+    "firstLoc": "서울",
+    "secondLoc": "송파구",
+    "geoX": 63,
+    "geoY": 125
+  },
+  {
+    "code": 1171056600,
+    "firstLoc": "서울",
+    "secondLoc": "송파구",
+    "geoX": 63,
+    "geoY": 126
+  },
+  {
+    "code": 1174051500,
+    "firstLoc": "서울",
+    "secondLoc": "강동구",
+    "geoX": 63,
+    "geoY": 127
+  },
+  {
+    "code": 2611000000,
+    "firstLoc": "부산",
+    "secondLoc": "중구",
+    "geoX": 97,
+    "geoY": 74
+  },
+  {
+    "code": 2614068000,
+    "firstLoc": "부산",
+    "secondLoc": "서구",
+    "geoX": 97,
+    "geoY": 73
+  },
+  {
+    "code": 2617000000,
+    "firstLoc": "부산",
+    "secondLoc": "동구",
+    "geoX": 98,
+    "geoY": 75
+  },
+  {
+    "code": 2620000000,
+    "firstLoc": "부산",
+    "secondLoc": "영도구",
+    "geoX": 98,
+    "geoY": 74
+  },
+  {
+    "code": 2620065000,
+    "firstLoc": "부산",
+    "secondLoc": "영도구",
+    "geoX": 98,
+    "geoY": 73
+  },
+  {
+    "code": 2623000000,
+    "firstLoc": "부산",
+    "secondLoc": "부산진",
+    "geoX": 97,
+    "geoY": 75
+  },
+  {
+    "code": 2623054000,
+    "firstLoc": "부산",
+    "secondLoc": "부산진",
+    "geoX": 97,
+    "geoY": 76
+  },
+  {
+    "code": 2626000000,
+    "firstLoc": "부산",
+    "secondLoc": "동래구",
+    "geoX": 98,
+    "geoY": 76
+  },
+  {
+    "code": 2629057000,
+    "firstLoc": "부산",
+    "secondLoc": "남구",
+    "geoX": 99,
+    "geoY": 74
+  },
+  {
+    "code": 2632000000,
+    "firstLoc": "부산",
+    "secondLoc": "북구",
+    "geoX": 96,
+    "geoY": 76
+  },
+  {
+    "code": 2632053000,
+    "firstLoc": "부산",
+    "secondLoc": "북구",
+    "geoX": 97,
+    "geoY": 77
+  },
+  {
+    "code": 2635000000,
+    "firstLoc": "부산",
+    "secondLoc": "해운대",
+    "geoX": 99,
+    "geoY": 75
+  },
+  {
+    "code": 2635052000,
+    "firstLoc": "부산",
+    "secondLoc": "해운대",
+    "geoX": 99,
+    "geoY": 76
+  },
+  {
+    "code": 2635054000,
+    "firstLoc": "부산",
+    "secondLoc": "해운대",
+    "geoX": 100,
+    "geoY": 75
+  },
+  {
+    "code": 2635055100,
+    "firstLoc": "부산",
+    "secondLoc": "해운대",
+    "geoX": 100,
+    "geoY": 76
+  },
+  {
+    "code": 2635061000,
+    "firstLoc": "부산",
+    "secondLoc": "해운대",
+    "geoX": 99,
+    "geoY": 77
+  },
+  {
+    "code": 2638000000,
+    "firstLoc": "부산",
+    "secondLoc": "사하구",
+    "geoX": 96,
+    "geoY": 74
+  },
+  {
+    "code": 2638058000,
+    "firstLoc": "부산",
+    "secondLoc": "사하구",
+    "geoX": 96,
+    "geoY": 73
+  },
+  {
+    "code": 2641000000,
+    "firstLoc": "부산",
+    "secondLoc": "금정구",
+    "geoX": 98,
+    "geoY": 77
+  },
+  {
+    "code": 2641063500,
+    "firstLoc": "부산",
+    "secondLoc": "금정구",
+    "geoX": 98,
+    "geoY": 78
+  },
+  {
+    "code": 2644053000,
+    "firstLoc": "부산",
+    "secondLoc": "강서구",
+    "geoX": 95,
+    "geoY": 76
+  },
+  {
+    "code": 2644056000,
+    "firstLoc": "부산",
+    "secondLoc": "강서구",
+    "geoX": 94,
+    "geoY": 74
+  },
+  {
+    "code": 2644058000,
+    "firstLoc": "부산",
+    "secondLoc": "강서구",
+    "geoX": 93,
+    "geoY": 73
+  },
+  {
+    "code": 2653000000,
+    "firstLoc": "부산",
+    "secondLoc": "사상구",
+    "geoX": 96,
+    "geoY": 75
+  },
+  {
+    "code": 2671000000,
+    "firstLoc": "부산",
+    "secondLoc": "기장군",
+    "geoX": 100,
+    "geoY": 77
+  },
+  {
+    "code": 2671025300,
+    "firstLoc": "부산",
+    "secondLoc": "기장군",
+    "geoX": 101,
+    "geoY": 79
+  },
+  {
+    "code": 2671033000,
+    "firstLoc": "부산",
+    "secondLoc": "기장군",
+    "geoX": 99,
+    "geoY": 78
+  },
+  {
+    "code": 2711000000,
+    "firstLoc": "대구",
+    "secondLoc": "중구",
+    "geoX": 89,
+    "geoY": 90
+  },
+  {
+    "code": 2714000000,
+    "firstLoc": "대구",
+    "secondLoc": "동구",
+    "geoX": 90,
+    "geoY": 91
+  },
+  {
+    "code": 2714076000,
+    "firstLoc": "대구",
+    "secondLoc": "동구",
+    "geoX": 90,
+    "geoY": 92
+  },
+  {
+    "code": 2717000000,
+    "firstLoc": "대구",
+    "secondLoc": "서구",
+    "geoX": 88,
+    "geoY": 90
+  },
+  {
+    "code": 2717055000,
+    "firstLoc": "대구",
+    "secondLoc": "서구",
+    "geoX": 88,
+    "geoY": 91
+  },
+  {
+    "code": 2723000000,
+    "firstLoc": "대구",
+    "secondLoc": "북구",
+    "geoX": 89,
+    "geoY": 91
+  },
+  {
+    "code": 2723069500,
+    "firstLoc": "대구",
+    "secondLoc": "북구",
+    "geoX": 89,
+    "geoY": 92
+  },
+  {
+    "code": 2723072500,
+    "firstLoc": "대구",
+    "secondLoc": "북구",
+    "geoX": 88,
+    "geoY": 92
+  },
+  {
+    "code": 2726054000,
+    "firstLoc": "대구",
+    "secondLoc": "수성구",
+    "geoX": 90,
+    "geoY": 90
+  },
+  {
+    "code": 2726063000,
+    "firstLoc": "대구",
+    "secondLoc": "수성구",
+    "geoX": 89,
+    "geoY": 89
+  },
+  {
+    "code": 2726065100,
+    "firstLoc": "대구",
+    "secondLoc": "수성구",
+    "geoX": 90,
+    "geoY": 89
+  },
+  {
+    "code": 2729057600,
+    "firstLoc": "대구",
+    "secondLoc": "달서구",
+    "geoX": 87,
+    "geoY": 90
+  },
+  {
+    "code": 2729060100,
+    "firstLoc": "대구",
+    "secondLoc": "달서구",
+    "geoX": 88,
+    "geoY": 89
+  },
+  {
+    "code": 2771000000,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 86,
+    "geoY": 88
+  },
+  {
+    "code": 2771025600,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 86,
+    "geoY": 90
+  },
+  {
+    "code": 2771026500,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 86,
+    "geoY": 87
+  },
+  {
+    "code": 2771033000,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 86,
+    "geoY": 91
+  },
+  {
+    "code": 2771038000,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 86,
+    "geoY": 86
+  },
+  {
+    "code": 2800000000,
+    "firstLoc": "인천",
+    "secondLoc": "미추홀",
+    "geoX": 55,
+    "geoY": 124
+  },
+  {
+    "code": 2811000000,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 54,
+    "geoY": 125
+  },
+  {
+    "code": 2811052000,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 53,
+    "geoY": 124
+  },
+  {
+    "code": 2811062000,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 52,
+    "geoY": 125
+  },
+  {
+    "code": 2811062800,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 51,
+    "geoY": 125
+  },
+  {
+    "code": 2811063000,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 50,
+    "geoY": 124
+  },
+  {
+    "code": 2818500000,
+    "firstLoc": "인천",
+    "secondLoc": "연수구",
+    "geoX": 55,
+    "geoY": 123
+  },
+  {
+    "code": 2818582000,
+    "firstLoc": "인천",
+    "secondLoc": "연수구",
+    "geoX": 54,
+    "geoY": 123
+  },
+  {
+    "code": 2820000000,
+    "firstLoc": "인천",
+    "secondLoc": "남동구",
+    "geoX": 56,
+    "geoY": 124
+  },
+  {
+    "code": 2820069000,
+    "firstLoc": "인천",
+    "secondLoc": "남동구",
+    "geoX": 56,
+    "geoY": 123
+  },
+  {
+    "code": 2823700000,
+    "firstLoc": "인천",
+    "secondLoc": "부평구",
+    "geoX": 55,
+    "geoY": 125
+  },
+  {
+    "code": 2824500000,
+    "firstLoc": "인천",
+    "secondLoc": "계양구",
+    "geoX": 56,
+    "geoY": 126
+  },
+  {
+    "code": 2824571000,
+    "firstLoc": "인천",
+    "secondLoc": "계양구",
+    "geoX": 56,
+    "geoY": 127
+  },
+  {
+    "code": 2826000000,
+    "firstLoc": "인천",
+    "secondLoc": "서구",
+    "geoX": 55,
+    "geoY": 126
+  },
+  {
+    "code": 2826051500,
+    "firstLoc": "인천",
+    "secondLoc": "서구",
+    "geoX": 55,
+    "geoY": 127
+  },
+  {
+    "code": 2826053600,
+    "firstLoc": "인천",
+    "secondLoc": "서구",
+    "geoX": 54,
+    "geoY": 126
+  },
+  {
+    "code": 2871000000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 51,
+    "geoY": 130
+  },
+  {
+    "code": 2871025000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 51,
+    "geoY": 131
+  },
+  {
+    "code": 2871032000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 51,
+    "geoY": 129
+  },
+  {
+    "code": 2871033000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 51,
+    "geoY": 128
+  },
+  {
+    "code": 2871034000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 50,
+    "geoY": 128
+  },
+  {
+    "code": 2871035000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 50,
+    "geoY": 129
+  },
+  {
+    "code": 2871036000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 50,
+    "geoY": 130
+  },
+  {
+    "code": 2871037000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 50,
+    "geoY": 131
+  },
+  {
+    "code": 2871038000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 50,
+    "geoY": 132
+  },
+  {
+    "code": 2871040000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 48,
+    "geoY": 131
+  },
+  {
+    "code": 2871041000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 49,
+    "geoY": 130
+  },
+  {
+    "code": 2871042000,
+    "firstLoc": "인천",
+    "secondLoc": "강화군",
+    "geoX": 47,
+    "geoY": 128
+  },
+  {
+    "code": 2872031000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 50,
+    "geoY": 126
+  },
+  {
+    "code": 2872033000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 21,
+    "geoY": 135
+  },
+  {
+    "code": 2872034000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 21,
+    "geoY": 132
+  },
+  {
+    "code": 2872035000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 46,
+    "geoY": 119
+  },
+  {
+    "code": 2872036000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 51,
+    "geoY": 120
+  },
+  {
+    "code": 2872037000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 48,
+    "geoY": 120
+  },
+  {
+    "code": 2872038000,
+    "firstLoc": "인천",
+    "secondLoc": "옹진군",
+    "geoX": 38,
+    "geoY": 129
+  },
+  {
+    "code": 2900000000,
+    "firstLoc": "광주",
+    "secondLoc": "서구",
+    "geoX": 58,
+    "geoY": 74
+  },
+  {
+    "code": 2911000000,
+    "firstLoc": "광주",
+    "secondLoc": "동구",
+    "geoX": 60,
+    "geoY": 74
+  },
+  {
+    "code": 2911073000,
+    "firstLoc": "광주",
+    "secondLoc": "동구",
+    "geoX": 60,
+    "geoY": 73
+  },
+  {
+    "code": 2914000000,
+    "firstLoc": "광주",
+    "secondLoc": "서구",
+    "geoX": 59,
+    "geoY": 74
+  },
+  {
+    "code": 2914080000,
+    "firstLoc": "광주",
+    "secondLoc": "서구",
+    "geoX": 58,
+    "geoY": 73
+  },
+  {
+    "code": 2914084000,
+    "firstLoc": "광주",
+    "secondLoc": "서구",
+    "geoX": 58,
+    "geoY": 75
+  },
+  {
+    "code": 2915500000,
+    "firstLoc": "광주",
+    "secondLoc": "남구",
+    "geoX": 59,
+    "geoY": 73
+  },
+  {
+    "code": 2917000000,
+    "firstLoc": "광주",
+    "secondLoc": "북구",
+    "geoX": 59,
+    "geoY": 75
+  },
+  {
+    "code": 2917065000,
+    "firstLoc": "광주",
+    "secondLoc": "북구",
+    "geoX": 60,
+    "geoY": 75
+  },
+  {
+    "code": 2917069500,
+    "firstLoc": "광주",
+    "secondLoc": "북구",
+    "geoX": 59,
+    "geoY": 76
+  },
+  {
+    "code": 2920000000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 57,
+    "geoY": 74
+  },
+  {
+    "code": 2920060000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 57,
+    "geoY": 75
+  },
+  {
+    "code": 2920062000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 58,
+    "geoY": 76
+  },
+  {
+    "code": 2920065000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 56,
+    "geoY": 76
+  },
+  {
+    "code": 2920066000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 57,
+    "geoY": 73
+  },
+  {
+    "code": 2920068000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 55,
+    "geoY": 74
+  },
+  {
+    "code": 2920069000,
+    "firstLoc": "광주",
+    "secondLoc": "광산구",
+    "geoX": 56,
+    "geoY": 75
+  },
+  {
+    "code": 3000000000,
+    "firstLoc": "대전",
+    "secondLoc": "중구",
+    "geoX": 67,
+    "geoY": 100
+  },
+  {
+    "code": 3011000000,
+    "firstLoc": "대전",
+    "secondLoc": "동구",
+    "geoX": 68,
+    "geoY": 100
+  },
+  {
+    "code": 3011055100,
+    "firstLoc": "대전",
+    "secondLoc": "동구",
+    "geoX": 69,
+    "geoY": 100
+  },
+  {
+    "code": 3011064000,
+    "firstLoc": "대전",
+    "secondLoc": "동구",
+    "geoX": 68,
+    "geoY": 101
+  },
+  {
+    "code": 3011074000,
+    "firstLoc": "대전",
+    "secondLoc": "동구",
+    "geoX": 69,
+    "geoY": 99
+  },
+  {
+    "code": 3014062000,
+    "firstLoc": "대전",
+    "secondLoc": "중구",
+    "geoX": 68,
+    "geoY": 99
+  },
+  {
+    "code": 3014074000,
+    "firstLoc": "대전",
+    "secondLoc": "중구",
+    "geoX": 67,
+    "geoY": 99
+  },
+  {
+    "code": 3017059600,
+    "firstLoc": "대전",
+    "secondLoc": "서구",
+    "geoX": 66,
+    "geoY": 99
+  },
+  {
+    "code": 3017060000,
+    "firstLoc": "대전",
+    "secondLoc": "서구",
+    "geoX": 67,
+    "geoY": 98
+  },
+  {
+    "code": 3020000000,
+    "firstLoc": "대전",
+    "secondLoc": "유성구",
+    "geoX": 67,
+    "geoY": 101
+  },
+  {
+    "code": 3020054000,
+    "firstLoc": "대전",
+    "secondLoc": "유성구",
+    "geoX": 66,
+    "geoY": 101
+  },
+  {
+    "code": 3020058000,
+    "firstLoc": "대전",
+    "secondLoc": "유성구",
+    "geoX": 67,
+    "geoY": 102
+  },
+  {
+    "code": 3023055000,
+    "firstLoc": "대전",
+    "secondLoc": "대덕구",
+    "geoX": 68,
+    "geoY": 103
+  },
+  {
+    "code": 3023056000,
+    "firstLoc": "대전",
+    "secondLoc": "대덕구",
+    "geoX": 68,
+    "geoY": 102
+  },
+  {
+    "code": 3100000000,
+    "firstLoc": "울산",
+    "secondLoc": "중구",
+    "geoX": 102,
+    "geoY": 84
+  },
+  {
+    "code": 3111063000,
+    "firstLoc": "울산",
+    "secondLoc": "중구",
+    "geoX": 102,
+    "geoY": 85
+  },
+  {
+    "code": 3114054000,
+    "firstLoc": "울산",
+    "secondLoc": "남구",
+    "geoX": 102,
+    "geoY": 83
+  },
+  {
+    "code": 3117000000,
+    "firstLoc": "울산",
+    "secondLoc": "동구",
+    "geoX": 104,
+    "geoY": 83
+  },
+  {
+    "code": 3117058000,
+    "firstLoc": "울산",
+    "secondLoc": "동구",
+    "geoX": 104,
+    "geoY": 84
+  },
+  {
+    "code": 3120000000,
+    "firstLoc": "울산",
+    "secondLoc": "북구",
+    "geoX": 103,
+    "geoY": 85
+  },
+  {
+    "code": 3120051000,
+    "firstLoc": "울산",
+    "secondLoc": "북구",
+    "geoX": 102,
+    "geoY": 86
+  },
+  {
+    "code": 3120054000,
+    "firstLoc": "울산",
+    "secondLoc": "북구",
+    "geoX": 104,
+    "geoY": 85
+  },
+  {
+    "code": 3120058000,
+    "firstLoc": "울산",
+    "secondLoc": "북구",
+    "geoX": 103,
+    "geoY": 84
+  },
+  {
+    "code": 3120059000,
+    "firstLoc": "울산",
+    "secondLoc": "북구",
+    "geoX": 103,
+    "geoY": 83
+  },
+  {
+    "code": 3171000000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 101,
+    "geoY": 84
+  },
+  {
+    "code": 3171025000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 102,
+    "geoY": 81
+  },
+  {
+    "code": 3171025300,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 98,
+    "geoY": 84
+  },
+  {
+    "code": 3171025600,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 101,
+    "geoY": 81
+  },
+  {
+    "code": 3171025900,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 100,
+    "geoY": 84
+  },
+  {
+    "code": 3171031000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 102,
+    "geoY": 80
+  },
+  {
+    "code": 3171034000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 100,
+    "geoY": 82
+  },
+  {
+    "code": 3171036000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 100,
+    "geoY": 86
+  },
+  {
+    "code": 3171037000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 99,
+    "geoY": 86
+  },
+  {
+    "code": 3171038000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 98,
+    "geoY": 85
+  },
+  {
+    "code": 3171040000,
+    "firstLoc": "울산",
+    "secondLoc": "울주군",
+    "geoX": 99,
+    "geoY": 83
+  },
+  {
+    "code": 3611000000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 66,
+    "geoY": 103
+  },
+  {
+    "code": 3611025000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 66,
+    "geoY": 106
+  },
+  {
+    "code": 3611031000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 105
+  },
+  {
+    "code": 3611032000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 66,
+    "geoY": 105
+  },
+  {
+    "code": 3611033000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 67,
+    "geoY": 104
+  },
+  {
+    "code": 3611034000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 103
+  },
+  {
+    "code": 3611035000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 64,
+    "geoY": 104
+  },
+  {
+    "code": 3611036000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 106
+  },
+  {
+    "code": 3611037000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 64,
+    "geoY": 108
+  },
+  {
+    "code": 3611038000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 107
+  },
+  {
+    "code": 3611039000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 63,
+    "geoY": 108
+  },
+  {
+    "code": 3611052000,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 104
+  },
+  {
+    "code": 4111100000,
+    "firstLoc": "경기",
+    "secondLoc": "수원장안",
+    "geoX": 60,
+    "geoY": 121
+  },
+  {
+    "code": 4111300000,
+    "firstLoc": "경기",
+    "secondLoc": "수원권선",
+    "geoX": 60,
+    "geoY": 120
+  },
+  {
+    "code": 4111366200,
+    "firstLoc": "경기",
+    "secondLoc": "수원권선",
+    "geoX": 59,
+    "geoY": 120
+  },
+  {
+    "code": 4111500000,
+    "firstLoc": "경기",
+    "secondLoc": "수원팔달",
+    "geoX": 61,
+    "geoY": 121
+  },
+  {
+    "code": 4111700000,
+    "firstLoc": "경기",
+    "secondLoc": "수원영통",
+    "geoX": 61,
+    "geoY": 120
+  },
+  {
+    "code": 4113100000,
+    "firstLoc": "경기",
+    "secondLoc": "성남수정",
+    "geoX": 63,
+    "geoY": 124
+  },
+  {
+    "code": 4113154000,
+    "firstLoc": "경기",
+    "secondLoc": "성남수정",
+    "geoX": 62,
+    "geoY": 124
+  },
+  {
+    "code": 4113367000,
+    "firstLoc": "경기",
+    "secondLoc": "성남중원",
+    "geoX": 63,
+    "geoY": 123
+  },
+  {
+    "code": 4113500000,
+    "firstLoc": "경기",
+    "secondLoc": "성남분당",
+    "geoX": 62,
+    "geoY": 123
+  },
+  {
+    "code": 4113551000,
+    "firstLoc": "경기",
+    "secondLoc": "성남분당",
+    "geoX": 63,
+    "geoY": 122
+  },
+  {
+    "code": 4113553000,
+    "firstLoc": "경기",
+    "secondLoc": "성남분당",
+    "geoX": 62,
+    "geoY": 122
+  },
+  {
+    "code": 4115000000,
+    "firstLoc": "경기",
+    "secondLoc": "의정부",
+    "geoX": 61,
+    "geoY": 130
+  },
+  {
+    "code": 4115057300,
+    "firstLoc": "경기",
+    "secondLoc": "의정부",
+    "geoX": 62,
+    "geoY": 130
+  },
+  {
+    "code": 4117100000,
+    "firstLoc": "경기",
+    "secondLoc": "안양만안",
+    "geoX": 59,
+    "geoY": 123
+  },
+  {
+    "code": 4117161000,
+    "firstLoc": "경기",
+    "secondLoc": "안양만안",
+    "geoX": 58,
+    "geoY": 123
+  },
+  {
+    "code": 4117355000,
+    "firstLoc": "경기",
+    "secondLoc": "안양동안",
+    "geoX": 60,
+    "geoY": 123
+  },
+  {
+    "code": 4122000000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 62,
+    "geoY": 114
+  },
+  {
+    "code": 4122025000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 61,
+    "geoY": 114
+  },
+  {
+    "code": 4122025300,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 59,
+    "geoY": 114
+  },
+  {
+    "code": 4122025600,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 58,
+    "geoY": 114
+  },
+  {
+    "code": 4122031000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 62,
+    "geoY": 117
+  },
+  {
+    "code": 4122032000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 61,
+    "geoY": 117
+  },
+  {
+    "code": 4122033000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 61,
+    "geoY": 115
+  },
+  {
+    "code": 4122034000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 60,
+    "geoY": 115
+  },
+  {
+    "code": 4122051000,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 61,
+    "geoY": 116
+  },
+  {
+    "code": 4122053500,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 62,
+    "geoY": 115
+  },
+  {
+    "code": 4125000000,
+    "firstLoc": "경기",
+    "secondLoc": "동두천시",
+    "geoX": 61,
+    "geoY": 134
+  },
+  {
+    "code": 4125058000,
+    "firstLoc": "경기",
+    "secondLoc": "동두천시",
+    "geoX": 61,
+    "geoY": 135
+  },
+  {
+    "code": 4127100000,
+    "firstLoc": "경기",
+    "secondLoc": "안산상록",
+    "geoX": 58,
+    "geoY": 121
+  },
+  {
+    "code": 4127157000,
+    "firstLoc": "경기",
+    "secondLoc": "안산상록",
+    "geoX": 58,
+    "geoY": 122
+  },
+  {
+    "code": 4127160000,
+    "firstLoc": "경기",
+    "secondLoc": "안산상록",
+    "geoX": 59,
+    "geoY": 121
+  },
+  {
+    "code": 4127300000,
+    "firstLoc": "경기",
+    "secondLoc": "안산단원",
+    "geoX": 57,
+    "geoY": 121
+  },
+  {
+    "code": 4127351000,
+    "firstLoc": "경기",
+    "secondLoc": "안산단원",
+    "geoX": 57,
+    "geoY": 122
+  },
+  {
+    "code": 4127361000,
+    "firstLoc": "경기",
+    "secondLoc": "안산단원",
+    "geoX": 53,
+    "geoY": 120
+  },
+  {
+    "code": 4128100000,
+    "firstLoc": "경기",
+    "secondLoc": "고양덕양",
+    "geoX": 57,
+    "geoY": 128
+  },
+  {
+    "code": 4128151000,
+    "firstLoc": "경기",
+    "secondLoc": "고양덕양",
+    "geoX": 57,
+    "geoY": 129
+  },
+  {
+    "code": 4128152000,
+    "firstLoc": "경기",
+    "secondLoc": "고양덕양",
+    "geoX": 58,
+    "geoY": 129
+  },
+  {
+    "code": 4128153000,
+    "firstLoc": "경기",
+    "secondLoc": "고양덕양",
+    "geoX": 58,
+    "geoY": 128
+  },
+  {
+    "code": 4128159000,
+    "firstLoc": "경기",
+    "secondLoc": "고양덕양",
+    "geoX": 59,
+    "geoY": 130
+  },
+  {
+    "code": 4128500000,
+    "firstLoc": "경기",
+    "secondLoc": "일산동구",
+    "geoX": 56,
+    "geoY": 129
+  },
+  {
+    "code": 4128557000,
+    "firstLoc": "경기",
+    "secondLoc": "일산동구",
+    "geoX": 56,
+    "geoY": 128
+  },
+  {
+    "code": 4128560000,
+    "firstLoc": "경기",
+    "secondLoc": "일산동구",
+    "geoX": 57,
+    "geoY": 130
+  },
+  {
+    "code": 4129000000,
+    "firstLoc": "경기",
+    "secondLoc": "과천시",
+    "geoX": 60,
+    "geoY": 124
+  },
+  {
+    "code": 4131000000,
+    "firstLoc": "경기",
+    "secondLoc": "구리시",
+    "geoX": 62,
+    "geoY": 127
+  },
+  {
+    "code": 4131052000,
+    "firstLoc": "경기",
+    "secondLoc": "구리시",
+    "geoX": 63,
+    "geoY": 128
+  },
+  {
+    "code": 4136000000,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 64,
+    "geoY": 128
+  },
+  {
+    "code": 4136025000,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 64,
+    "geoY": 127
+  },
+  {
+    "code": 4136025300,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 63,
+    "geoY": 130
+  },
+  {
+    "code": 4136025600,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 65,
+    "geoY": 129
+  },
+  {
+    "code": 4136025900,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 63,
+    "geoY": 129
+  },
+  {
+    "code": 4136026200,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 64,
+    "geoY": 130
+  },
+  {
+    "code": 4136034000,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 66,
+    "geoY": 130
+  },
+  {
+    "code": 4136036000,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 65,
+    "geoY": 126
+  },
+  {
+    "code": 4136051000,
+    "firstLoc": "경기",
+    "secondLoc": "남양주",
+    "geoX": 64,
+    "geoY": 129
+  },
+  {
+    "code": 4137000000,
+    "firstLoc": "경기",
+    "secondLoc": "오산시",
+    "geoX": 62,
+    "geoY": 118
+  },
+  {
+    "code": 4137053000,
+    "firstLoc": "경기",
+    "secondLoc": "오산시",
+    "geoX": 61,
+    "geoY": 118
+  },
+  {
+    "code": 4139000000,
+    "firstLoc": "경기",
+    "secondLoc": "시흥시",
+    "geoX": 57,
+    "geoY": 123
+  },
+  {
+    "code": 4139051000,
+    "firstLoc": "경기",
+    "secondLoc": "시흥시",
+    "geoX": 57,
+    "geoY": 124
+  },
+  {
+    "code": 4139058900,
+    "firstLoc": "경기",
+    "secondLoc": "시흥시",
+    "geoX": 56,
+    "geoY": 122
+  },
+  {
+    "code": 4141000000,
+    "firstLoc": "경기",
+    "secondLoc": "군포시",
+    "geoX": 59,
+    "geoY": 122
+  },
+  {
+    "code": 4143000000,
+    "firstLoc": "경기",
+    "secondLoc": "의왕시",
+    "geoX": 60,
+    "geoY": 122
+  },
+  {
+    "code": 4145000000,
+    "firstLoc": "경기",
+    "secondLoc": "하남시",
+    "geoX": 64,
+    "geoY": 126
+  },
+  {
+    "code": 4146100000,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 64,
+    "geoY": 119
+  },
+  {
+    "code": 4146125000,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 64,
+    "geoY": 120
+  },
+  {
+    "code": 4146125900,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 63,
+    "geoY": 117
+  },
+  {
+    "code": 4146134000,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 66,
+    "geoY": 118
+  },
+  {
+    "code": 4146135000,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 67,
+    "geoY": 118
+  },
+  {
+    "code": 4146136000,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 65,
+    "geoY": 120
+  },
+  {
+    "code": 4146152600,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 63,
+    "geoY": 120
+  },
+  {
+    "code": 4146300000,
+    "firstLoc": "경기",
+    "secondLoc": "용인기흥",
+    "geoX": 62,
+    "geoY": 120
+  },
+  {
+    "code": 4146500000,
+    "firstLoc": "경기",
+    "secondLoc": "용인수지",
+    "geoX": 62,
+    "geoY": 121
+  },
+  {
+    "code": 4148000000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 56,
+    "geoY": 131
+  },
+  {
+    "code": 4148025000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 56,
+    "geoY": 133
+  },
+  {
+    "code": 4148025300,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 57,
+    "geoY": 132
+  },
+  {
+    "code": 4148025600,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 58,
+    "geoY": 133
+  },
+  {
+    "code": 4148031000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 57,
+    "geoY": 132
+  },
+  {
+    "code": 4148032000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 55,
+    "geoY": 132
+  },
+  {
+    "code": 4148035000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 58,
+    "geoY": 131
+  },
+  {
+    "code": 4148036000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 57,
+    "geoY": 134
+  },
+  {
+    "code": 4148037000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 59,
+    "geoY": 135
+  },
+  {
+    "code": 4148039000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 55,
+    "geoY": 133
+  },
+  {
+    "code": 4150000000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 68,
+    "geoY": 121
+  },
+  {
+    "code": 4150025000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 71,
+    "geoY": 117
+  },
+  {
+    "code": 4150025300,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 69,
+    "geoY": 121
+  },
+  {
+    "code": 4150031000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 67,
+    "geoY": 121
+  },
+  {
+    "code": 4150032000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 69,
+    "geoY": 122
+  },
+  {
+    "code": 4150033000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 68,
+    "geoY": 119
+  },
+  {
+    "code": 4150034000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 66,
+    "geoY": 120
+  },
+  {
+    "code": 4150035000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 69,
+    "geoY": 119
+  },
+  {
+    "code": 4150036000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 69,
+    "geoY": 118
+  },
+  {
+    "code": 4150037000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 69,
+    "geoY": 117
+  },
+  {
+    "code": 4150038000,
+    "firstLoc": "경기",
+    "secondLoc": "이천시",
+    "geoX": 70,
+    "geoY": 117
+  },
+  {
+    "code": 4155000000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 65,
+    "geoY": 115
+  },
+  {
+    "code": 4155032000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 66,
+    "geoY": 114
+  },
+  {
+    "code": 4155033000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 65,
+    "geoY": 113
+  },
+  {
+    "code": 4155034000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 64,
+    "geoY": 114
+  },
+  {
+    "code": 4155035000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 64,
+    "geoY": 115
+  },
+  {
+    "code": 4155036000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 64,
+    "geoY": 116
+  },
+  {
+    "code": 4155038000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 63,
+    "geoY": 115
+  },
+  {
+    "code": 4155039000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 69,
+    "geoY": 116
+  },
+  {
+    "code": 4155040000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 68,
+    "geoY": 116
+  },
+  {
+    "code": 4155041000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 67,
+    "geoY": 116
+  },
+  {
+    "code": 4155042000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 65,
+    "geoY": 116
+  },
+  {
+    "code": 4155052000,
+    "firstLoc": "경기",
+    "secondLoc": "안성시",
+    "geoX": 65,
+    "geoY": 114
+  },
+  {
+    "code": 4157000000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 55,
+    "geoY": 128
+  },
+  {
+    "code": 4157025000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 53,
+    "geoY": 129
+  },
+  {
+    "code": 4157025600,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 54,
+    "geoY": 129
+  },
+  {
+    "code": 4157034000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 53,
+    "geoY": 128
+  },
+  {
+    "code": 4157035000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 53,
+    "geoY": 130
+  },
+  {
+    "code": 4157036000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 54,
+    "geoY": 130
+  },
+  {
+    "code": 4157057000,
+    "firstLoc": "경기",
+    "secondLoc": "김포시",
+    "geoX": 54,
+    "geoY": 128
+  },
+  {
+    "code": 4159000000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 57,
+    "geoY": 119
+  },
+  {
+    "code": 4159025300,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 59,
+    "geoY": 119
+  },
+  {
+    "code": 4159025600,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 57,
+    "geoY": 116
+  },
+  {
+    "code": 4159025900,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 59,
+    "geoY": 117
+  },
+  {
+    "code": 4159026200,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 57,
+    "geoY": 119
+  },
+  {
+    "code": 4159032000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 58,
+    "geoY": 119
+  },
+  {
+    "code": 4159033000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 56,
+    "geoY": 119
+  },
+  {
+    "code": 4159035000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 55,
+    "geoY": 118
+  },
+  {
+    "code": 4159036000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 59,
+    "geoY": 118
+  },
+  {
+    "code": 4159040000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 59,
+    "geoY": 116
+  },
+  {
+    "code": 4159041000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 60,
+    "geoY": 118
+  },
+  {
+    "code": 4159052000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 61,
+    "geoY": 119
+  },
+  {
+    "code": 4159056000,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 60,
+    "geoY": 119
+  },
+  {
+    "code": 4159058500,
+    "firstLoc": "경기",
+    "secondLoc": "화성시",
+    "geoX": 62,
+    "geoY": 119
+  },
+  {
+    "code": 4161000000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 65,
+    "geoY": 123
+  },
+  {
+    "code": 4161033000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 66,
+    "geoY": 121
+  },
+  {
+    "code": 4161034000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 66,
+    "geoY": 125
+  },
+  {
+    "code": 4161035000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 65,
+    "geoY": 125
+  },
+  {
+    "code": 4161037000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 64,
+    "geoY": 124
+  },
+  {
+    "code": 4161052000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 65,
+    "geoY": 124
+  },
+  {
+    "code": 4163000000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 61,
+    "geoY": 131
+  },
+  {
+    "code": 4163025000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 60,
+    "geoY": 132
+  },
+  {
+    "code": 4163031000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 61,
+    "geoY": 133
+  },
+  {
+    "code": 4163032000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 60,
+    "geoY": 134
+  },
+  {
+    "code": 4163052000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 62,
+    "geoY": 132
+  },
+  {
+    "code": 4163054000,
+    "firstLoc": "경기",
+    "secondLoc": "양주시",
+    "geoX": 61,
+    "geoY": 132
+  },
+  {
+    "code": 4165000000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 64,
+    "geoY": 134
+  },
+  {
+    "code": 4165025000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 63,
+    "geoY": 132
+  },
+  {
+    "code": 4165032000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 64,
+    "geoY": 131
+  },
+  {
+    "code": 4165033000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 63,
+    "geoY": 133
+  },
+  {
+    "code": 4165034000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 64,
+    "geoY": 135
+  },
+  {
+    "code": 4165035000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 63,
+    "geoY": 136
+  },
+  {
+    "code": 4165036000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 64,
+    "geoY": 136
+  },
+  {
+    "code": 4165037000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 66,
+    "geoY": 135
+  },
+  {
+    "code": 4165038000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 66,
+    "geoY": 137
+  },
+  {
+    "code": 4165039000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 65,
+    "geoY": 138
+  },
+  {
+    "code": 4165040000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 64,
+    "geoY": 140
+  },
+  {
+    "code": 4165041000,
+    "firstLoc": "경기",
+    "secondLoc": "포천시",
+    "geoX": 65,
+    "geoY": 134
+  },
+  {
+    "code": 4167000000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 71,
+    "geoY": 121
+  },
+  {
+    "code": 4167025000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 70,
+    "geoY": 119
+  },
+  {
+    "code": 4167031000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 72,
+    "geoY": 119
+  },
+  {
+    "code": 4167032000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 70,
+    "geoY": 122
+  },
+  {
+    "code": 4167033000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 69,
+    "geoY": 123
+  },
+  {
+    "code": 4167035000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 70,
+    "geoY": 123
+  },
+  {
+    "code": 4167036000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 72,
+    "geoY": 122
+  },
+  {
+    "code": 4167037000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 73,
+    "geoY": 120
+  },
+  {
+    "code": 4167038000,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 68,
+    "geoY": 123
+  },
+  {
+    "code": 4180000000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 61,
+    "geoY": 138
+  },
+  {
+    "code": 4180025300,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 61,
+    "geoY": 137
+  },
+  {
+    "code": 4180031000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 60,
+    "geoY": 138
+  },
+  {
+    "code": 4180032000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 61,
+    "geoY": 136
+  },
+  {
+    "code": 4180033000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 59,
+    "geoY": 137
+  },
+  {
+    "code": 4180034000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 60,
+    "geoY": 137
+  },
+  {
+    "code": 4180036000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 62,
+    "geoY": 140
+  },
+  {
+    "code": 4180037000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 60,
+    "geoY": 139
+  },
+  {
+    "code": 4180038000,
+    "firstLoc": "경기",
+    "secondLoc": "연천군",
+    "geoX": 58,
+    "geoY": 136
+  },
+  {
+    "code": 4182000000,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 69,
+    "geoY": 133
+  },
+  {
+    "code": 4182025000,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 69,
+    "geoY": 132
+  },
+  {
+    "code": 4182031000,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 69,
+    "geoY": 129
+  },
+  {
+    "code": 4182032500,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 67,
+    "geoY": 131
+  },
+  {
+    "code": 4182033000,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 66,
+    "geoY": 132
+  },
+  {
+    "code": 4182035000,
+    "firstLoc": "경기",
+    "secondLoc": "가평군",
+    "geoX": 70,
+    "geoY": 134
+  },
+  {
+    "code": 4183000000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 69,
+    "geoY": 125
+  },
+  {
+    "code": 4183032000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 67,
+    "geoY": 125
+  },
+  {
+    "code": 4183033000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 66,
+    "geoY": 126
+  },
+  {
+    "code": 4183034000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 68,
+    "geoY": 126
+  },
+  {
+    "code": 4183035000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 66,
+    "geoY": 128
+  },
+  {
+    "code": 4183036000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 72,
+    "geoY": 126
+  },
+  {
+    "code": 4183037000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 72,
+    "geoY": 127
+  },
+  {
+    "code": 4183038000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 73,
+    "geoY": 124
+  },
+  {
+    "code": 4183039500,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 71,
+    "geoY": 125
+  },
+  {
+    "code": 4183040000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 70,
+    "geoY": 125
+  },
+  {
+    "code": 4183041000,
+    "firstLoc": "경기",
+    "secondLoc": "양평군",
+    "geoX": 70,
+    "geoY": 124
+  },
+  {
+    "code": 4311100000,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 69,
+    "geoY": 106
+  },
+  {
+    "code": 4311131000,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 71,
+    "geoY": 106
+  },
+  {
+    "code": 4311132000,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 72,
+    "geoY": 107
+  },
+  {
+    "code": 4311133000,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 70,
+    "geoY": 105
+  },
+  {
+    "code": 4311135000,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 69,
+    "geoY": 104
+  },
+  {
+    "code": 4311152500,
+    "firstLoc": "충북",
+    "secondLoc": "청주상당",
+    "geoX": 69,
+    "geoY": 107
+  },
+  {
+    "code": 4311231000,
+    "firstLoc": "충북",
+    "secondLoc": "청주서원",
+    "geoX": 68,
+    "geoY": 105
+  },
+  {
+    "code": 4311253000,
+    "firstLoc": "충북",
+    "secondLoc": "청주서원",
+    "geoX": 68,
+    "geoY": 107
+  },
+  {
+    "code": 4311259000,
+    "firstLoc": "충북",
+    "secondLoc": "청주서원",
+    "geoX": 68,
+    "geoY": 106
+  },
+  {
+    "code": 4311300000,
+    "firstLoc": "충북",
+    "secondLoc": "청주흥덕",
+    "geoX": 67,
+    "geoY": 106
+  },
+  {
+    "code": 4311332000,
+    "firstLoc": "충북",
+    "secondLoc": "청주흥덕",
+    "geoX": 67,
+    "geoY": 107
+  },
+  {
+    "code": 4311425000,
+    "firstLoc": "충북",
+    "secondLoc": "청주청원",
+    "geoX": 70,
+    "geoY": 109
+  },
+  {
+    "code": 4311425300,
+    "firstLoc": "충북",
+    "secondLoc": "청주청원",
+    "geoX": 68,
+    "geoY": 109
+  },
+  {
+    "code": 4311455000,
+    "firstLoc": "충북",
+    "secondLoc": "청주청원",
+    "geoX": 69,
+    "geoY": 108
+  },
+  {
+    "code": 4313000000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 76,
+    "geoY": 114
+  },
+  {
+    "code": 4313025000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 74,
+    "geoY": 114
+  },
+  {
+    "code": 4313031000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 77,
+    "geoY": 113
+  },
+  {
+    "code": 4313032500,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 78,
+    "geoY": 111
+  },
+  {
+    "code": 4313035000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 73,
+    "geoY": 114
+  },
+  {
+    "code": 4313036000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 73,
+    "geoY": 116
+  },
+  {
+    "code": 4313037000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 73,
+    "geoY": 117
+  },
+  {
+    "code": 4313038500,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 75,
+    "geoY": 115
+  },
+  {
+    "code": 4313039000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 76,
+    "geoY": 116
+  },
+  {
+    "code": 4313040000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 77,
+    "geoY": 115
+  },
+  {
+    "code": 4313041000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 77,
+    "geoY": 116
+  },
+  {
+    "code": 4313042000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 76,
+    "geoY": 117
+  },
+  {
+    "code": 4313043000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 75,
+    "geoY": 117
+  },
+  {
+    "code": 4313051500,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 77,
+    "geoY": 114
+  },
+  {
+    "code": 4313064000,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 76,
+    "geoY": 115
+  },
+  {
+    "code": 4315000000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 81,
+    "geoY": 118
+  },
+  {
+    "code": 4315025000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 80,
+    "geoY": 118
+  },
+  {
+    "code": 4315031000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 81,
+    "geoY": 116
+  },
+  {
+    "code": 4315032000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 81,
+    "geoY": 115
+  },
+  {
+    "code": 4315033000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 81,
+    "geoY": 113
+  },
+  {
+    "code": 4315035000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 79,
+    "geoY": 112
+  },
+  {
+    "code": 4315036000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 78,
+    "geoY": 118
+  },
+  {
+    "code": 4315038000,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 82,
+    "geoY": 119
+  },
+  {
+    "code": 4315057700,
+    "firstLoc": "충북",
+    "secondLoc": "제천시",
+    "geoX": 82,
+    "geoY": 118
+  },
+  {
+    "code": 4372000000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 73,
+    "geoY": 103
+  },
+  {
+    "code": 4372031500,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 75,
+    "geoY": 104
+  },
+  {
+    "code": 4372032500,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 74,
+    "geoY": 103
+  },
+  {
+    "code": 4372033000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 75,
+    "geoY": 102
+  },
+  {
+    "code": 4372034000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 74,
+    "geoY": 102
+  },
+  {
+    "code": 4372035000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 73,
+    "geoY": 101
+  },
+  {
+    "code": 4372037000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 71,
+    "geoY": 102
+  },
+  {
+    "code": 4372038500,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 71,
+    "geoY": 104
+  },
+  {
+    "code": 4372039000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 72,
+    "geoY": 105
+  },
+  {
+    "code": 4372040000,
+    "firstLoc": "충북",
+    "secondLoc": "보은군",
+    "geoX": 73,
+    "geoY": 105
+  },
+  {
+    "code": 4373000000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 71,
+    "geoY": 99
+  },
+  {
+    "code": 4373032000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 72,
+    "geoY": 101
+  },
+  {
+    "code": 4373034000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 74,
+    "geoY": 100
+  },
+  {
+    "code": 4373036000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 71,
+    "geoY": 98
+  },
+  {
+    "code": 4373037000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 70,
+    "geoY": 99
+  },
+  {
+    "code": 4373038000,
+    "firstLoc": "충북",
+    "secondLoc": "옥천군",
+    "geoX": 70,
+    "geoY": 100
+  },
+  {
+    "code": 4374000000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 74,
+    "geoY": 97
+  },
+  {
+    "code": 4374031000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 75,
+    "geoY": 99
+  },
+  {
+    "code": 4374032000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 77,
+    "geoY": 98
+  },
+  {
+    "code": 4374033500,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 78,
+    "geoY": 98
+  },
+  {
+    "code": 4374034000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 77,
+    "geoY": 97
+  },
+  {
+    "code": 4374035000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 77,
+    "geoY": 96
+  },
+  {
+    "code": 4374036000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 74,
+    "geoY": 96
+  },
+  {
+    "code": 4374037000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 74,
+    "geoY": 93
+  },
+  {
+    "code": 4374038000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 73,
+    "geoY": 95
+  },
+  {
+    "code": 4374039000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 72,
+    "geoY": 95
+  },
+  {
+    "code": 4374040000,
+    "firstLoc": "충북",
+    "secondLoc": "영동군",
+    "geoX": 73,
+    "geoY": 98
+  },
+  {
+    "code": 4374500000,
+    "firstLoc": "충북",
+    "secondLoc": "증평군",
+    "geoX": 71,
+    "geoY": 110
+  },
+  {
+    "code": 4375000000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 68,
+    "geoY": 111
+  },
+  {
+    "code": 4375032000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 70,
+    "geoY": 111
+  },
+  {
+    "code": 4375033000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 68,
+    "geoY": 110
+  },
+  {
+    "code": 4375034000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 67,
+    "geoY": 112
+  },
+  {
+    "code": 4375035000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 68,
+    "geoY": 113
+  },
+  {
+    "code": 4375037000,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 68,
+    "geoY": 114
+  },
+  {
+    "code": 4376000000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 74,
+    "geoY": 111
+  },
+  {
+    "code": 4376031000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 76,
+    "geoY": 111
+  },
+  {
+    "code": 4376032000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 77,
+    "geoY": 111
+  },
+  {
+    "code": 4376033000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 78,
+    "geoY": 110
+  },
+  {
+    "code": 4376034000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 75,
+    "geoY": 110
+  },
+  {
+    "code": 4376035000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 74,
+    "geoY": 110
+  },
+  {
+    "code": 4376036000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 73,
+    "geoY": 107
+  },
+  {
+    "code": 4376037000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 72,
+    "geoY": 110
+  },
+  {
+    "code": 4376039000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 72,
+    "geoY": 111
+  },
+  {
+    "code": 4376040000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 73,
+    "geoY": 111
+  },
+  {
+    "code": 4376041000,
+    "firstLoc": "충북",
+    "secondLoc": "괴산군",
+    "geoX": 75,
+    "geoY": 112
+  },
+  {
+    "code": 4377000000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 72,
+    "geoY": 113
+  },
+  {
+    "code": 4377025300,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 71,
+    "geoY": 114
+  },
+  {
+    "code": 4377031000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 74,
+    "geoY": 113
+  },
+  {
+    "code": 4377032000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 72,
+    "geoY": 112
+  },
+  {
+    "code": 4377033000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 70,
+    "geoY": 113
+  },
+  {
+    "code": 4377034000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 69,
+    "geoY": 114
+  },
+  {
+    "code": 4377035000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 69,
+    "geoY": 115
+  },
+  {
+    "code": 4377036000,
+    "firstLoc": "충북",
+    "secondLoc": "음성군",
+    "geoX": 71,
+    "geoY": 115
+  },
+  {
+    "code": 4380000000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 84,
+    "geoY": 115
+  },
+  {
+    "code": 4380025300,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 83,
+    "geoY": 116
+  },
+  {
+    "code": 4380031000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 84,
+    "geoY": 113
+  },
+  {
+    "code": 4380033000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 86,
+    "geoY": 117
+  },
+  {
+    "code": 4380034000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 84,
+    "geoY": 117
+  },
+  {
+    "code": 4380035000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 83,
+    "geoY": 114
+  },
+  {
+    "code": 4380036000,
+    "firstLoc": "충북",
+    "secondLoc": "단양군",
+    "geoX": 83,
+    "geoY": 113
+  },
+  {
+    "code": 4413100000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 63,
+    "geoY": 110
+  },
+  {
+    "code": 4413125000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 65,
+    "geoY": 110
+  },
+  {
+    "code": 4413132000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 62,
+    "geoY": 108
+  },
+  {
+    "code": 4413133000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 65,
+    "geoY": 111
+  },
+  {
+    "code": 4413134000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 65,
+    "geoY": 109
+  },
+  {
+    "code": 4413136000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 66,
+    "geoY": 109
+  },
+  {
+    "code": 4413137000,
+    "firstLoc": "충남",
+    "secondLoc": "천안동남",
+    "geoX": 66,
+    "geoY": 110
+  },
+  {
+    "code": 4413300000,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 63,
+    "geoY": 112
+  },
+  {
+    "code": 4413325000,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 63,
+    "geoY": 113
+  },
+  {
+    "code": 4413325300,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 64,
+    "geoY": 112
+  },
+  {
+    "code": 4413331000,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 64,
+    "geoY": 113
+  },
+  {
+    "code": 4413352000,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 63,
+    "geoY": 111
+  },
+  {
+    "code": 4413356000,
+    "firstLoc": "충남",
+    "secondLoc": "천안서북",
+    "geoX": 62,
+    "geoY": 110
+  },
+  {
+    "code": 4415000000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 63,
+    "geoY": 102
+  },
+  {
+    "code": 4415025000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 60,
+    "geoY": 105
+  },
+  {
+    "code": 4415031000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 62,
+    "geoY": 101
+  },
+  {
+    "code": 4415032000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 61,
+    "geoY": 100
+  },
+  {
+    "code": 4415033000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 63,
+    "geoY": 100
+  },
+  {
+    "code": 4415034000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 65,
+    "geoY": 101
+  },
+  {
+    "code": 4415036000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 63,
+    "geoY": 104
+  },
+  {
+    "code": 4415037000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 63,
+    "geoY": 106
+  },
+  {
+    "code": 4415038000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 61,
+    "geoY": 103
+  },
+  {
+    "code": 4415039000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 61,
+    "geoY": 104
+  },
+  {
+    "code": 4415040000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 60,
+    "geoY": 104
+  },
+  {
+    "code": 4415054000,
+    "firstLoc": "충남",
+    "secondLoc": "공주시",
+    "geoX": 63,
+    "geoY": 103
+  },
+  {
+    "code": 4418000000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 54,
+    "geoY": 100
+  },
+  {
+    "code": 4418025000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 54,
+    "geoY": 98
+  },
+  {
+    "code": 4418031000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 53,
+    "geoY": 102
+  },
+  {
+    "code": 4418032000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 52,
+    "geoY": 102
+  },
+  {
+    "code": 4418033000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 52,
+    "geoY": 103
+  },
+  {
+    "code": 4418035000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 55,
+    "geoY": 101
+  },
+  {
+    "code": 4418036000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 54,
+    "geoY": 99
+  },
+  {
+    "code": 4418038000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 54,
+    "geoY": 97
+  },
+  {
+    "code": 4418039000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 55,
+    "geoY": 97
+  },
+  {
+    "code": 4418041000,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 53,
+    "geoY": 101
+  },
+  {
+    "code": 4418051500,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 53,
+    "geoY": 100
+  },
+  {
+    "code": 4418056500,
+    "firstLoc": "충남",
+    "secondLoc": "보령시",
+    "geoX": 52,
+    "geoY": 99
+  },
+  {
+    "code": 4420000000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 60,
+    "geoY": 110
+  },
+  {
+    "code": 4420031000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 61,
+    "geoY": 109
+  },
+  {
+    "code": 4420033000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 61,
+    "geoY": 110
+  },
+  {
+    "code": 4420035000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 61,
+    "geoY": 111
+  },
+  {
+    "code": 4420036000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 61,
+    "geoY": 113
+  },
+  {
+    "code": 4420037000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 60,
+    "geoY": 111
+  },
+  {
+    "code": 4420038000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 58,
+    "geoY": 111
+  },
+  {
+    "code": 4420039000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 58,
+    "geoY": 110
+  },
+  {
+    "code": 4420040000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 58,
+    "geoY": 109
+  },
+  {
+    "code": 4420041000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 59,
+    "geoY": 110
+  },
+  {
+    "code": 4420061000,
+    "firstLoc": "충남",
+    "secondLoc": "아산시",
+    "geoX": 60,
+    "geoY": 109
+  },
+  {
+    "code": 4421000000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 51,
+    "geoY": 110
+  },
+  {
+    "code": 4421025000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 51,
+    "geoY": 113
+  },
+  {
+    "code": 4421031000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 50,
+    "geoY": 109
+  },
+  {
+    "code": 4421032000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 50,
+    "geoY": 108
+  },
+  {
+    "code": 4421033000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 49,
+    "geoY": 110
+  },
+  {
+    "code": 4421034000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 51,
+    "geoY": 111
+  },
+  {
+    "code": 4421037000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 52,
+    "geoY": 110
+  },
+  {
+    "code": 4421038000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 53,
+    "geoY": 110
+  },
+  {
+    "code": 4421039000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 53,
+    "geoY": 108
+  },
+  {
+    "code": 4421040000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 52,
+    "geoY": 107
+  },
+  {
+    "code": 4421054000,
+    "firstLoc": "충남",
+    "secondLoc": "서산시",
+    "geoX": 51,
+    "geoY": 109
+  },
+  {
+    "code": 4423000000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 62,
+    "geoY": 97
+  },
+  {
+    "code": 4423025000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 61,
+    "geoY": 96
+  },
+  {
+    "code": 4423025300,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 62,
+    "geoY": 95
+  },
+  {
+    "code": 4423031000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 61,
+    "geoY": 97
+  },
+  {
+    "code": 4423032000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 62,
+    "geoY": 98
+  },
+  {
+    "code": 4423033000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 63,
+    "geoY": 99
+  },
+  {
+    "code": 4423034000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 63,
+    "geoY": 99
+  },
+  {
+    "code": 4423035000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 63,
+    "geoY": 97
+  },
+  {
+    "code": 4423036000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 64,
+    "geoY": 97
+  },
+  {
+    "code": 4423038000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 65,
+    "geoY": 97
+  },
+  {
+    "code": 4423039000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 65,
+    "geoY": 96
+  },
+  {
+    "code": 4423040000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 63,
+    "geoY": 96
+  },
+  {
+    "code": 4423041000,
+    "firstLoc": "충남",
+    "secondLoc": "논산시",
+    "geoX": 62,
+    "geoY": 96
+  },
+  {
+    "code": 4425000000,
+    "firstLoc": "충남",
+    "secondLoc": "계룡시",
+    "geoX": 65,
+    "geoY": 99
+  },
+  {
+    "code": 4425031000,
+    "firstLoc": "충남",
+    "secondLoc": "계룡시",
+    "geoX": 65,
+    "geoY": 98
+  },
+  {
+    "code": 4427000000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 54,
+    "geoY": 112
+  },
+  {
+    "code": 4427025000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 56,
+    "geoY": 110
+  },
+  {
+    "code": 4427025300,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 55,
+    "geoY": 112
+  },
+  {
+    "code": 4427031000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 53,
+    "geoY": 113
+  },
+  {
+    "code": 4427032000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 53,
+    "geoY": 114
+  },
+  {
+    "code": 4427033000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 52,
+    "geoY": 112
+  },
+  {
+    "code": 4427034000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 53,
+    "geoY": 112
+  },
+  {
+    "code": 4427035000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 55,
+    "geoY": 110
+  },
+  {
+    "code": 4427036000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 55,
+    "geoY": 111
+  },
+  {
+    "code": 4427037000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 57,
+    "geoY": 110
+  },
+  {
+    "code": 4427038000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 56,
+    "geoY": 112
+  },
+  {
+    "code": 4427039000,
+    "firstLoc": "충남",
+    "secondLoc": "당진시",
+    "geoX": 55,
+    "geoY": 113
+  },
+  {
+    "code": 4471000000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 69,
+    "geoY": 95
+  },
+  {
+    "code": 4471031000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 69,
+    "geoY": 96
+  },
+  {
+    "code": 4471032000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 70,
+    "geoY": 95
+  },
+  {
+    "code": 4471033000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 70,
+    "geoY": 94
+  },
+  {
+    "code": 4471034000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 70,
+    "geoY": 96
+  },
+  {
+    "code": 4471036000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 68,
+    "geoY": 94
+  },
+  {
+    "code": 4471037000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 67,
+    "geoY": 96
+  },
+  {
+    "code": 4471038000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 68,
+    "geoY": 96
+  },
+  {
+    "code": 4471039000,
+    "firstLoc": "충남",
+    "secondLoc": "금산군",
+    "geoX": 69,
+    "geoY": 97
+  },
+  {
+    "code": 4476000000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 59,
+    "geoY": 99
+  },
+  {
+    "code": 4476032000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 58,
+    "geoY": 99
+  },
+  {
+    "code": 4476033000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 55,
+    "geoY": 99
+  },
+  {
+    "code": 4476034000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 57,
+    "geoY": 99
+  },
+  {
+    "code": 4476035000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 57,
+    "geoY": 98
+  },
+  {
+    "code": 4476036000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 56,
+    "geoY": 97
+  },
+  {
+    "code": 4476037000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 56,
+    "geoY": 97
+  },
+  {
+    "code": 4476038000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 57,
+    "geoY": 97
+  },
+  {
+    "code": 4476040000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 59,
+    "geoY": 96
+  },
+  {
+    "code": 4476041000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 59,
+    "geoY": 97
+  },
+  {
+    "code": 4476042000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 59,
+    "geoY": 98
+  },
+  {
+    "code": 4476043000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 60,
+    "geoY": 96
+  },
+  {
+    "code": 4476044000,
+    "firstLoc": "충남",
+    "secondLoc": "부여군",
+    "geoX": 61,
+    "geoY": 98
+  },
+  {
+    "code": 4477000000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 55,
+    "geoY": 94
+  },
+  {
+    "code": 4477025000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 55,
+    "geoY": 93
+  },
+  {
+    "code": 4477032000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 57,
+    "geoY": 93
+  },
+  {
+    "code": 4477033000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 56,
+    "geoY": 94
+  },
+  {
+    "code": 4477034000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 57,
+    "geoY": 94
+  },
+  {
+    "code": 4477035000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 57,
+    "geoY": 95
+  },
+  {
+    "code": 4477036000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 56,
+    "geoY": 95
+  },
+  {
+    "code": 4477037000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 56,
+    "geoY": 96
+  },
+  {
+    "code": 4477038000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 55,
+    "geoY": 96
+  },
+  {
+    "code": 4477039000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 55,
+    "geoY": 95
+  },
+  {
+    "code": 4477040000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 54,
+    "geoY": 96
+  },
+  {
+    "code": 4477041000,
+    "firstLoc": "충남",
+    "secondLoc": "서천군",
+    "geoX": 53,
+    "geoY": 96
+  },
+  {
+    "code": 4479000000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 57,
+    "geoY": 103
+  },
+  {
+    "code": 4479025000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 57,
+    "geoY": 102
+  },
+  {
+    "code": 4479031000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 58,
+    "geoY": 104
+  },
+  {
+    "code": 4479032000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 58,
+    "geoY": 102
+  },
+  {
+    "code": 4479033000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 60,
+    "geoY": 102
+  },
+  {
+    "code": 4479034000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 61,
+    "geoY": 102
+  },
+  {
+    "code": 4479035000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 60,
+    "geoY": 100
+  },
+  {
+    "code": 4479036000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 59,
+    "geoY": 100
+  },
+  {
+    "code": 4479037000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 57,
+    "geoY": 101
+  },
+  {
+    "code": 4479038000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 56,
+    "geoY": 102
+  },
+  {
+    "code": 4479039000,
+    "firstLoc": "충남",
+    "secondLoc": "청양군",
+    "geoX": 57,
+    "geoY": 104
+  },
+  {
+    "code": 4480000000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 55,
+    "geoY": 106
+  },
+  {
+    "code": 4480025300,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 54,
+    "geoY": 104
+  },
+  {
+    "code": 4480032000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 56,
+    "geoY": 106
+  },
+  {
+    "code": 4480033000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 55,
+    "geoY": 105
+  },
+  {
+    "code": 4480034000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 55,
+    "geoY": 104
+  },
+  {
+    "code": 4480035000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 53,
+    "geoY": 104
+  },
+  {
+    "code": 4480037000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 52,
+    "geoY": 105
+  },
+  {
+    "code": 4480038000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 53,
+    "geoY": 106
+  },
+  {
+    "code": 4480039000,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 54,
+    "geoY": 105
+  },
+  {
+    "code": 4481000000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 58,
+    "geoY": 107
+  },
+  {
+    "code": 4481025300,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 56,
+    "geoY": 108
+  },
+  {
+    "code": 4481031000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 59,
+    "geoY": 107
+  },
+  {
+    "code": 4481032000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 58,
+    "geoY": 106
+  },
+  {
+    "code": 4481033000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 57,
+    "geoY": 105
+  },
+  {
+    "code": 4481034000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 57,
+    "geoY": 106
+  },
+  {
+    "code": 4481035000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 56,
+    "geoY": 107
+  },
+  {
+    "code": 4481036000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 55,
+    "geoY": 108
+  },
+  {
+    "code": 4481037000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 55,
+    "geoY": 109
+  },
+  {
+    "code": 4481038000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 56,
+    "geoY": 109
+  },
+  {
+    "code": 4481039000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 57,
+    "geoY": 109
+  },
+  {
+    "code": 4481040000,
+    "firstLoc": "충남",
+    "secondLoc": "예산군",
+    "geoX": 57,
+    "geoY": 108
+  },
+  {
+    "code": 4482500000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 48,
+    "geoY": 109
+  },
+  {
+    "code": 4482525300,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 49,
+    "geoY": 104
+  },
+  {
+    "code": 4482531000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 50,
+    "geoY": 102
+  },
+  {
+    "code": 4482532000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 48,
+    "geoY": 107
+  },
+  {
+    "code": 4482533000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 47,
+    "geoY": 108
+  },
+  {
+    "code": 4482534000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 46,
+    "geoY": 109
+  },
+  {
+    "code": 4482535000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 48,
+    "geoY": 110
+  },
+  {
+    "code": 4482536000,
+    "firstLoc": "충남",
+    "secondLoc": "태안군",
+    "geoX": 48,
+    "geoY": 111
+  },
+  {
+    "code": 4511100000,
+    "firstLoc": "전북",
+    "secondLoc": "전주완산",
+    "geoX": 63,
+    "geoY": 89
+  },
+  {
+    "code": 4511163500,
+    "firstLoc": "전북",
+    "secondLoc": "전주완산",
+    "geoX": 63,
+    "geoY": 88
+  },
+  {
+    "code": 4511171400,
+    "firstLoc": "전북",
+    "secondLoc": "전주완산",
+    "geoX": 62,
+    "geoY": 89
+  },
+  {
+    "code": 4511356000,
+    "firstLoc": "전북",
+    "secondLoc": "전주덕진",
+    "geoX": 64,
+    "geoY": 89
+  },
+  {
+    "code": 4511362000,
+    "firstLoc": "전북",
+    "secondLoc": "전주덕진",
+    "geoX": 63,
+    "geoY": 90
+  },
+  {
+    "code": 4511365000,
+    "firstLoc": "전북",
+    "secondLoc": "전주덕진",
+    "geoX": 62,
+    "geoY": 90
+  },
+  {
+    "code": 4513000000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 56,
+    "geoY": 92
+  },
+  {
+    "code": 4513025000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 55,
+    "geoY": 91
+  },
+  {
+    "code": 4513031000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 56,
+    "geoY": 91
+  },
+  {
+    "code": 4513033000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 58,
+    "geoY": 92
+  },
+  {
+    "code": 4513035000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 57,
+    "geoY": 91
+  },
+  {
+    "code": 4513036000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 57,
+    "geoY": 92
+  },
+  {
+    "code": 4513038000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 58,
+    "geoY": 93
+  },
+  {
+    "code": 4513039000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 43,
+    "geoY": 95
+  },
+  {
+    "code": 4513040000,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 54,
+    "geoY": 91
+  },
+  {
+    "code": 4513051500,
+    "firstLoc": "전북",
+    "secondLoc": "군산시",
+    "geoX": 55,
+    "geoY": 92
+  },
+  {
+    "code": 4514000000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 60,
+    "geoY": 91
+  },
+  {
+    "code": 4514025000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 60,
+    "geoY": 94
+  },
+  {
+    "code": 4514031000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 59,
+    "geoY": 91
+  },
+  {
+    "code": 4514032000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 60,
+    "geoY": 93
+  },
+  {
+    "code": 4514033000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 59,
+    "geoY": 94
+  },
+  {
+    "code": 4514034000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 58,
+    "geoY": 94
+  },
+  {
+    "code": 4514035000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 59,
+    "geoY": 95
+  },
+  {
+    "code": 4514036000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 60,
+    "geoY": 95
+  },
+  {
+    "code": 4514037000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 61,
+    "geoY": 94
+  },
+  {
+    "code": 4514039000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 62,
+    "geoY": 94
+  },
+  {
+    "code": 4514040000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 62,
+    "geoY": 92
+  },
+  {
+    "code": 4514042000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 61,
+    "geoY": 90
+  },
+  {
+    "code": 4514059500,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 60,
+    "geoY": 92
+  },
+  {
+    "code": 4514067000,
+    "firstLoc": "전북",
+    "secondLoc": "익산시",
+    "geoX": 61,
+    "geoY": 92
+  },
+  {
+    "code": 4518000000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 58,
+    "geoY": 83
+  },
+  {
+    "code": 4518025000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 59,
+    "geoY": 86
+  },
+  {
+    "code": 4518031000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 59,
+    "geoY": 84
+  },
+  {
+    "code": 4518032000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 57,
+    "geoY": 82
+  },
+  {
+    "code": 4518033000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 57,
+    "geoY": 83
+  },
+  {
+    "code": 4518034000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 57,
+    "geoY": 84
+  },
+  {
+    "code": 4518035000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 57,
+    "geoY": 85
+  },
+  {
+    "code": 4518036000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 58,
+    "geoY": 84
+  },
+  {
+    "code": 4518037000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 58,
+    "geoY": 85
+  },
+  {
+    "code": 4518038000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 59,
+    "geoY": 85
+  },
+  {
+    "code": 4518039000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 60,
+    "geoY": 85
+  },
+  {
+    "code": 4518042000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 61,
+    "geoY": 84
+  },
+  {
+    "code": 4518043000,
+    "firstLoc": "전북",
+    "secondLoc": "정읍시",
+    "geoX": 61,
+    "geoY": 83
+  },
+  {
+    "code": 4519000000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 68,
+    "geoY": 80
+  },
+  {
+    "code": 4519025000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 70,
+    "geoY": 81
+  },
+  {
+    "code": 4519031000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 69,
+    "geoY": 79
+  },
+  {
+    "code": 4519032000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 67,
+    "geoY": 78
+  },
+  {
+    "code": 4519033000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 67,
+    "geoY": 79
+  },
+  {
+    "code": 4519035000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 66,
+    "geoY": 79
+  },
+  {
+    "code": 4519036000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 65,
+    "geoY": 78
+  },
+  {
+    "code": 4519037000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 67,
+    "geoY": 80
+  },
+  {
+    "code": 4519038000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 67,
+    "geoY": 82
+  },
+  {
+    "code": 4519040000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 68,
+    "geoY": 82
+  },
+  {
+    "code": 4519041000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 69,
+    "geoY": 82
+  },
+  {
+    "code": 4519042000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 69,
+    "geoY": 80
+  },
+  {
+    "code": 4519045000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 72,
+    "geoY": 82
+  },
+  {
+    "code": 4519046000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 72,
+    "geoY": 80
+  },
+  {
+    "code": 4519047000,
+    "firstLoc": "전북",
+    "secondLoc": "남원시",
+    "geoX": 71,
+    "geoY": 81
+  },
+  {
+    "code": 4521000000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 59,
+    "geoY": 88
+  },
+  {
+    "code": 4521025000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 58,
+    "geoY": 89
+  },
+  {
+    "code": 4521032000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 57,
+    "geoY": 88
+  },
+  {
+    "code": 4521033000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 59,
+    "geoY": 89
+  },
+  {
+    "code": 4521034000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 60,
+    "geoY": 89
+  },
+  {
+    "code": 4521035000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 60,
+    "geoY": 90
+  },
+  {
+    "code": 4521036000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 58,
+    "geoY": 87
+  },
+  {
+    "code": 4521038000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 59,
+    "geoY": 90
+  },
+  {
+    "code": 4521039000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 58,
+    "geoY": 90
+  },
+  {
+    "code": 4521040000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 57,
+    "geoY": 89
+  },
+  {
+    "code": 4521041000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 57,
+    "geoY": 90
+  },
+  {
+    "code": 4521042000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 61,
+    "geoY": 88
+  },
+  {
+    "code": 4521043000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 60,
+    "geoY": 87
+  },
+  {
+    "code": 4521044000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 60,
+    "geoY": 88
+  },
+  {
+    "code": 4521045000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 61,
+    "geoY": 86
+  },
+  {
+    "code": 4521046000,
+    "firstLoc": "전북",
+    "secondLoc": "김제시",
+    "geoX": 56,
+    "geoY": 89
+  },
+  {
+    "code": 4571025000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 62,
+    "geoY": 91
+  },
+  {
+    "code": 4571025300,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 64,
+    "geoY": 91
+  },
+  {
+    "code": 4571032000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 64,
+    "geoY": 88
+  },
+  {
+    "code": 4571033000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 61,
+    "geoY": 89
+  },
+  {
+    "code": 4571034000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 65,
+    "geoY": 90
+  },
+  {
+    "code": 4571035000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 63,
+    "geoY": 87
+  },
+  {
+    "code": 4571036000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 64,
+    "geoY": 92
+  },
+  {
+    "code": 4571037000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 63,
+    "geoY": 93
+  },
+  {
+    "code": 4571038000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 66,
+    "geoY": 95
+  },
+  {
+    "code": 4571039000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 64,
+    "geoY": 93
+  },
+  {
+    "code": 4571040000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 66,
+    "geoY": 91
+  },
+  {
+    "code": 4571041000,
+    "firstLoc": "전북",
+    "secondLoc": "완주군",
+    "geoX": 65,
+    "geoY": 93
+  },
+  {
+    "code": 4572000000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 68,
+    "geoY": 88
+  },
+  {
+    "code": 4572031000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 70,
+    "geoY": 92
+  },
+  {
+    "code": 4572032000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 70,
+    "geoY": 91
+  },
+  {
+    "code": 4572033000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 71,
+    "geoY": 89
+  },
+  {
+    "code": 4572034000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 69,
+    "geoY": 89
+  },
+  {
+    "code": 4572035000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 68,
+    "geoY": 86
+  },
+  {
+    "code": 4572036000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 66,
+    "geoY": 86
+  },
+  {
+    "code": 4572037000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 67,
+    "geoY": 87
+  },
+  {
+    "code": 4572038000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 67,
+    "geoY": 89
+  },
+  {
+    "code": 4572039000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 68,
+    "geoY": 90
+  },
+  {
+    "code": 4572040000,
+    "firstLoc": "전북",
+    "secondLoc": "진안군",
+    "geoX": 68,
+    "geoY": 92
+  },
+  {
+    "code": 4573000000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 72,
+    "geoY": 93
+  },
+  {
+    "code": 4573031000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 76,
+    "geoY": 92
+  },
+  {
+    "code": 4573032000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 75,
+    "geoY": 93
+  },
+  {
+    "code": 4573033000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 72,
+    "geoY": 92
+  },
+  {
+    "code": 4573034000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 72,
+    "geoY": 90
+  },
+  {
+    "code": 4573035000,
+    "firstLoc": "전북",
+    "secondLoc": "무주군",
+    "geoX": 71,
+    "geoY": 92
+  },
+  {
+    "code": 4574000000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 70,
+    "geoY": 85
+  },
+  {
+    "code": 4574031000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 68,
+    "geoY": 84
+  },
+  {
+    "code": 4574032000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 70,
+    "geoY": 83
+  },
+  {
+    "code": 4574033500,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 71,
+    "geoY": 87
+  },
+  {
+    "code": 4574034000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 70,
+    "geoY": 87
+  },
+  {
+    "code": 4574035000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 71,
+    "geoY": 86
+  },
+  {
+    "code": 4574036000,
+    "firstLoc": "전북",
+    "secondLoc": "장수군",
+    "geoX": 72,
+    "geoY": 88
+  },
+  {
+    "code": 4575000000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 66,
+    "geoY": 84
+  },
+  {
+    "code": 4575031000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 64,
+    "geoY": 83
+  },
+  {
+    "code": 4575032000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 63,
+    "geoY": 85
+  },
+  {
+    "code": 4575033000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 65,
+    "geoY": 85
+  },
+  {
+    "code": 4575034000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 67,
+    "geoY": 85
+  },
+  {
+    "code": 4575035500,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 67,
+    "geoY": 83
+  },
+  {
+    "code": 4575036000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 64,
+    "geoY": 86
+  },
+  {
+    "code": 4575037000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 66,
+    "geoY": 82
+  },
+  {
+    "code": 4575039000,
+    "firstLoc": "전북",
+    "secondLoc": "임실군",
+    "geoX": 64,
+    "geoY": 82
+  },
+  {
+    "code": 4577000000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 63,
+    "geoY": 79
+  },
+  {
+    "code": 4577031000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 63,
+    "geoY": 80
+  },
+  {
+    "code": 4577032000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 65,
+    "geoY": 81
+  },
+  {
+    "code": 4577033000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 63,
+    "geoY": 78
+  },
+  {
+    "code": 4577034000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 62,
+    "geoY": 78
+  },
+  {
+    "code": 4577036000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 61,
+    "geoY": 82
+  },
+  {
+    "code": 4577037000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 60,
+    "geoY": 80
+  },
+  {
+    "code": 4577038000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 65,
+    "geoY": 80
+  },
+  {
+    "code": 4577039000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 64,
+    "geoY": 79
+  },
+  {
+    "code": 4577040000,
+    "firstLoc": "전북",
+    "secondLoc": "순창군",
+    "geoX": 63,
+    "geoY": 81
+  },
+  {
+    "code": 4579000000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 56,
+    "geoY": 80
+  },
+  {
+    "code": 4579031000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 55,
+    "geoY": 80
+  },
+  {
+    "code": 4579032000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 54,
+    "geoY": 80
+  },
+  {
+    "code": 4579033000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 53,
+    "geoY": 80
+  },
+  {
+    "code": 4579034000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 52,
+    "geoY": 79
+  },
+  {
+    "code": 4579035000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 52,
+    "geoY": 80
+  },
+  {
+    "code": 4579036000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 53,
+    "geoY": 81
+  },
+  {
+    "code": 4579037000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 55,
+    "geoY": 79
+  },
+  {
+    "code": 4579038000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 54,
+    "geoY": 78
+  },
+  {
+    "code": 4579039000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 53,
+    "geoY": 82
+  },
+  {
+    "code": 4579040000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 56,
+    "geoY": 82
+  },
+  {
+    "code": 4579041000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 56,
+    "geoY": 83
+  },
+  {
+    "code": 4579042000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 56,
+    "geoY": 81
+  },
+  {
+    "code": 4579043000,
+    "firstLoc": "전북",
+    "secondLoc": "고창군",
+    "geoX": 55,
+    "geoY": 82
+  },
+  {
+    "code": 4580000000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 56,
+    "geoY": 87
+  },
+  {
+    "code": 4580031000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 56,
+    "geoY": 85
+  },
+  {
+    "code": 4580034000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 55,
+    "geoY": 87
+  },
+  {
+    "code": 4580035000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 55,
+    "geoY": 84
+  },
+  {
+    "code": 4580036000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 52,
+    "geoY": 85
+  },
+  {
+    "code": 4580037000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 54,
+    "geoY": 84
+  },
+  {
+    "code": 4580038000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 57,
+    "geoY": 86
+  },
+  {
+    "code": 4580039000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 55,
+    "geoY": 86
+  },
+  {
+    "code": 4580042000,
+    "firstLoc": "전북",
+    "secondLoc": "부안군",
+    "geoX": 48,
+    "geoY": 84
+  },
+  {
+    "code": 4611000000,
+    "firstLoc": "전남",
+    "secondLoc": "목포시",
+    "geoX": 50,
+    "geoY": 67
+  },
+  {
+    "code": 4611075700,
+    "firstLoc": "전남",
+    "secondLoc": "목포시",
+    "geoX": 51,
+    "geoY": 67
+  },
+  {
+    "code": 4611075800,
+    "firstLoc": "전남",
+    "secondLoc": "목포시",
+    "geoX": 51,
+    "geoY": 66
+  },
+  {
+    "code": 4613000000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 73,
+    "geoY": 66
+  },
+  {
+    "code": 4613025000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 74,
+    "geoY": 63
+  },
+  {
+    "code": 4613031000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 72,
+    "geoY": 66
+  },
+  {
+    "code": 4613032000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 71,
+    "geoY": 68
+  },
+  {
+    "code": 4613033000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 72,
+    "geoY": 65
+  },
+  {
+    "code": 4613034000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 75,
+    "geoY": 60
+  },
+  {
+    "code": 4613035000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 73,
+    "geoY": 63
+  },
+  {
+    "code": 4613036000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 67,
+    "geoY": 50
+  },
+  {
+    "code": 4613051500,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 74,
+    "geoY": 65
+  },
+  {
+    "code": 4613060000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 74,
+    "geoY": 66
+  },
+  {
+    "code": 4613082000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 73,
+    "geoY": 67
+  },
+  {
+    "code": 4613083000,
+    "firstLoc": "전남",
+    "secondLoc": "여수시",
+    "geoX": 74,
+    "geoY": 68
+  },
+  {
+    "code": 4615000000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 70,
+    "geoY": 70
+  },
+  {
+    "code": 4615025000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 68,
+    "geoY": 71
+  },
+  {
+    "code": 4615031000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 71,
+    "geoY": 69
+  },
+  {
+    "code": 4615032000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 70,
+    "geoY": 71
+  },
+  {
+    "code": 4615033000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 69,
+    "geoY": 73
+  },
+  {
+    "code": 4615034000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 68,
+    "geoY": 73
+  },
+  {
+    "code": 4615035000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 65,
+    "geoY": 73
+  },
+  {
+    "code": 4615036000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 66,
+    "geoY": 70
+  },
+  {
+    "code": 4615037000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 66,
+    "geoY": 69
+  },
+  {
+    "code": 4615038000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 67,
+    "geoY": 69
+  },
+  {
+    "code": 4615039000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 69,
+    "geoY": 68
+  },
+  {
+    "code": 4615040000,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 69,
+    "geoY": 70
+  },
+  {
+    "code": 4615063500,
+    "firstLoc": "전남",
+    "secondLoc": "순천시",
+    "geoX": 70,
+    "geoY": 69
+  },
+  {
+    "code": 4617000000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 56,
+    "geoY": 71
+  },
+  {
+    "code": 4617025000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 58,
+    "geoY": 72
+  },
+  {
+    "code": 4617031000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 56,
+    "geoY": 69
+  },
+  {
+    "code": 4617032000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 55,
+    "geoY": 70
+  },
+  {
+    "code": 4617033000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 55,
+    "geoY": 69
+  },
+  {
+    "code": 4617034000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 54,
+    "geoY": 70
+  },
+  {
+    "code": 4617035000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 53,
+    "geoY": 69
+  },
+  {
+    "code": 4617036000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 54,
+    "geoY": 71
+  },
+  {
+    "code": 4617037000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 54,
+    "geoY": 72
+  },
+  {
+    "code": 4617038000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 56,
+    "geoY": 72
+  },
+  {
+    "code": 4617039000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 57,
+    "geoY": 71
+  },
+  {
+    "code": 4617040000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 57,
+    "geoY": 72
+  },
+  {
+    "code": 4617042000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 58,
+    "geoY": 70
+  },
+  {
+    "code": 4617043000,
+    "firstLoc": "전남",
+    "secondLoc": "나주시",
+    "geoX": 57,
+    "geoY": 70
+  },
+  {
+    "code": 4623000000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 73,
+    "geoY": 70
+  },
+  {
+    "code": 4623025000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 71,
+    "geoY": 70
+  },
+  {
+    "code": 4623031000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 71,
+    "geoY": 71
+  },
+  {
+    "code": 4623032000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 72,
+    "geoY": 71
+  },
+  {
+    "code": 4623033000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 73,
+    "geoY": 71
+  },
+  {
+    "code": 4623034000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 74,
+    "geoY": 71
+  },
+  {
+    "code": 4623036000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 73,
+    "geoY": 74
+  },
+  {
+    "code": 4623054000,
+    "firstLoc": "전남",
+    "secondLoc": "광양시",
+    "geoX": 74,
+    "geoY": 70
+  },
+  {
+    "code": 4671000000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 61,
+    "geoY": 78
+  },
+  {
+    "code": 4671031000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 60,
+    "geoY": 77
+  },
+  {
+    "code": 4671032000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 60,
+    "geoY": 76
+  },
+  {
+    "code": 4671033500,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 61,
+    "geoY": 75
+  },
+  {
+    "code": 4671034000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 61,
+    "geoY": 76
+  },
+  {
+    "code": 4671035000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 62,
+    "geoY": 76
+  },
+  {
+    "code": 4671036000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 61,
+    "geoY": 77
+  },
+  {
+    "code": 4671038000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 61,
+    "geoY": 79
+  },
+  {
+    "code": 4671039000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 60,
+    "geoY": 78
+  },
+  {
+    "code": 4671041000,
+    "firstLoc": "전남",
+    "secondLoc": "담양군",
+    "geoX": 59,
+    "geoY": 77
+  },
+  {
+    "code": 4672000000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 66,
+    "geoY": 77
+  },
+  {
+    "code": 4672032000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 65,
+    "geoY": 76
+  },
+  {
+    "code": 4672033000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 65,
+    "geoY": 74
+  },
+  {
+    "code": 4672034000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 66,
+    "geoY": 74
+  },
+  {
+    "code": 4672035000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 67,
+    "geoY": 74
+  },
+  {
+    "code": 4672036000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 67,
+    "geoY": 77
+  },
+  {
+    "code": 4672037000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 63,
+    "geoY": 77
+  },
+  {
+    "code": 4672038000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 64,
+    "geoY": 77
+  },
+  {
+    "code": 4672039000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 64,
+    "geoY": 76
+  },
+  {
+    "code": 4672040000,
+    "firstLoc": "전남",
+    "secondLoc": "곡성군",
+    "geoX": 63,
+    "geoY": 76
+  },
+  {
+    "code": 4673000000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 69,
+    "geoY": 75
+  },
+  {
+    "code": 4673025000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 69,
+    "geoY": 76
+  },
+  {
+    "code": 4673031000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 70,
+    "geoY": 75
+  },
+  {
+    "code": 4673032000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 71,
+    "geoY": 75
+  },
+  {
+    "code": 4673034000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 70,
+    "geoY": 76
+  },
+  {
+    "code": 4673035000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 69,
+    "geoY": 77
+  },
+  {
+    "code": 4673037000,
+    "firstLoc": "전남",
+    "secondLoc": "구례군",
+    "geoX": 69,
+    "geoY": 78
+  },
+  {
+    "code": 4677000000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 66,
+    "geoY": 62
+  },
+  {
+    "code": 4677025300,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 64,
+    "geoY": 61
+  },
+  {
+    "code": 4677031000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 65,
+    "geoY": 62
+  },
+  {
+    "code": 4677033000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 63,
+    "geoY": 59
+  },
+  {
+    "code": 4677034000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 67,
+    "geoY": 60
+  },
+  {
+    "code": 4677035000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 67,
+    "geoY": 62
+  },
+  {
+    "code": 4677036000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 69,
+    "geoY": 59
+  },
+  {
+    "code": 4677037000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 68,
+    "geoY": 63
+  },
+  {
+    "code": 4677038000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 67,
+    "geoY": 64
+  },
+  {
+    "code": 4677039000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 67,
+    "geoY": 65
+  },
+  {
+    "code": 4677040000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 67,
+    "geoY": 66
+  },
+  {
+    "code": 4677041000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 66,
+    "geoY": 66
+  },
+  {
+    "code": 4677042000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 66,
+    "geoY": 63
+  },
+  {
+    "code": 4677044000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 69,
+    "geoY": 62
+  },
+  {
+    "code": 4677045000,
+    "firstLoc": "전남",
+    "secondLoc": "고흥군",
+    "geoX": 69,
+    "geoY": 60
+  },
+  {
+    "code": 4678000000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 62,
+    "geoY": 66
+  },
+  {
+    "code": 4678025300,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 67,
+    "geoY": 68
+  },
+  {
+    "code": 4678032000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 63,
+    "geoY": 66
+  },
+  {
+    "code": 4678033000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 64,
+    "geoY": 67
+  },
+  {
+    "code": 4678034000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 64,
+    "geoY": 68
+  },
+  {
+    "code": 4678035000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 63,
+    "geoY": 69
+  },
+  {
+    "code": 4678036000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 64,
+    "geoY": 69
+  },
+  {
+    "code": 4678037000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 65,
+    "geoY": 67
+  },
+  {
+    "code": 4678038000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 64,
+    "geoY": 66
+  },
+  {
+    "code": 4678039000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 63,
+    "geoY": 64
+  },
+  {
+    "code": 4678040000,
+    "firstLoc": "전남",
+    "secondLoc": "보성군",
+    "geoX": 61,
+    "geoY": 65
+  },
+  {
+    "code": 4679000000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 61,
+    "geoY": 72
+  },
+  {
+    "code": 4679031000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 61,
+    "geoY": 70
+  },
+  {
+    "code": 4679032000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 60,
+    "geoY": 70
+  },
+  {
+    "code": 4679033000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 60,
+    "geoY": 68
+  },
+  {
+    "code": 4679034000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 61,
+    "geoY": 68
+  },
+  {
+    "code": 4679035000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 60,
+    "geoY": 71
+  },
+  {
+    "code": 4679036000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 59,
+    "geoY": 71
+  },
+  {
+    "code": 4679037000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 59,
+    "geoY": 69
+  },
+  {
+    "code": 4679038000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 62,
+    "geoY": 73
+  },
+  {
+    "code": 4679039500,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 63,
+    "geoY": 75
+  },
+  {
+    "code": 4679040000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 63,
+    "geoY": 72
+  },
+  {
+    "code": 4679041500,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 63,
+    "geoY": 71
+  },
+  {
+    "code": 4679042000,
+    "firstLoc": "전남",
+    "secondLoc": "화순군",
+    "geoX": 62,
+    "geoY": 71
+  },
+  {
+    "code": 4680000000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 59,
+    "geoY": 64
+  },
+  {
+    "code": 4680025300,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 60,
+    "geoY": 61
+  },
+  {
+    "code": 4680025600,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 59,
+    "geoY": 60
+  },
+  {
+    "code": 4680031000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 59,
+    "geoY": 62
+  },
+  {
+    "code": 4680032000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 61,
+    "geoY": 63
+  },
+  {
+    "code": 4680034000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 61,
+    "geoY": 66
+  },
+  {
+    "code": 4680035000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 58,
+    "geoY": 66
+  },
+  {
+    "code": 4680036000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 59,
+    "geoY": 65
+  },
+  {
+    "code": 4680037000,
+    "firstLoc": "전남",
+    "secondLoc": "장흥군",
+    "geoX": 60,
+    "geoY": 59
+  },
+  {
+    "code": 4681000000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 57,
+    "geoY": 63
+  },
+  {
+    "code": 4681031000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 58,
+    "geoY": 63
+  },
+  {
+    "code": 4681032000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 57,
+    "geoY": 61
+  },
+  {
+    "code": 4681033000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 57,
+    "geoY": 60
+  },
+  {
+    "code": 4681034000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 56,
+    "geoY": 61
+  },
+  {
+    "code": 4681035000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 56,
+    "geoY": 60
+  },
+  {
+    "code": 4681036000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 56,
+    "geoY": 64
+  },
+  {
+    "code": 4681037000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 57,
+    "geoY": 64
+  },
+  {
+    "code": 4681038000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 58,
+    "geoY": 65
+  },
+  {
+    "code": 4681039000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 57,
+    "geoY": 65
+  },
+  {
+    "code": 4681040000,
+    "firstLoc": "전남",
+    "secondLoc": "강진군",
+    "geoX": 58,
+    "geoY": 59
+  },
+  {
+    "code": 4682000000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 54,
+    "geoY": 61
+  },
+  {
+    "code": 4682031000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 54,
+    "geoY": 60
+  },
+  {
+    "code": 4682032000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 52,
+    "geoY": 60
+  },
+  {
+    "code": 4682033000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 53,
+    "geoY": 59
+  },
+  {
+    "code": 4682034000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 52,
+    "geoY": 57
+  },
+  {
+    "code": 4682035000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 54,
+    "geoY": 58
+  },
+  {
+    "code": 4682036000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 55,
+    "geoY": 59
+  },
+  {
+    "code": 4682037000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 55,
+    "geoY": 61
+  },
+  {
+    "code": 4682038000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 55,
+    "geoY": 63
+  },
+  {
+    "code": 4682039000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 53,
+    "geoY": 62
+  },
+  {
+    "code": 4682040000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 51,
+    "geoY": 61
+  },
+  {
+    "code": 4682041000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 51,
+    "geoY": 63
+  },
+  {
+    "code": 4682042000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 49,
+    "geoY": 62
+  },
+  {
+    "code": 4682043000,
+    "firstLoc": "전남",
+    "secondLoc": "해남군",
+    "geoX": 49,
+    "geoY": 64
+  },
+  {
+    "code": 4683000000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 56,
+    "geoY": 66
+  },
+  {
+    "code": 4683025300,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 51,
+    "geoY": 65
+  },
+  {
+    "code": 4683031000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 56,
+    "geoY": 67
+  },
+  {
+    "code": 4683032000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 56,
+    "geoY": 68
+  },
+  {
+    "code": 4683033000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 55,
+    "geoY": 68
+  },
+  {
+    "code": 4683034000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 54,
+    "geoY": 68
+  },
+  {
+    "code": 4683035000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 55,
+    "geoY": 67
+  },
+  {
+    "code": 4683036000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 55,
+    "geoY": 66
+  },
+  {
+    "code": 4683037000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 54,
+    "geoY": 65
+  },
+  {
+    "code": 4683038000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 53,
+    "geoY": 65
+  },
+  {
+    "code": 4683039000,
+    "firstLoc": "전남",
+    "secondLoc": "영암군",
+    "geoX": 53,
+    "geoY": 64
+  },
+  {
+    "code": 4684000000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 52,
+    "geoY": 71
+  },
+  {
+    "code": 4684025300,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 52,
+    "geoY": 67
+  },
+  {
+    "code": 4684032000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 52,
+    "geoY": 69
+  },
+  {
+    "code": 4684033000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 51,
+    "geoY": 69
+  },
+  {
+    "code": 4684034000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 50,
+    "geoY": 71
+  },
+  {
+    "code": 4684036000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 48,
+    "geoY": 73
+  },
+  {
+    "code": 4684037000,
+    "firstLoc": "전남",
+    "secondLoc": "무안군",
+    "geoX": 49,
+    "geoY": 70
+  },
+  {
+    "code": 4686000000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 52,
+    "geoY": 72
+  },
+  {
+    "code": 4686031000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 51,
+    "geoY": 74
+  },
+  {
+    "code": 4686032000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 52,
+    "geoY": 74
+  },
+  {
+    "code": 4686033000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 53,
+    "geoY": 71
+  },
+  {
+    "code": 4686035000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 53,
+    "geoY": 72
+  },
+  {
+    "code": 4686036000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 54,
+    "geoY": 73
+  },
+  {
+    "code": 4686037000,
+    "firstLoc": "전남",
+    "secondLoc": "함평군",
+    "geoX": 54,
+    "geoY": 75
+  },
+  {
+    "code": 4687000000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 52,
+    "geoY": 77
+  },
+  {
+    "code": 4687025300,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 51,
+    "geoY": 77
+  },
+  {
+    "code": 4687025600,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 51,
+    "geoY": 79
+  },
+  {
+    "code": 4687031000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 53,
+    "geoY": 77
+  },
+  {
+    "code": 4687032000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 53,
+    "geoY": 76
+  },
+  {
+    "code": 4687033000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 52,
+    "geoY": 75
+  },
+  {
+    "code": 4687034000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 52,
+    "geoY": 76
+  },
+  {
+    "code": 4687035000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 51,
+    "geoY": 76
+  },
+  {
+    "code": 4687036000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 50,
+    "geoY": 75
+  },
+  {
+    "code": 4687037000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 51,
+    "geoY": 79
+  },
+  {
+    "code": 4687038000,
+    "firstLoc": "전남",
+    "secondLoc": "영광군",
+    "geoX": 45,
+    "geoY": 75
+  },
+  {
+    "code": 4688000000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 57,
+    "geoY": 77
+  },
+  {
+    "code": 4688031000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 58,
+    "geoY": 77
+  },
+  {
+    "code": 4688033000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 56,
+    "geoY": 77
+  },
+  {
+    "code": 4688034000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 55,
+    "geoY": 76
+  },
+  {
+    "code": 4688037000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 57,
+    "geoY": 78
+  },
+  {
+    "code": 4688038000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 57,
+    "geoY": 79
+  },
+  {
+    "code": 4688039000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 57,
+    "geoY": 80
+  },
+  {
+    "code": 4688040000,
+    "firstLoc": "전남",
+    "secondLoc": "장성군",
+    "geoX": 59,
+    "geoY": 80
+  },
+  {
+    "code": 4689000000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 57,
+    "geoY": 56
+  },
+  {
+    "code": 4689025300,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 62,
+    "geoY": 57
+  },
+  {
+    "code": 4689025600,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 53,
+    "geoY": 53
+  },
+  {
+    "code": 4689031000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 55,
+    "geoY": 57
+  },
+  {
+    "code": 4689032000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 58,
+    "geoY": 56
+  },
+  {
+    "code": 4689033000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 58,
+    "geoY": 58
+  },
+  {
+    "code": 4689034000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 59,
+    "geoY": 58
+  },
+  {
+    "code": 4689035000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 59,
+    "geoY": 53
+  },
+  {
+    "code": 4689036000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 55,
+    "geoY": 53
+  },
+  {
+    "code": 4689037000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 62,
+    "geoY": 58
+  },
+  {
+    "code": 4689039000,
+    "firstLoc": "전남",
+    "secondLoc": "완도군",
+    "geoX": 61,
+    "geoY": 56
+  },
+  {
+    "code": 4690000000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 48,
+    "geoY": 59
+  },
+  {
+    "code": 4690031000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 48,
+    "geoY": 60
+  },
+  {
+    "code": 4690032000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 49,
+    "geoY": 60
+  },
+  {
+    "code": 4690033000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 48,
+    "geoY": 58
+  },
+  {
+    "code": 4690034000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 46,
+    "geoY": 58
+  },
+  {
+    "code": 4690036000,
+    "firstLoc": "전남",
+    "secondLoc": "진도군",
+    "geoX": 44,
+    "geoY": 55
+  },
+  {
+    "code": 4691000000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 50,
+    "geoY": 66
+  },
+  {
+    "code": 4691025000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 47,
+    "geoY": 72
+  },
+  {
+    "code": 4691031000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 46,
+    "geoY": 71
+  },
+  {
+    "code": 4691032000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 45,
+    "geoY": 73
+  },
+  {
+    "code": 4691033000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 44,
+    "geoY": 68
+  },
+  {
+    "code": 4691034000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 42,
+    "geoY": 65
+  },
+  {
+    "code": 4691035000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 42,
+    "geoY": 64
+  },
+  {
+    "code": 4691036000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 33,
+    "geoY": 64
+  },
+  {
+    "code": 4691037000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 44,
+    "geoY": 62
+  },
+  {
+    "code": 4691038000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 45,
+    "geoY": 62
+  },
+  {
+    "code": 4691039000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 46,
+    "geoY": 63
+  },
+  {
+    "code": 4691040000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 45,
+    "geoY": 65
+  },
+  {
+    "code": 4691041000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 46,
+    "geoY": 66
+  },
+  {
+    "code": 4691042000,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 45,
+    "geoY": 67
+  },
+  {
+    "code": 4711100000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 102,
+    "geoY": 94
+  },
+  {
+    "code": 4711125000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 105,
+    "geoY": 94
+  },
+  {
+    "code": 4711125600,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 103,
+    "geoY": 93
+  },
+  {
+    "code": 4711131000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 102,
+    "geoY": 93
+  },
+  {
+    "code": 4711132000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 104,
+    "geoY": 94
+  },
+  {
+    "code": 4711133000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 105,
+    "geoY": 92
+  },
+  {
+    "code": 4711135000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 106,
+    "geoY": 96
+  },
+  {
+    "code": 4711156000,
+    "firstLoc": "경북",
+    "secondLoc": "포항남구",
+    "geoX": 103,
+    "geoY": 94
+  },
+  {
+    "code": 4711300000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 102,
+    "geoY": 95
+  },
+  {
+    "code": 4711325000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 102,
+    "geoY": 96
+  },
+  {
+    "code": 4711331000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 100,
+    "geoY": 97
+  },
+  {
+    "code": 4711332000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 102,
+    "geoY": 98
+  },
+  {
+    "code": 4711333000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 102,
+    "geoY": 99
+  },
+  {
+    "code": 4711334000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 100,
+    "geoY": 95
+  },
+  {
+    "code": 4711335000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 97,
+    "geoY": 97
+  },
+  {
+    "code": 4711336000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 99,
+    "geoY": 96
+  },
+  {
+    "code": 4711371000,
+    "firstLoc": "경북",
+    "secondLoc": "포항북구",
+    "geoX": 103,
+    "geoY": 95
+  },
+  {
+    "code": 4713000000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 100,
+    "geoY": 91
+  },
+  {
+    "code": 4713025000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 105,
+    "geoY": 90
+  },
+  {
+    "code": 4713025300,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 100,
+    "geoY": 93
+  },
+  {
+    "code": 4713025600,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 98,
+    "geoY": 90
+  },
+  {
+    "code": 4713025900,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 102,
+    "geoY": 88
+  },
+  {
+    "code": 4713031500,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 104,
+    "geoY": 89
+  },
+  {
+    "code": 4713032000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 104,
+    "geoY": 87
+  },
+  {
+    "code": 4713033000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 100,
+    "geoY": 88
+  },
+  {
+    "code": 4713034000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 97,
+    "geoY": 88
+  },
+  {
+    "code": 4713035000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 97,
+    "geoY": 91
+  },
+  {
+    "code": 4713037000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 101,
+    "geoY": 93
+  },
+  {
+    "code": 4713038000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 101,
+    "geoY": 91
+  },
+  {
+    "code": 4713051500,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 100,
+    "geoY": 90
+  },
+  {
+    "code": 4713059000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 99,
+    "geoY": 90
+  },
+  {
+    "code": 4713065000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 101,
+    "geoY": 89
+  },
+  {
+    "code": 4713066000,
+    "firstLoc": "경북",
+    "secondLoc": "경주시",
+    "geoX": 101,
+    "geoY": 90
+  },
+  {
+    "code": 4715000000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 80,
+    "geoY": 96
+  },
+  {
+    "code": 4715025000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 83,
+    "geoY": 97
+  },
+  {
+    "code": 4715031000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 81,
+    "geoY": 95
+  },
+  {
+    "code": 4715032000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 82,
+    "geoY": 95
+  },
+  {
+    "code": 4715034000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 81,
+    "geoY": 97
+  },
+  {
+    "code": 4715035000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 81,
+    "geoY": 98
+  },
+  {
+    "code": 4715036000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 80,
+    "geoY": 97
+  },
+  {
+    "code": 4715037000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 79,
+    "geoY": 96
+  },
+  {
+    "code": 4715039000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 80,
+    "geoY": 94
+  },
+  {
+    "code": 4715041000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 79,
+    "geoY": 94
+  },
+  {
+    "code": 4715042000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 79,
+    "geoY": 93
+  },
+  {
+    "code": 4715043000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 77,
+    "geoY": 93
+  },
+  {
+    "code": 4715044000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 78,
+    "geoY": 91
+  },
+  {
+    "code": 4715045000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 79,
+    "geoY": 91
+  },
+  {
+    "code": 4715056500,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 80,
+    "geoY": 95
+  },
+  {
+    "code": 4715061000,
+    "firstLoc": "경북",
+    "secondLoc": "김천시",
+    "geoX": 81,
+    "geoY": 96
+  },
+  {
+    "code": 4717000000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 91,
+    "geoY": 106
+  },
+  {
+    "code": 4717025000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 88,
+    "geoY": 106
+  },
+  {
+    "code": 4717031000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 91,
+    "geoY": 107
+  },
+  {
+    "code": 4717032000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 90,
+    "geoY": 108
+  },
+  {
+    "code": 4717033000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 90,
+    "geoY": 107
+  },
+  {
+    "code": 4717034000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 87,
+    "geoY": 105
+  },
+  {
+    "code": 4717035000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 90,
+    "geoY": 104
+  },
+  {
+    "code": 4717036000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 90,
+    "geoY": 105
+  },
+  {
+    "code": 4717037000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 91,
+    "geoY": 105
+  },
+  {
+    "code": 4717038000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 92,
+    "geoY": 105
+  },
+  {
+    "code": 4717039000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 94,
+    "geoY": 103
+  },
+  {
+    "code": 4717040000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 94,
+    "geoY": 106
+  },
+  {
+    "code": 4717041000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 93,
+    "geoY": 108
+  },
+  {
+    "code": 4717042000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 92,
+    "geoY": 110
+  },
+  {
+    "code": 4717043000,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 91,
+    "geoY": 110
+  },
+  {
+    "code": 4717058500,
+    "firstLoc": "경북",
+    "secondLoc": "안동시",
+    "geoX": 90,
+    "geoY": 106
+  },
+  {
+    "code": 4719000000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 84,
+    "geoY": 96
+  },
+  {
+    "code": 4719025000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 83,
+    "geoY": 98
+  },
+  {
+    "code": 4719025300,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 84,
+    "geoY": 97
+  },
+  {
+    "code": 4719031000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 82,
+    "geoY": 99
+  },
+  {
+    "code": 4719032000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 83,
+    "geoY": 100
+  },
+  {
+    "code": 4719033000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 84,
+    "geoY": 100
+  },
+  {
+    "code": 4719034000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 85,
+    "geoY": 97
+  },
+  {
+    "code": 4719036000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 87,
+    "geoY": 96
+  },
+  {
+    "code": 4719058300,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 84,
+    "geoY": 95
+  },
+  {
+    "code": 4719059000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 85,
+    "geoY": 96
+  },
+  {
+    "code": 4719063000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 85,
+    "geoY": 95
+  },
+  {
+    "code": 4719067000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 86,
+    "geoY": 95
+  },
+  {
+    "code": 4719069000,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 86,
+    "geoY": 96
+  },
+  {
+    "code": 4721000000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 89,
+    "geoY": 111
+  },
+  {
+    "code": 4721025000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 87,
+    "geoY": 112
+  },
+  {
+    "code": 4721032000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 90,
+    "geoY": 109
+  },
+  {
+    "code": 4721033000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 89,
+    "geoY": 110
+  },
+  {
+    "code": 4721034000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 88,
+    "geoY": 110
+  },
+  {
+    "code": 4721037000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 88,
+    "geoY": 113
+  },
+  {
+    "code": 4721038000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 88,
+    "geoY": 114
+  },
+  {
+    "code": 4721039000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 89,
+    "geoY": 115
+  },
+  {
+    "code": 4721063000,
+    "firstLoc": "경북",
+    "secondLoc": "영주시",
+    "geoX": 88,
+    "geoY": 111
+  },
+  {
+    "code": 4723000000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 95,
+    "geoY": 93
+  },
+  {
+    "code": 4723025000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 94,
+    "geoY": 92
+  },
+  {
+    "code": 4723031000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 93,
+    "geoY": 93
+  },
+  {
+    "code": 4723032000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 92,
+    "geoY": 94
+  },
+  {
+    "code": 4723033000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 93,
+    "geoY": 94
+  },
+  {
+    "code": 4723034000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 94,
+    "geoY": 96
+  },
+  {
+    "code": 4723035000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 94,
+    "geoY": 95
+  },
+  {
+    "code": 4723036000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 96,
+    "geoY": 95
+  },
+  {
+    "code": 4723037000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 95,
+    "geoY": 94
+  },
+  {
+    "code": 4723038000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 97,
+    "geoY": 94
+  },
+  {
+    "code": 4723039000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 96,
+    "geoY": 92
+  },
+  {
+    "code": 4723040000,
+    "firstLoc": "경북",
+    "secondLoc": "영천시",
+    "geoX": 94,
+    "geoY": 91
+  },
+  {
+    "code": 4725000000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 81,
+    "geoY": 102
+  },
+  {
+    "code": 4725025000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 81,
+    "geoY": 105
+  },
+  {
+    "code": 4725031000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 83,
+    "geoY": 102
+  },
+  {
+    "code": 4725032500,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 82,
+    "geoY": 103
+  },
+  {
+    "code": 4725033000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 82,
+    "geoY": 101
+  },
+  {
+    "code": 4725034000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 80,
+    "geoY": 100
+  },
+  {
+    "code": 4725035000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 80,
+    "geoY": 99
+  },
+  {
+    "code": 4725036000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 80,
+    "geoY": 101
+  },
+  {
+    "code": 4725037000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 79,
+    "geoY": 102
+  },
+  {
+    "code": 4725038000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 77,
+    "geoY": 100
+  },
+  {
+    "code": 4725040000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 77,
+    "geoY": 101
+  },
+  {
+    "code": 4725041000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 77,
+    "geoY": 103
+  },
+  {
+    "code": 4725042000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 77,
+    "geoY": 105
+  },
+  {
+    "code": 4725043000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 80,
+    "geoY": 103
+  },
+  {
+    "code": 4725044000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 79,
+    "geoY": 105
+  },
+  {
+    "code": 4725045000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 81,
+    "geoY": 104
+  },
+  {
+    "code": 4725046000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 80,
+    "geoY": 106
+  },
+  {
+    "code": 4725047000,
+    "firstLoc": "경북",
+    "secondLoc": "상주시",
+    "geoX": 76,
+    "geoY": 103
+  },
+  {
+    "code": 4728000000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 81,
+    "geoY": 106
+  },
+  {
+    "code": 4728025000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 80,
+    "geoY": 109
+  },
+  {
+    "code": 4728025300,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 79,
+    "geoY": 107
+  },
+  {
+    "code": 4728031000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 82,
+    "geoY": 106
+  },
+  {
+    "code": 4728033000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 82,
+    "geoY": 107
+  },
+  {
+    "code": 4728035000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 83,
+    "geoY": 110
+  },
+  {
+    "code": 4728036000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 80,
+    "geoY": 108
+  },
+  {
+    "code": 4728037000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 78,
+    "geoY": 106
+  },
+  {
+    "code": 4728060000,
+    "firstLoc": "경북",
+    "secondLoc": "문경시",
+    "geoX": 81,
+    "geoY": 107
+  },
+  {
+    "code": 4729000000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 91,
+    "geoY": 90
+  },
+  {
+    "code": 4729025000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 93,
+    "geoY": 91
+  },
+  {
+    "code": 4729025600,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 92,
+    "geoY": 90
+  },
+  {
+    "code": 4729031000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 93,
+    "geoY": 92
+  },
+  {
+    "code": 4729033000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 93,
+    "geoY": 89
+  },
+  {
+    "code": 4729034000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 94,
+    "geoY": 89
+  },
+  {
+    "code": 4729037000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 91,
+    "geoY": 88
+  },
+  {
+    "code": 4729052000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 91,
+    "geoY": 89
+  },
+  {
+    "code": 4729056000,
+    "firstLoc": "경북",
+    "secondLoc": "경산시",
+    "geoX": 92,
+    "geoY": 89
+  },
+  {
+    "code": 4773000000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 90,
+    "geoY": 101
+  },
+  {
+    "code": 4773031000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 90,
+    "geoY": 102
+  },
+  {
+    "code": 4773032000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 91,
+    "geoY": 103
+  },
+  {
+    "code": 4773033000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 92,
+    "geoY": 102
+  },
+  {
+    "code": 4773034000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 92,
+    "geoY": 100
+  },
+  {
+    "code": 4773035000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 92,
+    "geoY": 99
+  },
+  {
+    "code": 4773036000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 91,
+    "geoY": 98
+  },
+  {
+    "code": 4773037000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 90,
+    "geoY": 99
+  },
+  {
+    "code": 4773038000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 88,
+    "geoY": 100
+  },
+  {
+    "code": 4773039000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 87,
+    "geoY": 101
+  },
+  {
+    "code": 4773040000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 86,
+    "geoY": 101
+  },
+  {
+    "code": 4773041000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 85,
+    "geoY": 101
+  },
+  {
+    "code": 4773042000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 85,
+    "geoY": 102
+  },
+  {
+    "code": 4773043000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 86,
+    "geoY": 102
+  },
+  {
+    "code": 4773044000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 84,
+    "geoY": 103
+  },
+  {
+    "code": 4773045000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 87,
+    "geoY": 103
+  },
+  {
+    "code": 4773046000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 88,
+    "geoY": 101
+  },
+  {
+    "code": 4773047000,
+    "firstLoc": "경북",
+    "secondLoc": "의성군",
+    "geoX": 86,
+    "geoY": 103
+  },
+  {
+    "code": 4775000000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 96,
+    "geoY": 103
+  },
+  {
+    "code": 4775031500,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 98,
+    "geoY": 101
+  },
+  {
+    "code": 4775032000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 97,
+    "geoY": 101
+  },
+  {
+    "code": 4775033000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 96,
+    "geoY": 100
+  },
+  {
+    "code": 4775034000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 94,
+    "geoY": 100
+  },
+  {
+    "code": 4775035000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 95,
+    "geoY": 100
+  },
+  {
+    "code": 4775036000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 96,
+    "geoY": 104
+  },
+  {
+    "code": 4775037000,
+    "firstLoc": "경북",
+    "secondLoc": "청송군",
+    "geoX": 96,
+    "geoY": 105
+  },
+  {
+    "code": 4776000000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 97,
+    "geoY": 108
+  },
+  {
+    "code": 4776031000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 97,
+    "geoY": 106
+  },
+  {
+    "code": 4776032000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 96,
+    "geoY": 108
+  },
+  {
+    "code": 4776033000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 98,
+    "geoY": 109
+  },
+  {
+    "code": 4776034000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 99,
+    "geoY": 110
+  },
+  {
+    "code": 4776035000,
+    "firstLoc": "경북",
+    "secondLoc": "영양군",
+    "geoX": 98,
+    "geoY": 106
+  },
+  {
+    "code": 4777000000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 102,
+    "geoY": 103
+  },
+  {
+    "code": 4777031000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 102,
+    "geoY": 102
+  },
+  {
+    "code": 4777032000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 102,
+    "geoY": 100
+  },
+  {
+    "code": 4777033000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 101,
+    "geoY": 102
+  },
+  {
+    "code": 4777034000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 100,
+    "geoY": 103
+  },
+  {
+    "code": 4777035000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 103,
+    "geoY": 105
+  },
+  {
+    "code": 4777037000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 103,
+    "geoY": 107
+  },
+  {
+    "code": 4777038000,
+    "firstLoc": "경북",
+    "secondLoc": "영덕군",
+    "geoX": 102,
+    "geoY": 106
+  },
+  {
+    "code": 4782000000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 91,
+    "geoY": 86
+  },
+  {
+    "code": 4782025300,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 92,
+    "geoY": 86
+  },
+  {
+    "code": 4782031000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 90,
+    "geoY": 85
+  },
+  {
+    "code": 4782032000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 89,
+    "geoY": 85
+  },
+  {
+    "code": 4782033000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 89,
+    "geoY": 86
+  },
+  {
+    "code": 4782034000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 90,
+    "geoY": 86
+  },
+  {
+    "code": 4782035000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 95,
+    "geoY": 87
+  },
+  {
+    "code": 4782036000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 94,
+    "geoY": 87
+  },
+  {
+    "code": 4782037000,
+    "firstLoc": "경북",
+    "secondLoc": "청도군",
+    "geoX": 94,
+    "geoY": 86
+  },
+  {
+    "code": 4783000000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 83,
+    "geoY": 87
+  },
+  {
+    "code": 4783031000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 82,
+    "geoY": 88
+  },
+  {
+    "code": 4783032000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 84,
+    "geoY": 88
+  },
+  {
+    "code": 4783033000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 85,
+    "geoY": 88
+  },
+  {
+    "code": 4783034000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 86,
+    "geoY": 89
+  },
+  {
+    "code": 4783035000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 85,
+    "geoY": 87
+  },
+  {
+    "code": 4783036000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 84,
+    "geoY": 86
+  },
+  {
+    "code": 4783037000,
+    "firstLoc": "경북",
+    "secondLoc": "고령군",
+    "geoX": 83,
+    "geoY": 86
+  },
+  {
+    "code": 4784000000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 83,
+    "geoY": 91
+  },
+  {
+    "code": 4784031000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 85,
+    "geoY": 91
+  },
+  {
+    "code": 4784032000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 84,
+    "geoY": 90
+  },
+  {
+    "code": 4784033000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 82,
+    "geoY": 89
+  },
+  {
+    "code": 4784034000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 81,
+    "geoY": 91
+  },
+  {
+    "code": 4784036000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 82,
+    "geoY": 91
+  },
+  {
+    "code": 4784037000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 82,
+    "geoY": 92
+  },
+  {
+    "code": 4784038000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 83,
+    "geoY": 93
+  },
+  {
+    "code": 4784039000,
+    "firstLoc": "경북",
+    "secondLoc": "성주군",
+    "geoX": 84,
+    "geoY": 92
+  },
+  {
+    "code": 4785000000,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 85,
+    "geoY": 93
+  },
+  {
+    "code": 4785025300,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 84,
+    "geoY": 94
+  },
+  {
+    "code": 4785025600,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 85,
+    "geoY": 94
+  },
+  {
+    "code": 4785031000,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 87,
+    "geoY": 92
+  },
+  {
+    "code": 4785032000,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 88,
+    "geoY": 93
+  },
+  {
+    "code": 4785033000,
+    "firstLoc": "경북",
+    "secondLoc": "칠곡군",
+    "geoX": 88,
+    "geoY": 95
+  },
+  {
+    "code": 4790000000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 86,
+    "geoY": 107
+  },
+  {
+    "code": 4790031000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 85,
+    "geoY": 108
+  },
+  {
+    "code": 4790034000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 87,
+    "geoY": 109
+  },
+  {
+    "code": 4790035000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 87,
+    "geoY": 108
+  },
+  {
+    "code": 4790036000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 86,
+    "geoY": 106
+  },
+  {
+    "code": 4790037000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 85,
+    "geoY": 107
+  },
+  {
+    "code": 4790038000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 83,
+    "geoY": 106
+  },
+  {
+    "code": 4790039000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 84,
+    "geoY": 106
+  },
+  {
+    "code": 4790040000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 85,
+    "geoY": 105
+  },
+  {
+    "code": 4790041000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 83,
+    "geoY": 104
+  },
+  {
+    "code": 4792000000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 90,
+    "geoY": 113
+  },
+  {
+    "code": 4792025000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 91,
+    "geoY": 113
+  },
+  {
+    "code": 4792031000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 90,
+    "geoY": 115
+  },
+  {
+    "code": 4792032000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 92,
+    "geoY": 113
+  },
+  {
+    "code": 4792033000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 93,
+    "geoY": 113
+  },
+  {
+    "code": 4792034000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 94,
+    "geoY": 114
+  },
+  {
+    "code": 4792035000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 95,
+    "geoY": 114
+  },
+  {
+    "code": 4792036000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 95,
+    "geoY": 111
+  },
+  {
+    "code": 4792037000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 93,
+    "geoY": 112
+  },
+  {
+    "code": 4792038000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 91,
+    "geoY": 111
+  },
+  {
+    "code": 4792039000,
+    "firstLoc": "경북",
+    "secondLoc": "봉화군",
+    "geoX": 96,
+    "geoY": 116
+  },
+  {
+    "code": 4793000000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 102,
+    "geoY": 115
+  },
+  {
+    "code": 4793025300,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 103,
+    "geoY": 110
+  },
+  {
+    "code": 4793031000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 101,
+    "geoY": 118
+  },
+  {
+    "code": 4793035000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 103,
+    "geoY": 111
+  },
+  {
+    "code": 4793036000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 101,
+    "geoY": 109
+  },
+  {
+    "code": 4793037000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 102,
+    "geoY": 117
+  },
+  {
+    "code": 4793038000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 103,
+    "geoY": 109
+  },
+  {
+    "code": 4793039000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 99,
+    "geoY": 114
+  },
+  {
+    "code": 4793040000,
+    "firstLoc": "경북",
+    "secondLoc": "울진군",
+    "geoX": 102,
+    "geoY": 114
+  },
+  {
+    "code": 4794000000,
+    "firstLoc": "경북",
+    "secondLoc": "울릉군",
+    "geoX": 127,
+    "geoY": 127
+  },
+  {
+    "code": 4794031000,
+    "firstLoc": "경북",
+    "secondLoc": "울릉군",
+    "geoX": 126,
+    "geoY": 127
+  },
+  {
+    "code": 4794032000,
+    "firstLoc": "경북",
+    "secondLoc": "울릉군",
+    "geoX": 127,
+    "geoY": 129
+  },
+  {
+    "code": 4794033000,
+    "firstLoc": "경북",
+    "secondLoc": "울릉군",
+    "geoX": 144,
+    "geoY": 123
+  },
+  {
+    "code": 4800000000,
+    "firstLoc": "경남",
+    "secondLoc": "창원의창",
+    "geoX": 91,
+    "geoY": 77
+  },
+  {
+    "code": 4812100000,
+    "firstLoc": "경남",
+    "secondLoc": "창원의창",
+    "geoX": 90,
+    "geoY": 77
+  },
+  {
+    "code": 4812125000,
+    "firstLoc": "경남",
+    "secondLoc": "창원의창",
+    "geoX": 91,
+    "geoY": 78
+  },
+  {
+    "code": 4812131000,
+    "firstLoc": "경남",
+    "secondLoc": "창원의창",
+    "geoX": 89,
+    "geoY": 79
+  },
+  {
+    "code": 4812132000,
+    "firstLoc": "경남",
+    "secondLoc": "창원의창",
+    "geoX": 91,
+    "geoY": 79
+  },
+  {
+    "code": 4812300000,
+    "firstLoc": "경남",
+    "secondLoc": "창원성산",
+    "geoX": 91,
+    "geoY": 76
+  },
+  {
+    "code": 4812357000,
+    "firstLoc": "경남",
+    "secondLoc": "창원성산",
+    "geoX": 90,
+    "geoY": 76
+  },
+  {
+    "code": 4812500000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 89,
+    "geoY": 76
+  },
+  {
+    "code": 4812531000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 89,
+    "geoY": 74
+  },
+  {
+    "code": 4812532000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 88,
+    "geoY": 74
+  },
+  {
+    "code": 4812533000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 87,
+    "geoY": 74
+  },
+  {
+    "code": 4812534000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 86,
+    "geoY": 74
+  },
+  {
+    "code": 4812551000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 89,
+    "geoY": 75
+  },
+  {
+    "code": 4812725000,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 88,
+    "geoY": 77
+  },
+  {
+    "code": 4812900000,
+    "firstLoc": "경남",
+    "secondLoc": "창원진해",
+    "geoX": 91,
+    "geoY": 75
+  },
+  {
+    "code": 4812963000,
+    "firstLoc": "경남",
+    "secondLoc": "창원진해",
+    "geoX": 92,
+    "geoY": 74
+  },
+  {
+    "code": 4812964000,
+    "firstLoc": "경남",
+    "secondLoc": "창원진해",
+    "geoX": 93,
+    "geoY": 75
+  },
+  {
+    "code": 4812965000,
+    "firstLoc": "경남",
+    "secondLoc": "창원진해",
+    "geoX": 93,
+    "geoY": 74
+  },
+  {
+    "code": 4817000000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 75
+  },
+  {
+    "code": 4817025000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 82,
+    "geoY": 75
+  },
+  {
+    "code": 4817031000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 80,
+    "geoY": 75
+  },
+  {
+    "code": 4817032000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 74
+  },
+  {
+    "code": 4817033000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 82,
+    "geoY": 73
+  },
+  {
+    "code": 4817035000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 83,
+    "geoY": 75
+  },
+  {
+    "code": 4817036000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 84,
+    "geoY": 75
+  },
+  {
+    "code": 4817037000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 85,
+    "geoY": 75
+  },
+  {
+    "code": 4817039000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 83,
+    "geoY": 76
+  },
+  {
+    "code": 4817040000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 82,
+    "geoY": 77
+  },
+  {
+    "code": 4817041000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 76
+  },
+  {
+    "code": 4817042000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 80,
+    "geoY": 76
+  },
+  {
+    "code": 4817043000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 78
+  },
+  {
+    "code": 4817044000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 79,
+    "geoY": 76
+  },
+  {
+    "code": 4817045000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 78,
+    "geoY": 76
+  },
+  {
+    "code": 4817046000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 77,
+    "geoY": 75
+  },
+  {
+    "code": 4817068000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 75
+  },
+  {
+    "code": 4817071000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 79,
+    "geoY": 75
+  },
+  {
+    "code": 4817074000,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 75
+  },
+  {
+    "code": 4822000000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 87,
+    "geoY": 68
+  },
+  {
+    "code": 4822025000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 86,
+    "geoY": 67
+  },
+  {
+    "code": 4822033000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 85,
+    "geoY": 69
+  },
+  {
+    "code": 4822034000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 86,
+    "geoY": 69
+  },
+  {
+    "code": 4822035000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 84,
+    "geoY": 63
+  },
+  {
+    "code": 4822036000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 88,
+    "geoY": 66
+  },
+  {
+    "code": 4822037000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 83,
+    "geoY": 68
+  },
+  {
+    "code": 4822051000,
+    "firstLoc": "경남",
+    "secondLoc": "통영시",
+    "geoX": 86,
+    "geoY": 68
+  },
+  {
+    "code": 4824000000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 80,
+    "geoY": 71
+  },
+  {
+    "code": 4824025000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 80,
+    "geoY": 73
+  },
+  {
+    "code": 4824031000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 81,
+    "geoY": 72
+  },
+  {
+    "code": 4824032000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 80,
+    "geoY": 72
+  },
+  {
+    "code": 4824034000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 80,
+    "geoY": 74
+  },
+  {
+    "code": 4824035000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 78,
+    "geoY": 72
+  },
+  {
+    "code": 4824036000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 78,
+    "geoY": 74
+  },
+  {
+    "code": 4824037000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 78,
+    "geoY": 71
+  },
+  {
+    "code": 4824051000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 80,
+    "geoY": 70
+  },
+  {
+    "code": 4824057000,
+    "firstLoc": "경남",
+    "secondLoc": "사천시",
+    "geoX": 81,
+    "geoY": 70
+  },
+  {
+    "code": 4825000000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 95,
+    "geoY": 77
+  },
+  {
+    "code": 4825025000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 92,
+    "geoY": 78
+  },
+  {
+    "code": 4825032000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 93,
+    "geoY": 77
+  },
+  {
+    "code": 4825033000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 92,
+    "geoY": 77
+  },
+  {
+    "code": 4825034000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 93,
+    "geoY": 79
+  },
+  {
+    "code": 4825035000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 94,
+    "geoY": 79
+  },
+  {
+    "code": 4825036000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 95,
+    "geoY": 78
+  },
+  {
+    "code": 4825037000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 96,
+    "geoY": 77
+  },
+  {
+    "code": 4825051000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 94,
+    "geoY": 77
+  },
+  {
+    "code": 4825056500,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 94,
+    "geoY": 76
+  },
+  {
+    "code": 4825061000,
+    "firstLoc": "경남",
+    "secondLoc": "김해시",
+    "geoX": 93,
+    "geoY": 76
+  },
+  {
+    "code": 4827000000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 92,
+    "geoY": 83
+  },
+  {
+    "code": 4827025000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 93,
+    "geoY": 80
+  },
+  {
+    "code": 4827025300,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 91,
+    "geoY": 80
+  },
+  {
+    "code": 4827031000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 91,
+    "geoY": 83
+  },
+  {
+    "code": 4827032000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 92,
+    "geoY": 84
+  },
+  {
+    "code": 4827033000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 93,
+    "geoY": 83
+  },
+  {
+    "code": 4827034000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 94,
+    "geoY": 84
+  },
+  {
+    "code": 4827035000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 94,
+    "geoY": 83
+  },
+  {
+    "code": 4827036000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 92,
+    "geoY": 81
+  },
+  {
+    "code": 4827037000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 91,
+    "geoY": 81
+  },
+  {
+    "code": 4827038000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 90,
+    "geoY": 82
+  },
+  {
+    "code": 4827039000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 90,
+    "geoY": 83
+  },
+  {
+    "code": 4827051000,
+    "firstLoc": "경남",
+    "secondLoc": "밀양시",
+    "geoX": 92,
+    "geoY": 82
+  },
+  {
+    "code": 4831000000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 90,
+    "geoY": 69
+  },
+  {
+    "code": 4831031000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 92,
+    "geoY": 68
+  },
+  {
+    "code": 4831032000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 90,
+    "geoY": 68
+  },
+  {
+    "code": 4831033000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 90,
+    "geoY": 66
+  },
+  {
+    "code": 4831034000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 89,
+    "geoY": 68
+  },
+  {
+    "code": 4831035000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 88,
+    "geoY": 68
+  },
+  {
+    "code": 4831036000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 88,
+    "geoY": 70
+  },
+  {
+    "code": 4831037000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 91,
+    "geoY": 70
+  },
+  {
+    "code": 4831038000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 91,
+    "geoY": 71
+  },
+  {
+    "code": 4831051000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 92,
+    "geoY": 69
+  },
+  {
+    "code": 4831054000,
+    "firstLoc": "경남",
+    "secondLoc": "거제시",
+    "geoX": 91,
+    "geoY": 69
+  },
+  {
+    "code": 4833000000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 97,
+    "geoY": 79
+  },
+  {
+    "code": 4833025300,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 96,
+    "geoY": 78
+  },
+  {
+    "code": 4833031000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 98,
+    "geoY": 79
+  },
+  {
+    "code": 4833032000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 95,
+    "geoY": 80
+  },
+  {
+    "code": 4833033000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 97,
+    "geoY": 81
+  },
+  {
+    "code": 4833034000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 98,
+    "geoY": 82
+  },
+  {
+    "code": 4833054000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 99,
+    "geoY": 81
+  },
+  {
+    "code": 4833056000,
+    "firstLoc": "경남",
+    "secondLoc": "양산시",
+    "geoX": 99,
+    "geoY": 80
+  },
+  {
+    "code": 4872000000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 83,
+    "geoY": 78
+  },
+  {
+    "code": 4872032000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 82,
+    "geoY": 79
+  },
+  {
+    "code": 4872033000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 81,
+    "geoY": 79
+  },
+  {
+    "code": 4872035000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 84,
+    "geoY": 79
+  },
+  {
+    "code": 4872036000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 84,
+    "geoY": 80
+  },
+  {
+    "code": 4872037000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 85,
+    "geoY": 80
+  },
+  {
+    "code": 4872038000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 85,
+    "geoY": 82
+  },
+  {
+    "code": 4872039000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 84,
+    "geoY": 81
+  },
+  {
+    "code": 4872040000,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 83,
+    "geoY": 82
+  },
+  {
+    "code": 4872041500,
+    "firstLoc": "경남",
+    "secondLoc": "의령군",
+    "geoX": 83,
+    "geoY": 81
+  },
+  {
+    "code": 4873000000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 86,
+    "geoY": 77
+  },
+  {
+    "code": 4873025300,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 88,
+    "geoY": 78
+  },
+  {
+    "code": 4873032000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 85,
+    "geoY": 77
+  },
+  {
+    "code": 4873033000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 85,
+    "geoY": 78
+  },
+  {
+    "code": 4873034000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 86,
+    "geoY": 79
+  },
+  {
+    "code": 4873035000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 87,
+    "geoY": 79
+  },
+  {
+    "code": 4873036000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 88,
+    "geoY": 79
+  },
+  {
+    "code": 4873039000,
+    "firstLoc": "경남",
+    "secondLoc": "함안군",
+    "geoX": 86,
+    "geoY": 76
+  },
+  {
+    "code": 4874000000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 87,
+    "geoY": 83
+  },
+  {
+    "code": 4874025300,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 87,
+    "geoY": 80
+  },
+  {
+    "code": 4874031000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 88,
+    "geoY": 84
+  },
+  {
+    "code": 4874032000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 87,
+    "geoY": 85
+  },
+  {
+    "code": 4874034000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 85,
+    "geoY": 84
+  },
+  {
+    "code": 4874035000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 86,
+    "geoY": 82
+  },
+  {
+    "code": 4874036000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 87,
+    "geoY": 84
+  },
+  {
+    "code": 4874037000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 88,
+    "geoY": 82
+  },
+  {
+    "code": 4874038000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 88,
+    "geoY": 81
+  },
+  {
+    "code": 4874039000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 87,
+    "geoY": 81
+  },
+  {
+    "code": 4874041000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 89,
+    "geoY": 80
+  },
+  {
+    "code": 4874042000,
+    "firstLoc": "경남",
+    "secondLoc": "창녕군",
+    "geoX": 89,
+    "geoY": 81
+  },
+  {
+    "code": 4882000000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 85,
+    "geoY": 71
+  },
+  {
+    "code": 4882031000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 84,
+    "geoY": 70
+  },
+  {
+    "code": 4882032000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 82,
+    "geoY": 70
+  },
+  {
+    "code": 4882034000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 82,
+    "geoY": 71
+  },
+  {
+    "code": 4882035000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 84,
+    "geoY": 72
+  },
+  {
+    "code": 4882036000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 82,
+    "geoY": 72
+  },
+  {
+    "code": 4882037000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 83,
+    "geoY": 74
+  },
+  {
+    "code": 4882038000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 83,
+    "geoY": 73
+  },
+  {
+    "code": 4882039000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 85,
+    "geoY": 73
+  },
+  {
+    "code": 4882042000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 86,
+    "geoY": 72
+  },
+  {
+    "code": 4882043000,
+    "firstLoc": "경남",
+    "secondLoc": "고성군",
+    "geoX": 86,
+    "geoY": 71
+  },
+  {
+    "code": 4884000000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 77,
+    "geoY": 68
+  },
+  {
+    "code": 4884031000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 78,
+    "geoY": 67
+  },
+  {
+    "code": 4884032000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 79,
+    "geoY": 65
+  },
+  {
+    "code": 4884033000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 79,
+    "geoY": 67
+  },
+  {
+    "code": 4884034000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 80,
+    "geoY": 65
+  },
+  {
+    "code": 4884035000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 77,
+    "geoY": 66
+  },
+  {
+    "code": 4884036000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 76,
+    "geoY": 67
+  },
+  {
+    "code": 4884037000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 77,
+    "geoY": 69
+  },
+  {
+    "code": 4884039000,
+    "firstLoc": "경남",
+    "secondLoc": "남해군",
+    "geoX": 79,
+    "geoY": 68
+  },
+  {
+    "code": 4885000000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 74,
+    "geoY": 73
+  },
+  {
+    "code": 4885031000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 72,
+    "geoY": 75
+  },
+  {
+    "code": 4885032000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 74,
+    "geoY": 75
+  },
+  {
+    "code": 4885033000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 75,
+    "geoY": 73
+  },
+  {
+    "code": 4885035000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 76,
+    "geoY": 72
+  },
+  {
+    "code": 4885036000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 76,
+    "geoY": 70
+  },
+  {
+    "code": 4885037000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 77,
+    "geoY": 72
+  },
+  {
+    "code": 4885038000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 76,
+    "geoY": 72
+  },
+  {
+    "code": 4885039000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 77,
+    "geoY": 74
+  },
+  {
+    "code": 4885040000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 75,
+    "geoY": 74
+  },
+  {
+    "code": 4885042000,
+    "firstLoc": "경남",
+    "secondLoc": "하동군",
+    "geoX": 75,
+    "geoY": 70
+  },
+  {
+    "code": 4886000000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 76,
+    "geoY": 80
+  },
+  {
+    "code": 4886031000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 77,
+    "geoY": 81
+  },
+  {
+    "code": 4886032000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 76,
+    "geoY": 81
+  },
+  {
+    "code": 4886033000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 76,
+    "geoY": 82
+  },
+  {
+    "code": 4886035000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 76,
+    "geoY": 78
+  },
+  {
+    "code": 4886036000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 76,
+    "geoY": 77
+  },
+  {
+    "code": 4886037000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 78,
+    "geoY": 78
+  },
+  {
+    "code": 4886039000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 79,
+    "geoY": 79
+  },
+  {
+    "code": 4886040000,
+    "firstLoc": "경남",
+    "secondLoc": "산청군",
+    "geoX": 79,
+    "geoY": 80
+  },
+  {
+    "code": 4887000000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 74,
+    "geoY": 82
+  },
+  {
+    "code": 4887031000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 73,
+    "geoY": 80
+  },
+  {
+    "code": 4887033000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 75,
+    "geoY": 81
+  },
+  {
+    "code": 4887034000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 75,
+    "geoY": 82
+  },
+  {
+    "code": 4887035000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 74,
+    "geoY": 83
+  },
+  {
+    "code": 4887036000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 75,
+    "geoY": 85
+  },
+  {
+    "code": 4887037000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 73,
+    "geoY": 85
+  },
+  {
+    "code": 4887038000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 73,
+    "geoY": 86
+  },
+  {
+    "code": 4887039000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 72,
+    "geoY": 83
+  },
+  {
+    "code": 4887040000,
+    "firstLoc": "경남",
+    "secondLoc": "함양군",
+    "geoX": 73,
+    "geoY": 83
+  },
+  {
+    "code": 4888000000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 77,
+    "geoY": 86
+  },
+  {
+    "code": 4888031000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 77,
+    "geoY": 87
+  },
+  {
+    "code": 4888032000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 77,
+    "geoY": 89
+  },
+  {
+    "code": 4888033000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 76,
+    "geoY": 89
+  },
+  {
+    "code": 4888034000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 75,
+    "geoY": 88
+  },
+  {
+    "code": 4888035000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 75,
+    "geoY": 87
+  },
+  {
+    "code": 4888036000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 76,
+    "geoY": 86
+  },
+  {
+    "code": 4888037000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 77,
+    "geoY": 85
+  },
+  {
+    "code": 4888039000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 77,
+    "geoY": 84
+  },
+  {
+    "code": 4888040000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 79,
+    "geoY": 87
+  },
+  {
+    "code": 4888041000,
+    "firstLoc": "경남",
+    "secondLoc": "거창군",
+    "geoX": 78,
+    "geoY": 88
+  },
+  {
+    "code": 4889000000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 84
+  },
+  {
+    "code": 4889031000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 79,
+    "geoY": 85
+  },
+  {
+    "code": 4889032000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 80,
+    "geoY": 86
+  },
+  {
+    "code": 4889033000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 88
+  },
+  {
+    "code": 4889034000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 87
+  },
+  {
+    "code": 4889035000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 82,
+    "geoY": 84
+  },
+  {
+    "code": 4889036000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 83,
+    "geoY": 83
+  },
+  {
+    "code": 4889037000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 83,
+    "geoY": 84
+  },
+  {
+    "code": 4889038000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 85,
+    "geoY": 85
+  },
+  {
+    "code": 4889039000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 84,
+    "geoY": 84
+  },
+  {
+    "code": 4889040000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 83,
+    "geoY": 83
+  },
+  {
+    "code": 4889041000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 82,
+    "geoY": 83
+  },
+  {
+    "code": 4889042000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 81
+  },
+  {
+    "code": 4889043000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 80
+  },
+  {
+    "code": 4889044000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 79,
+    "geoY": 81
+  },
+  {
+    "code": 4889045000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 79,
+    "geoY": 83
+  },
+  {
+    "code": 4889046000,
+    "firstLoc": "경남",
+    "secondLoc": "합천군",
+    "geoX": 81,
+    "geoY": 83
+  },
+  {
+    "code": 5011000000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 53,
+    "geoY": 38
+  },
+  {
+    "code": 5011025000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 48,
+    "geoY": 36
+  },
+  {
+    "code": 5011025300,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 49,
+    "geoY": 37
+  },
+  {
+    "code": 5011025600,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 59,
+    "geoY": 38
+  },
+  {
+    "code": 5011025900,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 55,
+    "geoY": 39
+  },
+  {
+    "code": 5011031000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 46,
+    "geoY": 35
+  },
+  {
+    "code": 5011032000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 48,
+    "geoY": 48
+  },
+  {
+    "code": 5011033000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 60,
+    "geoY": 38
+  },
+  {
+    "code": 5011057000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 52,
+    "geoY": 38
+  },
+  {
+    "code": 5011061000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 54,
+    "geoY": 38
+  },
+  {
+    "code": 5011063000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 53,
+    "geoY": 37
+  },
+  {
+    "code": 5011067000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 51,
+    "geoY": 38
+  },
+  {
+    "code": 5011068000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 51,
+    "geoY": 38
+  },
+  {
+    "code": 5011068000,
+    "firstLoc": "제주",
+    "secondLoc": "제주시",
+    "geoX": 52,
+    "geoY": 37
+  },
+  {
+    "code": 5013000000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 52,
+    "geoY": 33
+  },
+  {
+    "code": 5013025000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 48,
+    "geoY": 32
+  },
+  {
+    "code": 5013025300,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 56,
+    "geoY": 33
+  },
+  {
+    "code": 5013025900,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 60,
+    "geoY": 37
+  },
+  {
+    "code": 5013031000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 49,
+    "geoY": 32
+  },
+  {
+    "code": 5013032000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 58,
+    "geoY": 34
+  },
+  {
+    "code": 5013051000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 53,
+    "geoY": 32
+  },
+  {
+    "code": 5013055000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 54,
+    "geoY": 33
+  },
+  {
+    "code": 5013057000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 53,
+    "geoY": 33
+  },
+  {
+    "code": 5013059000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 52,
+    "geoY": 32
+  },
+  {
+    "code": 5013061000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 51,
+    "geoY": 32
+  },
+  {
+    "code": 5013062000,
+    "firstLoc": "제주",
+    "secondLoc": "서귀포",
+    "geoX": 50,
+    "geoY": 32
+  },
+  {
+    "code": 5019000000,
+    "firstLoc": "이어",
+    "secondLoc": "이어도",
+    "geoX": 28,
+    "geoY": 8
+  },
+  {
+    "code": 5111000000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 73,
+    "geoY": 134
+  },
+  {
+    "code": 5111025000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 73,
+    "geoY": 135
+  },
+  {
+    "code": 5111032000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 74,
+    "geoY": 131
+  },
+  {
+    "code": 5111033000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 72,
+    "geoY": 132
+  },
+  {
+    "code": 5111034000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 70,
+    "geoY": 130
+  },
+  {
+    "code": 5111035000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 72,
+    "geoY": 134
+  },
+  {
+    "code": 5111036000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 71,
+    "geoY": 137
+  },
+  {
+    "code": 5111038000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 75,
+    "geoY": 136
+  },
+  {
+    "code": 5111039000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 73,
+    "geoY": 133
+  },
+  {
+    "code": 5111040000,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 71,
+    "geoY": 132
+  },
+  {
+    "code": 5111067500,
+    "firstLoc": "강원",
+    "secondLoc": "춘천시",
+    "geoX": 72,
+    "geoY": 133
+  },
+  {
+    "code": 5113000000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 76,
+    "geoY": 122
+  },
+  {
+    "code": 5113025000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 74,
+    "geoY": 121
+  },
+  {
+    "code": 5113031000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 78,
+    "geoY": 124
+  },
+  {
+    "code": 5113032000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 76,
+    "geoY": 124
+  },
+  {
+    "code": 5113033000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 75,
+    "geoY": 122
+  },
+  {
+    "code": 5113035000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 73,
+    "geoY": 119
+  },
+  {
+    "code": 5113036000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 76,
+    "geoY": 118
+  },
+  {
+    "code": 5113037000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 76,
+    "geoY": 121
+  },
+  {
+    "code": 5113038000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 78,
+    "geoY": 121
+  },
+  {
+    "code": 5113039000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 79,
+    "geoY": 120
+  },
+  {
+    "code": 5113051500,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 77,
+    "geoY": 122
+  },
+  {
+    "code": 5113060000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 76,
+    "geoY": 123
+  },
+  {
+    "code": 5113062000,
+    "firstLoc": "강원",
+    "secondLoc": "원주시",
+    "geoX": 77,
+    "geoY": 123
+  },
+  {
+    "code": 5115000000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 92,
+    "geoY": 131
+  },
+  {
+    "code": 5115025000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 91,
+    "geoY": 134
+  },
+  {
+    "code": 5115032000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 92,
+    "geoY": 130
+  },
+  {
+    "code": 5115034000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 94,
+    "geoY": 131
+  },
+  {
+    "code": 5115035000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 95,
+    "geoY": 129
+  },
+  {
+    "code": 5115036000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 92,
+    "geoY": 133
+  },
+  {
+    "code": 5115037000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 92,
+    "geoY": 134
+  },
+  {
+    "code": 5115052000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 93,
+    "geoY": 132
+  },
+  {
+    "code": 5115055000,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 92,
+    "geoY": 132
+  },
+  {
+    "code": 5115061500,
+    "firstLoc": "강원",
+    "secondLoc": "강릉시",
+    "geoX": 93,
+    "geoY": 131
+  },
+  {
+    "code": 5117000000,
+    "firstLoc": "강원",
+    "secondLoc": "동해시",
+    "geoX": 97,
+    "geoY": 127
+  },
+  {
+    "code": 5117052000,
+    "firstLoc": "강원",
+    "secondLoc": "동해시",
+    "geoX": 97,
+    "geoY": 126
+  },
+  {
+    "code": 5117054000,
+    "firstLoc": "강원",
+    "secondLoc": "동해시",
+    "geoX": 96,
+    "geoY": 127
+  },
+  {
+    "code": 5117065000,
+    "firstLoc": "강원",
+    "secondLoc": "동해시",
+    "geoX": 96,
+    "geoY": 126
+  },
+  {
+    "code": 5119000000,
+    "firstLoc": "강원",
+    "secondLoc": "태백시",
+    "geoX": 95,
+    "geoY": 119
+  },
+  {
+    "code": 5119058500,
+    "firstLoc": "강원",
+    "secondLoc": "태백시",
+    "geoX": 94,
+    "geoY": 118
+  },
+  {
+    "code": 5119059500,
+    "firstLoc": "강원",
+    "secondLoc": "태백시",
+    "geoX": 95,
+    "geoY": 117
+  },
+  {
+    "code": 5119061500,
+    "firstLoc": "강원",
+    "secondLoc": "태백시",
+    "geoX": 96,
+    "geoY": 118
+  },
+  {
+    "code": 5121000000,
+    "firstLoc": "강원",
+    "secondLoc": "속초시",
+    "geoX": 87,
+    "geoY": 141
+  },
+  {
+    "code": 5121060000,
+    "firstLoc": "강원",
+    "secondLoc": "속초시",
+    "geoX": 87,
+    "geoY": 140
+  },
+  {
+    "code": 5123000000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 98,
+    "geoY": 125
+  },
+  {
+    "code": 5123025000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 96,
+    "geoY": 120
+  },
+  {
+    "code": 5123025300,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 101,
+    "geoY": 119
+  },
+  {
+    "code": 5123031000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 99,
+    "geoY": 124
+  },
+  {
+    "code": 5123032000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 94,
+    "geoY": 123
+  },
+  {
+    "code": 5123033000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 98,
+    "geoY": 123
+  },
+  {
+    "code": 5123034000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 97,
+    "geoY": 124
+  },
+  {
+    "code": 5123036000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 96,
+    "geoY": 123
+  },
+  {
+    "code": 5123057000,
+    "firstLoc": "강원",
+    "secondLoc": "삼척시",
+    "geoX": 97,
+    "geoY": 125
+  },
+  {
+    "code": 5172000000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 75,
+    "geoY": 130
+  },
+  {
+    "code": 5172031000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 77,
+    "geoY": 131
+  },
+  {
+    "code": 5172032000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 78,
+    "geoY": 134
+  },
+  {
+    "code": 5172033000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 79,
+    "geoY": 132
+  },
+  {
+    "code": 5172034000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 81,
+    "geoY": 130
+  },
+  {
+    "code": 5172035200,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 76,
+    "geoY": 129
+  },
+  {
+    "code": 5172036000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 73,
+    "geoY": 128
+  },
+  {
+    "code": 5172037000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 72,
+    "geoY": 129
+  },
+  {
+    "code": 5172039000,
+    "firstLoc": "강원",
+    "secondLoc": "홍천군",
+    "geoX": 84,
+    "geoY": 132
+  },
+  {
+    "code": 5173000000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 77,
+    "geoY": 125
+  },
+  {
+    "code": 5173031000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 79,
+    "geoY": 125
+  },
+  {
+    "code": 5173032000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 80,
+    "geoY": 124
+  },
+  {
+    "code": 5173033000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 81,
+    "geoY": 126
+  },
+  {
+    "code": 5173034000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 79,
+    "geoY": 127
+  },
+  {
+    "code": 5173035000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 80,
+    "geoY": 127
+  },
+  {
+    "code": 5173036000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 77,
+    "geoY": 126
+  },
+  {
+    "code": 5173037000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 75,
+    "geoY": 125
+  },
+  {
+    "code": 5173038000,
+    "firstLoc": "강원",
+    "secondLoc": "횡성군",
+    "geoX": 80,
+    "geoY": 123
+  },
+  {
+    "code": 5175000000,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 86,
+    "geoY": 119
+  },
+  {
+    "code": 5175025300,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 92,
+    "geoY": 118
+  },
+  {
+    "code": 5175031200,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 89,
+    "geoY": 118
+  },
+  {
+    "code": 5175032500,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 88,
+    "geoY": 118
+  },
+  {
+    "code": 5175033000,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 85,
+    "geoY": 120
+  },
+  {
+    "code": 5175034000,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 85,
+    "geoY": 119
+  },
+  {
+    "code": 5175035500,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 83,
+    "geoY": 120
+  },
+  {
+    "code": 5175036000,
+    "firstLoc": "강원",
+    "secondLoc": "영월군",
+    "geoX": 82,
+    "geoY": 121
+  },
+  {
+    "code": 5176000000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 84,
+    "geoY": 123
+  },
+  {
+    "code": 5176031000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 86,
+    "geoY": 122
+  },
+  {
+    "code": 5176032000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 84,
+    "geoY": 124
+  },
+  {
+    "code": 5176033000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 85,
+    "geoY": 126
+  },
+  {
+    "code": 5176034000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 84,
+    "geoY": 128
+  },
+  {
+    "code": 5176035000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 85,
+    "geoY": 128
+  },
+  {
+    "code": 5176036000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 87,
+    "geoY": 129
+  },
+  {
+    "code": 5176038000,
+    "firstLoc": "강원",
+    "secondLoc": "평창군",
+    "geoX": 89,
+    "geoY": 130
+  },
+  {
+    "code": 5177000000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 89,
+    "geoY": 123
+  },
+  {
+    "code": 5177025300,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 92,
+    "geoY": 120
+  },
+  {
+    "code": 5177025900,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 89,
+    "geoY": 120
+  },
+  {
+    "code": 5177032000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 90,
+    "geoY": 121
+  },
+  {
+    "code": 5177034000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 89,
+    "geoY": 125
+  },
+  {
+    "code": 5177035000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 92,
+    "geoY": 126
+  },
+  {
+    "code": 5177036000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 91,
+    "geoY": 123
+  },
+  {
+    "code": 5177037000,
+    "firstLoc": "강원",
+    "secondLoc": "정선군",
+    "geoX": 90,
+    "geoY": 125
+  },
+  {
+    "code": 5178000000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 65,
+    "geoY": 139
+  },
+  {
+    "code": 5178025000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 64,
+    "geoY": 141
+  },
+  {
+    "code": 5178025300,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 67,
+    "geoY": 142
+  },
+  {
+    "code": 5178031000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 67,
+    "geoY": 140
+  },
+  {
+    "code": 5178032000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 68,
+    "geoY": 141
+  },
+  {
+    "code": 5178033000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 67,
+    "geoY": 143
+  },
+  {
+    "code": 5178034000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 69,
+    "geoY": 143
+  },
+  {
+    "code": 5178035000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 73,
+    "geoY": 143
+  },
+  {
+    "code": 5178036000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 71,
+    "geoY": 143
+  },
+  {
+    "code": 5178037000,
+    "firstLoc": "강원",
+    "secondLoc": "철원군",
+    "geoX": 75,
+    "geoY": 143
+  },
+  {
+    "code": 5179000000,
+    "firstLoc": "강원",
+    "secondLoc": "화천군",
+    "geoX": 72,
+    "geoY": 139
+  },
+  {
+    "code": 5179031000,
+    "firstLoc": "강원",
+    "secondLoc": "화천군",
+    "geoX": 74,
+    "geoY": 137
+  },
+  {
+    "code": 5179032000,
+    "firstLoc": "강원",
+    "secondLoc": "화천군",
+    "geoX": 71,
+    "geoY": 138
+  },
+  {
+    "code": 5179033000,
+    "firstLoc": "강원",
+    "secondLoc": "화천군",
+    "geoX": 71,
+    "geoY": 140
+  },
+  {
+    "code": 5179034000,
+    "firstLoc": "강원",
+    "secondLoc": "화천군",
+    "geoX": 69,
+    "geoY": 138
+  },
+  {
+    "code": 5180000000,
+    "firstLoc": "강원",
+    "secondLoc": "양구군",
+    "geoX": 77,
+    "geoY": 139
+  },
+  {
+    "code": 5180031500,
+    "firstLoc": "강원",
+    "secondLoc": "양구군",
+    "geoX": 78,
+    "geoY": 139
+  },
+  {
+    "code": 5180032000,
+    "firstLoc": "강원",
+    "secondLoc": "양구군",
+    "geoX": 78,
+    "geoY": 141
+  },
+  {
+    "code": 5180033000,
+    "firstLoc": "강원",
+    "secondLoc": "양구군",
+    "geoX": 76,
+    "geoY": 141
+  },
+  {
+    "code": 5180034000,
+    "firstLoc": "강원",
+    "secondLoc": "양구군",
+    "geoX": 79,
+    "geoY": 143
+  },
+  {
+    "code": 5181000000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 80,
+    "geoY": 138
+  },
+  {
+    "code": 5181031000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 79,
+    "geoY": 136
+  },
+  {
+    "code": 5181032000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 81,
+    "geoY": 139
+  },
+  {
+    "code": 5181033000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 83,
+    "geoY": 136
+  },
+  {
+    "code": 5181034000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 81,
+    "geoY": 141
+  },
+  {
+    "code": 5181035000,
+    "firstLoc": "강원",
+    "secondLoc": "인제군",
+    "geoX": 82,
+    "geoY": 134
+  },
+  {
+    "code": 5182000000,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 85,
+    "geoY": 145
+  },
+  {
+    "code": 5182025300,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 85,
+    "geoY": 146
+  },
+  {
+    "code": 5182031000,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 84,
+    "geoY": 147
+  },
+  {
+    "code": 5182032000,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 86,
+    "geoY": 144
+  },
+  {
+    "code": 5182033000,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 87,
+    "geoY": 142
+  },
+  {
+    "code": 5182034000,
+    "firstLoc": "강원",
+    "secondLoc": "고성군",
+    "geoX": 82,
+    "geoY": 146
+  },
+  {
+    "code": 5183000000,
+    "firstLoc": "강원",
+    "secondLoc": "양양군",
+    "geoX": 88,
+    "geoY": 138
+  },
+  {
+    "code": 5183031000,
+    "firstLoc": "강원",
+    "secondLoc": "양양군",
+    "geoX": 87,
+    "geoY": 138
+  },
+  {
+    "code": 5183033000,
+    "firstLoc": "강원",
+    "secondLoc": "양양군",
+    "geoX": 89,
+    "geoY": 137
+  },
+  {
+    "code": 5183034000,
+    "firstLoc": "강원",
+    "secondLoc": "양양군",
+    "geoX": 90,
+    "geoY": 136
+  },
+  {
+    "code": 2644053500,
+    "firstLoc": "부산",
+    "secondLoc": "강서구",
+    "geoX": 95,
+    "geoY": 74
+  },
+  {
+    "code": 2671025600,
+    "firstLoc": "부산",
+    "secondLoc": "기장군",
+    "geoX": 100,
+    "geoY": 79
+  },
+  {
+    "code": 2671025900,
+    "firstLoc": "부산",
+    "secondLoc": "기장군",
+    "geoX": 101,
+    "geoY": 78
+  },
+  {
+    "code": 2714074200,
+    "firstLoc": "대구",
+    "secondLoc": "동구",
+    "geoX": 91,
+    "geoY": 91
+  },
+  {
+    "code": 2729061700,
+    "firstLoc": "대구",
+    "secondLoc": "달서구",
+    "geoX": 87,
+    "geoY": 89
+  },
+  {
+    "code": 2771025900,
+    "firstLoc": "대구",
+    "secondLoc": "달성군",
+    "geoX": 87,
+    "geoY": 87
+  },
+  {
+    "code": 2772000000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 88,
+    "geoY": 99
+  },
+  {
+    "code": 2772025000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 88,
+    "geoY": 98
+  },
+  {
+    "code": 2772031000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 86,
+    "geoY": 99
+  },
+  {
+    "code": 2772032000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 88,
+    "geoY": 97
+  },
+  {
+    "code": 2772033000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 90,
+    "geoY": 95
+  },
+  {
+    "code": 2772034000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 90,
+    "geoY": 98
+  },
+  {
+    "code": 2772035000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 91,
+    "geoY": 97
+  },
+  {
+    "code": 2772036000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 90,
+    "geoY": 96
+  },
+  {
+    "code": 2772037000,
+    "firstLoc": "대구",
+    "secondLoc": "군위군",
+    "geoX": 92,
+    "geoY": 96
+  },
+  {
+    "code": 2811062200,
+    "firstLoc": "인천",
+    "secondLoc": "중구",
+    "geoX": 53,
+    "geoY": 125
+  },
+  {
+    "code": 2817700000,
+    "firstLoc": "인천",
+    "secondLoc": "미추홀",
+    "geoX": 54,
+    "geoY": 124
+  },
+  {
+    "code": 2826068000,
+    "firstLoc": "인천",
+    "secondLoc": "서구",
+    "geoX": 54,
+    "geoY": 127
+  },
+  {
+    "code": 3020052600,
+    "firstLoc": "대전",
+    "secondLoc": "유성구",
+    "geoX": 66,
+    "geoY": 100
+  },
+  {
+    "code": 3611052300,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 65,
+    "geoY": 104
+  },
+  {
+    "code": 3611055600,
+    "firstLoc": "세종",
+    "secondLoc": "세종",
+    "geoX": 66,
+    "geoY": 104
+  },
+  {
+    "code": 4115057800,
+    "firstLoc": "경기",
+    "secondLoc": "의정부",
+    "geoX": 62,
+    "geoY": 131
+  },
+  {
+    "code": 4119000000,
+    "firstLoc": "경기",
+    "secondLoc": "부천시",
+    "geoX": 56,
+    "geoY": 125
+  },
+  {
+    "code": 4122025900,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 59,
+    "geoY": 115
+  },
+  {
+    "code": 4122063500,
+    "firstLoc": "경기",
+    "secondLoc": "평택시",
+    "geoX": 63,
+    "geoY": 114
+  },
+  {
+    "code": 4128754600,
+    "firstLoc": "경기",
+    "secondLoc": "일산동구",
+    "geoX": 56,
+    "geoY": 130
+  },
+  {
+    "code": 4128761000,
+    "firstLoc": "경기",
+    "secondLoc": "일산동구",
+    "geoX": 55,
+    "geoY": 129
+  },
+  {
+    "code": 4129051500,
+    "firstLoc": "경기",
+    "secondLoc": "과천시",
+    "geoX": 60,
+    "geoY": 124
+  },
+  {
+    "code": 4145063000,
+    "firstLoc": "경기",
+    "secondLoc": "하남시",
+    "geoX": 63,
+    "geoY": 126
+  },
+  {
+    "code": 4146125300,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 64,
+    "geoY": 122
+  },
+  {
+    "code": 4146125600,
+    "firstLoc": "경기",
+    "secondLoc": "용인처인",
+    "geoX": 64,
+    "geoY": 117
+  },
+  {
+    "code": 4146357700,
+    "firstLoc": "경기",
+    "secondLoc": "용인기흥",
+    "geoX": 63,
+    "geoY": 121
+  },
+  {
+    "code": 4148059000,
+    "firstLoc": "경기",
+    "secondLoc": "파주시",
+    "geoX": 55,
+    "geoY": 130
+  },
+  {
+    "code": 4161025900,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 66,
+    "geoY": 122
+  },
+  {
+    "code": 4161056000,
+    "firstLoc": "경기",
+    "secondLoc": "광주시",
+    "geoX": 64,
+    "geoY": 123
+  },
+  {
+    "code": 4167034500,
+    "firstLoc": "경기",
+    "secondLoc": "여주시",
+    "geoX": 70,
+    "geoY": 121
+  },
+  {
+    "code": 4313033500,
+    "firstLoc": "충북",
+    "secondLoc": "충주시",
+    "geoX": 75,
+    "geoY": 114
+  },
+  {
+    "code": 4375025300,
+    "firstLoc": "충북",
+    "secondLoc": "진천군",
+    "geoX": 69,
+    "geoY": 113
+  },
+  {
+    "code": 4480025600,
+    "firstLoc": "충남",
+    "secondLoc": "홍성군",
+    "geoX": 55,
+    "geoY": 107
+  },
+  {
+    "code": 4691025300,
+    "firstLoc": "전남",
+    "secondLoc": "신안군",
+    "geoX": 49,
+    "geoY": 68
+  },
+  {
+    "code": 4719025600,
+    "firstLoc": "경북",
+    "secondLoc": "구미시",
+    "geoX": 86,
+    "geoY": 97
+  },
+  {
+    "code": 4790042000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 85,
+    "geoY": 110
+  },
+  {
+    "code": 4790043000,
+    "firstLoc": "경북",
+    "secondLoc": "예천군",
+    "geoX": 86,
+    "geoY": 109
+  },
+  {
+    "code": 4812754500,
+    "firstLoc": "경남",
+    "secondLoc": "창원마산",
+    "geoX": 89,
+    "geoY": 77
+  },
+  {
+    "code": 4817067800,
+    "firstLoc": "경남",
+    "secondLoc": "진주시",
+    "geoX": 81,
+    "geoY": 75
+  }
+]

@@ -1,2 +1,5 @@
-User-Agent: *
-Disallow:
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: 
+
+sitemap: https://www.dewdew.dev/sitemap.xml
