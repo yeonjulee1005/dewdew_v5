@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "version:major": "node scripts/version-manager.js major",
+    "version:minor": "node scripts/version-manager.js minor",
+    "version:patch": "node scripts/version-manager.js patch",
+    "version:clear": "node scripts/version-manager.js clear"
   },
   "dependencies": {
     "@nuxt/eslint": "1.10.0",
@@ -21,5 +25,6 @@
     "typescript": "^5.6.3",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
-  }
+  },
+  "version": "0.2511.2"
 }
