@@ -1,0 +1,93 @@
+name: 'Bug issue'
+description: 알려진 문제점(심각하지 않는)이 발생하였을 경우 사용하는 템플릿 입니다.
+labels: ['bug fix']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **[주의]: 이슈 생성 후 담당자(Assignees)로 본인을 지정해주세요.**
+
+        버그 리포트를 작성하기 전에 다음 사항을 확인해주세요:
+        - 동일한 버그가 이미 보고되었는지 확인
+        - 최신 버전에서도 동일한 문제가 발생하는지 확인
+        - 가능한 한 상세한 정보 제공
+  - type: textarea
+    id: bug-title
+    attributes:
+      label: 제목
+      description: 제목을 입력해주세요.
+      placeholder: |
+        예시: 출석체크 달력이 정상적으로 표시되지 않는 현상
+    validations:
+      required: true
+  - type: textarea
+    id: bug-environment
+    attributes:
+      label: 환경 정보
+      description: 버그가 발생한 환경에 대한 정보를 제공해주세요.
+      placeholder: |
+        예시:
+        - 플랫폼(필수): Desktop or Mobile (IOS 또는 Android)
+        - 브라우저 정보(필수): Chrome or Arc or Safari or Samsung Browser 등
+        - 표시되는 앱 버전: 2.2.1
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 버그 재현 방법
+      description: 버그를 재현하는 단계를 간단하게 순서대로 작성해주세요.
+      placeholder: |
+        예시:
+        1. 앱 실행
+        2. 출석체크 진입
+    validations:
+      required: true
+  - type: textarea
+    id: bug-expected-behavior
+    attributes:
+      label: 예상된 결과
+      description: 정상적으로 동작했을 때 기대했던 결과를 설명해주세요.
+      placeholder: |
+        예시:
+        올바르게 달력 컴포넌트가 표시되어야 함
+    validations:
+      required: false
+  - type: textarea
+    id: bug-screenshots
+    attributes:
+      label: 스크린샷
+      description: |
+        가능하다면 스크린샷을 첨부해주세요.
+        이미지는 드래그 앤 드롭으로 업로드할 수 있습니다.
+      placeholder: |
+        스크린샷을 여기에 붙여넣어 주세요.
+    validations:
+      required: false
+  - type: textarea
+    id: bug-logs
+    attributes:
+      label: 로그
+      description: |
+        로그가 있을 경우, 여기에 붙여넣기 해주세요.
+      render: shell-script
+  - type: textarea
+    id: bug-work-details
+    attributes:
+      label: 버그와 함께 추가적으로 작업할 이슈
+      description: 버그와 관련되지 않지만, 버그와 함께 작업할 기능이 있다면 추가해주세요.
+      placeholder: |
+        - [ ] 첫 번째 작업 내용을 입력해주세요
+        - [ ] 두 번째 작업 내용을 입력해주세요
+        - [ ] 세 번째 작업 내용을 입력해주세요
+        - [ ] PR 생성 및 리뷰 요청
+
+        완료된 작업은 다음과 같이 체크하세요:
+        - [x] 완료된 작업 예시
+      value: |
+        - [ ] 작업1
+        - [ ] 작업2  
+        - [ ] 작업3
+        - [ ] PR
+    validations:
+      required: false

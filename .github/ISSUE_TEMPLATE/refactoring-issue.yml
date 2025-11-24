@@ -1,0 +1,38 @@
+name: 'Refactoring Issue'
+description: 리팩토링 템플릿 입니다.
+labels: ['refactoring']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **[주의]: 이슈 생성 후 담당자(Assignees)로 본인을 지정해주세요.**
+  - type: textarea
+    id: refactoring-title
+    attributes:
+      label: 제목
+      description: 제목을 입력해주세요.
+      placeholder: |
+        예시:
+        - 로그인기능 리팩토링
+    validations:
+      required: true
+  - type: textarea
+    id: refactoring-work-details
+    attributes:
+      label: 작업사항
+      description: 작업사항을 나열해주세요.
+      placeholder: |
+        - [ ] 첫 번째 작업 내용을 입력해주세요
+        - [ ] 두 번째 작업 내용을 입력해주세요
+        - [ ] 세 번째 작업 내용을 입력해주세요
+        - [ ] PR 생성 및 리뷰 요청
+
+        완료된 작업은 다음과 같이 체크하세요:
+        - [x] 완료된 작업 예시
+      value: |
+        - [ ] 작업1
+        - [ ] 작업2  
+        - [ ] 작업3
+        - [ ] PR
+    validations:
+      required: false

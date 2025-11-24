@@ -1,0 +1,84 @@
+@use 'fonts' as *;
+@import 'https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css';
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body {
+  position: relative;
+  display: flex;
+  font-family: 'Pretendard Variable', 'Anton', 'Source Code Pro', sans-serif;
+  flex-direction: column;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+  -webkit-touch-callout: none;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  // user-select: none;
+  // -webkit-user-select: none;
+  // -moz-user-select: none;
+  // -ms-use-select: none;
+  -ms-overflow-style: none;
+}
+
+// .layout-enter-active,
+// .layout-leave-active,
+// .page-enter-active,
+// .page-leave-active {
+//   transition: all .1s ease-in-out;
+// }
+
+// .layout-enter-from,
+// .layout-leave-to,
+// .page-enter-from,
+// .page-leave-to {
+//   opacity: .3;
+// }
+
+// .intro-enter-active {
+//   transition: opacity 2s ease-in-out;
+// }
+
+// .intro-leave-active {
+//   transition: opacity 1s ease-in-out;
+// }
+
+// .intro-enter-from,
+// .intro-leave-to {
+//   opacity: 0;
+// }
+
+// .intro-enter-to,
+// .intro-leave-from {
+//   opacity: 1;
+// }
+
+// .flicking-viewport {
+//   width: 100%;
+//   .flicking-pagination {
+//     position: relative;
+//     margin-top: 40px;
+//     .flicking-pagination-bullet {
+//     background-color: lightgray !important;
+//     }
+//     .flicking-pagination-bullet-active {
+//       background-color: lightblue !important;
+//     }
+//   }
+// }
+
+// :root {
+//   --zigzag-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><polyline points="0,10 10,0 20,10 30,0 40,10 50,0 60,10 70,0 80,10 90,0 100,10" fill="none" stroke="lightgray" stroke-width="2"/></svg>');
+//   --zigzag-footer-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><polyline points="0,10 10,0 20,10 30,0 40,10 50,0 60,10 70,0 80,10 90,0 100,10" fill="none" stroke="rgb(224, 225, 255)" stroke-width="1"/></svg>');
+//   --zigzag-footer-dark-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><polyline points="0,10 10,0 20,10 30,0 40,10 50,0 60,10 70,0 80,10 90,0 100,10" fill="none" stroke="rgb(46, 48, 129)" stroke-width="1"/></svg>');
+// }
