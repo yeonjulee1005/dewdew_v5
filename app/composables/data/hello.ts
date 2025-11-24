@@ -1,0 +1,35 @@
+export const useHelloList = () => {
+  const helloList = [
+    '안녕하세요!',
+    'Hello!',
+    'Tere!',
+    '你好!',
+    'こんにちは!',
+    'สวัสดีครับ!',
+    'Xin chào!',
+    'Szia!',
+    'Cześć!',
+    'Привіт!',
+    'হ্যালো!',
+    'Ahoj!',
+    'გამარჯობა!',
+    'Hej!',
+    'Bonjour!',
+    'Hallo!',
+    'Kamusta!',
+    'Ciao!',
+    'Salut!',
+    'Olá!',
+    'Hola!',
+    'Hujambo!',
+    'Γεια σας!',
+    'Привет!',
+    'مرحبا!',
+    'Merhaba!',
+    'नमस्ते!',
+    'Halo!',
+    'ہیلو!',
+  ]
+
+  return helloList
+}

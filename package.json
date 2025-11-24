@@ -1,17 +1,30 @@
 {
   "name": "dewdew_v5",
-  "type": "module",
+  "author": {
+    "name": "Dewdew",
+    "email": "yeonju.lee1005@gmail.com"
+  },
   "private": true,
+  "version": "0.2511.1",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port 4600",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt preview --port 4600",
     "postinstall": "nuxt prepare",
+    "cleanup": "nuxt cleanup",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "delete:modules": "rm -rf node_modules .nuxt",
+    "upgrade:force": "nuxt upgrade --force",
     "version:major": "node scripts/version-manager.js major",
     "version:minor": "node scripts/version-manager.js minor",
     "version:patch": "node scripts/version-manager.js patch",
-    "version:clear": "node scripts/version-manager.js clear"
+    "version:clear": "node scripts/version-manager.js clear",
+    "supabase:login": "supabase login",
+    "supabase:type": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema public > app/types/supabase.ts",
+    "supabase:type-menu": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema menu > app/types/supabase-menu.ts",
+    "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts"
   },
   "dependencies": {
     "@nuxt/eslint": "1.10.0",
@@ -26,5 +39,22 @@
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   },
-  "version": "0.2511.1"
+  "devDependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@nuxtjs/i18n": "^10.0.6",
+    "@nuxtjs/stylelint-module": "^5.2.1",
+    "@nuxtjs/supabase": "^2.0.1",
+    "@pinia/nuxt": "^0.11.3",
+    "@vueuse/nuxt": "^14.0.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "dayjs-nuxt": "^2.1.11",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "sass": "^1.94.2",
+    "stylelint": "^16.26.0",
+    "stylelint-config-recommended-scss": "^16.0.2",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "supabase": "^2.58.5",
+    "vite-plugin-eslint2": "^5.0.4"
+  }
 }

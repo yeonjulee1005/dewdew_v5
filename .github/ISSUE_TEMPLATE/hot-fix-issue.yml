@@ -1,0 +1,37 @@
+name: 'Hot Fix Issue'
+description: 심각한 버그가 발생하였을 경우 사용하는 템플릿 입니다.
+labels: ['hot fix']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **[주의]: 이슈 생성 후 담당자(Assignees)로 본인을 지정해주세요.**
+  - type: textarea
+    id: hot-fix-title
+    attributes:
+      label: 제목
+      description: 제목을 입력해주세요.
+      placeholder: |
+        예시: 마이페이지 진입시, 비정상적으로 종료되는 현상 발생
+    validations:
+      required: true
+  - type: textarea
+    id: hot-fix-work-details
+    attributes:
+      label: 작업사항
+      description: Hotfix를 위한 작업사항을 나열해주세요.
+      placeholder: |
+        - [ ] 첫 번째 작업 내용을 입력해주세요
+        - [ ] 두 번째 작업 내용을 입력해주세요
+        - [ ] 세 번째 작업 내용을 입력해주세요
+        - [ ] PR 생성 및 리뷰 요청
+
+        완료된 작업은 다음과 같이 체크하세요:
+        - [x] 완료된 작업 예시
+      value: |
+        - [ ] 작업1
+        - [ ] 작업2  
+        - [ ] 작업3
+        - [ ] PR
+    validations:
+      required: false

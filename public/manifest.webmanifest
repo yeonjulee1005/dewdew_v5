@@ -1,0 +1,44 @@
+{
+  "id": "dev.dewdew",
+  "name": "DewDew",
+  "short_name": "Dewdew",
+  "description": "Frontend Developer DewDew",
+  "start_url": "/",
+  "display_override": [
+    "standalone",
+    "window-controls-overlay",
+    "browser"
+  ],
+  "dir": "ltr",
+  "lang": "ko",
+  "orientation": "portrait-primary",
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "prefer_related_applications": false,
+  "handler_link": "auto",
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "icons": [
+    {
+      "src": "/image/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/image/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#6a64c7",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "categories": [
+    "productivity",
+    "utilities"
+  ]
+}
