@@ -13,10 +13,16 @@ export interface OpenAIChatOptions {
   systemPrompt: string
   model?: string
   temperature?: number
+  maxTokens?: number
 }
 
 export const createChatStream = async (options: OpenAIChatOptions): Promise<ReadableStream<Uint8Array>> => {
-  const { messages, systemPrompt, model = 'gpt-4o-mini', temperature = 0.7 } = options
+  const {
+    messages, systemPrompt,
+    model = 'gpt-4o-mini',
+    temperature = 0.7,
+    maxTokens = 2500,
+  } = options
 
   const response = await fetch(OPENAI_API_URL, {
     method: 'POST',
@@ -32,6 +38,7 @@ export const createChatStream = async (options: OpenAIChatOptions): Promise<Read
       ],
       stream: true,
       temperature,
+      max_completion_tokens: maxTokens,
     }),
   })
 
