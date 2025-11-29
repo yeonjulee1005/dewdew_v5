@@ -21,11 +21,11 @@ const selectedImageSrc = ref('')
 
 const suggestions = [
   '자기소개 해주세요!',
+  '경력이 어떻게 되세요?',
+  '어떤 기술 스택을 사용하세요?',
   '앞으로의 커리어 패스를 어떻게 가져가고 싶나요?',
   '어떤 기술적인 고민들을 하고있나요?',
-  '프로젝트 보여주세요!',
-  '경력이 어떻게 되세요?',
-  '어떤 스킬들을 가지고 있나요?',
+  '최근 진행했던 프로젝트 보여주세요!',
   '종합적으로 생각했을때, 듀듀는 어떤 개발자 이신가요?',
 ]
 
@@ -235,15 +235,20 @@ onUnmounted(() => {
         }"
         :user="{
           variant: 'subtle',
-          color: 'stone',
           side: 'right',
+          ui: {
+            content: 'bg-neutral-200/50 dark:bg-neutral-800/50 ring-0',
+          },
         }"
         :assistant="{
           variant: 'subtle',
-          color: 'amber',
           side: 'left',
           avatar: {
             src: url(true, '/assets/logo/dewdew_v4_logo.webp'),
+          },
+          ui: {
+            root: width < 360 ? 'max-w-full ' : 'max-w-[80%]',
+            content: 'bg-amber-100 dark:bg-amber-600/50 ring-0',
           },
         }"
         :ui="{
@@ -274,7 +279,7 @@ onUnmounted(() => {
               v-if="message.componentType"
               :component-type="message.componentType"
               :component-data="message.componentData"
-              class="w-full max-w-2xl"
+              class="w-full"
             />
 
             <!-- 마크다운 메시지 (스트리밍 중에도 MDC 사용) -->
@@ -304,7 +309,8 @@ onUnmounted(() => {
           :key="suggestion"
           variant="soft"
           color="neutral"
-          size="lg"
+          size="xl"
+          class="bg-neutral-200/50 dark:bg-neutral-800/50"
           @click="handleSuggestion(suggestion)"
         >
           {{ suggestion }}
@@ -314,6 +320,7 @@ onUnmounted(() => {
       <!-- 입력창 -->
       <DdChatPrompt
         v-model="inputMessage"
+        class="bg-neutral-200/50 dark:bg-neutral-800/50 ring-0"
         placeholder="무엇이 궁금하세요?"
         :disabled="isStreaming"
         :maxrows="3"
@@ -327,7 +334,7 @@ onUnmounted(() => {
         @submit="handleSubmit"
       >
         <template #trailing>
-          <div class="flex items-end h-full justify-end">
+          <div class="flex items-center h-full">
             <DdChatPromptSubmit
               :status="status"
               icon="i-lucide-send"
