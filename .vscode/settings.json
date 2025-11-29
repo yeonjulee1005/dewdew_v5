@@ -1,5 +1,9 @@
 {
   "i18n-ally.localesPaths": [
-    "locales"
-  ]
+    "i18n/locales"
+  ],
+  "i18n-ally.parsers.typescript.compilerOptions": {
+    "moduleResolution": "node",
+},
+"i18n-ally.keystyle": "nested",
 }

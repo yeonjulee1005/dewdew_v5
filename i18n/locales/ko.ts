@@ -2,17 +2,31 @@ export default {
   pageTitle: {
     yeonju: '개발자 이연주',
     dewdew: 'Dewdew',
-    main: 'Main',
-    portfolio: 'Portfolio',
-    project: 'Project',
-    blog: 'Blog',
-    archive: 'Archives',
-    colorsTranslate: '내 색상 찾아줘!',
+    ai: 'Dewdew, AI에게 묻다',
+    // main: 'Main',
+    // portfolio: 'Portfolio',
+    // project: 'Project',
+    // blog: 'Blog',
+    // archive: 'Archives',
+    // colorsTranslate: '내 색상 찾아줘!',
   },
-  pageSubTitle: {
-    colorsTranslate: '내 색상 찾아줘..',
-    hhkb: 'HHKB 키보드 모델링',
+  seoTitle: {
+    intro: 'Dewdew | Software Engineer 이연주',
+    ai: 'Dewdew, AI에게 묻다',
   },
+  seoDescription: {
+    intro: 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 제품에 대한 많은 고민과 주도적인 개발을 지향하고 있습니다. Nuxt4 프레임워크 생태계에 기여하고 있습니다.',
+    ai: 'LLM+RAG+AGENT 기반의 AI에게 저에 대해서 물어보세요.',
+  },
+  externalMenu: {
+    SMC001: '듀듀월드',
+    SMC002: '깃허브',
+    SMC003: '링크드인',
+  },
+  // pageSubTitle: {
+  //   colorsTranslate: '내 색상 찾아줘..',
+  //   hhkb: 'HHKB 키보드 모델링',
+  // },
   openGraph: {
     main: '안녕하세요. FE 개발자 이연주입니다.',
     portfolio: '포트폴리오 입니다.',
