@@ -1,4 +1,4 @@
-import locations from '~/data/korLocation.json'
+import locations from './korLocation.json'
 
 export const useKorLocation = () => {
   const filteredLocations = (geoX: number, geoY: number) => {

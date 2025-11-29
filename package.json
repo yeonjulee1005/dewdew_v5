@@ -8,9 +8,9 @@
   "version": "0.2511.1",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --port 4600",
+    "dev": "nuxt dev --port 4110",
     "generate": "nuxt generate",
-    "preview": "nuxt preview --port 4600",
+    "preview": "nuxt preview --port 4110",
     "postinstall": "nuxt prepare",
     "cleanup": "nuxt cleanup",
     "lint": "eslint .",
@@ -24,14 +24,17 @@
     "supabase:login": "supabase login",
     "supabase:type": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema public > app/types/supabase.ts",
     "supabase:type-menu": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema menu > app/types/supabase-menu.ts",
-    "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts"
+    "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts",
+    "supabase:deploy": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc"
   },
   "dependencies": {
+    "@egjs/vue3-flicking": "^4.15.0",
     "@nuxt/eslint": "1.10.0",
     "@nuxt/hints": "1.0.0-alpha.2",
     "@nuxt/image": "2.0.0",
     "@nuxt/scripts": "0.13.0",
     "@nuxt/ui": "4.2.1",
+    "@nuxtjs/color-mode": "4.0.0",
     "@unhead/vue": "^2.0.3",
     "eslint": "^9.0.0",
     "nuxt": "^4.2.1",
@@ -40,10 +43,16 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@egjs/flicking-plugins": "^4.7.1",
     "@emailjs/browser": "^4.4.1",
+    "@iconify-json/lucide": "^1.2.75",
+    "@iconify-json/streamline": "^1.2.5",
+    "@iconify-json/svg-spinners": "^1.2.4",
+    "@iconify-json/wi": "^1.2.1",
     "@nuxtjs/i18n": "^10.0.6",
+    "@nuxtjs/mdc": "^0.18.4",
     "@nuxtjs/stylelint-module": "^5.2.1",
-    "@nuxtjs/supabase": "^2.0.1",
+    "@nuxtjs/supabase": "^1.5.0",
     "@pinia/nuxt": "^0.11.3",
     "@vueuse/nuxt": "^14.0.0",
     "date-fns": "^4.1.0",
@@ -54,7 +63,8 @@
     "stylelint": "^16.26.0",
     "stylelint-config-recommended-scss": "^16.0.2",
     "stylelint-config-recommended-vue": "^1.6.1",
-    "supabase": "^2.58.5",
+    "supabase": "^2.39.2",
+    "typeit": "^8.8.7",
     "vite-plugin-eslint2": "^5.0.4"
   }
 }

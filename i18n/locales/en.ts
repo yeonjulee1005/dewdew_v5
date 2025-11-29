@@ -2,17 +2,31 @@ export default {
   pageTitle: {
     yeonju: 'Developer Yeonju Lee',
     dewdew: 'Dewdew',
-    main: 'Main',
-    portfolio: 'Portfolio',
-    project: 'Project',
-    blog: 'Blog',
-    archive: 'Archives',
-    colorsTranslate: 'Find my colors!',
+    ai: 'Dewdew, Ask Dewdew AI',
+    // main: 'Main',
+    // portfolio: 'Portfolio',
+    // project: 'Project',
+    // blog: 'Blog',
+    // archive: 'Archives',
+    // colorsTranslate: 'Find my colors!',
   },
-  pageSubTitle: {
-    colorsTranslate: 'Find my colors..',
-    hhkb: 'HHKB Keyboard Modeling',
+  seoTitle: {
+    intro: 'Dewdew | Software Engineer Yeonju Lee',
+    ai: 'Dewdew, Ask Dewdew AI',
   },
+  seoDescription: {
+    intro: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
+    ai: 'Ask me about me based on LLM+RAG+AGENT.',
+  },
+  externalMenu: {
+    SMC001: 'Dewdew World',
+    SMC002: 'Github',
+    SMC003: 'Linkedin',
+  },
+  // pageSubTitle: {
+  //   colorsTranslate: 'Find my colors..',
+  //   hhkb: 'HHKB Keyboard Modeling',
+  // },
   openGraph: {
     main: 'Hello. I am FE Developer Yeonju Lee.',
     portfolio: 'This is the portfolio.',

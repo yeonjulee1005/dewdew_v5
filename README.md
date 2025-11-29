@@ -1,4 +1,4 @@
-![Dewdew](./.github/assets/dewdew.jpg)
+![Dewdew](./.github/assets/dewdew.webp)
 
 # 🚀 Dewdew Portfolio
 
@@ -6,9 +6,9 @@
 > 현대적인 웹 기술과 사용자 경험을 중시한 풀스택 개발자의 작품집
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Nuxt](https://img.shields.io/badge/Nuxt-4.0.3-00DC82?logo=nuxt.js)](https://nuxt.com/)
-[![Vue](https://img.shields.io/badge/Vue-3.5.19-4FC08D?logo=vue.js)](https://vuejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![Nuxt](https://img.shields.io/badge/Nuxt-4.2.1-00DC82?logo=nuxt.js)](https://nuxt.com/)
+[![Vue](https://img.shields.io/badge/Vue-3.5.25-4FC08D?logo=vue.js)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 
 [🌐 **Web Site**](https://www.dewdew.dev)
 
@@ -59,86 +59,192 @@
 
 ### 📁 프로젝트 구조
 ```
-dewdew_v4/
+dewdew_v5/
 ├── 📱 app/                    # Nuxt 4 앱 디렉토리
 │   ├── 🧩 components/         # Vue 컴포넌트 (Atomic Design)
 │   │   ├── a/                 # Atomic 컴포넌트
-│   │   ├── header/            # 헤더 관련 컴포넌트
-│   │   ├── main/              # 메인 페이지 컴포넌트
-│   │   └── modal/             # 모달 컴포넌트
+│   │   │   ├── footer/        # 푸터 컴포넌트 (Group, Information, Menu, Sns)
+│   │   │   ├── Forecast.client.vue
+│   │   │   ├── IconText.vue
+│   │   │   ├── LanguageChange.vue
+│   │   │   ├── ThemeChange.vue
+│   │   │   └── TooltipButton.vue
+│   │   ├── chat/              # AI 채팅 관련 컴포넌트
+│   │   │   ├── Container.vue
+│   │   │   ├── Content.vue
+│   │   │   ├── DynamicComponent.vue
+│   │   │   ├── Error.vue
+│   │   │   └── Skeleton.vue
+│   │   └── intro/             # 인트로 애니메이션 컴포넌트
+│   │       ├── Controller.client.vue
+│   │       ├── TransitionMessage.client.vue
+│   │       ├── TransitionMessage.server.vue
+│   │       ├── TypeTitle.client.vue
+│   │       └── TypeTitle.server.vue
 │   ├── 🔧 composables/        # Vue Composables (도메인별 분리)
+│   │   ├── chat/              # AI 채팅 관련
+│   │   │   └── useChat.ts     # 채팅 상태 관리 및 스트리밍 처리
 │   │   ├── data/              # 데이터 관련
+│   │   │   ├── hello.ts
+│   │   │   ├── korLocation.json
+│   │   │   ├── locations.ts
+│   │   │   └── weather.ts
+│   │   ├── forecast/          # 날씨 예보 관련
+│   │   │   └── translateCoords.ts
 │   │   ├── formatting/        # 포맷팅 유틸
+│   │   │   ├── useDateFormatter.ts
+│   │   │   └── useFormatter.ts
+│   │   ├── query/             # 쿼리 관련
+│   │   │   └── index.ts
 │   │   ├── ui/                # UI 유틸리티
+│   │   │   ├── imageStorage.ts
+│   │   │   ├── useColorUtils.ts
+│   │   │   └── useUtils.ts
 │   │   └── validation/        # 유효성 검사
+│   │       └── useValidation.ts
 │   ├── 📄 pages/              # 파일 기반 라우팅
+│   │   ├── ai.vue             # AI 채팅 페이지
+│   │   └── index.vue           # 메인 페이지
 │   ├── 🎨 layouts/            # 레이아웃 컴포넌트
+│   │   ├── center.vue
+│   │   └── default.vue
+│   ├── 🏪 stores/             # Pinia 상태 관리
+│   │   ├── locationWeather.ts # 위치 및 날씨 상태
+│   │   └── menu.ts            # 메뉴 상태
 │   ├── 📝 types/              # TypeScript 타입 정의 (도메인별)
-│   └── 🔌 plugins/            # Nuxt 플러그인
-├── 📚 content/                # Nuxt Content (마크다운 블로그)
-├── 🌐 server/api/             # 서버 API 엔드포인트
-├── 🏪 stores/                 # Pinia 상태 관리
-├── 🌍 i18n/locales/           # 다국어 번역 파일
-└── 📋 .claude/                # AI 개발 가이드라인
+│   │   ├── chat.ts            # 채팅 관련 타입
+│   │   ├── database.types.ts  # Supabase 데이터베이스 타입
+│   │   ├── supabase-menu.ts   # 메뉴 스키마 타입
+│   │   ├── supabase.ts        # Supabase 공통 타입
+│   │   └── weather.ts         # 날씨 관련 타입
+│   ├── 🎨 assets/             # 정적 자산
+│   │   ├── css/
+│   │   │   └── main.css
+│   │   └── scss/
+│   │       ├── fonts.scss
+│   │       └── style.scss
+│   ├── app.config.ts          # 앱 설정
+│   ├── app.vue                # 루트 컴포넌트
+│   └── error.vue              # 에러 페이지
+├── 🌐 server/                 # 서버 API 엔드포인트
+│   └── api/
+│       ├── chat/              # AI 채팅 API
+│       │   ├── greeting.get.ts
+│       │   └── index.post.ts
+│       └── menu/
+│           └── externalMenu.ts
+├── 🗄️ supabase/               # Supabase Functions
+│   └── functions/
+│       ├── _shared/            # 공유 모듈 (배포 안됨)
+│       │   ├── component-mapper.ts  # 컴포넌트 타입 매핑
+│       │   ├── history-optimizer.ts # 대화 기록 최적화
+│       │   ├── openai.ts            # OpenAI 클라이언트
+│       │   ├── rag.ts               # RAG 로직
+│       │   ├── supabase.ts          # Supabase 클라이언트
+│       │   └── types.ts             # 타입 정의
+│       └── dewdew-rag-portfolio/    # RAG 포트폴리오 함수
+│           ├── index.ts
+│           └── README.md
+├── 🌍 i18n/                   # 다국어 번역 파일
+│   └── locales/
+│       ├── en.ts              # 영어 번역
+│       └── ko.ts              # 한국어 번역
+├── 📁 public/                 # 정적 파일
+│   ├── fonts/                 # 웹폰트
+│   ├── image/                 # 이미지 파일
+│   ├── favicon.ico
+│   ├── manifest.webmanifest
+│   └── robots.txt
+├── 📜 scripts/                # 빌드 스크립트
+│   └── version-manager.js
+├── nuxt.config.ts             # Nuxt 설정
+├── tsconfig.json              # TypeScript 설정
+├── eslint.config.mjs          # ESLint 설정
+├── package.json               # 패키지 의존성
+└── README.md                  # 프로젝트 문서
 ```
 
 ### 🧩 Composable 아키텍처
 ```typescript
-// 도메인별로 분리된 Composable 구조
+// 도메인별로 분리된 Composable 구조 (단일 책임 원칙)
 app/composables/
+├── chat/
+│   └── useChat.ts             # AI 채팅 상태 관리, 스트리밍 처리
 ├── data/
-│   ├── imageStorage.ts        # 이미지 저장소 관리
-│   └── weatherMapData.ts      # 날씨 데이터 처리
+│   ├── hello.ts               # 인사말 데이터
+│   ├── korLocation.json       # 한국 지역 데이터
+│   ├── locations.ts           # 위치 관련 유틸
+│   └── weather.ts             # 날씨 데이터 처리
+├── forecast/
+│   └── translateCoords.ts     # 좌표 변환 (위경도 ↔ 격자)
 ├── formatting/
-│   ├── useFormatter.ts        # 데이터 포맷팅
-│   └── useDateFormatter.ts    # 날짜/시간 포맷팅
+│   ├── useDateFormatter.ts    # 날짜/시간 포맷팅
+│   └── useFormatter.ts        # 일반 데이터 포맷팅
+├── query/
+│   └── index.ts               # 쿼리 관련 유틸
 ├── ui/
+│   ├── imageStorage.ts        # 이미지 저장소 관리 (Supabase)
 │   ├── useColorUtils.ts       # 색상 매핑 유틸
-│   └── useUiUtils.ts          # UI 헬퍼 함수
+│   └── useUtils.ts            # UI 헬퍼 함수
 └── validation/
     └── useValidation.ts       # 입력 유효성 검사
 ```
 
 ### 📋 타입 시스템
 ```typescript
-// 도메인 주도 설계(DDD) 적용
+// 도메인 주도 설계(DDD) 적용 - 도메인별 타입 분리
 app/types/
-├── weather.d.ts               # 날씨 관련 타입
-├── portfolio.d.ts             # 포트폴리오 타입
-├── ui.d.ts                    # UI 공통 타입
-├── utils.d.ts                 # 제네릭 유틸리티 타입
-└── global.d.ts                # 글로벌 타입 선언
+├── chat.ts                    # AI 채팅 관련 타입 (ChatMessage, ComponentType 등)
+├── database.types.ts          # Supabase 데이터베이스 자동 생성 타입
+├── supabase-menu.ts           # 메뉴 스키마 타입
+├── supabase.ts                # Supabase 공통 타입
+└── weather.ts                 # 날씨 관련 타입
+```
+
+### 🤖 AI 채팅 시스템 아키텍처
+```typescript
+// RAG 기반 AI 채팅 시스템
+supabase/functions/
+├── _shared/
+│   ├── component-mapper.ts    # 쿼리 → 컴포넌트 타입 매핑
+│   ├── rag.ts                 # RAG (Retrieval-Augmented Generation) 로직
+│   ├── openai.ts             # OpenAI API 클라이언트
+│   └── history-optimizer.ts  # 대화 기록 최적화
+└── dewdew-rag-portfolio/
+    └── index.ts               # Edge Function 엔드포인트
+
+// 클라이언트 측
+app/composables/chat/
+└── useChat.ts                 # 스트리밍 처리, 메시지 관리
+
+app/components/chat/
+├── Container.vue             # 채팅 컨테이너
+├── Content.vue                # 메시지 표시 영역
+└── DynamicComponent.vue       # 동적 컴포넌트 렌더링
 ```
 
 ---
 
 ## 🌟 주요 기능
 
-### 🏠 **메인 페이지**
-- **실시간 날씨**: 사용자 위치 기반 날씨 정보 표시
+### 🏠 **메인 페이지** (`/`)
+- **실시간 날씨**: 사용자 위치 기반 날씨 정보 표시 (기상청 API)
 - **타이핑 애니메이션**: TypeIt으로 동적 텍스트 효과
 - **반응형 레이아웃**: 데스크톱/모바일 최적화
+- **인트로 애니메이션**: 부드러운 페이지 전환 효과
 
-### 🎨 **프로젝트 섹션**
-- **Color Translate**: 실시간 색상 변환 도구
-- **EyeDropper API**: 브라우저 네이티브 색상 선택
-- **클립보드 연동**: 원클릭 색상 복사
+### 🤖 **AI 채팅** (`/ai`)
+- **RAG 기반 AI**: 포트폴리오 데이터 기반 지식 검색
+- **스트리밍 응답**: 실시간 텍스트 스트리밍
+- **동적 컴포넌트**: 프로젝트, 경력, 스킬 등을 컴포넌트로 표시
+- **자동 스크롤**: 긴 대화에서도 자동 스크롤 유지
+- **컴포넌트 매핑**: 자연어 쿼리 → 적절한 UI 컴포넌트 자동 매핑
 
-### 💼 **포트폴리오**
-- **동적 썸네일**: 자동 이미지 최적화
-- **다국어 설명**: 한/영 자동 전환
-- **필터링**: 기술별 프로젝트 분류
-
-### 📝 **블로그**
-- **Nuxt Content**: 마크다운 기반 CMS
-- **문법 강조**: Shiki 코드 하이라이팅
-- **댓글 시스템**: Supabase 기반 실시간 댓글
-- **좋아요 기능**: 실시간 반응 시스템
-
-### 📸 **아카이브**
-- **사진 갤러리**: Masonry 레이아웃
-- **무한 스크롤**: 성능 최적화된 이미지 로딩
-- **메타데이터**: EXIF 정보 표시
+### 🎨 **UI 컴포넌트**
+- **Atomic Design**: 재사용 가능한 컴포넌트 구조
+- **Nuxt UI**: 커스텀 프리픽스 (`Dd`) 적용
+- **다크/라이트 모드**: 시스템 테마 자동 감지
+- **다국어 지원**: 한국어/영어 실시간 전환
 
 ---
 
@@ -170,8 +276,8 @@ app/types/
 
 ```bash
 # 저장소 클론
-git clone https://github.com/dewdew/dewdew_v4.git
-cd dewdew_v4
+git clone https://github.com/dewdew/dewdew_v5.git
+cd dewdew_v5
 
 # Node.js 버전 설정
 nvm use
@@ -181,12 +287,29 @@ bun install
 
 # 환경 변수 설정
 cp .env.example .env
+# 필수 환경 변수:
+# - SUPABASE_URL
+# - SUPABASE_KEY
+# - OPENAI_API_KEY (AI 채팅 기능용)
 
 # 개발 서버 실행
 bun dev
 ```
 
-🌐 **브라우저에서 http://localhost:4500 접속**
+🌐 **브라우저에서 http://localhost:4110 접속**
+
+### 🔧 **Supabase Functions 배포**
+```bash
+# Supabase 로그인
+bun run supabase:login
+
+# 타입 생성
+bun run supabase:type
+bun run supabase:type-menu
+
+# Functions 배포
+bun run supabase:deploy
+```
 
 ---
 
@@ -203,9 +326,15 @@ bun dev
 - **결과**: 타입 안전성 향상, 코드 재사용성 증대
 
 ### ⚡ **Phase 3: Nuxt 4 마이그레이션**
-- **업그레이드**: Nuxt 3 → Nuxt 4.0.3
+- **업그레이드**: Nuxt 3 → Nuxt 4.2.1
 - **개선**: i18n v10, Node.js 24.5 지원
 - **최적화**: 빌드 성능 20% 향상
+
+### 🤖 **Phase 4: AI 채팅 시스템 구축**
+- **RAG 구현**: Supabase Edge Functions 기반 RAG 시스템
+- **스트리밍 처리**: 실시간 텍스트 스트리밍 및 자동 스크롤
+- **동적 컴포넌트**: 자연어 쿼리 기반 컴포넌트 자동 매핑
+- **성능 최적화**: DOM 조작 최소화로 스크롤 성능 개선
 
 ---
 

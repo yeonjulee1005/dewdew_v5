@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { KoreanLocationCode, UvData, AirDiffusionData, WeatherData, WeatherItem, WeatherFirstData, WeatherSecondData } from '~/types/weather'
 
 export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   /**
@@ -29,8 +30,8 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   const currentLocationCode = ref<KoreanLocationCode>()
   const uvData = ref<UvData>()
   const airDiffusionData = ref<AirDiffusionData>()
-  const weatherFirstData = ref<weatherFirstData>()
-  const weatherSecondData = ref<weatherSecondData>()
+  const weatherFirstData = ref<WeatherFirstData>()
+  const weatherSecondData = ref<WeatherSecondData>()
 
   const getForecastHour = () => {
     forecastHour.value = acceptableMinute() ? getLastHour().concat('00') : genDateFormat('HH').concat('00')
