@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'dayjs-nuxt',
     'pinia-plugin-persistedstate',
+    '@nuxtjs/device',
   ],
   imports: {
     dirs: [

@@ -11,6 +11,7 @@
         "@nuxt/scripts": "0.13.0",
         "@nuxt/ui": "4.2.1",
         "@nuxtjs/color-mode": "4.0.0",
+        "@nuxtjs/device": "3.2.4",
         "@unhead/vue": "^2.0.3",
         "eslint": "^9.0.0",
         "nuxt": "^4.2.1",
@@ -429,6 +430,8 @@
     "@nuxt/vite-builder": ["@nuxt/vite-builder@4.2.1", "", { "dependencies": { "@nuxt/kit": "4.2.1", "@rollup/plugin-replace": "^6.0.3", "@vitejs/plugin-vue": "^6.0.1", "@vitejs/plugin-vue-jsx": "^5.1.1", "autoprefixer": "^10.4.21", "consola": "^3.4.2", "cssnano": "^7.1.2", "defu": "^6.1.4", "esbuild": "^0.25.12", "escape-string-regexp": "^5.0.0", "exsolve": "^1.0.7", "get-port-please": "^3.2.0", "h3": "^1.15.4", "jiti": "^2.6.1", "knitwork": "^1.2.0", "magic-string": "^0.30.21", "mlly": "^1.8.0", "mocked-exports": "^0.1.1", "pathe": "^2.0.3", "pkg-types": "^2.3.0", "postcss": "^8.5.6", "rollup-plugin-visualizer": "^6.0.5", "seroval": "^1.3.2", "std-env": "^3.10.0", "ufo": "^1.6.1", "unenv": "^2.0.0-rc.24", "vite": "^7.2.1", "vite-node": "^5.0.0", "vite-plugin-checker": "^0.11.0", "vue-bundle-renderer": "^2.2.0" }, "peerDependencies": { "nuxt": "4.2.1", "rolldown": "^1.0.0-beta.38", "vue": "^3.3.4" }, "optionalPeers": ["rolldown"] }, "sha512-SuBxCtGrHcbgrtzHwJgLe0pBXWw2T9RFQx9JQ7A3dE9RjBhzjaxtmjVHx7vtq6DCGi0d0WlW1Z1lBZUDaXy8WA=="],
 
     "@nuxtjs/color-mode": ["@nuxtjs/color-mode@4.0.0", "", { "dependencies": { "@nuxt/kit": "^4.2.1", "exsolve": "^1.0.8", "pathe": "^2.0.3", "pkg-types": "^2.3.0", "semver": "^7.7.3" } }, "sha512-xyaVR/TPLdMuRa2VOgH6b75jvmFEsn9QKL6ISldaAw38ooFJfWY1ts2F3ye43wcT/goCbcuvPuskF2f8yUZhlw=="],
+
+    "@nuxtjs/device": ["@nuxtjs/device@3.2.4", "", { "dependencies": { "defu": "^6.1.4" } }, "sha512-jIvN6QeodBNrUrL/1FCHk4bebsiLsGHlJd8c/m2ksLrGY4IZ0npA8IYhDTdYV92epGxoe8+3iZOzCjav+6TshQ=="],
 
     "@nuxtjs/i18n": ["@nuxtjs/i18n@10.2.1", "", { "dependencies": { "@intlify/core": "^11.1.11", "@intlify/h3": "^0.7.1", "@intlify/shared": "^11.1.11", "@intlify/unplugin-vue-i18n": "^11.0.0", "@intlify/utils": "^0.13.0", "@miyaneee/rollup-plugin-json5": "^1.2.0", "@nuxt/kit": "^4.1.2", "@rollup/plugin-yaml": "^4.1.2", "@vue/compiler-sfc": "^3.5.22", "defu": "^6.1.4", "devalue": "^5.1.1", "h3": "^1.15.4", "knitwork": "^1.2.0", "magic-string": "^0.30.21", "mlly": "^1.7.4", "nuxt-define": "^1.0.0", "ohash": "^2.0.11", "oxc-parser": "^0.95.0", "oxc-transform": "^0.95.0", "oxc-walker": "^0.5.2", "pathe": "^2.0.3", "typescript": "^5.9.2", "ufo": "^1.6.1", "unplugin": "^2.3.5", "unplugin-vue-router": "^0.16.0", "unstorage": "^1.16.1", "vue-i18n": "^11.1.11", "vue-router": "^4.6.3" } }, "sha512-/CHAIpYbFgobxeMsnKcD8xBUHxBpqipRMjaI3ol9MVZKscJM+IetYdNL9lGNFdEtlxzkV8COxnoa60rE4sPjuQ=="],
 

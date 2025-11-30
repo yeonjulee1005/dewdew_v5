@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { width } = useWindowSize()
+const { isMobile } = useDevice()
 
 withDefaults(
   defineProps<{
@@ -117,7 +117,7 @@ defineEmits([
         customClass,
         roundButton ? 'rounded-full' : 'rounded-md',
         buttonVariant === 'outline' ? 'text-neutral-500 dark:text-neutral-500 ring-neutral-300 dark:ring-neutral-300 focus:ring-neutral-400 dark:focus:ring-neutral-400' : '',
-        buttonSize === 'xl' && width < 360 ? 'text-sm' : buttonSize === 'xl' ? 'text-base' : '',
+        buttonSize === 'xl' && isMobile ? 'text-sm' : buttonSize === 'xl' ? 'text-base' : '',
         buttonCustomPadding || '',
         'cursor-pointer',
       ]"

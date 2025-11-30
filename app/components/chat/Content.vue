@@ -3,7 +3,7 @@ import ChatDynamicComponent from './DynamicComponent.vue'
 import type { ChatMessage } from '~/types/chat'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
-const { width } = useWindowSize()
+const { isMobile } = useDevice()
 const { url } = useImageStorage()
 const {
   messages,
@@ -28,6 +28,15 @@ const suggestions = [
   '최근 진행했던 프로젝트 보여주세요!',
   '종합적으로 생각했을때, 듀듀는 어떤 개발자 이신가요?',
 ]
+
+const suggestionItems = computed(() => {
+  return suggestions.map((suggestion, index) => ({
+    label: suggestion,
+    value: String(index),
+  }))
+})
+
+const selectedSuggestion = ref<string>()
 
 const messagesContainer = ref<HTMLElement>()
 let mutationObserver: MutationObserver | null = null
@@ -154,6 +163,15 @@ const handleSuggestion = (suggestion: string) => {
   handleSubmit()
 }
 
+// Select 변경 핸들러
+const handleSelectChange = (value: string) => {
+  const selectedItem = suggestionItems.value.find(item => item.value === value)
+  if (selectedItem) {
+    handleSuggestion(selectedItem.label)
+    selectedSuggestion.value = undefined // 선택 후 초기화
+  }
+}
+
 // MutationObserver로 DOM 변경 감지 (스트리밍 중에는 비활성화)
 const setupMutationObserver = () => {
   if (!messagesContainer.value || mutationObserver) return
@@ -217,7 +235,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col h-[calc(100vh-320px)] overflow-hidden bg-white dark:bg-neutral-900 mt-8">
+  <div
+    class="flex flex-col overflow-hidden bg-white dark:bg-neutral-900 mt-8"
+    :class="[isMobile ? 'h-[calc(100vh-180px)]' : 'h-[calc(100vh-320px)]']"
+  >
     <!-- 메시지 영역 -->
     <div
       ref="messagesContainer"
@@ -252,7 +273,7 @@ onUnmounted(() => {
           },
         }"
         :ui="{
-          autoScroll: 'bottom-54',
+          autoScroll: isMobile ? 'bottom-28' : 'bottom-54',
         }"
       >
         <!-- 🆕 생각 중 인디케이터 -->
@@ -272,7 +293,7 @@ onUnmounted(() => {
           </div>
         </template>
         <template #content="{ message }">
-          <div class="flex flex-col gap-2 w-full px-4">
+          <div class="flex flex-col gap-2 w-full">
             <!-- 동적 컴포넌트 -->
             {{ message.componentType }}
             <ChatDynamicComponent
@@ -287,6 +308,7 @@ onUnmounted(() => {
               <MDC
                 :value="getTextFromMessage(message)"
                 :cache-key="message.id === 'streaming' ? `streaming-${streamingText.length}` : message.id"
+                class="prose"
               />
               <!-- 스트리밍 커서 (스트리밍 중일 때만 표시) -->
               <Icon
@@ -303,7 +325,10 @@ onUnmounted(() => {
     <!-- 입력 영역 -->
     <div class="p-4 space-y-4">
       <!-- 추천 질문 (메시지 1개 이하일 때만) -->
-      <div class="flex flex-wrap gap-4">
+      <div
+        v-if="!isMobile"
+        class="flex flex-wrap gap-4"
+      >
         <DdButton
           v-for="suggestion in suggestions"
           :key="suggestion"
@@ -317,10 +342,30 @@ onUnmounted(() => {
         </DdButton>
       </div>
 
+      <!-- Quick 질문 Select (모바일) -->
+      <DdSelect
+        v-if="isMobile"
+        v-model="selectedSuggestion"
+        :items="suggestionItems"
+        placeholder="Quick 질문"
+        value-key="value"
+        size="xl"
+        variant="soft"
+        color="neutral"
+        :content="{
+          side: 'top',
+          sideOffset: 8,
+        }"
+        :ui="{
+          base: 'bg-neutral-200 dark:bg-neutral-800 w-full',
+        }"
+        @update:model-value="handleSelectChange"
+      />
+
       <!-- 입력창 -->
       <DdChatPrompt
         v-model="inputMessage"
-        class="bg-neutral-200/50 dark:bg-neutral-800/50 ring-0"
+        class="bg-neutral-200 dark:bg-neutral-800 ring-0"
         placeholder="무엇이 궁금하세요?"
         :disabled="isStreaming"
         :maxrows="3"
@@ -330,6 +375,7 @@ onUnmounted(() => {
         :ui="{
           base: width < 360 ? 'text-lg' : 'text-xl',
           body: 'break-keep',
+          trailing: 'pe-1',
         }"
         @submit="handleSubmit"
       >
@@ -365,3 +411,12 @@ onUnmounted(() => {
     </DdModal>
   </div>
 </template>
+
+<style lang="scss" scoped>
+:deep(.prose) {
+  p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+}
+</style>

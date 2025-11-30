@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 withDefaults(
   defineProps<{
     error?: Error | null
@@ -21,19 +23,21 @@ defineEmits([
     />
 
     <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-      연결에 문제가 생겼어요
+      {{ t('ai.error.title') }}
     </h3>
 
     <p class="text-neutral-500 mb-4">
-      {{ error?.message || '채팅을 불러오는 중 오류가 발생했습니다.' }}
+      {{ error?.message || t('ai.error.description') }}
     </p>
 
     <DdButton
       color="primary"
+      size="xl"
+      variant="subtle"
       icon="i-lucide-refresh-cw"
       @click="$emit('retry')"
     >
-      다시 시도
+      {{ t('ai.error.tryAgain') }}
     </DdButton>
   </div>
 </template>
