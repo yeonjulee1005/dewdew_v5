@@ -3,7 +3,6 @@
 
 const { coords, resume } = useGeolocation()
 
-// const { width } = useWindowSize()
 const appConfig = useAppConfig()
 const { meta, path } = useRoute()
 

@@ -14,7 +14,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="h-full bg-neutral-50 dark:bg-neutral-900">
+  <div class="h-fit bg-neutral-50 dark:bg-neutral-900">
     <ChatContainer />
   </div>
 </template>
