@@ -9,22 +9,22 @@ defineProps<{
 
 // 동적 컴포넌트 (Lazy Loading)
 const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
-  // 'greeting-card': defineAsyncComponent(() => import('~/components/portfolio/GreetingCard.vue')),  // 추가!
-  // 'profile-card': defineAsyncComponent(() => import('~/components/portfolio/ProfileCard.vue')),
-  // 'experience-list': defineAsyncComponent(() => import('~/components/portfolio/ExperienceList.vue')),
-  // 'experience-timeline': defineAsyncComponent(() => import('~/components/portfolio/ExperienceTimeline.vue')),
-  // 'skill-card': defineAsyncComponent(() => import('~/components/portfolio/SkillCard.vue')),
-  // 'skill-radar': defineAsyncComponent(() => import('~/components/portfolio/SkillRadar.vue')),
-  // 'project-carousel': defineAsyncComponent(() => import('~/components/portfolio/ProjectCarousel.vue')),
-  // 'project-list': defineAsyncComponent(() => import('~/components/portfolio/ProjectList.vue')),
-  // 'project-card': defineAsyncComponent(() => import('~/components/portfolio/ProjectCard.vue')),
-  // 'education-card': defineAsyncComponent(() => import('~/components/portfolio/EducationCard.vue')),
-  // 'hobby-list': defineAsyncComponent(() => import('~/components/portfolio/HobbyList.vue')),
-  // 'social-links': defineAsyncComponent(() => import('~/components/portfolio/SocialLinks.vue')),
-  // 'image-carousel': defineAsyncComponent(() => import('~/components/portfolio/ImageCarousel.vue')),
-  // 'image-grid': defineAsyncComponent(() => import('~/components/portfolio/ImageGrid.vue')),
-  // 'image-timeline': defineAsyncComponent(() => import('~/components/portfolio/ImageTimeline.vue')),
-  // 'contact-form': defineAsyncComponent(() => import('~/components/portfolio/ContactForm.vue')),
+  'greeting-card': defineAsyncComponent(() => import('~/components/dynamic/card/Greeting.server.vue')),
+  'profile-card': defineAsyncComponent(() => import('~/components/dynamic/card/Profile.server.vue')),
+  'experience-list': defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceList.server.vue')),
+  'experience-timeline': defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceTimeline.server.vue')),
+  // 'skill-card': defineAsyncComponent(() => import('~/components/portfolio/SkillCard.server.vue')),
+  // 'skill-radar': defineAsyncComponent(() => import('~/components/portfolio/SkillRadar.server.vue')),
+  // 'project-carousel': defineAsyncComponent(() => import('~/components/portfolio/ProjectCarousel.server.vue')),
+  // 'project-list': defineAsyncComponent(() => import('~/components/portfolio/ProjectList.server.vue')),
+  // 'project-card': defineAsyncComponent(() => import('~/components/portfolio/ProjectCard.server.vue')),
+  // 'education-card': defineAsyncComponent(() => import('~/components/portfolio/EducationCard.server.vue')),
+  // 'hobby-list': defineAsyncComponent(() => import('~/components/portfolio/HobbyList.server.vue')),
+  // 'social-links': defineAsyncComponent(() => import('~/components/portfolio/SocialLinks.server.vue')),
+  // 'image-carousel': defineAsyncComponent(() => import('~/components/portfolio/ImageCarousel.server.vue')),
+  // 'image-grid': defineAsyncComponent(() => import('~/components/portfolio/ImageGrid.server.vue')),
+  // 'image-timeline': defineAsyncComponent(() => import('~/components/portfolio/ImageTimeline.server.vue')),
+  // 'contact-form': defineAsyncComponent(() => import('~/components/portfolio/ContactForm.server.vue')),
 }
 </script>
 

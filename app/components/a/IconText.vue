@@ -2,6 +2,8 @@
 withDefaults(
   defineProps<{
     useIcon?: boolean
+    useLink?: boolean
+    linkUrl?: string
     defaultClass?: string
     customClass?: string
     textClass?: string
@@ -11,6 +13,8 @@ withDefaults(
   }>(),
   {
     useIcon: true,
+    useLink: false,
+    linkUrl: '',
     defaultClass: 'flex items-center gap-1',
     customClass: '',
     textClass: '',
@@ -28,7 +32,18 @@ withDefaults(
       :name="iconName"
       :class="iconClass"
     />
-    <span :class="textClass">
+    <NuxtLink
+      v-if="useLink"
+      :to="linkUrl"
+      external
+      class="hover:text-neutral-500"
+    >
+      {{ text }}
+    </NuxtLink>
+    <span
+      v-else
+      :class="textClass"
+    >
       {{ text }}
     </span>
   </div>

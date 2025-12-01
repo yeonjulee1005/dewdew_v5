@@ -2,6 +2,7 @@
 const { url } = useImageStorage()
 
 const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
+  method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
