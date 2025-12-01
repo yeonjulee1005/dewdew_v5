@@ -3,14 +3,6 @@ const { isDesktopOrTablet, isMobileOrTablet } = useDevice()
 const { url } = useImageStorage()
 
 const slideoverTrigger = ref(false)
-
-// const moveToNavigation = (url: string, isExternal: boolean) => {
-//   isExternal
-//     ? navigateTo(url, { external: true, open: { target: '_blank' } })
-//     : navigateTo(url)
-
-//   slideoverTrigger.value = false
-// }
 </script>
 
 <template>

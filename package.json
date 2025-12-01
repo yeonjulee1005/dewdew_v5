@@ -5,7 +5,7 @@
     "email": "yeonju.lee1005@gmail.com"
   },
   "private": true,
-  "version": "1.2511.3",
+  "version": "1.2511.4",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
@@ -24,6 +24,7 @@
     "supabase:login": "supabase login",
     "supabase:type": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema public > app/types/supabase.ts",
     "supabase:type-menu": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema menu > app/types/supabase-menu.ts",
+    "supabase:type-resume": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema resume > app/types/supabase-resume.ts",
     "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts",
     "supabase:deploy": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc"
   },

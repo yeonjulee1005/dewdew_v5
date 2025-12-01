@@ -62,6 +62,17 @@ export default {
       tryAgain: 'Try again',
     },
   },
+  dynamic: {
+    greeting: {
+      title: 'SOFTWARE ENGINEER。',
+    },
+    experience: {
+      title: 'Experience',
+      current: 'Current',
+      present: 'Present',
+      empty: 'No experience information available.',
+    },
+  },
   texts: {
     footer: 'Footer',
     version: 'Version {version}',
@@ -94,7 +105,6 @@ export default {
   },
   main: {
     intro: {
-      largeTitle: 'FRONTEND DEVELOPER。',
       description: [
         'The person who works hard cannot beat the person who enjoys.',
         'I am a developer who enjoys development and hobbies.',

@@ -62,6 +62,17 @@ export default {
       tryAgain: '재시도',
     },
   },
+  dynamic: {
+    greeting: {
+      title: 'SOFTWARE ENGINEER。',
+    },
+    experience: {
+      title: '경력',
+      current: '재직중',
+      present: '현재',
+      empty: '경력 정보가 없습니다.',
+    },
+  },
   texts: {
     footer: 'Footer',
     version: '버전 {version}',
@@ -94,7 +105,6 @@ export default {
   },
   main: {
     intro: {
-      largeTitle: 'FRONTEND DEVELOPER。',
       description: [
         '노력하는 사람은 즐기는 사람을 이길 수 없습니다.',
         '개발과 취미를 즐기며 살아가는 개발자 이연주입니다.',

@@ -1,9 +1,23 @@
 <script setup lang="ts">
 import ChatDynamicComponent from './DynamicComponent.vue'
-import type { ChatMessage } from '~/types/chat'
+import type { ChatMessage, ComponentType } from '~/types/chat'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
+// UIMessage를 확장한 커스텀 타입
+// DdChatMessages의 message 슬롯에서 받는 타입에 componentType과 componentData 추가
+type ExtendedUIMessage = {
+  id: string
+  role: 'user' | 'assistant'
+  parts: Array<{
+    type: 'text' | 'reasoning'
+    text: string
+  }>
+  componentType?: ComponentType | null
+  componentData?: Record<string, unknown> | null
+}
+
 const { isMobile } = useDevice()
+const { width } = useWindowSize()
 const { url } = useImageStorage()
 const {
   messages,
@@ -49,7 +63,7 @@ const uiMessages = computed(() => {
     role: msg.role,
     parts: [
       {
-        type: 'text',
+        type: 'text' as const,
         text: msg.content,
       },
     ],
@@ -71,7 +85,7 @@ const displayMessages = computed(() => {
       role: 'assistant' as const,
       parts: [
         {
-          type: 'text',
+          type: 'text' as const,
           text: streamingText.value,
         },
       ],
@@ -268,7 +282,7 @@ onUnmounted(() => {
             src: url(true, '/assets/logo/dewdew_v4_logo.webp'),
           },
           ui: {
-            root: width < 360 ? 'max-w-full ' : 'max-w-[80%]',
+            root: isMobile ? 'max-w-full ' : 'max-w-[80%]',
             content: 'bg-amber-100 dark:bg-amber-600/50 ring-0',
           },
         }"
@@ -295,11 +309,11 @@ onUnmounted(() => {
         <template #content="{ message }">
           <div class="flex flex-col gap-2 w-full">
             <!-- 동적 컴포넌트 -->
-            {{ message.componentType }}
+            {{ (message as ExtendedUIMessage).componentType }}
             <ChatDynamicComponent
-              v-if="message.componentType"
-              :component-type="message.componentType"
-              :component-data="message.componentData"
+              v-if="(message as ExtendedUIMessage).componentType"
+              :component-type="(message as ExtendedUIMessage).componentType"
+              :component-data="(message as ExtendedUIMessage).componentData"
               class="w-full"
             />
 
@@ -324,10 +338,10 @@ onUnmounted(() => {
 
     <!-- 입력 영역 -->
     <div class="p-4 space-y-4">
-      <!-- 추천 질문 (메시지 1개 이하일 때만) -->
+      <!-- 추천 질문 -->
       <div
         v-if="!isMobile"
-        class="flex flex-wrap gap-4"
+        class="flex flex-wrap gap-2"
       >
         <DdButton
           v-for="suggestion in suggestions"
@@ -342,43 +356,54 @@ onUnmounted(() => {
         </DdButton>
       </div>
 
-      <!-- Quick 질문 Select (모바일) -->
-      <DdSelect
-        v-if="isMobile"
-        v-model="selectedSuggestion"
-        :items="suggestionItems"
-        placeholder="Quick 질문"
-        value-key="value"
-        size="xl"
-        variant="soft"
-        color="neutral"
-        :content="{
-          side: 'top',
-          sideOffset: 8,
-        }"
-        :ui="{
-          base: 'bg-neutral-200 dark:bg-neutral-800 w-full',
-        }"
-        @update:model-value="handleSelectChange"
-      />
-
       <!-- 입력창 -->
       <DdChatPrompt
         v-model="inputMessage"
-        class="bg-neutral-200 dark:bg-neutral-800 ring-0"
+        class="bg-neutral-200/50 dark:bg-neutral-800/50 ring-0"
         placeholder="무엇이 궁금하세요?"
         :disabled="isStreaming"
         :maxrows="3"
         :autoresize="true"
-        size="xl"
         variant="subtle"
         :ui="{
+          root: isMobile ? 'gap-2' : 'gap-0',
           base: width < 360 ? 'text-lg' : 'text-xl',
           body: 'break-keep',
           trailing: 'pe-1',
         }"
         @submit="handleSubmit"
       >
+        <template #header>
+          <DdSelect
+            v-if="isMobile"
+            v-model="selectedSuggestion"
+            class="w-96"
+            :class="[isMobile ? '' : 'hidden']"
+            :items="suggestionItems"
+            placeholder="Quick 질문"
+            value-key="value"
+            size="xl"
+            variant="outline"
+            color="neutral"
+            trailing-icon="i-lucide-chevron-up"
+            :content="{
+              side: 'top',
+              sideOffset: 16,
+            }"
+            :ui="{
+              base: 'bg-neutral-200/50 dark:bg-neutral-800/50 w-fit',
+              itemLabel: 'break-keep whitespace-normal',
+              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
+            }"
+            @update:model-value="handleSelectChange"
+          >
+            <template #item-label="{ item }">
+              <span class="break-keep whitespace-normal">
+                {{ item.label }}
+              </span>
+            </template>
+          </DdSelect>
+        </template>
         <template #trailing>
           <div class="flex items-center h-full">
             <DdChatPromptSubmit
