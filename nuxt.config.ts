@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     '@nuxt/hints',
     '@nuxt/image',
     '@nuxt/scripts',
+    '@nuxtjs/color-mode',
     '@nuxt/ui',
+    '@nuxtjs/mdc',
     '@nuxtjs/supabase',
     '@nuxtjs/i18n',
     '@nuxtjs/stylelint-module',
@@ -16,9 +18,11 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'dayjs-nuxt',
     'pinia-plugin-persistedstate',
+    '@nuxtjs/device',
   ],
   imports: {
     dirs: [
+      'components/**',
       'composables/**',
       'stores/**',
     ],
@@ -36,21 +40,31 @@ export default defineNuxtConfig({
     },
   },
   css: [
-    '~/assets/style.scss',
+    '~/assets/scss/style.scss',
+    '~/assets/css/main.css',
   ],
   // site: {
   //   name: 'Dewdew',
   //   url: process.env.NUXT_PUBLIC_SITE_URL ?? process.env.NUXT_ENV_VERCEL_URL ?? 'http://localhost:4600',
   // },
   colorMode: {
-    preference: 'light',
-    fallback: 'system',
+    preference: 'system',
+    fallback: 'dark',
+    storage: 'localStorage',
+    storageKey: 'nuxt-color-mode',
+  },
+  mdc: {
+    components: {
+      prose: true,
+    },
   },
   ui: {
     fonts: false,
     prefix: 'Dd',
   },
   runtimeConfig: {
+    supabaseUrl: process.env.SUPABASE_URL ?? '',
+    supabaseKey: process.env.SUPABASE_KEY ?? '',
     public: {
       appVersion: JSON.stringify(packageJson.version),
       siteUrl: process.env.BASE_URL ?? process.env.NUXT_PUBLIC_SITE_URL ?? process.env.NUXT_ENV_VERCEL_URL ?? 'http://localhost:4500',
@@ -67,7 +81,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   nitro: {
-    preset: 'vercel',
+    // preset: 'vercel',
     compressPublicAssets: {
       brotli: true,
       gzip: true,

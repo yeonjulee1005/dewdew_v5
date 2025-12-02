@@ -2,17 +2,31 @@ export default {
   pageTitle: {
     yeonju: '개발자 이연주',
     dewdew: 'Dewdew',
-    main: 'Main',
-    portfolio: 'Portfolio',
-    project: 'Project',
-    blog: 'Blog',
-    archive: 'Archives',
-    colorsTranslate: '내 색상 찾아줘!',
+    ai: 'Dewdew, AI에게 묻다',
+    // main: 'Main',
+    // portfolio: 'Portfolio',
+    // project: 'Project',
+    // blog: 'Blog',
+    // archive: 'Archives',
+    // colorsTranslate: '내 색상 찾아줘!',
   },
-  pageSubTitle: {
-    colorsTranslate: '내 색상 찾아줘..',
-    hhkb: 'HHKB 키보드 모델링',
+  seoTitle: {
+    intro: 'Dewdew | Software Engineer 이연주',
+    ai: 'Dewdew, AI에게 묻다',
   },
+  seoDescription: {
+    intro: 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 제품에 대한 많은 고민과 주도적인 개발을 지향하고 있습니다. Nuxt4 프레임워크 생태계에 기여하고 있습니다.',
+    ai: 'LLM+RAG+AGENT 기반의 AI에게 저에 대해서 물어보세요.',
+  },
+  externalMenu: {
+    SMC001: '듀듀월드',
+    SMC002: '깃허브',
+    SMC003: '링크드인',
+  },
+  // pageSubTitle: {
+  //   colorsTranslate: '내 색상 찾아줘..',
+  //   hhkb: 'HHKB 키보드 모델링',
+  // },
   openGraph: {
     main: '안녕하세요. FE 개발자 이연주입니다.',
     portfolio: '포트폴리오 입니다.',
@@ -25,27 +39,56 @@ export default {
   button: {
     moveMain: '이동하기',
   },
-  texts: {
-    portfolio: '포트폴리오',
-    archives: '아카이브',
-    send: '보내기',
-    regenerate: '색상 생성',
-    version: '버전 {version}',
-    dewdewWorld: 'Dewdew World',
-    copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',
-    designed: 'Designed by Yeonju Lee.',
-    uv: '자외선',
-    diffusion: '대기정체',
-    name: '이름',
-    email: '이메일',
-    message: '메시지',
-  },
   menu: {
+    home: '홈',
+    ai: 'Dewdew, AI에게 묻다',
+    aiComponents: 'AI 컴포넌트',
+    //
     MNC001: '메인',
     MNC002: '프로젝트',
     MNC003: '포트폴리오',
     MNC004: '블로그',
     MNC005: '아카이브',
+  },
+  error: {
+    title: '404',
+    description: '페이지를 찾을 수 없어요!',
+    button: '홈 이동',
+  },
+  ai: {
+    error: {
+      title: '연결에 문제가 생겼어요',
+      description: '채팅을 불러오는 중 오류가 발생했습니다.',
+      tryAgain: '재시도',
+    },
+  },
+  dynamic: {
+    greeting: {
+      title: 'SOFTWARE ENGINEER。',
+    },
+    experience: {
+      title: '경력',
+      current: '재직중',
+      present: '현재',
+      empty: '경력 정보가 없습니다.',
+    },
+  },
+  texts: {
+    footer: 'Footer',
+    version: '버전 {version}',
+    dewdewWorld: 'Dewdew World',
+    copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',
+    designed: 'Designed by Yeonju Lee.',
+    //
+    portfolio: '포트폴리오',
+    archives: '아카이브',
+    send: '보내기',
+    regenerate: '색상 생성',
+    uv: '자외선',
+    diffusion: '대기정체',
+    name: '이름',
+    email: '이메일',
+    message: '메시지',
   },
   subMenu: {
     SMC001: '색상 팔레트 🎨',
@@ -62,7 +105,6 @@ export default {
   },
   main: {
     intro: {
-      largeTitle: 'FRONTEND DEVELOPER。',
       description: [
         '노력하는 사람은 즐기는 사람을 이길 수 없습니다.',
         '개발과 취미를 즐기며 살아가는 개발자 이연주입니다.',

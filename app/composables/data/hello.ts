@@ -1,4 +1,14 @@
 export const useHelloList = () => {
+  const introTitleKo = [
+    'Software Engineer 이연주 입니다.',
+    '이동하기 버튼을 눌러 메인 페이지로 이동해보세요.',
+  ]
+
+  const introTitleEn = [
+    'Software Engineer Yeonju Lee.',
+    'Press move button to go to main page.',
+  ]
+
   const helloList = [
     '안녕하세요!',
     'Hello!',
@@ -31,5 +41,9 @@ export const useHelloList = () => {
     'ہیلو!',
   ]
 
-  return helloList
+  return {
+    helloList,
+    introTitleKo,
+    introTitleEn,
+  }
 }
