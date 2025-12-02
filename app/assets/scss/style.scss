@@ -45,37 +45,43 @@ body {
 //   opacity: .3;
 // }
 
-// .intro-enter-active {
-//   transition: opacity 2s ease-in-out;
-// }
+.intro-enter-active {
+  transition: all 0.5s ease-out;
+}
 
-// .intro-leave-active {
-//   transition: opacity 1s ease-in-out;
-// }
+.intro-leave-active {
+  transition: all 0.3s ease-in;
+}
 
-// .intro-enter-from,
-// .intro-leave-to {
-//   opacity: 0;
-// }
+.intro-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
 
-// .intro-enter-to,
-// .intro-leave-from {
-//   opacity: 1;
-// }
+.intro-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
 
-// .flicking-viewport {
-//   width: 100%;
-//   .flicking-pagination {
-//     position: relative;
-//     margin-top: 40px;
-//     .flicking-pagination-bullet {
-//     background-color: lightgray !important;
-//     }
-//     .flicking-pagination-bullet-active {
-//       background-color: lightblue !important;
-//     }
-//   }
-// }
+.intro-enter-to,
+.intro-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flicking-viewport {
+  width: 100%;
+  .flicking-pagination {
+    position: relative;
+    margin-top: 40px;
+    .flicking-pagination-bullet {
+    background-color: lightgray !important;
+    }
+    .flicking-pagination-bullet-active {
+      background-color: lightblue !important;
+    }
+  }
+}
 
 // :root {
 //   --zigzag-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><polyline points="0,10 10,0 20,10 30,0 40,10 50,0 60,10 70,0 80,10 90,0 100,10" fill="none" stroke="lightgray" stroke-width="2"/></svg>');

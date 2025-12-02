@@ -3,9 +3,7 @@
  * 클립보드, 랜덤, 댓글명 생성 등의 기능을 제공합니다
  */
 
-export const useUiUtils = () => {
-  const { commentName } = useCommentName()
-
+export const useUtils = () => {
   /**
    * 클립보드에 텍스트 복사
    * @param value 복사할 텍스트
@@ -31,24 +29,8 @@ export const useUiUtils = () => {
     return Math.floor(Math.random() * max)
   }
 
-  /**
-   * 랜덤 댓글 작성자명 생성
-   * @returns 랜덤하게 조합된 댓글 작성자명
-   * @example generateCommentName() // "친근한 사자"
-   */
-  const generateCommentName = (): string => {
-    const frontName = commentName.frontName
-    const backName = commentName.backName
-
-    const randomFront = frontName[Math.floor(Math.random() * frontName.length)] ?? ''
-    const randomBack = backName[Math.floor(Math.random() * backName.length)] ?? ''
-
-    return randomFront.concat(' ', randomBack)
-  }
-
   return {
     copyClipBoard,
     randomOrder,
-    generateCommentName,
   }
 }

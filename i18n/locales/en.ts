@@ -2,17 +2,31 @@ export default {
   pageTitle: {
     yeonju: 'Developer Yeonju Lee',
     dewdew: 'Dewdew',
-    main: 'Main',
-    portfolio: 'Portfolio',
-    project: 'Project',
-    blog: 'Blog',
-    archive: 'Archives',
-    colorsTranslate: 'Find my colors!',
+    ai: 'Dewdew, Ask Dewdew AI',
+    // main: 'Main',
+    // portfolio: 'Portfolio',
+    // project: 'Project',
+    // blog: 'Blog',
+    // archive: 'Archives',
+    // colorsTranslate: 'Find my colors!',
   },
-  pageSubTitle: {
-    colorsTranslate: 'Find my colors..',
-    hhkb: 'HHKB Keyboard Modeling',
+  seoTitle: {
+    intro: 'Dewdew | Software Engineer Yeonju Lee',
+    ai: 'Dewdew, Ask Dewdew AI',
   },
+  seoDescription: {
+    intro: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
+    ai: 'Ask me about me based on LLM+RAG+AGENT.',
+  },
+  externalMenu: {
+    SMC001: 'Dewdew World',
+    SMC002: 'Github',
+    SMC003: 'Linkedin',
+  },
+  // pageSubTitle: {
+  //   colorsTranslate: 'Find my colors..',
+  //   hhkb: 'HHKB Keyboard Modeling',
+  // },
   openGraph: {
     main: 'Hello. I am FE Developer Yeonju Lee.',
     portfolio: 'This is the portfolio.',
@@ -25,27 +39,56 @@ export default {
   button: {
     moveMain: 'Move',
   },
-  texts: {
-    portfolio: 'Portfolio',
-    archives: 'Archives',
-    send: 'Send',
-    regenerate: 'Regenerate',
-    version: 'Version {version}',
-    dewdewWorld: 'Dewdew World',
-    copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',
-    designed: 'Designed by Yeonju Lee.',
-    uv: 'UV',
-    diffusion: 'Diffusion',
-    name: 'Name',
-    email: 'Email',
-    message: 'Message',
-  },
   menu: {
+    home: 'Home',
+    ai: 'Dewdew, Ask Dewdew AI',
+    aiComponents: 'AI Components',
+    //
     MNC001: 'Main',
     MNC002: 'Project',
     MNC003: 'Portfolio',
     MNC004: 'Blog',
     MNC005: 'Archives',
+  },
+  error: {
+    title: '404',
+    description: 'Page not found!',
+    button: 'Move to home',
+  },
+  ai: {
+    error: {
+      title: 'Connection error',
+      description: 'An error occurred while loading the chat.',
+      tryAgain: 'Try again',
+    },
+  },
+  dynamic: {
+    greeting: {
+      title: 'SOFTWARE ENGINEER。',
+    },
+    experience: {
+      title: 'Experience',
+      current: 'Current',
+      present: 'Present',
+      empty: 'No experience information available.',
+    },
+  },
+  texts: {
+    footer: 'Footer',
+    version: 'Version {version}',
+    dewdewWorld: 'Dewdew World',
+    copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',
+    designed: 'Designed by Yeonju Lee.',
+    //
+    portfolio: 'Portfolio',
+    archives: 'Archives',
+    send: 'Send',
+    regenerate: 'Regenerate',
+    uv: 'UV',
+    diffusion: 'Diffusion',
+    name: 'Name',
+    email: 'Email',
+    message: 'Message',
   },
   subMenu: {
     SMC001: 'Color Translate 🎨',
@@ -62,7 +105,6 @@ export default {
   },
   main: {
     intro: {
-      largeTitle: 'FRONTEND DEVELOPER。',
       description: [
         'The person who works hard cannot beat the person who enjoys.',
         'I am a developer who enjoys development and hobbies.',

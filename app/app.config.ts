@@ -5,14 +5,19 @@ export default defineAppConfig({
     },
   },
   toaster: {
-    position: 'bottom-right' as const,
+    position: 'top-right' as const,
     expand: true,
-    duration: 5000,
+    duration: 2000,
   },
   ui: {
     colors: {
-      primary: 'indigo',
-      neutral: 'stone',
+      primary: 'amber',
+      secondary: 'indigo',
+      success: 'emerald',
+      info: 'sky',
+      warning: 'orange',
+      error: 'rose',
+      neutral: 'neutral',
     },
     modal: {
       variants: {

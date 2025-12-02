@@ -3,7 +3,6 @@
 
 const { coords, resume } = useGeolocation()
 
-// const { width } = useWindowSize()
 const appConfig = useAppConfig()
 const { meta, path } = useRoute()
 
@@ -11,15 +10,15 @@ const { t } = useI18n()
 
 const { genDateFormat } = useDateFormatter()
 
-// const { viewMenuData } = storeToRefs(useMenuStore())
+// const { externalMenu } = storeToRefs(useMenuStore())
 const { geoX, geoY, latitude, longitude, forecastHour, currentLocationCode } = storeToRefs(useLocWeatherStore())
 const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 
 const { filteredLocations } = useKorLocation()
 const { dfsXyConvert } = useTranslateCoords()
 
-const seoTitle = 'Dewdew | Software Engineer 이연주'
-const seoDescription = 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 주로 프론트엔드 개발(Nuxt3)에 관심이 있습니다.'
+const seoTitle = t('seoTitle.intro')
+const seoDescription = t('seoDescription.intro')
 const seoUrl = `https://www.dewdew.dev${path}`
 const seoImage = 'https://api.dewdew.dev/storage/v1/object/public/assets/banner/main_banner_v4.webp'
 
@@ -30,9 +29,14 @@ useHead({
       return t('pageTitle.dewdew').concat(' | ', '메인')
     }
 
-    return !title.includes(t('pageTitle.dewdew'))
-      ? t('pageTitle.dewdew').concat(' | ', t(title))
-      : title
+    const isTranslatedString = !title.startsWith('pageTitle.') && !title.includes('pageTitle.')
+    const translatedTitle = isTranslatedString
+      ? title
+      : t(title.startsWith('pageTitle.') ? title : `pageTitle.${title.toLowerCase()}`, title)
+
+    return !translatedTitle.includes(t('pageTitle.dewdew'))
+      ? t('pageTitle.dewdew').concat(' | ', translatedTitle)
+      : translatedTitle
   },
   link: [
     { rel: 'canonical', href: seoUrl },
@@ -73,13 +77,15 @@ useSeoMeta({
   twitterCreator: '@dewdew',
 })
 
-// const { execute: executeMenuData } = await useAsyncData('menuData', async () => {
-//   const { data } = await useFetch('/api/menuData', {
+// const { execute: _executeExternalMenu } = useAsyncData('externalMenuData', async () => {
+//   const { data } = await useFetch('/api/externalMenu', {
 //     headers: useRequestHeaders(['cookie']),
 //     immediate: true,
 //   })
 
-//   viewMenuData.value = data.value
+//   externalMenu.value = data.value
+
+//   console.log(externalMenu.value)
 
 //   return []
 // }, {
@@ -118,7 +124,7 @@ watch(() => coords.value, () => {
   initWeatherData()
 }, { immediate: true })
 
-// executeMenuData()
+// executeExternalMenu()
 </script>
 
 <template>
