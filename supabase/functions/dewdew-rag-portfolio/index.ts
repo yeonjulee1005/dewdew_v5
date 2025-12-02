@@ -1,5 +1,5 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createChatStream } from '../_shared/openai.ts'
+import { createAIChatStream, getDefaultModelConfig } from '../_shared/ai-provider.ts'
 import { fetchRelevantData, getAISettings } from '../_shared/rag.ts'
 import { determineComponentType } from '../_shared/component-mapper.ts'
 import { optimizeHistory, createContextSummary } from '../_shared/history-optimizer.ts'
@@ -11,6 +11,8 @@ import type {
   AISettingsMap,
   StreamMetadata,
   StreamTextChunk,
+  ModelProvider,
+  ModelConfig,
 } from '../_shared/types.ts'
 import { ALLOWED_COMPONENTS } from '../_shared/types.ts'
 
@@ -73,6 +75,8 @@ ${speakingStyle}
 - 경력 질문1: 각 회사에서의 경험과 성장 포인트 위주로 설명 (어떤 제품을 만들었는지, 어떤 기술을 이용해서 문제를 해결했는지에 대해서 사실적으로 공유)
 - 경력 질문2: 최근 경력(order_index가 큰것들) 위주로 알려줘
 - 연락처/협업 질문: 편하게 연락 주시라고 안내 (이메일, 링크드인, 깃헙링크 제공)
+- GitHub 질문: externalProfiles.github 데이터가 있으면 실제 레포지토리, 스타 수, 사용 언어 등을 구체적으로 설명
+- LinkedIn 질문: LinkedIn은 직접 방문을 안내하되, 프로필 URL을 제공
 - 모르는 질문: 솔직하게 답변드리기 어렵다고 하고, 다른 주제 제안하거나, 직접연락을 유도! (더 궁금한 점이 있으면 이야기해주세요!)
 
 ═══════════════════════════════════════
@@ -91,6 +95,12 @@ A: "이 사이트는 Nuxt 4로 만들었어요! 그리고 지금 저와 대화�
 Q: "취미가 뭐예요?"
 A: "코딩이 취미라고 하면 조금 그렇긴 한데... 사이드 프로젝트 만드는 게 정말 재밌어요! 그 외에는 여행 다니면서 풍경 사진 많이 찍어두는 편이에요! 오토바이 타는 걸 좋아해요"
 
+Q: "GitHub에서 어떤 프로젝트 하세요?"
+A: "제 GitHub에는 여러 프로젝트가 있어요! 최근에는 이 포트폴리오 사이트(dewdew_v5)를 Nuxt 4로 만들었고, RAG 기반 AI 채팅 기능도 직접 구현했어요. TypeScript와 Vue.js 위주로 작업하고 있고, 공개 레포가 20개 정도 있습니다. 자세한 내용은 제 GitHub에서 확인해보실 수 있어요!"
+
+Q: "LinkedIn 프로필 볼 수 있어요?"
+A: "네! 제 LinkedIn 프로필에서 더 자세한 경력과 이력을 확인하실 수 있어요. 링크 드릴게요! 궁금한 점이 있으시면 LinkedIn으로 연락 주셔도 됩니다."
+
 
 ═══════════════════════════════════════
 [응답 길이 가이드]
@@ -101,6 +111,8 @@ A: "코딩이 취미라고 하면 조금 그렇긴 한데... 사이드 프로젝
 - 종합적인 질문: 8-10문장으로 풍부하게
 - 기술 스택 질문: 카테고리별로 나눠서 상세히 설명 (8-10문장)
 - 취미/관심사 질문: 5-7문장으로 열정적으로
+- GitHub 질문: externalProfiles.github에 실시간 GitHub 데이터가 포함되어 있으면 이를 활용해서 구체적으로 답변 (레포 이름, 스타 수, 사용 언어 등)
+- LinkedIn 질문: socialLinks에 LinkedIn URL이 있으면 해당 링크를 안내
 
 ═══════════════════════════════════════
 [응답 규칙]
@@ -132,11 +144,23 @@ A: "코딩이 취미라고 하면 조금 그렇긴 한데... 사이드 프로젝
 ${dataContext}`
 }
 
-// SSE 스트림 생성
+// 모델 설정 가져오기 (요청에서 또는 기본값)
+const getModelConfig = (request: ChatRequest): ModelConfig => {
+  if (request.modelProvider && request.modelName) {
+    return {
+      provider: request.modelProvider,
+      model: request.modelName,
+    }
+  }
+  return getDefaultModelConfig()
+}
+
+// SSE 스트림 생성 (멀티 프로바이더 지원)
 const createSSEStream = (
-  openaiStream: ReadableStream<Uint8Array>,
+  aiStream: ReadableStream<Uint8Array>,
   componentType: ComponentType,
   context: RAGContext,
+  provider: ModelProvider,
 ): ReadableStream<Uint8Array> => {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
@@ -153,8 +177,8 @@ const createSSEStream = (
         encoder.encode(`data: ${JSON.stringify(metadata)}\n\n`),
       )
 
-      // 2. OpenAI 스트림 처리
-      const reader = openaiStream.getReader()
+      // 2. AI 스트림 처리 (프로바이더별)
+      const reader = aiStream.getReader()
 
       try {
         while (true) {
@@ -167,31 +191,93 @@ const createSSEStream = (
             .filter(line => line.trim() !== '')
 
           for (const line of lines) {
-            if (!line.startsWith('data: ')) continue
+            // OpenAI 형식
+            if (provider === 'openai' && line.startsWith('data: ')) {
+              const jsonStr = line.slice(6).trim()
 
-            const jsonStr = line.slice(6).trim()
+              if (jsonStr === '[DONE]') {
+                controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+                continue
+              }
 
-            if (jsonStr === '[DONE]') {
-              controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-              continue
-            }
+              try {
+                const parsed = JSON.parse(jsonStr)
+                const content = parsed.choices?.[0]?.delta?.content
 
-            try {
-              const parsed = JSON.parse(jsonStr)
-              const content = parsed.choices?.[0]?.delta?.content
-
-              if (content) {
-                const textChunk: StreamTextChunk = {
-                  type: 'text',
-                  content,
+                if (content) {
+                  const textChunk: StreamTextChunk = {
+                    type: 'text',
+                    content,
+                  }
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
+                  )
                 }
-                controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
-                )
+              }
+              catch {
+                // JSON 파싱 실패는 무시
               }
             }
-            catch {
-              // JSON 파싱 실패는 무시
+
+            // Anthropic 형식
+            if (provider === 'anthropic' && line.startsWith('data: ')) {
+              const jsonStr = line.slice(6).trim()
+
+              if (jsonStr === '[DONE]') {
+                controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+                continue
+              }
+
+              try {
+                const parsed = JSON.parse(jsonStr)
+
+                // content_block_delta 이벤트에서 텍스트 추출
+                if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
+                  const textChunk: StreamTextChunk = {
+                    type: 'text',
+                    content: parsed.delta.text,
+                  }
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
+                  )
+                }
+
+                // message_stop 이벤트
+                if (parsed.type === 'message_stop') {
+                  controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+                }
+              }
+              catch {
+                // JSON 파싱 실패는 무시
+              }
+            }
+
+            // Google Gemini 형식
+            if (provider === 'google' && line.startsWith('data: ')) {
+              const jsonStr = line.slice(6).trim()
+
+              try {
+                const parsed = JSON.parse(jsonStr)
+                const text = parsed.candidates?.[0]?.content?.parts?.[0]?.text
+
+                if (text) {
+                  const textChunk: StreamTextChunk = {
+                    type: 'text',
+                    content: text,
+                  }
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
+                  )
+                }
+
+                // 완료 체크
+                if (parsed.candidates?.[0]?.finishReason) {
+                  controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+                }
+              }
+              catch {
+                // JSON 파싱 실패는 무시
+              }
             }
           }
         }
@@ -239,31 +325,37 @@ serve(async (req: Request): Promise<Response> => {
     const optimizedHistory = optimizeHistory(history, 6)
     const contextSummary = createContextSummary(history)
 
-    // 1. AI 설정 로드
+    // 2. AI 설정 로드
     const settings = await getAISettings()
 
-    // 2. RAG: 관련 데이터 검색
+    // 3. RAG: 관련 데이터 검색
     const context = await fetchRelevantData(message)
 
-    // 3. 컴포넌트 타입 결정
+    // 4. 컴포넌트 타입 결정
     const componentType = determineComponentType(message, context)
 
-    // 4. 시스템 프롬프트 구성
+    // 5. 시스템 프롬프트 구성
     const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary)
 
-    // 5. OpenAI 스트리밍 호출
+    // 6. 모델 설정 가져오기
+    const modelConfig = getModelConfig(body)
+    console.log(`Using model: ${modelConfig.provider}/${modelConfig.model}`)
+
+    // 7. 메시지 구성
     const messages = [
       ...optimizedHistory.map(h => ({ role: h.role, content: h.content })),
       { role: 'user', content: message },
     ]
 
-    const openaiStream = await createChatStream({
+    // 8. AI 스트리밍 호출 (멀티 프로바이더)
+    const { stream: aiStream, provider } = await createAIChatStream(
+      modelConfig,
       messages,
       systemPrompt,
-    })
+    )
 
-    // 6. SSE 스트림 응답
-    const sseStream = createSSEStream(openaiStream, componentType, context)
+    // 9. SSE 스트림 응답
+    const sseStream = createSSEStream(aiStream, componentType, context, provider)
 
     return new Response(sseStream, {
       headers: {

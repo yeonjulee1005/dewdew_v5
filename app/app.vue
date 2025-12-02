@@ -10,7 +10,6 @@ const { t } = useI18n()
 
 const { genDateFormat } = useDateFormatter()
 
-// const { externalMenu } = storeToRefs(useMenuStore())
 const { geoX, geoY, latitude, longitude, forecastHour, currentLocationCode } = storeToRefs(useLocWeatherStore())
 const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 
@@ -77,22 +76,6 @@ useSeoMeta({
   twitterCreator: '@dewdew',
 })
 
-// const { execute: _executeExternalMenu } = useAsyncData('externalMenuData', async () => {
-//   const { data } = await useFetch('/api/externalMenu', {
-//     headers: useRequestHeaders(['cookie']),
-//     immediate: true,
-//   })
-
-//   externalMenu.value = data.value
-
-//   console.log(externalMenu.value)
-
-//   return []
-// }, {
-//   dedupe: 'defer',
-//   immediate: true,
-// })
-
 const initWeatherData = () => {
   const rs = dfsXyConvert('toXY', coords.value.latitude, coords.value.longitude)
 
@@ -123,8 +106,6 @@ watch(() => coords.value, () => {
 
   initWeatherData()
 }, { immediate: true })
-
-// executeExternalMenu()
 </script>
 
 <template>
