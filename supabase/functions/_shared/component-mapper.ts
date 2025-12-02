@@ -9,14 +9,14 @@ const matchKeywords = (text: string, keywords: string[]): boolean => {
 
 // 컴포넌트 타입 결정 로직
 export const determineComponentType = (query: string, context: RAGContext): ComponentType => {
-  // 🆕 종합적인 질문 → profile-card 사용
-  if (matchKeywords(query, ['어떤 개발자', '어떤 사람', '종합적', '특징', '강점'])) {
-    return 'profile-card'
-  }
-
   // 인사
   if (matchKeywords(query, ['안녕', '하이', 'hi', 'hello', '반가워', '처음'])) {
     return 'greeting-card'
+  }
+
+  // 종합적인 질문 → profile-card 사용
+  if (matchKeywords(query, ['어떤 개발자', '어떤 사람', '종합적', '특징', '강점'])) {
+    return 'contact-form'
   }
 
   // 프로젝트 (명시적인 키워드가 있으면 우선 처리)
@@ -41,7 +41,7 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
 
   // 경력
   if (context.experience && context.experience.length > 0) {
-    if (matchKeywords(query, ['경력', '경험', '커리어', '회사', '일', '직장', '이직', 'career', 'experience', 'transition', 'company', 'job', 'work'])) {
+    if (matchKeywords(query, ['이력', '타임라인', 'timeline', 'career'])) {
       return 'experience-timeline'
     }
     return 'experience-list'
@@ -49,10 +49,10 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
 
   // 스킬
   if (context.skills && context.skills.length > 0) {
-    if (matchKeywords(query, ['차트', '그래프', '레이더', '시각화', 'chart', 'graph', 'radar', 'visualization'])) {
-      return 'skill-radar'
+    if (matchKeywords(query, ['기술', '스택', 'skill', 'stack', '프레임워크', '도구', 'framework', 'tool'])) {
+      return 'skill-card'
     }
-    return 'skill-card'
+    return 'skill-radar'
   }
 
   // 프로젝트 (명시적 키워드가 없을 때 fallback)

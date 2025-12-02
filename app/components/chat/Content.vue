@@ -25,6 +25,9 @@ const {
   isStreaming,
   streamingText,
   currentComponent,
+  selectedModel,
+  availableModels,
+  setModel,
   sendMessage,
   stop,
 } = useChat()
@@ -34,13 +37,13 @@ const imageModalOpen = ref(false)
 const selectedImageSrc = ref('')
 
 const suggestions = [
-  '자기소개 해주세요!',
-  '경력이 어떻게 되세요?',
-  '어떤 기술 스택을 사용하세요?',
-  '앞으로의 커리어 패스를 어떻게 가져가고 싶나요?',
+  '자기소개 해줘요!',
+  '최근 경력이 어떻게 되요?',
   '어떤 기술적인 고민들을 하고있나요?',
-  '최근 진행했던 프로젝트 보여주세요!',
-  '종합적으로 생각했을때, 듀듀는 어떤 개발자 이신가요?',
+  '앞으로의 커리어 패스를 어떻게 가져가고 싶어요?',
+  '최근 진행했던 프로젝트를 알려주세요!',
+  'Github에서 어떤 오픈소스에 기여했었는지 살펴봐줘!',
+  '종합적으로 생각했을때, 듀듀는 어떤 개발자 인가요?',
 ]
 
 const suggestionItems = computed(() => {
@@ -360,7 +363,7 @@ onUnmounted(() => {
       <DdChatPrompt
         v-model="inputMessage"
         class="bg-neutral-200/50 dark:bg-neutral-800/50 ring-0"
-        placeholder="무엇이 궁금하세요?"
+        :placeholder="$t('ai.placeholder')"
         :disabled="isStreaming"
         :maxrows="3"
         :autoresize="true"
@@ -369,7 +372,8 @@ onUnmounted(() => {
           root: isMobile ? 'gap-2' : 'gap-0',
           base: width < 360 ? 'text-lg' : 'text-xl',
           body: 'break-keep',
-          trailing: 'pe-1',
+          footer: 'pt-2',
+          trailing: 'pe-0',
         }"
         @submit="handleSubmit"
       >
@@ -398,7 +402,7 @@ onUnmounted(() => {
             @update:model-value="handleSelectChange"
           >
             <template #item-label="{ item }">
-              <span class="break-keep whitespace-normal">
+              <span class="break-keep whitespace-normal pe-11">
                 {{ item.label }}
               </span>
             </template>
@@ -413,6 +417,44 @@ onUnmounted(() => {
               @stop="stop"
               @reload="() => {}"
             />
+          </div>
+        </template>
+        <template #footer>
+          <div class="flex items-center gap-1.5">
+            <DdSelect
+              :model-value="selectedModel.model"
+              :items="availableModels"
+              class="w-42"
+              placeholder="모델 선택"
+              value-key="model"
+              size="md"
+              variant="ghost"
+              color="neutral"
+              :ui="{
+                base: 'w-fit text-md',
+                itemLabel: 'text-md',
+              }"
+              @update:model-value="(value: string) => {
+                const model = availableModels.find(m => m.model === value)
+                if (model) setModel(model)
+              }"
+            >
+              <template #leading>
+                <Icon
+                  :name="selectedModel.icon"
+                  class="w-5 h-5"
+                />
+              </template>
+              <template #item-leading="{ item }">
+                <Icon
+                  :name="item.icon"
+                  class="w-5 h-5"
+                />
+              </template>
+            </DdSelect>
+            <span class="text-md text-neutral-500 dark:text-neutral-400">
+              {{ selectedModel.label }}
+            </span>
           </div>
         </template>
       </DdChatPrompt>

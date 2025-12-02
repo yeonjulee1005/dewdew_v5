@@ -10,7 +10,7 @@ const { t } = useI18n()
 
 const accordionItems = [
   {
-    label: t('texts.footer'),
+    label: t('texts.designed'),
   },
 ]
 </script>

@@ -3,7 +3,9 @@ import type {
   ComponentType,
   StreamMetadata,
   StreamTextChunk,
+  ModelConfig,
 } from '~/types/chat'
+import { AVAILABLE_MODELS } from '~/types/chat'
 
 type ComponentData = {
   type: ComponentType
@@ -18,6 +20,10 @@ export const useChat = () => {
     type: ComponentType
     data: Record<string, any>
   } | null>(null)
+
+  // 모델 선택 상태
+  const selectedModel = ref<ModelConfig>(AVAILABLE_MODELS[0]!)
+  const availableModels = AVAILABLE_MODELS
 
   // 초기화 상태
   const isInitialized = ref(false)
@@ -180,6 +186,11 @@ export const useChat = () => {
 
   const isLoading = computed(() => isStreaming.value)
 
+  // 모델 변경
+  const setModel = (model: ModelConfig) => {
+    selectedModel.value = model
+  }
+
   // 메시지 전송
   const sendMessage = async (userMessage: string) => {
     if (!userMessage.trim() || isStreaming.value) return
@@ -212,6 +223,8 @@ export const useChat = () => {
             role: m.role,
             content: m.content,
           })),
+          modelProvider: selectedModel.value.provider,
+          modelName: selectedModel.value.model,
         }),
         signal: abortController.value.signal,
       })
@@ -321,6 +334,9 @@ export const useChat = () => {
     isLoading,
     isInitialized,
     initError,
+    selectedModel,
+    availableModels,
+    setModel,
     sendMessage,
     stop,
     clearMessages,
