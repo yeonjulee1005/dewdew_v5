@@ -61,6 +61,7 @@ export default {
       description: '채팅을 불러오는 중 오류가 발생했습니다.',
       tryAgain: '재시도',
     },
+    placeholder: '저에게 무엇이 궁금하세요?',
   },
   dynamic: {
     greeting: {
@@ -74,7 +75,6 @@ export default {
     },
   },
   texts: {
-    footer: 'Footer',
     version: '버전 {version}',
     dewdewWorld: 'Dewdew World',
     copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',

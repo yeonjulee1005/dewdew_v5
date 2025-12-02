@@ -146,6 +146,51 @@ export interface RAGContext {
   socialLinks?: SocialLink[] | null
   images?: ImageArchive[] | null
   imageYear?: number | null
+  // 외부 프로필 데이터 (GitHub, LinkedIn 등)
+  externalProfiles?: {
+    github?: {
+      profile: {
+        login: string
+        name: string | null
+        bio: string | null
+        company: string | null
+        location: string | null
+        public_repos: number
+        followers: number
+      } | null
+      repos: Array<{
+        name: string
+        description: string | null
+        language: string | null
+        stargazers_count: number
+        topics: string[]
+      }>
+      summary?: string
+    }
+    linkedin?: {
+      available: boolean
+      message: string
+    }
+  } | null
+}
+
+// ============================================
+// AI Model Types (멀티 모델 지원)
+// ============================================
+
+export type ModelProvider = 'openai' | 'anthropic' | 'google'
+
+export type OpenAIModel = 'gpt-4o-mini' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo'
+export type AnthropicModel = 'claude-3-5-sonnet-20241022' | 'claude-3-opus-20240229' | 'claude-3-haiku-20240307'
+export type GoogleModel = 'gemini-1.5-pro' | 'gemini-1.5-flash' | 'gemini-2.0-flash-exp'
+
+export type ModelName = OpenAIModel | AnthropicModel | GoogleModel
+
+export interface ModelConfig {
+  provider: ModelProvider
+  model: ModelName
+  temperature?: number
+  maxTokens?: number
 }
 
 // ============================================
@@ -155,6 +200,8 @@ export interface RAGContext {
 export interface ChatRequest {
   message: string
   history?: ChatMessage[]
+  modelProvider?: ModelProvider
+  modelName?: ModelName
 }
 
 export interface ChatMessage {

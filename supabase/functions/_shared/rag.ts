@@ -1,4 +1,8 @@
 import { getSupabaseClient } from './supabase.ts'
+import {
+  fetchExternalProfiles,
+  summarizeGitHubProfile,
+} from './url-fetcher.ts'
 import type {
   RAGContext,
   AISettingsMap,
@@ -150,8 +154,12 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
     context.hobbies = data
   }
 
-  // 소셜 링크
-  if (matchKeywords(queryLower, ['연락', '깃헙', 'github', '링크드인', 'linkedin', '소셜', '연결', '이메일', 'contact', 'github', 'linkedin', 'social', 'link', 'email'])) {
+  // 소셜 링크 및 외부 프로필
+  const isGitHubQuestion = matchKeywords(queryLower, ['깃헙', 'github', '깃허브', '레포', 'repo', '오픈소스', 'open source', '코드', 'code'])
+  const isLinkedInQuestion = matchKeywords(queryLower, ['링크드인', 'linkedin', '링크인', '이력서', '커리어'])
+  const isSocialQuestion = matchKeywords(queryLower, ['연락', '소셜', '연결', '이메일', 'contact', 'social', 'link', 'email'])
+
+  if (isGitHubQuestion || isLinkedInQuestion || isSocialQuestion) {
     const { data } = await supabase
       .schema('resume')
       .from('social_links')
@@ -159,6 +167,35 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index', { ascending: false })
       .returns<SocialLink[]>()
     context.socialLinks = data
+
+    // GitHub/LinkedIn 상세 질문인 경우 외부 데이터도 가져오기
+    if ((isGitHubQuestion || isLinkedInQuestion) && data && data.length > 0) {
+      try {
+        const externalData = await fetchExternalProfiles(data)
+
+        // GitHub 데이터가 있으면 요약 추가
+        if (externalData.github) {
+          const summary = summarizeGitHubProfile(externalData.github)
+          context.externalProfiles = {
+            github: {
+              profile: externalData.github.profile,
+              repos: externalData.github.repos.slice(0, 5), // 상위 5개만
+              summary,
+            },
+            linkedin: externalData.linkedin,
+          }
+        }
+        else if (externalData.linkedin) {
+          context.externalProfiles = {
+            linkedin: externalData.linkedin,
+          }
+        }
+      }
+      catch (error) {
+        console.error('External profile fetch error:', error)
+        // 에러가 나도 기본 소셜 링크는 제공
+      }
+    }
   }
 
   // 이미지 아카이브
