@@ -61,6 +61,7 @@ export default {
       description: 'An error occurred while loading the chat.',
       tryAgain: 'Try again',
     },
+    placeholder: 'What is your question?',
   },
   dynamic: {
     greeting: {
@@ -74,7 +75,6 @@ export default {
     },
   },
   texts: {
-    footer: 'Footer',
     version: 'Version {version}',
     dewdewWorld: 'Dewdew World',
     copyright: 'Copyright 2024 © Yeonju Lee All Rights Reserved.',

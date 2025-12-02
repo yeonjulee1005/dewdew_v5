@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { defineAsyncComponent } from 'vue'
 import type { ComponentType } from '~/types/chat'
 
 defineProps<{

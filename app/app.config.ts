@@ -28,5 +28,16 @@ export default defineAppConfig({
         },
       },
     },
+    textarea: {
+      compoundVariants: [
+        {
+          trailing: true,
+          size: 'md',
+          class: {
+            base: '!pe-11',
+          },
+        },
+      ],
+    },
   },
 })
