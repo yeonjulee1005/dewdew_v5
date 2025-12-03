@@ -63,5 +63,6 @@ export const useValidation = () => {
     checkHyperLink,
     checkYoutubeLink,
     patterns,
+    emailRegex: EMAIL_REGEX,
   }
 }

@@ -23,6 +23,17 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
 
+// 모델 설정 가져오기 (요청에서 또는 기본값)
+const getModelConfig = (request: ChatRequest): ModelConfig => {
+  if (request.modelProvider && request.modelName) {
+    return {
+      provider: request.modelProvider,
+      model: request.modelName,
+    }
+  }
+  return getDefaultModelConfig()
+}
+
 // 시스템 프롬프트 생성
 const buildSystemPrompt = (
   settings: AISettingsMap,
@@ -55,9 +66,15 @@ ${contextSummary ? `\n${contextSummary}\n` : ''}
 - 3인칭 표현(듀듀님은, 이연주씨는, 듀듀의) 절대 금지.
 
 ═══════════════════════════════════════
-[나의 성격]
+[나의 성격 및 상세 소개]
 ═══════════════════════════════════════
 ${personality}
+
+[상세 자기소개]
+${context.profile?.detailed_bio ?? ''}
+
+[성향 데이터 (참고용)]
+${context.profile?.ai_personality_data ? JSON.stringify(context.profile.ai_personality_data, null, 2) : ''}
 
 ═══════════════════════════════════════
 [말투 스타일]
@@ -77,6 +94,7 @@ ${speakingStyle}
 - 연락처/협업 질문: 편하게 연락 주시라고 안내 (이메일, 링크드인, 깃헙링크 제공)
 - GitHub 질문: externalProfiles.github 데이터가 있으면 실제 레포지토리, 스타 수, 사용 언어 등을 구체적으로 설명
 - LinkedIn 질문: LinkedIn은 직접 방문을 안내하되, 프로필 URL을 제공
+- 개발 철학/가치관 질문: [상세 자기소개]에 있는 개발 철학 내용을 인용하여 답변
 - 모르는 질문: 솔직하게 답변드리기 어렵다고 하고, 다른 주제 제안하거나, 직접연락을 유도! (더 궁금한 점이 있으면 이야기해주세요!)
 
 ═══════════════════════════════════════
@@ -142,17 +160,6 @@ A: "네! 제 LinkedIn 프로필에서 더 자세한 경력과 이력을 확인�
 현재 선택된 컴포넌트: ${componentType}
 허용된 컴포넌트 목록: ${ALLOWED_COMPONENTS.join(', ')}
 ${dataContext}`
-}
-
-// 모델 설정 가져오기 (요청에서 또는 기본값)
-const getModelConfig = (request: ChatRequest): ModelConfig => {
-  if (request.modelProvider && request.modelName) {
-    return {
-      provider: request.modelProvider,
-      model: request.modelName,
-    }
-  }
-  return getDefaultModelConfig()
 }
 
 // SSE 스트림 생성 (멀티 프로바이더 지원)
@@ -332,7 +339,14 @@ serve(async (req: Request): Promise<Response> => {
     const context = await fetchRelevantData(message)
 
     // 4. 컴포넌트 타입 결정
-    const componentType = determineComponentType(message, context)
+    let componentType = determineComponentType(message, context)
+
+    // greeting 응답인 경우 항상 'greeting-card' 보장
+    const isGreetingMessage = ['안녕', '하이', 'hi', 'hello', '반가워', '처음', '인사', '인사말', 'greeting', 'greetings']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isGreetingMessage && componentType === 'chat-response') {
+      componentType = 'greeting-card'
+    }
 
     // 5. 시스템 프롬프트 구성
     const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary)
