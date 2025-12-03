@@ -313,13 +313,6 @@ onUnmounted(() => {
           <div class="flex flex-col gap-2 w-full">
             <!-- 동적 컴포넌트 -->
             {{ (message as ExtendedUIMessage).componentType }}
-            <ChatDynamicComponent
-              v-if="(message as ExtendedUIMessage).componentType"
-              :component-type="(message as ExtendedUIMessage).componentType"
-              :component-data="(message as ExtendedUIMessage).componentData"
-              class="w-full"
-            />
-
             <!-- 마크다운 메시지 (스트리밍 중에도 MDC 사용) -->
             <div class="break-keep prose prose-sm dark:prose-invert max-w-none *:first:mt-0 *:last:mb-0 [&_img]:max-h-[200px] [&_img]:cursor-pointer [&_img]:object-contain [&_img]:w-auto [&_img]:h-auto">
               <MDC
@@ -334,6 +327,12 @@ onUnmounted(() => {
                 class="inline-block w-4 h-4 text-primary-500 animate-pulse ml-0.5 align-middle"
               />
             </div>
+            <ChatDynamicComponent
+              v-if="(message as ExtendedUIMessage).componentType && message.id !== 'streaming'"
+              :component-type="(message as ExtendedUIMessage).componentType"
+              :component-data="(message as ExtendedUIMessage).componentData"
+              class="w-full"
+            />
           </div>
         </template>
       </DdChatMessages>
