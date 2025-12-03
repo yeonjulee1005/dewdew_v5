@@ -90,7 +90,17 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   }
 
   // 프로필
-  if (matchKeywords(queryLower, ['자기소개', '누구', '프로필', '소개', '이름', '너는', 'introduce', 'name', 'who', 'profile', 'introduction'])) {
+  if (matchKeywords(queryLower, ['자기소개', '누구', '프로필', '소개', '이름', '너는', 'introduce', 'name', 'who', 'profile', 'introduction', '철학', '가치관', '성격', '장점', '강점', 'philosophy', 'value', 'personality', 'strength'])) {
+    const { data } = await supabase
+      .schema('resume')
+      .from('profile')
+      .select('*')
+      .single<Profile>()
+    context.profile = data
+  }
+
+  // 단점/부족한 점
+  if (matchKeywords(queryLower, ['단점', '부족', '아쉬운', '개선', '약점', '한계', '어려움', 'weakness', 'weaknesses', 'improvement', 'limitation', 'challenge', 'difficulty', '부족한 점', '아쉬운 점', '개선점', '개선할 점'])) {
     const { data } = await supabase
       .schema('resume')
       .from('profile')
@@ -111,7 +121,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   }
 
   // 스킬
-  if (matchKeywords(queryLower, ['스킬', '기여', '기술', '스택', '언어', '프레임워크', '뭘 잘', '역량', '능력', 'skill', 'contribution', 'stack', 'language', 'framework', 'ability', 'skillset'])) {
+  if (matchKeywords(queryLower, ['스킬', '기여', '기술', '스택', '언어', '프레임워크', '뭘 잘', '역량', '능력', 'skill', 'contribution', 'stack', 'language', 'framework', 'ability', 'skillset', '기술적', '기술적인', '어떤 기술', '기술 고민', '기술 관심', '기술 역량', '기술 능력', '기술 스택', '사용 기술', '사용하는 기술', '어떤 스택', '어떤 도구', '어떤 프레임워크', '고민', '관심'])) {
     const { data } = await supabase
       .schema('resume')
       .from('skills')
@@ -122,11 +132,12 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   }
 
   // 프로젝트
-  if (matchKeywords(queryLower, ['프로젝트', '만든', '개발', '포트폴리오', '작업', '작품', 'project', 'made', 'development', 'portfolio', 'work', 'work', 'product'])) {
+  if (matchKeywords(queryLower, ['프로젝트', '만든', '개발', '포트폴리오', '작업', '작품', '진행', '했던', '최근', 'project', 'made', 'development', 'portfolio', 'work', 'product', 'recent', 'tell'])) {
     const { data } = await supabase
       .schema('resume')
       .from('projects')
       .select('*')
+      .eq('deleted', false)
       .order('order_index', { ascending: false })
       .returns<Project[]>()
     context.projects = data
@@ -157,9 +168,10 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   // 소셜 링크 및 외부 프로필
   const isGitHubQuestion = matchKeywords(queryLower, ['깃헙', 'github', '깃허브', '레포', 'repo', '오픈소스', 'open source', '코드', 'code'])
   const isLinkedInQuestion = matchKeywords(queryLower, ['링크드인', 'linkedin', '링크인', '이력서', '커리어'])
-  const isSocialQuestion = matchKeywords(queryLower, ['연락', '소셜', '연결', '이메일', 'contact', 'social', 'link', 'email'])
+  const isSocialQuestion = matchKeywords(queryLower, ['소셜', '연결', 'social', 'link', 'sns'])
+  const isContactQuestion = matchKeywords(queryLower, ['연락', '컨택', '문의', '이메일', 'contact', 'inquiry', 'email', '메일'])
 
-  if (isGitHubQuestion || isLinkedInQuestion || isSocialQuestion) {
+  if (isGitHubQuestion || isLinkedInQuestion || isSocialQuestion || isContactQuestion) {
     const { data } = await supabase
       .schema('resume')
       .from('social_links')

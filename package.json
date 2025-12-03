@@ -5,7 +5,7 @@
     "email": "yeonju.lee1005@gmail.com"
   },
   "private": true,
-  "version": "1.2511.5",
+  "version": "1.2512.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
@@ -46,7 +46,8 @@
     "nuxt": "^4.2.1",
     "typescript": "^5.6.3",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@egjs/flicking-plugins": "^4.7.1",

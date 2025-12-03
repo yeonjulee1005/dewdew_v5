@@ -73,6 +73,39 @@ export default {
       present: '현재',
       empty: '경력 정보가 없습니다.',
     },
+    skill: {
+      title: '기술 스택',
+      core: '핵심 역량',
+      empty: '스킬 정보가 없습니다.',
+    },
+    project: {
+      title: '프로젝트',
+      present: '진행중',
+      empty: '프로젝트 정보가 없습니다.',
+      highlights: '주요 특징',
+      viewProject: '프로젝트 보기',
+      viewGithub: 'GitHub 보기',
+    },
+    education: {
+      title: '학력',
+      present: '재학중',
+      empty: '학력 정보가 없습니다.',
+    },
+    weaknesses: {
+      title: '단점 및 개선 영역',
+      empty: '단점 정보가 없습니다.',
+    },
+    hobby: {
+      title: '취미 및 관심사',
+      empty: '취미 정보가 없습니다.',
+    },
+    social: {
+      title: '소셜 링크',
+      empty: '소셜 링크 정보가 없습니다.',
+    },
+    contact: {
+      description: '이메일을 통해 연락해주세요!',
+    },
   },
   texts: {
     version: '버전 {version}',

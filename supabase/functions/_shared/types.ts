@@ -13,6 +13,9 @@ export interface Profile {
   phone: string | null
   created_at: string
   updated_at: string
+  detailed_bio?: string | null
+  ai_personality_data?: Record<string, any> | null
+  weaknesses?: string[] | null
 }
 
 export interface Experience {
@@ -113,15 +116,18 @@ export interface AISetting {
 // ============================================
 
 export const ALLOWED_COMPONENTS = [
+  'greeting-card',
   'profile-card',
   'experience-list',
   'experience-timeline',
   'skill-card',
   'skill-radar',
+  'project-list',
   'project-carousel',
   'project-card',
   'education-card',
-  'hobby-list',
+  'weaknesses-card',
+  'hobby-carousel',
   'social-links',
   'image-carousel',
   'image-grid',
@@ -180,9 +186,9 @@ export interface RAGContext {
 
 export type ModelProvider = 'openai' | 'anthropic' | 'google'
 
-export type OpenAIModel = 'gpt-4o-mini' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo'
-export type AnthropicModel = 'claude-3-5-sonnet-20241022' | 'claude-3-opus-20240229' | 'claude-3-haiku-20240307'
-export type GoogleModel = 'gemini-1.5-pro' | 'gemini-1.5-flash' | 'gemini-2.0-flash-exp'
+export type OpenAIModel = 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-4.1-nano' | 'o4-mini'
+export type AnthropicModel = 'claude-sonnet-4-5-20250929' | 'claude-haiku-4-5-20251001'
+export type GoogleModel = 'gemini-3-pro-preview' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite'
 
 export type ModelName = OpenAIModel | AnthropicModel | GoogleModel
 

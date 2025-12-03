@@ -4,10 +4,7 @@ const { url } = useImageStorage()
 </script>
 
 <template>
-  <DdCard
-    variant="subtle"
-    :ui="{ body: 'p-2 sm:p-4' }"
-  >
+  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
     <div class="relative w-full flex flex-col gap-y-2">
       <NuxtImg
         :src="url(true, '/assets/banner/main_banner_v5.webp')"
