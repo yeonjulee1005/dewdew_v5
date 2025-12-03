@@ -307,10 +307,12 @@ export type ResumeDatabase = {
       }
       profile: {
         Row: {
+          ai_personality_data: Json | null
           avatar_url: string | null
           bio: string | null
           created_at: string | null
           deleted: boolean | null
+          detailed_bio: string | null
           email: string | null
           full_name: string
           id: string
@@ -318,12 +320,15 @@ export type ResumeDatabase = {
           phone: string | null
           title: string | null
           updated_at: string | null
+          weaknesses: string[] | null
         }
         Insert: {
+          ai_personality_data?: Json | null
           avatar_url?: string | null
           bio?: string | null
           created_at?: string | null
           deleted?: boolean | null
+          detailed_bio?: string | null
           email?: string | null
           full_name: string
           id?: string
@@ -331,12 +336,15 @@ export type ResumeDatabase = {
           phone?: string | null
           title?: string | null
           updated_at?: string | null
+          weaknesses?: string[] | null
         }
         Update: {
+          ai_personality_data?: Json | null
           avatar_url?: string | null
           bio?: string | null
           created_at?: string | null
           deleted?: boolean | null
+          detailed_bio?: string | null
           email?: string | null
           full_name?: string
           id?: string
@@ -344,6 +352,7 @@ export type ResumeDatabase = {
           phone?: string | null
           title?: string | null
           updated_at?: string | null
+          weaknesses?: string[] | null
         }
         Relationships: []
       }

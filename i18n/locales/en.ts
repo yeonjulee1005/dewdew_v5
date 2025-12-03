@@ -73,6 +73,39 @@ export default {
       present: 'Present',
       empty: 'No experience information available.',
     },
+    skill: {
+      title: 'Tech Stack',
+      core: 'Core Competencies',
+      empty: 'No skill information available.',
+    },
+    project: {
+      title: 'Projects',
+      present: 'In Progress',
+      empty: 'No project information available.',
+      highlights: 'Highlights',
+      viewProject: 'View Project',
+      viewGithub: 'View GitHub',
+    },
+    education: {
+      title: 'Education',
+      present: 'Currently Enrolled',
+      empty: 'No education information available.',
+    },
+    weaknesses: {
+      title: 'Weaknesses & Areas for Improvement',
+      empty: 'No weakness information available.',
+    },
+    hobby: {
+      title: 'Hobbies & Interests',
+      empty: 'No hobby information available.',
+    },
+    social: {
+      title: 'Social Links',
+      empty: 'No social links available.',
+    },
+    contact: {
+      description: 'Please contact me via email!',
+    },
   },
   texts: {
     version: 'Version {version}',

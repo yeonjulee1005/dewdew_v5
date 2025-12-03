@@ -113,7 +113,7 @@ watch(() => coords.value, () => {
     <!-- <VitePwaManifest /> -->
     <NuxtLayout>
       <NuxtLoadingIndicator
-        color="repeating-linear-gradient(to right,#f1f4fc 0%,#6a64c7 100%)"
+        color="repeating-linear-gradient(to right,#f59e42 0%,#fbbf24 100%)"
         :height="5"
       />
       <NuxtPage />
