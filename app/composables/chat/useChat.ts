@@ -121,14 +121,23 @@ export const useChat = () => {
       )
 
       // 인사 메시지 저장
+      // greeting 응답인 경우 componentType이 없으면 기본값으로 'greeting-card' 설정
+      const finalComponentType = (componentType ?? 'greeting-card') as ComponentType
+      const finalComponentData = componentData || {}
+
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
         content: streamingText.value || '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
-        componentType,
-        componentData,
+        componentType: finalComponentType,
+        componentData: finalComponentData,
         timestamp: new Date(),
       })
+
+      // currentComponent도 업데이트 (컴포넌트가 표시되도록)
+      if (finalComponentType !== 'chat-response') {
+        currentComponent.value = { type: finalComponentType, data: finalComponentData }
+      }
 
       isInitialized.value = true
     }

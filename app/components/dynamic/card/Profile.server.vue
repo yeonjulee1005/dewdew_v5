@@ -10,10 +10,7 @@ const { data: profilesData } = await useFetch('/api/resume/profile', {
 </script>
 
 <template>
-  <DdCard
-    variant="subtle"
-    :ui="{ body: 'p-2 sm:p-4' }"
-  >
+  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
     <div class="flex flex-col items-start gap-y-4">
       <NuxtImg
         :src="url(true, profilesData?.profile?.avatar_url?.split('/public')[1] ?? '')"
