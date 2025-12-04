@@ -34,6 +34,13 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    if (!response.body) {
+      throw createError({
+        statusCode: 500,
+        message: 'No response body from Supabase',
+      })
+    }
+
     // 스트리밍 응답 헤더 설정
     setResponseHeader(event, 'Content-Type', 'text/event-stream')
     setResponseHeader(event, 'Cache-Control', 'no-cache')

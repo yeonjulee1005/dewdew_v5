@@ -3,6 +3,7 @@ export default {
     yeonju: 'Developer Yeonju Lee',
     dewdew: 'Dewdew',
     ai: 'Dewdew, Ask Dewdew AI',
+    aiComponents: 'Dewdew, AI Components',
     // main: 'Main',
     // portfolio: 'Portfolio',
     // project: 'Project',
@@ -13,10 +14,12 @@ export default {
   seoTitle: {
     intro: 'Dewdew | Software Engineer Yeonju Lee',
     ai: 'Dewdew, Ask Dewdew AI',
+    aiComponents: 'Dewdew AI Components',
   },
   seoDescription: {
     intro: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
     ai: 'Ask me about me based on LLM+RAG+AGENT.',
+    aiComponents: 'The list of server components displayed when answering Dewdew AI.',
   },
   externalMenu: {
     SMC001: 'Dewdew World',

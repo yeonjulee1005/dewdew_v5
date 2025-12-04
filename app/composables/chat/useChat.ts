@@ -47,36 +47,61 @@ export const useChat = () => {
     // reader 추적
     currentReader.value = reader
 
+    let buffer = ''
+    let isFirstChunk = true
+
     try {
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
 
         const chunk = decoder.decode(value, { stream: true })
-        const lines = chunk.split('\n').filter(line => line.startsWith('data: '))
+
+        // 첫 번째 청크 로그
+        if (isFirstChunk) {
+          isFirstChunk = false
+        }
+
+        buffer += chunk
+
+        // 완전한 라인만 처리 (개행 문자로 분리)
+        const lines = buffer.split('\n')
+        // 마지막 불완전한 라인은 버퍼에 유지
+        buffer = lines.pop() || ''
 
         for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+
           const jsonStr = line.slice(6).trim()
-          if (jsonStr === '[DONE]') continue
+          if (jsonStr === '' || jsonStr === '[DONE]') continue
 
           try {
             const parsed = JSON.parse(jsonStr) as StreamMetadata | StreamTextChunk
 
             if (parsed.type === 'metadata' && onMetadata) {
               const metadata = parsed as StreamMetadata
-              if (metadata.componentType !== 'chat-response') {
-                onMetadata(metadata.componentType, metadata.data)
-              }
+              // 모든 메타데이터에 대해 onMetadata 호출 (chat-response 포함)
+              onMetadata(metadata.componentType, metadata.data)
             }
 
             if (parsed.type === 'text') {
               onText((parsed as StreamTextChunk).content)
             }
           }
-          catch {
-            // JSON 파싱 실패 무시
+          catch (error) {
+            // JSON 파싱 실패 시 로그 출력
+            console.warn('[useChat] ⚠️ JSON parse error:', {
+              error: error instanceof Error ? error.message : String(error),
+              jsonStr: jsonStr.substring(0, 200), // 처음 200자만 로그
+              lineLength: jsonStr.length,
+            })
           }
         }
+      }
+
+      // 버퍼에 남은 데이터 처리
+      if (buffer.trim()) {
+        console.warn('[useChat] ⚠️ Remaining buffer after stream end:', buffer.substring(0, 200))
       }
     }
     finally {
@@ -242,6 +267,10 @@ export const useChat = () => {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
+      if (!response.body) {
+        throw new Error('No response body')
+      }
+
       let componentType: ComponentType | null = null
       let componentData: Record<string, any> | null = null
 
@@ -253,17 +282,35 @@ export const useChat = () => {
         (type, data) => {
           componentType = type
           componentData = data
-          currentComponent.value = { type, data }
+          // chat-response가 아닌 경우에만 currentComponent 설정
+          if (type !== 'chat-response') {
+            currentComponent.value = { type, data }
+          }
+          else {
+            currentComponent.value = null
+          }
         },
       )
 
-      // 어시스턴트 메시지 저장
+      // 스트리밍 완료 후 currentComponent에서 최종 값 확인 (메타데이터가 없을 경우 대비)
+      if (!componentType && currentComponent.value) {
+        const comp = currentComponent.value as ComponentData
+        if (comp.type !== 'chat-response') {
+          componentType = comp.type
+          componentData = comp.data
+        }
+      }
+
+      // chat-response는 저장하지 않음 (null로 저장)
+      const finalComponentType: ComponentType | null = componentType && (componentType as ComponentType) !== 'chat-response' ? componentType : null
+      const finalComponentData = finalComponentType ? componentData : null
+
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
         content: streamingText.value,
-        componentType,
-        componentData,
+        componentType: finalComponentType,
+        componentData: finalComponentData,
         timestamp: new Date(),
       })
     }
