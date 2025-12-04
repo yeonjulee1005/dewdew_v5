@@ -3,6 +3,7 @@ export default {
     yeonju: '개발자 이연주',
     dewdew: 'Dewdew',
     ai: 'Dewdew, AI에게 묻다',
+    aiComponents: 'Dewdew, AI 컴포넌트',
     // main: 'Main',
     // portfolio: 'Portfolio',
     // project: 'Project',
@@ -13,10 +14,12 @@ export default {
   seoTitle: {
     intro: 'Dewdew | Software Engineer 이연주',
     ai: 'Dewdew, AI에게 묻다',
+    aiComponents: 'Dewdew AI에서 사용한 컴포넌트 목록입니다',
   },
   seoDescription: {
     intro: 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 제품에 대한 많은 고민과 주도적인 개발을 지향하고 있습니다. Nuxt4 프레임워크 생태계에 기여하고 있습니다.',
     ai: 'LLM+RAG+AGENT 기반의 AI에게 저에 대해서 물어보세요.',
+    aiComponents: 'Dewdew AI 답변시 표시되는 서버컴포넌트 리스트입니다.',
   },
   externalMenu: {
     SMC001: '듀듀월드',

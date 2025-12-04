@@ -14,8 +14,6 @@ export const ALLOWED_COMPONENTS = [
   'hobby-carousel',
   'social-links',
   'image-carousel',
-  'image-grid',
-  'image-timeline',
   'contact-form',
   'chat-response',
 ] as const

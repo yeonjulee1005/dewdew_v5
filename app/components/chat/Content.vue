@@ -43,6 +43,12 @@ const suggestions = [
   '앞으로의 커리어 패스를 어떻게 가져가고 싶어요?',
   '최근 진행했던 프로젝트를 알려주세요!',
   'Github에서 어떤 오픈소스에 기여했었는지 살펴봐줘!',
+  '취미가 뭐에요? 평소에 어떤것을 하면서 리프레쉬 하고 있어요?',
+  '학력이 어떻게 되요?',
+  '커피챗 하고싶어요!',
+  '소셜 링크들을 알려주세요!',
+  '이 웹사이트는 어떻게 만들었어요?',
+  '부족한 점이나 단점이 있다면 알려줄 수 있어요?',
   '종합적으로 생각했을때, 듀듀는 어떤 개발자 인가요?',
 ]
 
@@ -56,23 +62,28 @@ const suggestionItems = computed(() => {
 const selectedSuggestion = ref<string>()
 
 const messagesContainer = ref<HTMLElement>()
+const suggestionsContainer = ref<HTMLElement>()
 let mutationObserver: MutationObserver | null = null
 let enhanceTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Nuxt UI ChatMessages 형식으로 메시지 변환
 const uiMessages = computed(() => {
-  return messages.value.map((msg: ChatMessage) => ({
-    id: msg.id,
-    role: msg.role,
-    parts: [
-      {
-        type: 'text' as const,
-        text: msg.content,
-      },
-    ],
-    componentType: msg.componentType,
-    componentData: msg.componentData,
-  }))
+  const converted = messages.value.map((msg: ChatMessage) => {
+    const result = {
+      id: msg.id,
+      role: msg.role,
+      parts: [
+        {
+          type: 'text' as const,
+          text: msg.content,
+        },
+      ],
+      componentType: msg.componentType,
+      componentData: msg.componentData,
+    }
+    return result
+  })
+  return converted
 })
 
 // 스트리밍 중일 때 임시 메시지 추가
@@ -81,20 +92,22 @@ const displayMessages = computed(() => {
     return uiMessages.value
   }
 
+  const streamingMessage = {
+    id: 'streaming',
+    role: 'assistant' as const,
+    parts: [
+      {
+        type: 'text' as const,
+        text: streamingText.value,
+      },
+    ],
+    componentType: currentComponent.value?.type,
+    componentData: currentComponent.value?.data,
+  }
+
   return [
     ...uiMessages.value,
-    {
-      id: 'streaming',
-      role: 'assistant' as const,
-      parts: [
-        {
-          type: 'text' as const,
-          text: streamingText.value,
-        },
-      ],
-      componentType: currentComponent.value?.type,
-      componentData: currentComponent.value?.data,
-    },
+    streamingMessage,
   ]
 })
 
@@ -178,6 +191,44 @@ const handleSubmit = async () => {
 const handleSuggestion = (suggestion: string) => {
   inputMessage.value = suggestion
   handleSubmit()
+}
+
+// 좌우 스크롤 함수
+const scrollSuggestions = (direction: 'left' | 'right') => {
+  if (!suggestionsContainer.value) return
+  const scrollAmount = 300 // 스크롤 거리
+  const currentScroll = suggestionsContainer.value.scrollLeft
+  const targetScroll = direction === 'left'
+    ? currentScroll - scrollAmount
+    : currentScroll + scrollAmount
+
+  suggestionsContainer.value.scrollTo({
+    left: targetScroll,
+    behavior: 'smooth',
+  })
+}
+
+// 스크롤 가능 여부 확인 (반응형 업데이트를 위한 force update)
+const scrollUpdateTrigger = ref(0)
+
+const canScrollLeft = computed(() => {
+  // 의존성 추가를 위한 참조
+  void scrollUpdateTrigger.value
+  if (!suggestionsContainer.value) return false
+  return suggestionsContainer.value.scrollLeft > 0
+})
+
+const canScrollRight = computed(() => {
+  // 의존성 추가를 위한 참조
+  void scrollUpdateTrigger.value
+  if (!suggestionsContainer.value) return false
+  const { scrollLeft, scrollWidth, clientWidth } = suggestionsContainer.value
+  return scrollLeft < scrollWidth - clientWidth - 1
+})
+
+// 스크롤 이벤트 핸들러
+const handleSuggestionsScroll = () => {
+  scrollUpdateTrigger.value++
 }
 
 // Select 변경 핸들러
@@ -283,6 +334,7 @@ onUnmounted(() => {
           side: 'left',
           avatar: {
             src: url(true, '/assets/logo/dewdew_v4_logo.webp'),
+            size: 'xl',
           },
           ui: {
             root: isMobile ? 'max-w-full ' : 'max-w-[80%]',
@@ -311,8 +363,6 @@ onUnmounted(() => {
         </template>
         <template #content="{ message }">
           <div class="flex flex-col gap-2 w-full">
-            <!-- 동적 컴포넌트 -->
-            {{ (message as ExtendedUIMessage).componentType }}
             <!-- 마크다운 메시지 (스트리밍 중에도 MDC 사용) -->
             <div class="break-keep prose prose-sm dark:prose-invert max-w-none *:first:mt-0 *:last:mb-0 [&_img]:max-h-[200px] [&_img]:cursor-pointer [&_img]:object-contain [&_img]:w-auto [&_img]:h-auto">
               <MDC
@@ -328,7 +378,7 @@ onUnmounted(() => {
               />
             </div>
             <ChatDynamicComponent
-              v-if="(message as ExtendedUIMessage).componentType && message.id !== 'streaming'"
+              v-if="(message as ExtendedUIMessage).componentType"
               :component-type="(message as ExtendedUIMessage).componentType"
               :component-data="(message as ExtendedUIMessage).componentData"
               class="w-full"
@@ -343,19 +393,50 @@ onUnmounted(() => {
       <!-- 추천 질문 -->
       <div
         v-if="!isMobile"
-        class="flex flex-wrap gap-2"
+        class="relative -mx-4 px-4"
       >
+        <!-- 왼쪽 스크롤 버튼 -->
         <DdButton
-          v-for="suggestion in suggestions"
-          :key="suggestion"
-          variant="soft"
+          v-if="canScrollLeft"
+          icon="i-lucide-chevron-left"
+          variant="ghost"
           color="neutral"
-          size="xl"
-          class="bg-neutral-200/50 dark:bg-neutral-800/50"
-          @click="handleSuggestion(suggestion)"
+          size="lg"
+          class="absolute left-4 top-1/2 -translate-y-1/2 z-10 opacity-90 dark:bg-neutral-900/80 backdrop-blur-sm cursor-pointer"
+          @click="scrollSuggestions('left')"
+        />
+        <!-- 오른쪽 스크롤 버튼 -->
+        <DdButton
+          v-if="canScrollRight"
+          icon="i-lucide-chevron-right"
+          variant="ghost"
+          color="neutral"
+          size="lg"
+          class="absolute right-4 top-1/2 -translate-y-1/2 z-10 opacity-90 dark:bg-neutral-900/80 backdrop-blur-sm cursor-pointer"
+          @click="scrollSuggestions('right')"
+        />
+        <!-- 추천 질문 컨테이너 -->
+        <div
+          ref="suggestionsContainer"
+          :class="[
+            'flex gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
+            canScrollLeft ? 'ml-10' : 'ml-0',
+            canScrollRight ? 'mr-10' : 'mr-0',
+          ]"
+          @scroll="handleSuggestionsScroll"
         >
-          {{ suggestion }}
-        </DdButton>
+          <DdButton
+            v-for="suggestion in suggestions"
+            :key="suggestion"
+            variant="soft"
+            color="neutral"
+            size="xl"
+            class="bg-neutral-200/50 dark:bg-neutral-800/50 shrink-0 whitespace-nowrap"
+            @click="handleSuggestion(suggestion)"
+          >
+            {{ suggestion }}
+          </DdButton>
+        </div>
       </div>
 
       <!-- 입력창 -->

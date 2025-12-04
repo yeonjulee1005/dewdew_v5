@@ -110,7 +110,6 @@ export const fetchGitHubPinnedRepos = async (username: string): Promise<GitHubRe
 
   // 토큰이 없으면 일반 레포 목록 반환
   if (!token) {
-    console.log('No GITHUB_TOKEN, skipping pinned repos')
     return []
   }
 

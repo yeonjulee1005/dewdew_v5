@@ -32,6 +32,8 @@ const categoryColor = (category: string) => {
       return 'secondary'
     case 'Tools/Workspace/Analytics':
       return 'warning'
+    default:
+      return 'neutral'
   }
 }
 </script>
