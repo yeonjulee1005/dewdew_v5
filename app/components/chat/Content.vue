@@ -61,18 +61,22 @@ let enhanceTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Nuxt UI ChatMessages 형식으로 메시지 변환
 const uiMessages = computed(() => {
-  return messages.value.map((msg: ChatMessage) => ({
-    id: msg.id,
-    role: msg.role,
-    parts: [
-      {
-        type: 'text' as const,
-        text: msg.content,
-      },
-    ],
-    componentType: msg.componentType,
-    componentData: msg.componentData,
-  }))
+  const converted = messages.value.map((msg: ChatMessage) => {
+    const result = {
+      id: msg.id,
+      role: msg.role,
+      parts: [
+        {
+          type: 'text' as const,
+          text: msg.content,
+        },
+      ],
+      componentType: msg.componentType,
+      componentData: msg.componentData,
+    }
+    return result
+  })
+  return converted
 })
 
 // 스트리밍 중일 때 임시 메시지 추가
@@ -81,20 +85,22 @@ const displayMessages = computed(() => {
     return uiMessages.value
   }
 
+  const streamingMessage = {
+    id: 'streaming',
+    role: 'assistant' as const,
+    parts: [
+      {
+        type: 'text' as const,
+        text: streamingText.value,
+      },
+    ],
+    componentType: currentComponent.value?.type,
+    componentData: currentComponent.value?.data,
+  }
+
   return [
     ...uiMessages.value,
-    {
-      id: 'streaming',
-      role: 'assistant' as const,
-      parts: [
-        {
-          type: 'text' as const,
-          text: streamingText.value,
-        },
-      ],
-      componentType: currentComponent.value?.type,
-      componentData: currentComponent.value?.data,
-    },
+    streamingMessage,
   ]
 })
 
@@ -311,8 +317,6 @@ onUnmounted(() => {
         </template>
         <template #content="{ message }">
           <div class="flex flex-col gap-2 w-full">
-            <!-- 동적 컴포넌트 -->
-            {{ (message as ExtendedUIMessage).componentType }}
             <!-- 마크다운 메시지 (스트리밍 중에도 MDC 사용) -->
             <div class="break-keep prose prose-sm dark:prose-invert max-w-none *:first:mt-0 *:last:mb-0 [&_img]:max-h-[200px] [&_img]:cursor-pointer [&_img]:object-contain [&_img]:w-auto [&_img]:h-auto">
               <MDC
@@ -328,7 +332,7 @@ onUnmounted(() => {
               />
             </div>
             <ChatDynamicComponent
-              v-if="(message as ExtendedUIMessage).componentType && message.id !== 'streaming'"
+              v-if="(message as ExtendedUIMessage).componentType"
               :component-type="(message as ExtendedUIMessage).componentType"
               :component-data="(message as ExtendedUIMessage).componentData"
               class="w-full"

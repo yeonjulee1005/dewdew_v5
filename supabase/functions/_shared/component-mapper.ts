@@ -7,109 +7,190 @@ const matchKeywords = (text: string, keywords: string[]): boolean => {
   return keywords.some(keyword => lowerText.includes(keyword))
 }
 
+// 카테고리 타입 정의
+type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'weakness' | 'profile' | 'experience' | 'education' | 'hobby' | 'social' | 'fallback' | 'none'
+
+// Fallback 컨텍스트 데이터 타입 정의
+type FallbackContextType = 'skills' | 'projects' | 'experience' | 'profile' | 'education' | 'hobbies' | 'socialLinks' | 'images' | 'none'
+
+// 카테고리 감지 (우선순위 순서대로 체크)
+const detectCategory = (query: string, context: RAGContext): CategoryType => {
+  // 1. 인사 (최우선)
+  if (matchKeywords(query, ['안녕', '하이', 'hi', 'hello', '반가워', '처음', '인사', '인사말', 'greeting', 'greetings'])) {
+    return 'greeting'
+  }
+
+  // 2. 연락처
+  if (matchKeywords(query, ['연락', '커피쳇', '커피챗', '면접제안', '컨택', '문의', '이메일', 'contact', 'inquiry', 'email', '메일'])) {
+    return 'contact'
+  }
+
+  // 3. 종합적인 질문
+  if (matchKeywords(query, ['어떤 개발자', '어떤 사람', '종합적', '전체적', '특징', '한마디로', '요약', '정리'])) {
+    return 'comprehensive'
+  }
+
+  // 4. 이미지 (프로젝트보다 먼저 체크 - "보여줘" 같은 일반 동사와 충돌 방지)
+  if (matchKeywords(query, ['사진', '이미지', '갤러리', '아카이브', '앨범', 'image', 'gallery', 'archive', 'album'])) {
+    return 'image'
+  }
+
+  // 5. 스킬
+  if (matchKeywords(query, ['기술', '스택', 'skill', 'stack', '프레임워크', '도구', 'framework', 'tool', '라이브러리', 'library', '기술적', '기술적인', '어떤 기술', '기술 고민', '기술 관심', '기술 역량', '기술 능력', '기술 스택', '사용 기술', '사용하는 기술', '어떤 스택', '어떤 도구', '어떤 프레임워크', '스킬', '기여', '언어', '역량', '능력', 'skillset', '고민', '관심'])) {
+    return 'skill'
+  }
+
+  // 6. 경력 (프로젝트보다 먼저 체크 - "최근 경력" 같은 경우 충돌 방지)
+  // "최근 경력", "경력이", "경력은" 같은 패턴도 명시적으로 체크
+  if (matchKeywords(query, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은', '어떻게 되', '어떻게 되요', '어떻게 되나'])) {
+    return 'experience'
+  }
+
+  // 7. 프로젝트
+  // 주의: "최근", "work" 같은 키워드는 경력 체크 후에만 매칭됨
+  // "최근 경력" 같은 경우를 제외하기 위해 "최근" 단독 키워드는 제거하고 "최근 프로젝트" 같은 패턴만 체크
+  if (matchKeywords(query, ['프로젝트', '토이프로젝트', '작업', '작품', '보여줘', '보여', '보기', '알려줘', '알려', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'show', 'display', 'view', 'recent project', 'tell'])) {
+    return 'project'
+  }
+
+  // 8. 단점/부족한 점
+  if (matchKeywords(query, ['단점', '부족', '아쉬운', '개선', '약점', '한계', '어려움', 'weakness', 'weaknesses', 'improvement', 'limitation', 'challenge', 'difficulty', '부족한 점', '아쉬운 점', '개선점', '개선할 점'])) {
+    return 'weakness'
+  }
+
+  // 9. 프로필
+  if (matchKeywords(query, ['자기소개', '누구', '프로필', '소개', 'introduce', 'name', 'who', 'profile', 'introduction', '철학', '가치관', '성격', '장점', '강점', 'philosophy', 'value', 'personality', 'strength'])) {
+    return 'profile'
+  }
+
+  // 10. 학력
+  if (matchKeywords(query, ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university'])) {
+    return 'education'
+  }
+
+  // 11. 취미
+  if (matchKeywords(query, ['취미', '관심사', '좋아하', '여가', '취향', 'hobby', 'interest', 'like', 'leisure'])) {
+    return 'hobby'
+  }
+
+  // 12. 소셜 링크
+  if (matchKeywords(query, ['소셜', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns', '레포', 'repo', '오픈소스', 'open source', '코드', 'code', '링크인', '이력서', '커리어'])) {
+    return 'social'
+  }
+
+  // 13. Fallback: 컨텍스트 데이터 기반
+  if (context.skills?.length || context.projects?.length || context.experience?.length || context.profile || context.education?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
+    return 'fallback'
+  }
+
+  return 'none'
+}
+
+// Fallback 컨텍스트 데이터 감지 (우선순위 순서대로 체크)
+const detectFallbackContext = (context: RAGContext): FallbackContextType => {
+  if (context.skills && context.skills.length > 0) {
+    return 'skills'
+  }
+  if (context.projects && context.projects.length > 0) {
+    return 'projects'
+  }
+  if (context.experience && context.experience.length > 0) {
+    return 'experience'
+  }
+  if (context.profile) {
+    return 'profile'
+  }
+  if (context.education && context.education.length > 0) {
+    return 'education'
+  }
+  if (context.hobbies && context.hobbies.length > 0) {
+    return 'hobbies'
+  }
+  if (context.socialLinks && context.socialLinks.length > 0) {
+    return 'socialLinks'
+  }
+  if (context.images && context.images.length > 0) {
+    return 'images'
+  }
+  return 'none'
+}
+
+// Fallback 컴포넌트 타입 결정
+const getFallbackComponentType = (context: RAGContext): ComponentType => {
+  const fallbackContext = detectFallbackContext(context)
+
+  switch (fallbackContext) {
+    case 'skills':
+      return 'skill-radar'
+    case 'projects':
+      return context.projects!.length === 1 ? 'project-card' : 'project-carousel'
+    case 'experience':
+      return 'experience-list'
+    case 'profile':
+      return 'profile-card'
+    case 'education':
+      return 'education-card'
+    case 'hobbies':
+      return 'hobby-carousel'
+    case 'socialLinks':
+      return 'social-links'
+    case 'images':
+      return 'image-carousel'
+    case 'none':
+    default:
+      return 'chat-response'
+  }
+}
+
 // 컴포넌트 타입 결정 로직
 export const determineComponentType = (query: string, context: RAGContext): ComponentType => {
-  // 인사 (최우선 처리 - 다른 조건보다 먼저 체크)
-  const greetingKeywords = ['안녕', '하이', 'hi', 'hello', '반가워', '처음', '인사', '인사말', 'greeting', 'greetings']
-  if (matchKeywords(query, greetingKeywords)) {
-    return 'greeting-card'
-  }
+  const category = detectCategory(query, context)
 
-  // 스킬 (기술 관련 질문 최우선 처리)
-  if (context.skills && context.skills.length > 0) {
-    if (matchKeywords(query, ['기술', '스택', 'skill', 'stack', '프레임워크', '도구', 'framework', 'tool', '라이브러리', 'library', '기술적', '기술적인', '어떤 기술', '기술 고민', '기술 관심', '기술 역량', '기술 능력', '기술 스택', '사용 기술', '사용하는 기술', '어떤 스택', '어떤 도구', '어떤 프레임워크'])) {
-      return 'skill-card'
-    }
-  }
-
-  // 종합적인 질문 → profile-card 사용 (스킬 키워드가 없을 때만)
-  if (matchKeywords(query, ['어떤 개발자', '어떤 사람', '종합적', '특징'])) {
-    // '강점'은 기술 맥락일 수 있으므로 제외
-    return 'contact-form'
-  }
-
-  // 프로젝트 (명시적인 키워드가 있으면 우선 처리)
-  if (context.projects && context.projects.length > 0) {
-    // 복수형 또는 여러 개를 의미하는 키워드가 있으면 project-list
-    if (matchKeywords(query, ['프로젝트들', '프로젝트 목록', '모든 프로젝트', '전체 프로젝트', '프로젝트 리스트', '프로젝트 목록', 'projects', 'all projects', 'project list', 'project lists'])) {
-      return 'project-list'
-    }
-    // 단일 프로젝트 또는 단수형 키워드 (보여주세요, 보여줘 등 요청 표현 포함)
-    // '개발' 키워드는 기술 질문과 겹칠 수 있으므로 '프로젝트'와 함께 있을 때만 매칭
-    if (matchKeywords(query, ['프로젝트', '토이프로젝트', '작업', '작품', '보여줘', '보여', '보기', '알려줘', '알려', '진행', '했던', '최근', 'project', 'made', 'portfolio', 'work', 'product', 'show', 'display', 'view', 'recent', 'tell'])) {
-      // 프로젝트가 1개면 project-card, 여러 개면 project-carousel
-      return context.projects.length === 1 ? 'project-card' : 'project-carousel'
-    }
-  }
-
-  // 단점/부족한 점 (프로필보다 우선 처리)
-  if (context.profile && context.profile.weaknesses && context.profile.weaknesses.length > 0) {
-    if (matchKeywords(query, ['단점', '부족', '아쉬운', '개선', '약점', '한계', '어려움', 'weakness', 'weaknesses', 'improvement', 'limitation', 'challenge', 'difficulty', '부족한 점', '아쉬운 점', '개선점', '개선할 점'])) {
-      return 'weaknesses-card'
-    }
-  }
-
-  // 프로필
-  if (context.profile) {
-    if (matchKeywords(query, ['자기소개', '누구', '프로필', '소개', 'introduce', 'name', 'who', 'profile', 'introduction'])) {
+  switch (category) {
+    case 'greeting':
+      return 'greeting-card'
+    case 'contact':
+      return 'contact-form'
+    case 'comprehensive':
       return 'profile-card'
+    case 'image':
+      return 'image-carousel'
+    case 'skill':
+      // 데이터가 있으면 skill-card, 없으면 skill-radar
+      return (context.skills && context.skills.length > 0) ? 'skill-card' : 'skill-radar'
+    case 'project': {
+      // 복수형 또는 여러 개를 의미하는 키워드가 있으면 project-list
+      if (matchKeywords(query, ['프로젝트들', '프로젝트 목록', '모든 프로젝트', '전체 프로젝트', '프로젝트 리스트', 'projects', 'all projects', 'project list', 'project lists'])) {
+        return 'project-list'
+      }
+      // 데이터가 있으면 개수에 따라 결정, 없으면 기본값
+      if (context.projects && context.projects.length > 0) {
+        return context.projects.length === 1 ? 'project-card' : 'project-carousel'
+      }
+      return 'project-carousel'
     }
+    case 'weakness':
+      return (context.profile?.weaknesses && context.profile.weaknesses.length > 0) ? 'weaknesses-card' : 'chat-response'
+    case 'profile':
+      return context.profile ? 'profile-card' : 'chat-response'
+    case 'experience':
+      if (context.experience && context.experience.length > 0) {
+        return matchKeywords(query, ['이력', '타임라인', 'timeline']) ? 'experience-timeline' : 'experience-list'
+      }
+      // 데이터가 없어도 키워드가 있으면 experience-list 반환
+      return 'experience-list'
+    case 'education':
+      return (context.education && context.education.length > 0) ? 'education-card' : 'chat-response'
+    case 'hobby':
+      return (context.hobbies && context.hobbies.length > 0) ? 'hobby-carousel' : 'chat-response'
+    case 'social':
+      return (context.socialLinks && context.socialLinks.length > 0) ? 'social-links' : 'chat-response'
+    case 'fallback':
+      return getFallbackComponentType(context)
+    case 'none':
+    default:
+      return 'chat-response'
   }
-
-  // 경력
-  if (context.experience && context.experience.length > 0) {
-    if (matchKeywords(query, ['이력', '타임라인', 'timeline', 'career'])) {
-      return 'experience-timeline'
-    }
-    return 'experience-list'
-  }
-
-  // 스킬 (Fallback)
-  if (context.skills && context.skills.length > 0) {
-    return 'skill-radar'
-  }
-
-  // 프로젝트 (명시적 키워드가 없을 때 fallback)
-  if (context.projects && context.projects.length > 0) {
-    // 기본값: 여러 프로젝트가 있으면 carousel
-    return 'project-carousel'
-  }
-
-  // 학력
-  if (context.education && context.education.length > 0) {
-    return 'education-card'
-  }
-
-  // 취미
-  if (context.hobbies && context.hobbies.length > 0) {
-    return 'hobby-carousel'
-  }
-
-  // 연락처 (소셜 링크보다 우선 처리)
-  if (matchKeywords(query, ['연락', '컨택', '문의', '이메일', 'contact', 'inquiry', 'email', '메일'])) {
-    return 'contact-form'
-  }
-
-  // 소셜 링크
-  if (context.socialLinks && context.socialLinks.length > 0) {
-    if (matchKeywords(query, ['소셜', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns'])) {
-      return 'social-links'
-    }
-  }
-
-  // 이미지
-  if (context.images && context.images.length > 0) {
-    if (matchKeywords(query, ['앨범', '이미지', '사진', '전체', '이미지 아카이브', 'image', 'photo', 'all', 'archive'])) {
-      return 'image-timeline'
-    }
-    if (matchKeywords(query, ['그리드', '모음', '갤러리', '앨범', 'grid', 'gallery', 'collection', 'album'])) {
-      return 'image-grid'
-    }
-    return 'image-carousel'
-  }
-
-  // 기본값
-  return 'chat-response'
 }
 
 // 컴포넌트 타입 유효성 검증

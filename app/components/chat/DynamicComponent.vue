@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ComponentType } from '~/types/chat'
 
-defineProps<{
+const props = defineProps<{
   componentType: ComponentType | null | undefined
   componentData: Record<string, any> | null | undefined
 }>()
@@ -22,10 +22,19 @@ const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
   'hobby-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/HobbyCarousel.server.vue')),
   'social-links': defineAsyncComponent(() => import('~/components/dynamic/card/SocialLinks.server.vue')),
   'contact-form': defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue')),
-  // 'image-carousel': defineAsyncComponent(() => import('~/components/portfolio/ImageCarousel.server.vue')),
-  // 'image-grid': defineAsyncComponent(() => import('~/components/portfolio/ImageGrid.server.vue')),
-  // 'image-timeline': defineAsyncComponent(() => import('~/components/portfolio/ImageTimeline.server.vue')),
+  'image-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/ImageCarousel.server.vue')),
 }
+
+// 컴포넌트 렌더링 조건 체크
+const shouldRender = computed(() => {
+  if (!props.componentType || props.componentType === 'chat-response') {
+    return false
+  }
+  if (!componentMap[props.componentType]) {
+    return false
+  }
+  return true
+})
 </script>
 
 <template>
@@ -38,11 +47,11 @@ const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
     leave-to-class="opacity-0"
   >
     <div
-      v-if="componentType && componentType !== 'chat-response' && componentMap[componentType]"
+      v-if="shouldRender"
       class="my-3 rounded-xl overflow-hidden"
     >
       <component
-        :is="componentMap[componentType]"
+        :is="componentMap[componentType!]"
         :data="componentData"
       />
     </div>

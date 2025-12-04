@@ -94,6 +94,7 @@ ${speakingStyle}
 - 연락처/협업 질문: 편하게 연락 주시라고 안내 (이메일, 링크드인, 깃헙링크 제공)
 - GitHub 질문: externalProfiles.github 데이터가 있으면 실제 레포지토리, 스타 수, 사용 언어 등을 구체적으로 설명
 - LinkedIn 질문: LinkedIn은 직접 방문을 안내하되, 프로필 URL을 제공
+- 이미지/사진 질문: 이미지 아카이브가 있으면 간단히 설명하고, 컴포넌트로 이미지를 보여줄 수 있다고 안내 (예: "제 사진들을 보여드릴게요!" 또는 "이미지 아카이브를 보여드릴게요!")
 - 개발 철학/가치관 질문: [상세 자기소개]에 있는 개발 철학 내용을 인용하여 답변
 - 모르는 질문: 솔직하게 답변드리기 어렵다고 하고, 다른 주제 제안하거나, 직접연락을 유도! (더 궁금한 점이 있으면 이야기해주세요!)
 
@@ -159,6 +160,11 @@ A: "네! 제 LinkedIn 프로필에서 더 자세한 경력과 이력을 확인�
 ═══════════════════════════════════════
 현재 선택된 컴포넌트: ${componentType}
 허용된 컴포넌트 목록: ${ALLOWED_COMPONENTS.join(', ')}
+
+중요: 컴포넌트가 'image-carousel'인 경우, 이미지를 직접 보여줄 수 있다고 말하지 마세요. 
+대신 "제 사진들을 보여드릴게요!" 또는 "이미지 아카이브를 보여드릴게요!" 같은 자연스러운 표현을 사용하세요.
+컴포넌트는 자동으로 표시되므로 별도로 언급할 필요가 없습니다.
+
 ${dataContext}`
 }
 
@@ -180,9 +186,8 @@ const createSSEStream = (
         componentType,
         data: context,
       }
-      controller.enqueue(
-        encoder.encode(`data: ${JSON.stringify(metadata)}\n\n`),
-      )
+      const metadataStr = `data: ${JSON.stringify(metadata)}\n\n`
+      controller.enqueue(encoder.encode(metadataStr))
 
       // 2. AI 스트림 처리 (프로바이더별)
       const reader = aiStream.getReader()
@@ -348,12 +353,32 @@ serve(async (req: Request): Promise<Response> => {
       componentType = 'greeting-card'
     }
 
+    // 이미지 관련 질문인 경우 항상 'image-carousel' 보장 (component-mapper에서 이미 처리되지만 안전장치)
+    const isImageQuestion = ['사진', '이미지', '갤러리', '아카이브', '앨범', 'image', 'gallery', 'archive', 'album']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isImageQuestion && componentType !== 'image-carousel') {
+      componentType = 'image-carousel'
+    }
+
+    // 경력 관련 질문인 경우 항상 'experience-list' 또는 'experience-timeline' 보장
+    const isExperienceQuestion = ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isExperienceQuestion && componentType !== 'experience-list' && componentType !== 'experience-timeline') {
+      componentType = 'experience-list'
+    }
+
+    // 프로젝트 관련 질문인 경우 project-carousel 또는 project-card 보장
+    const isProjectQuestion = ['프로젝트', '토이프로젝트', '작업', '작품', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'recent project']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isProjectQuestion && componentType !== 'project-carousel' && componentType !== 'project-card' && componentType !== 'project-list') {
+      componentType = 'project-carousel'
+    }
+
     // 5. 시스템 프롬프트 구성
     const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary)
 
     // 6. 모델 설정 가져오기
     const modelConfig = getModelConfig(body)
-    console.log(`Using model: ${modelConfig.provider}/${modelConfig.model}`)
 
     // 7. 메시지 구성
     const messages = [
