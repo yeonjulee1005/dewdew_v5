@@ -110,7 +110,8 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   }
 
   // 경력
-  if (matchKeywords(queryLower, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition'])) {
+  // "최근 경력", "경력이", "경력은" 같은 패턴도 명시적으로 체크
+  if (matchKeywords(queryLower, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '최근 경력', '경력이', '경력은', '어떻게 되', '어떻게 되요', '어떻게 되나'])) {
     const { data } = await supabase
       .schema('resume')
       .from('experience')
@@ -219,6 +220,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .schema('resume')
       .from('image_archive')
       .select('*')
+      .eq('deleted', false)
 
     if (year) {
       queryBuilder = queryBuilder.eq('year', year)
@@ -226,7 +228,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
 
     const { data } = await queryBuilder
       .order('year', { ascending: false })
-      .order('order_index', { ascending: false })
+      .order('order_index', { ascending: true })
       .returns<ImageArchive[]>()
 
     context.images = data
