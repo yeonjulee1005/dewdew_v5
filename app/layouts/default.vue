@@ -105,7 +105,7 @@ const slideoverTrigger = ref(false)
                 button-color="neutral"
                 button-label-class="text-xl font-bold truncate"
                 :button-text="$t('menu.aiComponents')"
-                @click:button="navigateTo('/ai')"
+                @click:button="navigateTo('/ai/components')"
               />
             </div>
             <DdSeparator />

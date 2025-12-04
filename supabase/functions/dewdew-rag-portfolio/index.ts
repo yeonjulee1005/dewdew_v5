@@ -360,17 +360,43 @@ serve(async (req: Request): Promise<Response> => {
       componentType = 'image-carousel'
     }
 
+    // 학력 관련 질문인 경우 항상 'education-card' 보장
+    const isEducationQuestion = ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university', '학력이', '학력은', '학력이 어떻게']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    // 경력 키워드가 함께 있으면 제외
+    const hasExperienceKeyword = ['경력', '회사', '일', '직장', 'career', 'company', 'job', 'work', 'experience'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isEducationQuestion && !hasExperienceKeyword && componentType !== 'education-card') {
+      console.log(`[Component Mapper] Education question detected but got ${componentType}, forcing to education-card`)
+      componentType = 'education-card'
+    }
+
     // 경력 관련 질문인 경우 항상 'experience-list' 또는 'experience-timeline' 보장
     const isExperienceQuestion = ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은']
       .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
-    if (isExperienceQuestion && componentType !== 'experience-list' && componentType !== 'experience-timeline') {
+    // 학력 키워드가 함께 있으면 제외
+    const hasEducationKeyword = ['학력', '학교', '졸업', '전공', '대학', 'education', 'school', 'graduate', 'major', 'university'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isExperienceQuestion && !hasEducationKeyword && componentType !== 'experience-list' && componentType !== 'experience-timeline') {
+      console.log(`[Component Mapper] Experience question detected but got ${componentType}, forcing to experience-list`)
       componentType = 'experience-list'
+    }
+
+    // 소셜 링크 관련 질문인 경우 social-links 보장
+    const isSocialQuestion = ['소셜', '소셜 링크', '소셜링크', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns', '레포', 'repo', '오픈소스', 'open source', '코드', 'code', '링크인', '연결', '연락처', '연락 방법']
+      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    // 프로젝트 키워드가 함께 있으면 제외
+    const hasProjectKeyword = ['프로젝트', 'project', 'portfolio', '작업', '작품'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isSocialQuestion && !hasProjectKeyword && componentType !== 'social-links') {
+      console.log(`[Component Mapper] Social question detected but got ${componentType}, forcing to social-links`)
+      componentType = 'social-links'
     }
 
     // 프로젝트 관련 질문인 경우 project-carousel 또는 project-card 보장
     const isProjectQuestion = ['프로젝트', '토이프로젝트', '작업', '작품', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'recent project']
       .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
-    if (isProjectQuestion && componentType !== 'project-carousel' && componentType !== 'project-card' && componentType !== 'project-list') {
+    // 소셜 링크 키워드가 함께 있으면 제외
+    const hasSocialKeyword = ['소셜', '링크', 'social', 'link', 'sns', '깃헙', 'github', 'linkedin'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    if (isProjectQuestion && !hasSocialKeyword && componentType !== 'project-carousel' && componentType !== 'project-card' && componentType !== 'project-list') {
+      console.log(`[Component Mapper] Project question detected but got ${componentType}, forcing to project-carousel`)
       componentType = 'project-carousel'
     }
 

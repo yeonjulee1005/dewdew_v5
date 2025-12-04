@@ -40,42 +40,51 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
     return 'skill'
   }
 
-  // 6. 경력 (프로젝트보다 먼저 체크 - "최근 경력" 같은 경우 충돌 방지)
+  // 6. 학력 (경력보다 먼저 체크 - "학력이 어떻게 되요" 같은 경우 충돌 방지)
+  if (matchKeywords(query, ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university', '학력이', '학력은', '학력이 어떻게', '학력이 어떻게 되', '학력이 어떻게 되요', '학력이 어떻게 되나'])) {
+    return 'education'
+  }
+
+  // 7. 경력 (프로젝트보다 먼저 체크 - "최근 경력" 같은 경우 충돌 방지)
   // "최근 경력", "경력이", "경력은" 같은 패턴도 명시적으로 체크
-  if (matchKeywords(query, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은', '어떻게 되', '어떻게 되요', '어떻게 되나'])) {
+  // 단, "학력" 키워드가 있으면 제외
+  if (matchKeywords(query, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은', '어떻게 되', '어떻게 되요', '어떻게 되나']) && !matchKeywords(query, ['학력', '학교', '졸업', '전공', '대학', 'education', 'school', 'graduate', 'major', 'university'])) {
     return 'experience'
   }
 
-  // 7. 프로젝트
-  // 주의: "최근", "work" 같은 키워드는 경력 체크 후에만 매칭됨
-  // "최근 경력" 같은 경우를 제외하기 위해 "최근" 단독 키워드는 제거하고 "최근 프로젝트" 같은 패턴만 체크
-  if (matchKeywords(query, ['프로젝트', '토이프로젝트', '작업', '작품', '보여줘', '보여', '보기', '알려줘', '알려', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'show', 'display', 'view', 'recent project', 'tell'])) {
-    return 'project'
+  // 8. 소셜 링크 (프로젝트보다 먼저 체크 - "소셜 링크를 알려주세요" 같은 경우 충돌 방지)
+  if (matchKeywords(query, ['소셜', '소셜 링크', '소셜링크', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns', '링크인', '이력서', '커리어', '연결', '연락처', '연락 방법'])) {
+    return 'social'
   }
 
-  // 8. 단점/부족한 점
+  // 9. 프로젝트
+  // 주의: "최근", "work" 같은 키워드는 경력 체크 후에만 매칭됨
+  // "최근 경력" 같은 경우를 제외하기 위해 "최근" 단독 키워드는 제거하고 "최근 프로젝트" 같은 패턴만 체크
+  // "소셜 링크" 같은 경우를 제외하기 위해 "링크" 단독 키워드는 제거하고 "프로젝트 링크" 같은 패턴만 체크
+  if (matchKeywords(query, ['프로젝트', '토이프로젝트', '작업', '작품', '보여줘', '보여', '보기', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'show', 'display', 'view', 'recent project', 'tell'])) {
+    // "알려줘", "알려"는 소셜 링크가 아닐 때만 프로젝트로 매칭
+    if (matchKeywords(query, ['알려줘', '알려']) && !matchKeywords(query, ['소셜', '링크', 'social', 'link', 'sns', '깃헙', 'github', 'linkedin'])) {
+      return 'project'
+    }
+    // 다른 프로젝트 키워드가 있으면 프로젝트
+    if (matchKeywords(query, ['프로젝트', '토이프로젝트', '작업', '작품', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'recent project'])) {
+      return 'project'
+    }
+  }
+
+  // 10. 단점/부족한 점
   if (matchKeywords(query, ['단점', '부족', '아쉬운', '개선', '약점', '한계', '어려움', 'weakness', 'weaknesses', 'improvement', 'limitation', 'challenge', 'difficulty', '부족한 점', '아쉬운 점', '개선점', '개선할 점'])) {
     return 'weakness'
   }
 
-  // 9. 프로필
+  // 11. 프로필
   if (matchKeywords(query, ['자기소개', '누구', '프로필', '소개', 'introduce', 'name', 'who', 'profile', 'introduction', '철학', '가치관', '성격', '장점', '강점', 'philosophy', 'value', 'personality', 'strength'])) {
     return 'profile'
   }
 
-  // 10. 학력
-  if (matchKeywords(query, ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university'])) {
-    return 'education'
-  }
-
-  // 11. 취미
+  // 12. 취미
   if (matchKeywords(query, ['취미', '관심사', '좋아하', '여가', '취향', 'hobby', 'interest', 'like', 'leisure'])) {
     return 'hobby'
-  }
-
-  // 12. 소셜 링크
-  if (matchKeywords(query, ['소셜', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns', '레포', 'repo', '오픈소스', 'open source', '코드', 'code', '링크인', '이력서', '커리어'])) {
-    return 'social'
   }
 
   // 13. Fallback: 컨텍스트 데이터 기반
