@@ -177,10 +177,14 @@ export default defineNuxtConfig({
     workbox: {
       navigateFallback: undefined,
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
+      // _nuxt 디렉토리의 해시가 변경되는 파일들은 프리캐시에서 제외 (런타임 캐싱으로 처리)
+      globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
       skipWaiting: true,
       clientsClaim: true,
+      // 404 응답을 무시하고 계속 진행 (프리캐시 실패 시에도 Service Worker가 정상 작동)
+      dontCacheBustURLsMatching: /\.\w{8}\./,
       // 런타임 캐싱 전략 설정
       runtimeCaching: [
         // 페이지 요청: 네트워크 우선, 실패 시 캐시 사용
@@ -258,7 +262,23 @@ export default defineNuxtConfig({
             },
           },
         },
-        // 정적 자산 (JS, CSS 등): 캐시 우선
+        // Nuxt 빌드 파일 (_nuxt 디렉토리): 네트워크 우선 (해시 변경 대응)
+        {
+          urlPattern: /\/_nuxt\/.*\.(?:js|mjs|css)$/,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'nuxt-assets-cache',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 7 * 24 * 60 * 60, // 7일
+            },
+            networkTimeoutSeconds: 3,
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        // 정적 자산 (JS, CSS 등): StaleWhileRevalidate
         {
           urlPattern: /\.(?:js|css|json)$/,
           handler: 'StaleWhileRevalidate',
