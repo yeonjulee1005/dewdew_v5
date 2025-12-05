@@ -34,7 +34,7 @@ const accordionItems = [
       }"
     >
       <template #content>
-        <div class="bg-white dark:bg-neutral-900 py-4">
+        <div class="flex flex-col gap-y-4 bg-white dark:bg-neutral-900">
           <AFooterMenu />
           <AFooterSns />
           <AFooterInformation />

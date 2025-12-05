@@ -326,7 +326,7 @@ onUnmounted(() => {
           variant: 'subtle',
           side: 'right',
           ui: {
-            content: 'bg-neutral-200/50 dark:bg-neutral-800/50 ring-0',
+            content: 'text-lg break-keep bg-neutral-200/50 dark:bg-neutral-800/50 ring-0',
           },
         }"
         :assistant="{
@@ -338,7 +338,7 @@ onUnmounted(() => {
           },
           ui: {
             root: isMobile ? 'max-w-full ' : 'max-w-[80%]',
-            content: 'bg-amber-100 dark:bg-amber-600/50 ring-0',
+            content: 'text-lg break-keep bg-amber-100 dark:bg-amber-600/50 ring-0',
           },
         }"
         :ui="{

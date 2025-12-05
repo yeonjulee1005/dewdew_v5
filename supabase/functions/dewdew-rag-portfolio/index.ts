@@ -390,12 +390,12 @@ serve(async (req: Request): Promise<Response> => {
       componentType = 'social-links'
     }
 
-    // 프로젝트 관련 질문인 경우 project-carousel 또는 project-card 보장
+    // 프로젝트 관련 질문인 경우 project-carousel 보장
     const isProjectQuestion = ['프로젝트', '토이프로젝트', '작업', '작품', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'recent project']
       .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
     // 소셜 링크 키워드가 함께 있으면 제외
     const hasSocialKeyword = ['소셜', '링크', 'social', 'link', 'sns', '깃헙', 'github', 'linkedin'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
-    if (isProjectQuestion && !hasSocialKeyword && componentType !== 'project-carousel' && componentType !== 'project-card' && componentType !== 'project-list') {
+    if (isProjectQuestion && !hasSocialKeyword && componentType !== 'project-carousel') {
       console.log(`[Component Mapper] Project question detected but got ${componentType}, forcing to project-carousel`)
       componentType = 'project-carousel'
     }

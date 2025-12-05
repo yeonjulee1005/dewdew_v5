@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { viewMenuData } = storeToRefs(useMenuStore())
+const { externalMenu } = storeToRefs(useMenuStore())
 </script>
 
 <template>
   <div class="flex flex-wrap items-center justify-center gap-x-4">
     <ATooltipButton
-      v-for="(menu, index) in viewMenuData"
+      v-for="(menu, index) in externalMenu"
       :key="index"
       use-leading
       :icon-lead-name="menu.icon ?? ''"

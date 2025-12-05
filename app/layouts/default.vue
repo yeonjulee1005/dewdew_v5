@@ -3,6 +3,14 @@ const { isDesktopOrTablet, isMobileOrTablet } = useDevice()
 const { url } = useImageStorage()
 
 const slideoverTrigger = ref(false)
+
+const handlePagination = (path: string, external: boolean = false) => {
+  external
+    ? navigateTo(path, { external: true, open: { target: '_blank' } })
+    : navigateTo(path)
+
+  slideoverTrigger.value = false
+}
 </script>
 
 <template>
@@ -79,7 +87,7 @@ const slideoverTrigger = ref(false)
                 button-color="neutral"
                 button-label-class="text-xl font-bold truncate"
                 :button-text="$t('menu.home')"
-                @click:button="navigateTo('/')"
+                @click:button="handlePagination('/', false)"
               />
               <ATooltipButton
                 custom-class="w-full cursor-pointer"
@@ -92,7 +100,7 @@ const slideoverTrigger = ref(false)
                 button-color="neutral"
                 button-label-class="text-xl font-bold truncate"
                 :button-text="$t('menu.ai')"
-                @click:button="navigateTo('/ai')"
+                @click:button="handlePagination('/ai', false)"
               />
               <ATooltipButton
                 custom-class="w-full cursor-pointer"
@@ -105,7 +113,20 @@ const slideoverTrigger = ref(false)
                 button-color="neutral"
                 button-label-class="text-xl font-bold truncate"
                 :button-text="$t('menu.aiComponents')"
-                @click:button="navigateTo('/ai/components')"
+                @click:button="handlePagination('/ai/components', false)"
+              />
+              <ATooltipButton
+                custom-class="w-full cursor-pointer"
+                use-leading
+                use-icon
+                icon-lead-name="i-lucide-chess-knight"
+                icon-lead-class="w-6 h-6"
+                button-size="xl"
+                button-variant="ghost"
+                button-color="neutral"
+                button-label-class="text-xl font-bold truncate"
+                :button-text="$t('menu.v4')"
+                @click:button="handlePagination('https://v4.dewdew.dev', true)"
               />
             </div>
             <DdSeparator />
