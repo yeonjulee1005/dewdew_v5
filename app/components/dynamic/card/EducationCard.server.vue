@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const { url } = useImageStorage()
+
+withDefaults(defineProps<{
+  title?: string
+}>(), {
+  title: '',
+})
+
 const { data: educationData } = await useFetch('/api/resume/education', {
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
@@ -14,60 +22,81 @@ const formatDate = (dateString: string | null) => {
 </script>
 
 <template>
-  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
-    <div class="flex flex-col gap-y-4">
-      <h3 class="text-xl font-bold">
-        {{ $t('dynamic.education.title', '학력') }}
-      </h3>
-      <div
-        v-if="educationData && educationData.length > 0"
-        class="flex flex-col gap-y-4"
-      >
+  <div class="flex flex-col gap-y-4">
+    <h3
+      v-if="title"
+      class="text-xl font-bold"
+    >
+      {{ title }}
+    </h3>
+    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-2xl font-bold">
+          {{ $t('dynamic.education.title') }}
+        </h3>
         <div
-          v-for="(education, index) in educationData"
-          :key="index"
-          class="flex flex-col gap-y-2 p-3 rounded-md border border-neutral-200 dark:border-neutral-700"
+          v-if="educationData && educationData.length > 0"
+          class="flex flex-col gap-y-4"
         >
-          <div class="flex flex-col gap-y-1">
-            <div class="flex items-center gap-x-2">
-              <span class="text-lg font-bold">
-                {{ education.school_name }}
-              </span>
-            </div>
-            <div class="flex flex-col gap-y-0.5">
-              <span
-                v-if="education.degree"
-                class="text-md font-semibold text-neutral-600 dark:text-neutral-400"
-              >
-                {{ education.degree }}
-              </span>
-              <span
-                v-if="education.major"
-                class="text-sm text-neutral-500 dark:text-neutral-500"
-              >
-                {{ education.major }}
-              </span>
-            </div>
-          </div>
-          <div class="flex items-center gap-x-2 text-sm text-neutral-500 dark:text-neutral-500">
-            <span>{{ formatDate(education.start_date) }}</span>
-            <span>~</span>
-            <span>{{ education.end_date ? formatDate(education.end_date) : $t('dynamic.education.present', '재학중') }}</span>
-          </div>
-          <p
-            v-if="education.description"
-            class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line"
+          <div
+            v-for="(education, index) in educationData"
+            :key="index"
+            class="flex items-center gap-x-9 p-4 rounded-md border border-neutral-200 dark:border-neutral-700"
           >
-            {{ education.description }}
-          </p>
+            <NuxtImg
+              v-if="education.image_url"
+              :src="url(true, education.image_url.split('/public')[1] ?? '')"
+              class="w-24 h-auto object-cover rounded-md"
+              format="webp"
+              :quality="80"
+              :alt="education.school_name"
+            />
+            <div class="flex flex-col gap-y-4">
+              <div class="flex flex-col gap-y-1">
+                <div class="flex items-center gap-x-2">
+                  <span class="text-xl font-bold">
+                    {{ education.school_name }}
+                  </span>
+                  <span
+                    v-if="education.degree"
+                    class="text-lg font-semibold text-neutral-600 dark:text-neutral-400"
+                  >
+                    {{ education.degree }}
+                  </span>
+                  <DdSeparator
+                    orientation="vertical"
+                    class="h-4"
+                  />
+                  <div class="flex items-center gap-x-2 text-sm text-neutral-500 dark:text-neutral-500">
+                    <span>{{ formatDate(education.start_date) }}</span>
+                    <span>~</span>
+                    <span>{{ education.end_date ? formatDate(education.end_date) : $t('dynamic.education.present') }}</span>
+                  </div>
+                </div>
+                <span
+                  v-if="education.major"
+                  class="text-md text-neutral-500 dark:text-neutral-500"
+                >
+                  {{ education.major }}
+                </span>
+              </div>
+              <DdSeparator />
+              <p
+                v-if="education.description"
+                class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line"
+              >
+                {{ education.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          v-else
+          class="text-sm text-neutral-500 dark:text-neutral-500"
+        >
+          {{ $t('dynamic.education.empty') }}
         </div>
       </div>
-      <div
-        v-else
-        class="text-sm text-neutral-500 dark:text-neutral-500"
-      >
-        {{ $t('dynamic.education.empty', '학력 정보가 없습니다.') }}
-      </div>
-    </div>
-  </DdCard>
+    </DdCard>
+  </div>
 </template>

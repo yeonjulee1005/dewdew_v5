@@ -130,6 +130,7 @@ export type ResumeDatabase = {
           description: string | null
           end_date: string | null
           id: string
+          image_url: string | null
           major: string | null
           order_index: number | null
           school_name: string
@@ -143,6 +144,7 @@ export type ResumeDatabase = {
           description?: string | null
           end_date?: string | null
           id?: string
+          image_url?: string | null
           major?: string | null
           order_index?: number | null
           school_name: string
@@ -156,6 +158,7 @@ export type ResumeDatabase = {
           description?: string | null
           end_date?: string | null
           id?: string
+          image_url?: string | null
           major?: string | null
           order_index?: number | null
           school_name?: string
@@ -249,17 +252,12 @@ export type ResumeDatabase = {
         Row: {
           category: string | null
           created_at: string | null
-          day: number | null
           deleted: boolean | null
-          description: string | null
-          full_date: string | null
           id: string
           image_url: string
-          month: number | null
           order_index: number | null
           season: string | null
           tags: string[] | null
-          thumbnail_url: string | null
           title: string
           updated_at: string | null
           year: number
@@ -268,17 +266,12 @@ export type ResumeDatabase = {
         Insert: {
           category?: string | null
           created_at?: string | null
-          day?: number | null
           deleted?: boolean | null
-          description?: string | null
-          full_date?: string | null
           id?: string
           image_url: string
-          month?: number | null
           order_index?: number | null
           season?: string | null
           tags?: string[] | null
-          thumbnail_url?: string | null
           title: string
           updated_at?: string | null
           year: number
@@ -287,17 +280,12 @@ export type ResumeDatabase = {
         Update: {
           category?: string | null
           created_at?: string | null
-          day?: number | null
           deleted?: boolean | null
-          description?: string | null
-          full_date?: string | null
           id?: string
           image_url?: string
-          month?: number | null
           order_index?: number | null
           season?: string | null
           tags?: string[] | null
-          thumbnail_url?: string | null
           title?: string
           updated_at?: string | null
           year?: number
