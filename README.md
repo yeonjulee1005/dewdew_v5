@@ -32,10 +32,12 @@
 ### **Frontend**
 [![My Skills](https://skillicons.dev/icons?i=nuxtjs,vue,ts,sass,tailwind,vite)](https://skillicons.dev)
 
-- **🎨 Framework**: Nuxt 4 (Vue 3 + SSR/SSG)
-- **📝 Language**: TypeScript 5.9
-- **🎭 Styling**: Sass + Tailwind CSS + Nuxt UI
+- **🎨 Framework**: Nuxt 4.2.1 (Vue 3 + SSR/SSG)
+- **📝 Language**: TypeScript 5.6.3
+- **🎭 Styling**: Sass + Tailwind CSS + Nuxt UI 4.2.1
 - **⚡ Build Tool**: Vite 7
+- **📊 Analytics**: Vercel Analytics + Speed Insights
+- **📱 PWA**: Service Worker 기반 오프라인 지원
 
 ### **Backend & Database**
 [![Backend Skills](https://skillicons.dev/icons?i=supabase,postgres,nodejs)](https://skillicons.dev)
@@ -73,8 +75,25 @@ dewdew_v5/
 │   │   │   ├── Container.vue
 │   │   │   ├── Content.vue
 │   │   │   ├── DynamicComponent.vue
-│   │   │   ├── Error.vue
-│   │   │   └── Skeleton.vue
+│   │   │   ├── Error.server.vue
+│   │   │   └── Skeleton.server.vue
+│   │   ├── dynamic/           # 동적 렌더링 카드 컴포넌트
+│   │   │   └── card/
+│   │   │       ├── ContactForm.client.vue
+│   │   │       ├── EducationCard.server.vue
+│   │   │       ├── ExperienceCarousel.server.vue
+│   │   │       ├── ExperienceTimeline.server.vue
+│   │   │       ├── Greeting.server.vue
+│   │   │       ├── HobbyCarousel.server.vue
+│   │   │       ├── ImageCarousel.server.vue
+│   │   │       ├── Profile.server.vue
+│   │   │       ├── ProjectCarousel.server.vue
+│   │   │       ├── Skill.server.vue
+│   │   │       ├── SkillRadar.server.vue
+│   │   │       ├── SocialLinks.server.vue
+│   │   │       └── WeaknessesCard.server.vue
+│   │   ├── InstallPwa.client.vue  # PWA 설치 프롬프트
+│   │   ├── SpeedInsights.client.vue  # 성능 모니터링
 │   │   └── intro/             # 인트로 애니메이션 컴포넌트
 │   │       ├── Controller.client.vue
 │   │       ├── TransitionMessage.client.vue
@@ -100,11 +119,17 @@ dewdew_v5/
 │   │   │   ├── imageStorage.ts
 │   │   │   ├── useColorUtils.ts
 │   │   │   └── useUtils.ts
-│   │   └── validation/        # 유효성 검사
-│   │       └── useValidation.ts
+│   │   ├── validation/        # 유효성 검사
+│   │   │   └── useValidation.ts
+│   │   └── useSkillIcon.ts    # 스킬 아이콘 유틸
+│   ├── 🔌 plugins/            # Nuxt 플러그인
+│   │   ├── analytics.client.ts  # Vercel Analytics
+│   │   └── senitize.ts        # DOMPurify HTML 정제
 │   ├── 📄 pages/              # 파일 기반 라우팅
-│   │   ├── ai.vue             # AI 채팅 페이지
-│   │   └── index.vue           # 메인 페이지
+│   │   ├── ai/                # AI 채팅 관련 페이지
+│   │   │   ├── index.vue     # AI 채팅 메인 페이지
+│   │   │   └── components.vue # AI 컴포넌트 데모 페이지
+│   │   └── index.vue          # 메인 페이지
 │   ├── 🎨 layouts/            # 레이아웃 컴포넌트
 │   │   ├── center.vue
 │   │   └── default.vue
@@ -115,6 +140,7 @@ dewdew_v5/
 │   │   ├── chat.ts            # 채팅 관련 타입
 │   │   ├── database.types.ts  # Supabase 데이터베이스 타입
 │   │   ├── supabase-menu.ts   # 메뉴 스키마 타입
+│   │   ├── supabase-resume.ts # 이력서 스키마 타입
 │   │   ├── supabase.ts        # Supabase 공통 타입
 │   │   └── weather.ts         # 날씨 관련 타입
 │   ├── 🎨 assets/             # 정적 자산
@@ -131,17 +157,28 @@ dewdew_v5/
 │       ├── chat/              # AI 채팅 API
 │       │   ├── greeting.get.ts
 │       │   └── index.post.ts
-│       └── menu/
-│           └── externalMenu.ts
+│       ├── menu/              # 메뉴 API
+│       │   └── externalMenu.get.ts
+│       └── resume/            # 이력서 데이터 API
+│           ├── education.get.ts
+│           ├── experience.get.ts
+│           ├── hobbies.get.ts
+│           ├── imageArchive.get.ts
+│           ├── profile.get.ts
+│           ├── projects.get.ts
+│           ├── skills.get.ts
+│           └── socialLinks.get.ts
 ├── 🗄️ supabase/               # Supabase Functions
 │   └── functions/
 │       ├── _shared/            # 공유 모듈 (배포 안됨)
-│       │   ├── component-mapper.ts  # 컴포넌트 타입 매핑
+│       │   ├── _openai.ts          # OpenAI 클라이언트 (레거시)
+│       │   ├── ai-provider.ts      # AI 프로바이더 추상화
+│       │   ├── component-mapper.ts # 컴포넌트 타입 매핑
 │       │   ├── history-optimizer.ts # 대화 기록 최적화
-│       │   ├── openai.ts            # OpenAI 클라이언트
-│       │   ├── rag.ts               # RAG 로직
-│       │   ├── supabase.ts          # Supabase 클라이언트
-│       │   └── types.ts             # 타입 정의
+│       │   ├── rag.ts              # RAG 로직
+│       │   ├── supabase.ts         # Supabase 클라이언트
+│       │   ├── types.ts            # 타입 정의
+│       │   └── url-fetcher.ts      # URL 페처 유틸리티
 │       └── dewdew-rag-portfolio/    # RAG 포트폴리오 함수
 │           ├── index.ts
 │           └── README.md
@@ -154,7 +191,7 @@ dewdew_v5/
 │   ├── image/                 # 이미지 파일
 │   ├── favicon.ico
 │   ├── manifest.webmanifest
-│   └── robots.txt
+│   └── _robots.txt
 ├── 📜 scripts/                # 빌드 스크립트
 │   └── version-manager.js
 ├── nuxt.config.ts             # Nuxt 설정
@@ -186,8 +223,9 @@ app/composables/
 │   ├── imageStorage.ts        # 이미지 저장소 관리 (Supabase)
 │   ├── useColorUtils.ts       # 색상 매핑 유틸
 │   └── useUtils.ts            # UI 헬퍼 함수
-└── validation/
-    └── useValidation.ts       # 입력 유효성 검사
+├── validation/
+│   └── useValidation.ts       # 입력 유효성 검사
+└── useSkillIcon.ts            # 스킬 아이콘 유틸
 ```
 
 ### 📋 타입 시스템
@@ -195,9 +233,10 @@ app/composables/
 // 도메인 주도 설계(DDD) 적용 - 도메인별 타입 분리
 app/types/
 ├── chat.ts                    # AI 채팅 관련 타입 (ChatMessage, ComponentType 등)
-├── database.types.ts          # Supabase 데이터베이스 자동 생성 타입
-├── supabase-menu.ts           # 메뉴 스키마 타입
-├── supabase.ts                # Supabase 공통 타입
+├── database.types.ts          # Supabase 데이터베이스 자동 생성 타입 (public 스키마)
+├── supabase-menu.ts           # 메뉴 스키마 타입 (자동 생성)
+├── supabase-resume.ts         # 이력서 스키마 타입 (자동 생성)
+├── supabase.ts                # Supabase 공통 타입 (자동 생성)
 └── weather.ts                 # 날씨 관련 타입
 ```
 
@@ -205,22 +244,43 @@ app/types/
 ```typescript
 // RAG 기반 AI 채팅 시스템
 supabase/functions/
-├── _shared/
+├── _shared/                    # 공유 모듈 (배포 안됨)
 │   ├── component-mapper.ts    # 쿼리 → 컴포넌트 타입 매핑
 │   ├── rag.ts                 # RAG (Retrieval-Augmented Generation) 로직
-│   ├── openai.ts             # OpenAI API 클라이언트
-│   └── history-optimizer.ts  # 대화 기록 최적화
-└── dewdew-rag-portfolio/
-    └── index.ts               # Edge Function 엔드포인트
+│   ├── ai-provider.ts         # AI 프로바이더 추상화 (@ai-sdk/openai)
+│   ├── _openai.ts             # OpenAI 클라이언트 (레거시)
+│   ├── history-optimizer.ts   # 대화 기록 최적화
+│   ├── url-fetcher.ts         # URL 페처 유틸리티
+│   ├── supabase.ts            # Supabase 클라이언트
+│   └── types.ts               # 타입 정의
+└── dewdew-rag-portfolio/      # 배포되는 Edge Function
+    └── index.ts               # RAG 엔드포인트
 
 // 클라이언트 측
 app/composables/chat/
 └── useChat.ts                 # 스트리밍 처리, 메시지 관리
 
 app/components/chat/
-├── Container.vue             # 채팅 컨테이너
-├── Content.vue                # 메시지 표시 영역
-└── DynamicComponent.vue       # 동적 컴포넌트 렌더링
+├── Container.vue              # 채팅 컨테이너
+├── Content.vue               # 메시지 표시 영역
+├── DynamicComponent.vue       # 동적 컴포넌트 렌더링
+├── Error.server.vue           # 에러 컴포넌트
+└── Skeleton.server.vue        # 로딩 스켈레톤
+
+app/components/dynamic/card/   # 동적 렌더링 카드 컴포넌트
+├── ContactForm.client.vue
+├── EducationCard.server.vue
+├── ExperienceCarousel.server.vue
+├── ExperienceTimeline.server.vue
+├── Greeting.server.vue
+├── HobbyCarousel.server.vue
+├── ImageCarousel.server.vue
+├── Profile.server.vue
+├── ProjectCarousel.server.vue
+├── Skill.server.vue
+├── SkillRadar.server.vue
+├── SocialLinks.server.vue
+└── WeaknessesCard.server.vue
 ```
 
 ---
@@ -239,6 +299,13 @@ app/components/chat/
 - **동적 컴포넌트**: 프로젝트, 경력, 스킬 등을 컴포넌트로 표시
 - **자동 스크롤**: 긴 대화에서도 자동 스크롤 유지
 - **컴포넌트 매핑**: 자연어 쿼리 → 적절한 UI 컴포넌트 자동 매핑
+- **컴포넌트 데모**: `/ai/components`에서 모든 동적 컴포넌트 미리보기
+
+### 📱 **PWA (Progressive Web App)**
+- **오프라인 지원**: Service Worker 기반 캐싱
+- **설치 프롬프트**: 모바일/데스크톱 설치 가능
+- **자동 업데이트**: 새 버전 자동 감지 및 업데이트
+- **캐싱 전략**: 이미지, 폰트, API 응답 최적화된 캐싱
 
 ### 🎨 **UI 컴포넌트**
 - **Atomic Design**: 재사용 가능한 컴포넌트 구조
@@ -304,8 +371,10 @@ bun dev
 bun run supabase:login
 
 # 타입 생성
-bun run supabase:type
-bun run supabase:type-menu
+bun run supabase:type          # public 스키마 타입 생성
+bun run supabase:type-menu     # menu 스키마 타입 생성
+bun run supabase:type-resume   # resume 스키마 타입 생성
+bun run supabase:type-data     # data 스키마 타입 생성
 
 # Functions 배포
 bun run supabase:deploy
@@ -335,6 +404,12 @@ bun run supabase:deploy
 - **스트리밍 처리**: 실시간 텍스트 스트리밍 및 자동 스크롤
 - **동적 컴포넌트**: 자연어 쿼리 기반 컴포넌트 자동 매핑
 - **성능 최적화**: DOM 조작 최소화로 스크롤 성능 개선
+
+### 📱 **Phase 5: PWA 및 성능 모니터링**
+- **PWA 구현**: Service Worker 기반 오프라인 지원
+- **Vercel Analytics**: 실시간 사용자 분석 통합
+- **Speed Insights**: Core Web Vitals 모니터링
+- **캐싱 전략**: 이미지, API, 정적 자산 최적화된 캐싱
 
 ---
 
@@ -378,10 +453,10 @@ interface MultilingualContent<T = string> {
 - 🇰🇷 **한국어** (기본)
 - 🇺🇸 **English**
 
-### 🔄 **자동 언어 감지**
+### 🔄 **언어 전환**
 - 브라우저 언어 설정 기반 자동 감지
-- URL 기반 언어 라우팅 (`/en/about`)
-- 쿠키를 통한 사용자 선택 기억
+- `no_prefix` 전략 사용 (URL에 언어 코드 없음)
+- LocalStorage를 통한 사용자 선택 기억
 
 ---
 
@@ -422,9 +497,14 @@ xl: 1280px   // 대형 데스크톱
 - **RSS 피드**: 블로그 포스트 구독
 
 ### 📊 **분석 도구**
-- **Vercel Analytics**: 실시간 방문자 분석
-- **Speed Insights**: 성능 모니터링
-- **Core Web Vitals**: 사용자 경험 지표
+- **Vercel Analytics**: 실시간 방문자 분석 (프로덕션 환경)
+- **Speed Insights**: 성능 모니터링 및 Core Web Vitals 추적
+- **자동 성능 측정**: LCP, FID, CLS 등 실시간 모니터링
+
+### 🔒 **보안 기능**
+- **DOMPurify**: XSS 공격 방지를 위한 HTML 정제
+- **입력 검증**: Yup 기반 폼 유효성 검사
+- **EmailJS**: 클라이언트 측 이메일 전송 (서버 노출 없음)
 
 ---
 

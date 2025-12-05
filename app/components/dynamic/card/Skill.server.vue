@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { getSkillIcon } = useSkillIcon()
 
+withDefaults(defineProps<{
+  title?: string
+}>(), {
+  title: '',
+})
+
 const { data: skills } = await useFetch('/api/resume/skills', {
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
@@ -39,55 +45,64 @@ const categoryColor = (category: string) => {
 </script>
 
 <template>
-  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
-    <div class="flex flex-col gap-y-4">
-      <h3 class="text-xl font-bold">
-        {{ $t('dynamic.skill.title', '기술 스택') }}
-      </h3>
+  <div class="flex flex-col gap-y-4">
+    <h3
+      v-if="title"
+      class="text-xl font-bold"
+    >
+      {{ title }}
+    </h3>
+    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-2xl font-bold">
+          {{ $t('dynamic.skill.title') }}
+        </h3>
 
-      <div v-if="skills && skills.length > 0">
-        <div
-          v-for="category in categories"
-          :key="category"
-          class="flex flex-col gap-y-2 mb-4 last:mb-0"
-        >
-          <h4 class="text-sm font-semibold text-neutral-500 uppercase tracking-wider">
-            {{ category }}
-          </h4>
-          <div class="flex flex-wrap gap-2">
-            <DdBadge
-              v-for="skill in groupedSkills[category]"
-              :key="skill.id"
-              :label="skill.name"
-              variant="outline"
-              :color="categoryColor(category)"
-              size="md"
-              class="px-3 py-1.5"
-            >
-              <template #leading>
-                <NuxtImg
-                  v-if="skill.icon_url"
-                  :src="skill.icon_url"
-                  class="w-4 h-4 mr-1"
-                  :alt="skill.name"
-                />
-                <Icon
-                  v-else
-                  :name="getSkillIcon(skill.name)"
-                  class="w-4 h-4 mr-1"
-                />
-              </template>
-            </DdBadge>
+        <div v-if="skills && skills.length > 0">
+          <div
+            v-for="(category, index) in categories"
+            :key="index"
+            class="flex flex-col gap-y-2 mb-4 last:mb-0"
+          >
+            <DdSeparator v-if="index > 0" />
+            <h4 class="text-lg font-semibold text-neutral-500 uppercase tracking-wider">
+              {{ category }}
+            </h4>
+            <div class="flex flex-wrap gap-2.5">
+              <DdBadge
+                v-for="skill in groupedSkills[category]"
+                :key="skill.id"
+                :label="skill.name"
+                variant="outline"
+                :color="categoryColor(category)"
+                size="xl"
+                class="px-3 py-1.5"
+              >
+                <template #leading>
+                  <NuxtImg
+                    v-if="skill.icon_url"
+                    :src="skill.icon_url"
+                    class="w-4 h-4 mr-1"
+                    :alt="skill.name"
+                  />
+                  <Icon
+                    v-else
+                    :name="getSkillIcon(skill.name)"
+                    class="w-4 h-4 mr-1"
+                  />
+                </template>
+              </DdBadge>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div
-        v-else
-        class="text-sm text-neutral-500"
-      >
-        {{ $t('dynamic.skill.empty', '스킬 정보가 없습니다.') }}
+        <div
+          v-else
+          class="text-sm text-neutral-500"
+        >
+          {{ $t('dynamic.skill.empty') }}
+        </div>
       </div>
-    </div>
-  </DdCard>
+    </DdCard>
+  </div>
 </template>

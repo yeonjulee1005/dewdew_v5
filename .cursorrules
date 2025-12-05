@@ -6,10 +6,12 @@
 ## 기술 스택
 - **Framework**: Nuxt 4.2.1 (Vue 3 + SSR)
 - **Language**: TypeScript 5.6.3
-- **Styling**: Sass + Tailwind CSS + Nuxt UI (커스텀 프리픽스: `Dd`)
+- **Styling**: Sass + Tailwind CSS + Nuxt UI 4.2.1 (커스텀 프리픽스: `Dd`)
 - **State Management**: Pinia
 - **Backend**: Supabase (PostgreSQL + Edge Functions)
-- **AI**: OpenAI API (RAG 기반)
+- **AI**: OpenAI API (RAG 기반, @ai-sdk/openai)
+- **Analytics**: Vercel Analytics + Speed Insights
+- **PWA**: @vite-pwa/nuxt
 - **Package Manager**: Bun
 
 ## 아키텍처 원칙
@@ -17,6 +19,7 @@
 ### 1. 컴포넌트 구조 (Atomic Design)
 - `app/components/a/`: Atomic 컴포넌트 (재사용 가능한 기본 컴포넌트)
 - `app/components/chat/`: AI 채팅 관련 컴포넌트
+- `app/components/dynamic/card/`: 동적 렌더링 카드 컴포넌트 (AI 채팅에서 사용)
 - `app/components/intro/`: 인트로 애니메이션 컴포넌트
 - `.client.vue` / `.server.vue` 접미사로 클라이언트/서버 컴포넌트 명시
 
@@ -27,7 +30,11 @@
 
 ### 3. 타입 시스템
 - 도메인별 타입 파일 분리 (`app/types/`)
-- Supabase 타입은 자동 생성 (`bun run supabase:type`)
+- Supabase 타입은 자동 생성:
+  - `bun run supabase:type` - public 스키마
+  - `bun run supabase:type-menu` - menu 스키마
+  - `bun run supabase:type-resume` - resume 스키마
+  - `bun run supabase:type-data` - data 스키마
 - 제네릭 타입 활용으로 재사용성 향상
 
 ### 4. 스타일링 규칙
@@ -91,11 +98,22 @@
 
 ### 서버 API (`server/api/`)
 - RESTful API 패턴 준수
-- 파일명으로 HTTP 메서드 명시 (예: `index.post.ts`)
+- 파일명으로 HTTP 메서드 명시 (예: `index.post.ts`, `greeting.get.ts`)
 - 타입 안전성 보장
+- 구조:
+  - `chat/`: AI 채팅 API
+  - `menu/`: 메뉴 API
+  - `resume/`: 이력서 데이터 API (education, experience, hobbies, profile, projects, skills 등)
 
 ### Supabase Edge Functions
 - `supabase/functions/_shared/`: 공유 모듈 (배포 안됨)
+  - `component-mapper.ts`: 컴포넌트 타입 매핑
+  - `rag.ts`: RAG 로직
+  - `ai-provider.ts`: AI 프로바이더 추상화
+  - `history-optimizer.ts`: 대화 기록 최적화
+  - `url-fetcher.ts`: URL 페처 유틸리티
+  - `supabase.ts`: Supabase 클라이언트
+  - `types.ts`: 타입 정의
 - `supabase/functions/dewdew-rag-portfolio/`: 배포되는 함수
 - TypeScript로 작성
 
@@ -116,11 +134,32 @@
 - `overflow-hidden` / `overflow-y-auto` 적절히 사용
 - 스트리밍 중 DOM 조작 최소화
 
+### PWA 최적화
+- Service Worker 기반 캐싱 전략
+- 이미지: CacheFirst (30일)
+- 폰트: CacheFirst (1년)
+- API: NetworkFirst (5분~1시간)
+- 정적 자산: StaleWhileRevalidate (7일)
+
+### 분석 및 모니터링
+- Vercel Analytics: 프로덕션 환경에서만 활성화 (`import.meta.env.VERCEL`)
+- Speed Insights: Core Web Vitals 실시간 모니터링
+
+## Plugins
+
+### 클라이언트 플러그인
+- `app/plugins/analytics.client.ts`: Vercel Analytics (프로덕션 환경에서만 활성화)
+- `app/plugins/senitize.ts`: DOMPurify를 통한 HTML 정제 (XSS 방지)
+
+### 플러그인 규칙
+- `.client.ts` 접미사로 클라이언트 전용 플러그인 명시
+- 서버에서 실행되면 안 되는 코드는 클라이언트 플러그인으로 분리
+
 ## 에러 처리
 
 ### 클라이언트
 - `app/error.vue`: 전역 에러 페이지
-- `app/components/chat/Error.vue`: 채팅 에러 컴포넌트
+- `app/components/chat/Error.server.vue`: 채팅 에러 컴포넌트
 - Try-catch로 에러 핸들링
 
 ### 서버
@@ -131,8 +170,13 @@
 
 ### 환경 변수
 - `.env` 파일에 필수 변수 설정
-- `SUPABASE_URL`, `SUPABASE_KEY` 필수
-- `OPENAI_API_KEY` (AI 채팅 기능용)
+- 필수 변수:
+  - `SUPABASE_URL`, `SUPABASE_KEY` (Supabase 연결)
+  - `OPENAI_API_KEY` (AI 채팅 기능용)
+- 선택 변수:
+  - `EMAILJS_KEY`, `EMAILJS_TEMPLATE` (연락 폼용)
+  - `DATA_PORTAL_API_KEY` (기상청 API용)
+  - `NUXT_PUBLIC_SITE_URL` (SEO용)
 
 ### 빌드 및 배포
 - 개발: `bun dev` (포트: 4110)
@@ -143,6 +187,18 @@
 - `scripts/version-manager.js`로 버전 관리
 - `bun run version:patch|minor|major`
 
+## 보안
+
+### XSS 방지
+- `vue-dompurify-html` 플러그인으로 HTML 정제
+- 사용자 입력은 항상 DOMPurify를 통해 정제
+- `v-html` 사용 시 주의 (가능하면 피하기)
+
+### 입력 검증
+- Yup을 통한 폼 유효성 검사
+- `useValidation` composable 활용
+- 서버 측 검증도 필수
+
 ## 주의사항
 
 1. **Nuxt UI 프리픽스**: 모든 Nuxt UI 컴포넌트는 `Dd` 프리픽스 사용
@@ -150,6 +206,8 @@
 3. **타입 안전성**: `any` 타입 사용 지양, 제네릭 타입 활용
 4. **성능**: 스트리밍 중 DOM 조작 최소화
 5. **다국어**: 모든 사용자에게 보이는 텍스트는 i18n 사용
+6. **Analytics**: 프로덕션 환경에서만 활성화 (`import.meta.env.VERCEL` 체크)
+7. **HTML 정제**: 사용자 입력 HTML은 반드시 DOMPurify 사용
 
 ## 참고 자료
 - [Nuxt 4 문서](https://nuxt.com/)

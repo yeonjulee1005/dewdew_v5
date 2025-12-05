@@ -65,6 +65,7 @@ export interface Education {
   major: string | null
   start_date: string | null
   end_date: string | null
+  image_url: string | null
   description: string | null
   order_index: number | null
   created_at: string
@@ -122,9 +123,7 @@ export const ALLOWED_COMPONENTS = [
   'experience-timeline',
   'skill-card',
   'skill-radar',
-  'project-list',
   'project-carousel',
-  'project-card',
   'education-card',
   'weaknesses-card',
   'hobby-carousel',

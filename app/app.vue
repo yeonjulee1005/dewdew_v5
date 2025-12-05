@@ -1,7 +1,9 @@
 <script setup lang="ts">
-// import { SpeedInsights } from '@vercel/speed-insights/vue'
-
 const { coords, resume } = useGeolocation()
+
+// Vercel 프로덕션 환경에서만 Speed Insights 활성화
+// 로컬 preview에서는 VERCEL 환경 변수가 없으므로 비활성화
+const isProduction = import.meta.env.VERCEL
 
 const appConfig = useAppConfig()
 const { meta, path } = useRoute()
@@ -16,10 +18,11 @@ const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 const { filteredLocations } = useKorLocation()
 const { dfsXyConvert } = useTranslateCoords()
 
+const config = useRuntimeConfig()
 const seoTitle = t('seoTitle.intro')
 const seoDescription = t('seoDescription.intro')
 const seoUrl = `https://www.dewdew.dev${path}`
-const seoImage = 'https://api.dewdew.dev/storage/v1/object/public/assets/banner/main_banner_v4.webp'
+const seoImage = `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v4.webp`
 
 useHead({
   title: (meta.title as string) ?? t('pageTitle.dewdew'),
@@ -110,15 +113,15 @@ watch(() => coords.value, () => {
 
 <template>
   <DdApp :toaster="appConfig.toaster">
-    <!-- <VitePwaManifest /> -->
+    <VitePwaManifest />
     <NuxtLayout>
       <NuxtLoadingIndicator
         color="repeating-linear-gradient(to right,#f59e42 0%,#fbbf24 100%)"
         :height="5"
       />
       <NuxtPage />
-      <!-- <InstallPwa /> -->
+      <InstallPwa />
     </NuxtLayout>
-    <!-- <SpeedInsights /> -->
+    <SpeedInsights v-if="isProduction" />
   </DdApp>
 </template>
