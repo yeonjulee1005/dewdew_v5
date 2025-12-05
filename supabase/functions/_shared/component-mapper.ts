@@ -132,7 +132,7 @@ const getFallbackComponentType = (context: RAGContext): ComponentType => {
     case 'skills':
       return 'skill-radar'
     case 'projects':
-      return context.projects!.length === 1 ? 'project-card' : 'project-carousel'
+      return 'project-carousel'
     case 'experience':
       return 'experience-list'
     case 'profile':
@@ -164,18 +164,22 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
       return 'profile-card'
     case 'image':
       return 'image-carousel'
-    case 'skill':
+    case 'skill': {
+      // 핵심 역량/선호 기술 관련 키워드가 있으면 skill-radar 우선 반환
+      if (matchKeywords(query, [
+        '핵심역량', '핵심 역량', 'core skills', 'core competency',
+        '어떤 기술을 사용하길 좋아해요', '어떤 기술을 사용하길 좋아해', '어떤 기술 좋아해', '어떤 기술 선호해',
+        '좋아하는 기술', '선호하는 기술', '자주 사용하는 기술', '주로 사용하는 기술',
+        '잘하는 기술', '강점 기술', '강점이 되는 기술', '특기 기술',
+        '어떤 기술 자주 써', '어떤 기술 주로 써', '어떤 기술 잘해', '어떤 기술 강점',
+        '능력치', '기술 수준', '기술 레벨',
+      ])) {
+        return 'skill-radar'
+      }
       // 데이터가 있으면 skill-card, 없으면 skill-radar
       return (context.skills && context.skills.length > 0) ? 'skill-card' : 'skill-radar'
+    }
     case 'project': {
-      // 복수형 또는 여러 개를 의미하는 키워드가 있으면 project-list
-      if (matchKeywords(query, ['프로젝트들', '프로젝트 목록', '모든 프로젝트', '전체 프로젝트', '프로젝트 리스트', 'projects', 'all projects', 'project list', 'project lists'])) {
-        return 'project-list'
-      }
-      // 데이터가 있으면 개수에 따라 결정, 없으면 기본값
-      if (context.projects && context.projects.length > 0) {
-        return context.projects.length === 1 ? 'project-card' : 'project-carousel'
-      }
       return 'project-carousel'
     }
     case 'weakness':

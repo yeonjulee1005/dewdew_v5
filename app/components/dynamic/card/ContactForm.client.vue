@@ -9,6 +9,12 @@ const { t } = useI18n()
 const { patterns } = useValidation()
 const emailRegex = patterns.email
 
+withDefaults(defineProps<{
+  title?: string
+}>(), {
+  title: '',
+})
+
 const schema = object({
   name: string()
     .min(2, t('messages.nameFormat'))
@@ -56,73 +62,84 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 </script>
 
 <template>
-  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
-    <div class="flex flex-col gap-y-4">
-      <p class="text-lg text-neutral-600 dark:text-neutral-400">
-        {{ $t('dynamic.contact.description', '이메일을 통해 연락해주세요!') }}
-      </p>
+  <div class="flex flex-col gap-y-4">
+    <h3
+      v-if="title"
+      class="text-xl font-bold"
+    >
+      {{ title }}
+    </h3>
+    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-2xl font-bold">
+          {{ $t('dynamic.contact.title') }}
+        </h3>
 
-      <DdForm
-        class="flex flex-col gap-y-4"
-        :schema="schema"
-        :state="formData"
-        @submit="onSubmit"
-      >
-        <DdFormField
-          name="name"
-          size="lg"
-          :label="$t('texts.name', '이름')"
-          required
+        <DdForm
+          class="max-w-2xl flex flex-col gap-y-4"
+          :schema="schema"
+          :state="formData"
+          @submit="onSubmit"
         >
-          <DdInput
-            v-model="formData.name"
-            class="w-full"
+          <DdFormField
+            name="name"
             size="xl"
-            :placeholder="$t('placeholder.inputName', '성함을 입력해주세요.')"
-          />
-        </DdFormField>
+            :label="$t('texts.name')"
+            required
+          >
+            <DdInput
+              v-model="formData.name"
+              class="w-full"
+              size="xl"
+              :placeholder="$t('placeholder.inputName')"
+            />
+          </DdFormField>
 
-        <DdFormField
-          name="email"
-          size="lg"
-          :label="$t('texts.email', '이메일')"
-          required
-        >
-          <DdInput
-            v-model="formData.email"
-            type="email"
-            class="w-full"
+          <DdFormField
+            name="email"
             size="xl"
-            :placeholder="$t('placeholder.inputEmail', '이메일을 적어주세요!')"
-          />
-        </DdFormField>
+            :label="$t('texts.email')"
+            required
+          >
+            <DdInput
+              v-model="formData.email"
+              type="email"
+              class="w-full"
+              size="xl"
+              :placeholder="$t('placeholder.inputEmail')"
+            />
+          </DdFormField>
 
-        <DdFormField
-          name="message"
-          size="lg"
-          :label="$t('texts.message', '메시지')"
-          required
-        >
-          <DdTextarea
-            v-model="formData.message"
-            class="w-full"
+          <DdFormField
+            name="message"
             size="xl"
-            :rows="5"
-            autoresize
-            :placeholder="$t('placeholder.inputContent', '내용을 입력해주세요.')"
-          />
-        </DdFormField>
+            :label="$t('texts.message')"
+            required
+          >
+            <DdTextarea
+              v-model="formData.message"
+              class="w-full"
+              size="xl"
+              :rows="5"
+              autoresize
+              :placeholder="$t('placeholder.inputContent')"
+            />
+          </DdFormField>
 
-        <DdButton
-          type="submit"
-          block
-          size="xl"
-          variant="solid"
-          color="primary"
-        >
-          {{ $t('texts.send', '보내기') }}
-        </DdButton>
-      </DdForm>
-    </div>
-  </DdCard>
+          <div class="w-fit">
+            <DdButton
+              class="min-w-24"
+              block
+              type="submit"
+              size="xl"
+              variant="solid"
+              color="primary"
+            >
+              {{ $t('texts.send') }}
+            </DdButton>
+          </div>
+        </DdForm>
+      </div>
+    </DdCard>
+  </div>
 </template>

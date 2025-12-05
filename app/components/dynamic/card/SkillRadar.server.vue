@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import type { ResumeDatabase } from '~/types/supabase-resume'
 
+withDefaults(defineProps<{
+  title?: string
+}>(), {
+  title: '',
+})
+
 const { data: skills } = await useFetch<ResumeDatabase['resume']['Tables']['skills']['Row'][]>('/api/resume/skills', {
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
@@ -19,55 +25,57 @@ const coreSkills = computed(() => {
 </script>
 
 <template>
-  <DdCard :ui="{ body: 'p-2 sm:p-4' }">
-    <div class="flex flex-col gap-y-4">
-      <h3 class="text-xl font-bold flex items-center gap-2">
-        <Icon
-          name="i-lucide-radar"
-          class="w-6 h-6 text-primary-500"
-        />
-        {{ $t('dynamic.skill.core', '핵심 역량') }}
-      </h3>
+  <div class="flex flex-col gap-y-4">
+    <h3
+      v-if="title"
+      class="text-xl font-bold"
+    >
+      {{ title }}
+    </h3>
+    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-2xl font-bold">
+          {{ $t('dynamic.skill.core') }}
+        </h3>
 
-      <div
-        v-if="coreSkills.length > 0"
-        class="flex flex-col gap-y-3"
-      >
         <div
-          v-for="skill in coreSkills"
-          :key="skill.id"
-          class="flex flex-col gap-1"
+          v-if="coreSkills.length > 0"
+          class="flex flex-wrap gap-3"
         >
-          <div class="flex items-center justify-between text-sm">
-            <span class="font-semibold flex items-center gap-1.5">
+          <DdBadge
+            v-for="skill in coreSkills"
+            :key="skill.id"
+            :label="skill.name"
+            variant="subtle"
+            :color="skill.proficiency ? 'primary' : 'neutral'"
+            size="lg"
+            class="px-3 py-1.5"
+          >
+            <template #leading>
               <NuxtImg
                 v-if="skill.icon_url"
                 :src="skill.icon_url"
-                class="w-4 h-4"
+                class="w-4 h-4 mr-1"
                 :alt="skill.name"
               />
-              {{ skill.name }}
-            </span>
-            <span class="text-xs text-neutral-500">{{ skill.proficiency }} / 5</span>
-          </div>
+            </template>
+            <template #trailing>
+              <Icon
+                name="i-lucide-star"
+                class="w-4 h-4 mr-1 text-amber-500 dark:text-amber-400"
+              />
+              <span class="text-sm text-neutral-600 dark:text-neutral-300">{{ skill.proficiency }} / 5</span>
+            </template>
+          </DdBadge>
+        </div>
 
-          <DdMeter
-            :value="skill.proficiency || 0"
-            :min="0"
-            :max="5"
-            color="primary"
-            size="md"
-            indicator
-          />
+        <div
+          v-else
+          class="text-sm text-neutral-500"
+        >
+          {{ $t('dynamic.skill.empty') }}
         </div>
       </div>
-
-      <div
-        v-else
-        class="text-sm text-neutral-500"
-      >
-        {{ $t('dynamic.skill.empty', '스킬 정보가 없습니다.') }}
-      </div>
-    </div>
-  </DdCard>
+    </DdCard>
+  </div>
 </template>

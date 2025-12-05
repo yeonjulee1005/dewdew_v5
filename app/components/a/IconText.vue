@@ -28,7 +28,7 @@ withDefaults(
 <template>
   <div :class="`${defaultClass} ${customClass}`">
     <Icon
-      v-if="useIcon"
+      v-if="useIcon && iconName"
       :name="iconName"
       :class="iconClass"
     />
