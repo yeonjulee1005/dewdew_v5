@@ -79,6 +79,15 @@
 - `nextTick` 사용으로 DOM 업데이트 후 처리
 - MutationObserver는 스트리밍 중 비활성화
 
+### 벡터 검색 및 임베딩 관리
+- **임베딩 초기화**: `initialize-embeddings` Edge Function으로 모든 문서의 임베딩 생성
+- **중요**: `resume` 스키마의 데이터가 변경될 때마다 **반드시** `initialize-embeddings` Edge Function을 다시 invoke() 해야 함
+  - 변경되는 테이블: profile, experience, skills, projects, education, hobbies, social_links, image_archive
+  - 이유: 벡터 검색이 최신 데이터를 반영하려면 임베딩이 최신 상태여야 함
+- **업데이트 방법**: Supabase Dashboard에서 Functions > initialize-embeddings > Invoke function
+- **주의**: 데이터 변경 후 임베딩을 업데이트하지 않으면 벡터 검색 결과가 오래된 데이터를 반환할 수 있음
+- **벡터 검색 방식**: 하이브리드 검색 (키워드 매칭 실패 시 의미 기반 벡터 검색 실행)
+
 ## 상태 관리
 
 ### Pinia Stores

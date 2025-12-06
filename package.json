@@ -26,7 +26,8 @@
     "supabase:type-menu": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema menu > app/types/supabase-menu.ts",
     "supabase:type-resume": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema resume > app/types/supabase-resume.ts",
     "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts",
-    "supabase:deploy": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc"
+    "supabase:deploy-rag-portfolio": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc",
+    "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.76",

@@ -3,6 +3,7 @@ import {
   fetchExternalProfiles,
   summarizeGitHubProfile,
 } from './url-fetcher.ts'
+import { getEmbedding } from './embeddings.ts'
 import type {
   RAGContext,
   AISettingsMap,
@@ -29,13 +30,231 @@ const extractYear = (text: string): number | null => {
   return match ? parseInt(match[1]) : null
 }
 
-// RAG: 질문 기반 데이터 검색
-export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
-  const supabase = getSupabaseClient()
-  const context: RAGContext = {}
-  const queryLower = query.toLowerCase()
+// 컨텍스트에 데이터가 있는지 확인
+const hasRelevantData = (context: RAGContext): boolean => {
+  return !!(
+    context.profile
+    || (context.experience && context.experience.length > 0)
+    || (context.skills && context.skills.length > 0)
+    || (context.projects && context.projects.length > 0)
+    || (context.education && context.education.length > 0)
+    || (context.hobbies && context.hobbies.length > 0)
+    || (context.socialLinks && context.socialLinks.length > 0)
+    || (context.images && context.images.length > 0)
+  )
+}
 
-  // 🆕 종합적인 질문 감지 (여러 데이터 조합)
+// 벡터 검색 결과를 컨텍스트로 변환
+const enrichContextFromVectorMatches = async (
+  context: RAGContext,
+  matches: Array<{
+    document_type: string
+    document_id: string
+    similarity: number
+    metadata: any
+  }>,
+  supabase: ReturnType<typeof getSupabaseClient>,
+): Promise<void> => {
+  // 유사도가 높은 순으로 정렬
+  const sortedMatches = matches.sort((a, b) => b.similarity - a.similarity)
+
+  // 이미 데이터가 있는지 확인하는 매핑
+  const hasDataMap: Record<string, () => boolean> = {
+    profile: () => !!context.profile,
+    experience: () => !!(context.experience && context.experience.length > 0),
+    skills: () => !!(context.skills && context.skills.length > 0),
+    project: () => !!(context.projects && context.projects.length > 0),
+    education: () => !!(context.education && context.education.length > 0),
+    hobbies: () => !!(context.hobbies && context.hobbies.length > 0),
+    social_links: () => !!(context.socialLinks && context.socialLinks.length > 0),
+    image_archive: () => !!(context.images && context.images.length > 0),
+    weaknesses: () => !!(context.profile?.weaknesses && context.profile.weaknesses.length > 0),
+    contact: () => !!(context.profile && context.socialLinks && context.socialLinks.length > 0),
+  }
+
+  // 필터링: 유사도 체크 및 이미 데이터가 있는지 확인
+  const validMatches = sortedMatches.filter((match) => {
+    // 유사도가 낮으면 스킵 (0.7 미만)
+    if (match.similarity < 0.7) {
+      return false
+    }
+    // 이미 키워드 매칭으로 데이터가 있으면 스킵
+    const hasData = hasDataMap[match.document_type]
+    if (hasData && hasData()) {
+      return false
+    }
+    return true
+  })
+
+  // 각 매치를 병렬로 처리
+  const handlers: Record<string, (match: typeof validMatches[0]) => Promise<void>> = {
+    profile: async (match) => {
+      if (!context.profile) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('profile')
+          .select('*')
+          .eq('id', match.document_id)
+          .single<Profile>()
+        if (data) {
+          context.profile = data
+        }
+      }
+    },
+    experience: async (match) => {
+      if (!context.experience) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('experience')
+          .select('*')
+          .eq('id', match.document_id)
+          .returns<Experience[]>()
+        if (data && data.length > 0) {
+          context.experience = data
+        }
+      }
+    },
+    skills: async () => {
+      if (!context.skills) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('skills')
+          .select('*')
+          .order('order_index', { ascending: false })
+          .returns<Skill[]>()
+        if (data) {
+          context.skills = data
+        }
+      }
+    },
+    project: async (match) => {
+      if (!context.projects) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('projects')
+          .select('*')
+          .eq('id', match.document_id)
+          .eq('deleted', false)
+          .returns<Project[]>()
+        if (data && data.length > 0) {
+          context.projects = data
+        }
+      }
+    },
+    education: async (match) => {
+      if (!context.education) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('education')
+          .select('*')
+          .eq('id', match.document_id)
+          .returns<Education[]>()
+        if (data && data.length > 0) {
+          context.education = data
+        }
+      }
+    },
+    hobbies: async () => {
+      if (!context.hobbies) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('hobbies')
+          .select('*')
+          .order('order_index')
+          .returns<Hobby[]>()
+        if (data) {
+          context.hobbies = data
+        }
+      }
+    },
+    social_links: async () => {
+      if (!context.socialLinks) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('social_links')
+          .select('*')
+          .order('order_index', { ascending: false })
+          .returns<SocialLink[]>()
+        if (data) {
+          context.socialLinks = data
+        }
+      }
+    },
+    image_archive: async (match) => {
+      if (!context.images) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('image_archive')
+          .select('*')
+          .eq('id', match.document_id)
+          .eq('deleted', false)
+          .returns<ImageArchive[]>()
+        if (data && data.length > 0) {
+          context.images = data
+        }
+      }
+    },
+    weaknesses: async (match) => {
+      if (!context.profile?.weaknesses || context.profile.weaknesses.length === 0) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('profile')
+          .select('*')
+          .eq('id', match.document_id)
+          .single<Profile>()
+        if (data && data.weaknesses && data.weaknesses.length > 0) {
+          context.profile = data
+        }
+      }
+    },
+    contact: async (match) => {
+      if (!context.profile) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('profile')
+          .select('*')
+          .eq('id', match.document_id)
+          .single<Profile>()
+        if (data) {
+          context.profile = data
+        }
+      }
+      if (!context.socialLinks) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('social_links')
+          .select('*')
+          .order('order_index', { ascending: false })
+          .returns<SocialLink[]>()
+        if (data) {
+          context.socialLinks = data
+        }
+      }
+    },
+  }
+
+  await Promise.all(validMatches.map(async (match) => {
+    try {
+      const handler = handlers[match.document_type]
+      if (handler) {
+        await handler(match)
+      }
+    }
+    catch (error) {
+      console.error(`Error enriching context for ${match.document_type}:`, error)
+    }
+  }))
+}
+
+// 키워드 매칭 시도 (기존 로직)
+const tryKeywordMatching = async (
+  queryLower: string,
+  context: RAGContext,
+  supabase: ReturnType<typeof getSupabaseClient>,
+): Promise<boolean> => {
+  let matched = false
+
+  // 종합적인 질문 감지
   const isComprehensiveQuestion = matchKeywords(queryLower, [
     '어떤 개발자',
     '어떤 사람',
@@ -52,7 +271,6 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   ])
 
   if (isComprehensiveQuestion) {
-    // 프로필 + 스킬 + 프로젝트 요약 모두 가져오기
     const { data: profile } = await supabase
       .schema('resume')
       .from('profile')
@@ -64,7 +282,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .schema('resume')
       .from('skills')
       .select('*')
-      .eq('proficiency', 5) // 능숙한 것만
+      .eq('proficiency', 5)
       .limit(10)
     context.skills = skills
 
@@ -73,13 +291,14 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .from('projects')
       .select('title, tech_stack, highlights')
       .order('order_index', { ascending: false })
-      .limit(5) // 최근 5개만
+      .limit(5)
     context.projects = projects
 
-    return context // 바로 반환
+    matched = true
+    return true
   }
 
-  // 인사말 - 프로필 데이터 가져오기
+  // 인사말
   if (matchKeywords(queryLower, ['안녕', '하이', 'hi', 'hello', '반가워', '처음', '인사', '인사말', '인사하다', '인사하기', '인사하세요', '인사합니다', '인사합니다'])) {
     const { data } = await supabase
       .schema('resume')
@@ -87,6 +306,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .select('*')
       .single<Profile>()
     context.profile = data
+    matched = true
   }
 
   // 프로필
@@ -97,6 +317,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .select('*')
       .single<Profile>()
     context.profile = data
+    matched = true
   }
 
   // 단점/부족한 점
@@ -107,10 +328,10 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .select('*')
       .single<Profile>()
     context.profile = data
+    matched = true
   }
 
   // 경력
-  // "최근 경력", "경력이", "경력은" 같은 패턴도 명시적으로 체크
   if (matchKeywords(queryLower, ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '최근 경력', '경력이', '경력은', '어떻게 되', '어떻게 되요', '어떻게 되나'])) {
     const { data } = await supabase
       .schema('resume')
@@ -119,6 +340,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index', { ascending: false })
       .returns<Experience[]>()
     context.experience = data
+    matched = true
   }
 
   // 스킬
@@ -130,6 +352,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index', { ascending: false })
       .returns<Skill[]>()
     context.skills = data
+    matched = true
   }
 
   // 프로젝트
@@ -142,6 +365,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index', { ascending: false })
       .returns<Project[]>()
     context.projects = data
+    matched = true
   }
 
   // 학력
@@ -153,6 +377,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index', { ascending: false })
       .returns<Education[]>()
     context.education = data
+    matched = true
   }
 
   // 취미
@@ -164,6 +389,7 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .order('order_index')
       .returns<Hobby[]>()
     context.hobbies = data
+    matched = true
   }
 
   // 소셜 링크 및 외부 프로필
@@ -181,18 +407,16 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .returns<SocialLink[]>()
     context.socialLinks = data
 
-    // GitHub/LinkedIn 상세 질문인 경우 외부 데이터도 가져오기
     if ((isGitHubQuestion || isLinkedInQuestion) && data && data.length > 0) {
       try {
         const externalData = await fetchExternalProfiles(data)
 
-        // GitHub 데이터가 있으면 요약 추가
         if (externalData.github) {
           const summary = summarizeGitHubProfile(externalData.github)
           context.externalProfiles = {
             github: {
               profile: externalData.github.profile,
-              repos: externalData.github.repos.slice(0, 5), // 상위 5개만
+              repos: externalData.github.repos.slice(0, 5),
               summary,
             },
             linkedin: externalData.linkedin,
@@ -206,9 +430,9 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       }
       catch (error) {
         console.error('External profile fetch error:', error)
-        // 에러가 나도 기본 소셜 링크는 제공
       }
     }
+    matched = true
   }
 
   // 이미지 아카이브
@@ -232,6 +456,47 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
       .returns<ImageArchive[]>()
 
     context.images = data
+    matched = true
+  }
+
+  return matched
+}
+
+// RAG: 질문 기반 데이터 검색 (하이브리드: 키워드 매칭 + 벡터 검색)
+export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
+  const supabase = getSupabaseClient()
+  const context: RAGContext = {}
+  const queryLower = query.toLowerCase()
+
+  // 1. 먼저 키워드 매칭 시도
+  const keywordMatched = await tryKeywordMatching(queryLower, context, supabase)
+
+  // 2. 키워드 매칭 성공하고 데이터가 충분하면 바로 반환
+  if (keywordMatched && hasRelevantData(context)) {
+    return context
+  }
+
+  // 3. 키워드 매칭 실패 또는 데이터 부족 → 벡터 검색 시도
+  try {
+    const queryEmbedding = await getEmbedding(query, 'openai')
+
+    const { data: matches, error } = await supabase.rpc('match_documents', {
+      query_embedding: `[${queryEmbedding.join(',')}]`,
+      match_threshold: 0.7,
+      match_count: 5,
+    })
+
+    if (error) {
+      console.error('Vector search error:', error)
+    }
+    else if (matches && matches.length > 0) {
+      // 벡터 검색 결과로 컨텍스트 보강
+      await enrichContextFromVectorMatches(context, matches, supabase)
+    }
+  }
+  catch (error) {
+    console.error('Vector search failed, using keyword matching results only:', error)
+    // 벡터 검색 실패해도 키워드 매칭 결과는 반환
   }
 
   return context

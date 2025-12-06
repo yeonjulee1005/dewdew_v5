@@ -149,6 +149,39 @@ export type ResumeDatabase = {
         }
         Relationships: []
       }
+      document_embeddings: {
+        Row: {
+          content: string
+          created_at: string | null
+          document_id: string
+          document_type: string
+          embedding: string | null
+          id: string
+          metadata: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          document_id: string
+          document_type: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          document_id?: string
+          document_type?: string
+          embedding?: string | null
+          id?: string
+          metadata?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       education: {
         Row: {
           created_at: string | null
@@ -499,7 +532,22 @@ export type ResumeDatabase = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_documents: {
+        Args: {
+          filter_document_type?: string
+          match_count?: number
+          match_threshold?: number
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          document_id: string
+          document_type: string
+          id: string
+          metadata: Json
+          similarity: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

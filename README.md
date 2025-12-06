@@ -283,6 +283,22 @@ app/components/dynamic/card/   # 동적 렌더링 카드 컴포넌트
 └── WeaknessesCard.server.vue
 ```
 
+### 🔍 벡터 검색 및 임베딩 관리
+
+#### 임베딩 초기화
+- **초기 생성**: `initialize-embeddings` Edge Function을 호출하여 모든 문서의 임베딩 생성
+- **업데이트**: `resume` 스키마의 데이터(profile, experience, skills, projects, education, hobbies, social_links, image_archive 등)가 변경될 때마다 **반드시** `initialize-embeddings` Edge Function을 다시 invoke() 해야 함
+- **이유**: 벡터 검색이 최신 데이터를 반영하려면 임베딩이 최신 상태여야 함
+
+#### 임베딩 업데이트 방법
+1. **Supabase Dashboard**:
+  - Functions > `initialize-embeddings` > Invoke function
+
+#### 주의사항
+- 데이터 변경 후 임베딩을 업데이트하지 않으면 벡터 검색 결과가 오래된 데이터를 반환할 수 있음
+- 임베딩 생성에는 시간이 걸릴 수 있으므로 (문서 수에 따라) 비동기로 처리됨
+- 벡터 검색은 하이브리드 방식으로 작동: 키워드 매칭 실패 시 의미 기반 벡터 검색 실행
+
 ---
 
 ## 🌟 주요 기능
@@ -377,7 +393,12 @@ bun run supabase:type-resume   # resume 스키마 타입 생성
 bun run supabase:type-data     # data 스키마 타입 생성
 
 # Functions 배포
-bun run supabase:deploy
+bun run supabase:deploy-rag-portfolio        # RAG 포트폴리오 함수 배포
+bun run supabase:deploy-initialize-embeddings # 임베딩 초기화 함수 배포
+
+# 초기 임베딩 생성 (배포 후 필수)
+# Supabase Dashboard에서 initialize-embeddings 함수를 invoke() 하거나
+# resume 스키마 데이터 변경 시에도 반드시 다시 invoke() 해야 함
 ```
 
 ---
