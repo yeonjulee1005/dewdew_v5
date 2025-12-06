@@ -86,6 +86,33 @@ export type ResumeDatabase = {
         }
         Relationships: []
       }
+      chat_history: {
+        Row: {
+          created_at: string
+          deleted: boolean
+          id: string
+          request_message: string
+          updated_at: string
+          user_agent: string
+        }
+        Insert: {
+          created_at?: string
+          deleted?: boolean
+          id?: string
+          request_message: string
+          updated_at?: string
+          user_agent: string
+        }
+        Update: {
+          created_at?: string
+          deleted?: boolean
+          id?: string
+          request_message?: string
+          updated_at?: string
+          user_agent?: string
+        }
+        Relationships: []
+      }
       component_types: {
         Row: {
           created_at: string | null
