@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { isMobile } = useDevice()
 const { url } = useImageStorage()
 
 withDefaults(defineProps<{
@@ -112,6 +113,7 @@ watch(selectedYear, () => {
             v-model="selectedYear"
             :items="tabs"
             size="xl"
+            :orientation="isMobile ? 'horizontal' : 'vertical'"
             :content="false"
           />
 

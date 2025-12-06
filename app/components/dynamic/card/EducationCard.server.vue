@@ -53,7 +53,7 @@ const formatDate = (dateString: string | null) => {
             />
             <div class="flex flex-col gap-y-4">
               <div class="flex flex-col gap-y-1">
-                <div class="flex items-center gap-x-2">
+                <div class="flex flex-wrap items-center gap-2">
                   <span class="text-xl font-bold">
                     {{ education.school_name }}
                   </span>
@@ -67,7 +67,7 @@ const formatDate = (dateString: string | null) => {
                     orientation="vertical"
                     class="h-4"
                   />
-                  <div class="flex items-center gap-x-2 text-sm text-neutral-500 dark:text-neutral-500">
+                  <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-500">
                     <span>{{ formatDate(education.start_date) }}</span>
                     <span>~</span>
                     <span>{{ education.end_date ? formatDate(education.end_date) : $t('dynamic.education.present') }}</span>
