@@ -65,7 +65,7 @@ const categoryColor = (category: string) => {
             class="flex flex-col gap-y-2 mb-4 last:mb-0"
           >
             <DdSeparator v-if="index > 0" />
-            <h4 class="text-lg font-semibold text-neutral-500 uppercase tracking-wider">
+            <h4 class="text-lg font-semibold break-keep truncate text-neutral-500 uppercase tracking-wider">
               {{ category }}
             </h4>
             <div class="flex flex-wrap gap-2.5">

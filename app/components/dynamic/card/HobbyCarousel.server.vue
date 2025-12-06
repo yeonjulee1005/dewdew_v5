@@ -37,7 +37,6 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
             v-slot="{ item: hobby }"
             :items="hobbiesData"
             arrows
-            dots
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 w-20 h-10', prev: '!left-0', next: '!right-0' }"
           >
             <div class="min-h-[220px] flex flex-col gap-y-3">
