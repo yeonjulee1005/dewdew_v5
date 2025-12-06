@@ -10,7 +10,7 @@ const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
 </script>
 
 <template>
-  <div class="flex justify-center gap-x-4">
+  <div class="flex flex-wrap justify-start gap-x-4">
     <ATooltipButton
       v-for="(menu, index) in externalMenu"
       :key="index"

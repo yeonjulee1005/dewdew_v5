@@ -110,7 +110,7 @@ onUnmounted(() => {
             }"
           >
             <template #title="{ item }">
-              <div class="flex items-center gap-x-2">
+              <div class="flex flex-wrap items-center gap-2">
                 <span>
                   {{ item.title }}
                 </span>
