@@ -39,6 +39,39 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'ko' },
+      link: [
+        { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
+        { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
+        // 폰트 preload (렌더링 차단 최소화)
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/woff2',
+          href: '/fonts/PretendardVariable.woff2',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/woff2',
+          href: '/fonts/SUIT-Variable.woff2',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/woff2',
+          href: '/fonts/SourceCodeVFUpright.woff2',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/ttf',
+          href: '/fonts/Anton-Regular.ttf',
+          crossorigin: 'anonymous',
+        },
+      ],
     },
   },
   css: [
@@ -113,6 +146,27 @@ export default defineNuxtConfig({
         },
         cors: true,
       },
+      // 폰트 파일 캐싱 최적화
+      '/fonts/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+        cors: true,
+      },
+      // CSS 파일 캐싱 최적화
+      '/_nuxt/**/*.css': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+        cors: true,
+      },
+      // 이미지 프록시 API 캐싱 최적화 (Supabase Storage 이미지)
+      '/api/images/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+        cors: true,
+      },
     },
   },
   vite: {
@@ -153,6 +207,16 @@ export default defineNuxtConfig({
   },
   image: {
     format: ['svg', 'png', 'jpg', 'jpeg', 'webp'],
+    quality: 80,
+    screens: {
+      'xs': 320,
+      'sm': 640,
+      'md': 768,
+      'lg': 1024,
+      'xl': 1280,
+      'xxl': 1536,
+      '2xl': 1536,
+    },
   },
   ogImage: {
     fonts: [
@@ -200,7 +264,22 @@ export default defineNuxtConfig({
             networkTimeoutSeconds: 3,
           },
         },
-        // 이미지: 캐시 우선 (오래된 이미지도 괜찮음)
+        // Supabase Storage 이미지: 캐시 우선 (변경이 거의 없으므로 긴 캐시)
+        {
+          urlPattern: /^https:\/\/.*\.supabase\.co\/storage\/v1\/object\/.*\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'supabase-images-cache',
+            expiration: {
+              maxEntries: 200,
+              maxAgeSeconds: 365 * 24 * 60 * 60, // 1년 (이미지는 거의 변경되지 않음)
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        // 일반 이미지: 캐시 우선 (오래된 이미지도 괜찮음)
         {
           urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,
           handler: 'CacheFirst',
@@ -246,7 +325,7 @@ export default defineNuxtConfig({
             },
           },
         },
-        // Supabase API: 네트워크 우선 (최신 데이터 중요)
+        // Supabase Storage API (이미지 제외): 네트워크 우선 (최신 데이터 중요)
         {
           urlPattern: /^https:\/\/.*\.supabase\.co\/.*$/,
           handler: 'NetworkFirst',
@@ -259,6 +338,10 @@ export default defineNuxtConfig({
             networkTimeoutSeconds: 5,
             cacheableResponse: {
               statuses: [0, 200],
+            },
+            // 이미지는 위의 Supabase Storage 이미지 캐싱 전략에서 처리
+            matchOptions: {
+              ignoreSearch: false,
             },
           },
         },

@@ -159,6 +159,11 @@ defineEmits([
           :class="imageClass"
           :src="imageUrl"
           :width="imageSize"
+          :height="imageSize"
+          :sizes="`${imageSize}px`"
+          format="webp"
+          :quality="80"
+          loading="lazy"
         />
         <span
           v-if="useLeadingCircleCount"
@@ -182,6 +187,11 @@ defineEmits([
           :class="imageTrailClass"
           :src="imageTrailUrl"
           :width="imageTrailSize"
+          :height="imageTrailSize"
+          :sizes="`${imageTrailSize}px`"
+          format="webp"
+          :quality="80"
+          loading="lazy"
         />
       </template>
     </DdButton>

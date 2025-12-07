@@ -5,7 +5,7 @@
     "email": "yeonju.lee1005@gmail.com"
   },
   "private": true,
-  "version": "1.2512.9",
+  "version": "1.2512.10",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
@@ -27,7 +27,8 @@
     "supabase:type-resume": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema resume > app/types/supabase-resume.ts",
     "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts",
     "supabase:deploy-rag-portfolio": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc",
-    "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc"
+    "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc",
+    "fonts:download": "node scripts/download-fonts.js"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.76",
