@@ -217,6 +217,8 @@ export default defineNuxtConfig({
       'xxl': 1536,
       '2xl': 1536,
     },
+    // Supabase Storage 도메인 허용 (외부 이미지 최적화)
+    domains: process.env.SUPABASE_URL ? [new URL(process.env.SUPABASE_URL).hostname] : [],
   },
   ogImage: {
     fonts: [

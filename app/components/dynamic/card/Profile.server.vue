@@ -45,7 +45,11 @@ const personalityData = computed(() => {
           class="w-fit h-full object-contain max-h-100 rounded-md"
           format="webp"
           :quality="80"
-          alt="greeting"
+          :width="400"
+          :height="400"
+          sizes="(max-width: 1024px) 200px, 400px"
+          :alt="profilesData?.profile?.full_name || 'Profile image'"
+          loading="lazy"
         />
         <div class="flex flex-col items-start gap-y-2">
           <h3 class="flex flex-wrap justify-start items-end gap-x-2">
