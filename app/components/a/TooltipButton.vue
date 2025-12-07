@@ -163,6 +163,7 @@ defineEmits([
           :sizes="`${imageSize}px`"
           format="webp"
           :quality="80"
+          :alt="buttonText || 'Button image'"
           loading="lazy"
         />
         <span
@@ -191,6 +192,7 @@ defineEmits([
           :sizes="`${imageTrailSize}px`"
           format="webp"
           :quality="80"
+          :alt="buttonText || 'Button image'"
           loading="lazy"
         />
       </template>

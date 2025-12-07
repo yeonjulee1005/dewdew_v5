@@ -53,7 +53,7 @@ useHead({
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/image/favicon-96x96.png' },
     { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
-    // LCP 이미지 프리로드 (greeting 배너) - 프록시 우회하여 직접 Supabase Storage URL 사용
+    // LCP 이미지 프리로드 (greeting 배너) - Nuxt Image가 자동으로 최적화
     {
       rel: 'preload',
       as: 'image',

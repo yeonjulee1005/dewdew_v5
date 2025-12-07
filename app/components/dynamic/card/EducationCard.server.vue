@@ -49,7 +49,11 @@ const formatDate = (dateString: string | null) => {
               class="w-24 h-auto object-cover rounded-md"
               format="webp"
               :quality="80"
+              :width="200"
+              :height="200"
+              sizes="96px"
               :alt="education.school_name"
+              loading="lazy"
             />
             <div class="flex flex-col gap-y-4">
               <div class="flex flex-col gap-y-1">
