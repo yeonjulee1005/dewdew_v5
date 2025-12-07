@@ -48,7 +48,7 @@ const formatDate = (dateString: string | null) => {
               :src="url(true, education.image_url.split('/public')[1] ?? '')"
               class="w-24 h-auto object-cover rounded-md"
               format="webp"
-              :quality="80"
+              :quality="60"
               :width="200"
               :height="200"
               sizes="96px"

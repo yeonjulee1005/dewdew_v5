@@ -167,11 +167,12 @@ const isImageLoading = (imageUrl: string) => {
                       </div>
                       <!-- 이미지 -->
                       <NuxtImg
+                        v-if="image.image_url.split('/public')[1]"
                         :src="url(true, image.image_url.split('/public')[1] ?? '')"
-                        class="w-full h-auto max-h-[500px] object-contain transition-opacity duration-300"
+                        class="w-full h-full max-h-[600px] object-contain"
                         :class="{ 'opacity-0': isImageLoading(image.image_url), 'opacity-100': !isImageLoading(image.image_url) }"
                         format="webp"
-                        :quality="80"
+                        :quality="60"
                         :alt="image.title || 'Image'"
                         loading="lazy"
                         @load="handleImageLoad(image.image_url)"
@@ -219,9 +220,10 @@ const isImageLoading = (imageUrl: string) => {
                     @click="selectThumbnail(index)"
                   >
                     <NuxtImg
-                      v-if="image.image_url"
+                      v-if="image.image_url && image.image_url.split('/public')[1]"
                       :src="url(true, image.image_url.split('/public')[1] ?? '')"
-                      class="w-full h-full object-cover"
+                      class="w-full h-full"
+                      fit="cover"
                       format="webp"
                       :quality="60"
                       :alt="image.title || 'Thumbnail'"
