@@ -43,6 +43,9 @@ useHead({
   link: [
     { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
     { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
+    // Supabase Storage preconnect (LCP 이미지 로드 최적화)
+    { rel: 'dns-prefetch', href: config.public.supabaseUrl },
+    { rel: 'preconnect', href: config.public.supabaseUrl, crossorigin: 'anonymous' },
     { rel: 'canonical', href: seoUrl },
     { rel: 'manifest', href: '/manifest.webmanifest' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/image/apple-touch-icon.png' },
@@ -50,13 +53,11 @@ useHead({
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/image/favicon-96x96.png' },
     { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
-    // LCP 이미지 프리로드 (greeting 배너)
+    // LCP 이미지 프리로드 (greeting 배너) - 프록시 우회하여 직접 Supabase Storage URL 사용
     {
       rel: 'preload',
       as: 'image',
-      href: import.meta.env.PROD
-        ? '/api/images/assets/banner/main_banner_v5.webp'
-        : `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`,
+      href: `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`,
       fetchpriority: 'high',
     },
   ],
