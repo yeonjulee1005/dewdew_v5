@@ -136,6 +136,10 @@ const isImageLoading = (imageUrl: string) => {
             :items="tabs"
             size="xl"
             :orientation="isMobile ? 'vertical' : 'horizontal'"
+            :ui="{
+              root: 'flex-col',
+              list: isMobile ? 'relative w-full flex p-1 group' : 'relative flex p-1 group',
+            }"
           >
             <template #content="{ item }">
               <!-- 선택된 년도의 이미지 Carousel -->
@@ -169,8 +173,14 @@ const isImageLoading = (imageUrl: string) => {
                       <NuxtImg
                         v-if="image.image_url.split('/public')[1]"
                         :src="url(true, image.image_url.split('/public')[1] ?? '')"
-                        class="w-full h-full max-h-[600px] object-contain"
-                        :class="{ 'opacity-0': isImageLoading(image.image_url), 'opacity-100': !isImageLoading(image.image_url) }"
+                        class="w-full h-full object-contain"
+                        :class="[
+                          {
+                            'opacity-0': isImageLoading(image.image_url),
+                            'opacity-100': !isImageLoading(image.image_url),
+                          },
+                          isMobile ? 'max-h-[300px]' : 'max-h-[600px]',
+                        ]"
                         format="webp"
                         :quality="60"
                         :alt="image.title || 'Image'"
@@ -222,8 +232,7 @@ const isImageLoading = (imageUrl: string) => {
                     <NuxtImg
                       v-if="image.image_url && image.image_url.split('/public')[1]"
                       :src="url(true, image.image_url.split('/public')[1] ?? '')"
-                      class="w-full h-full"
-                      fit="cover"
+                      class="w-full h-full object-cover"
                       format="webp"
                       :quality="60"
                       :alt="image.title || 'Thumbnail'"

@@ -29,7 +29,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="h-fit bg-neutral-50 dark:bg-neutral-900 p-4 space-y-8">
+  <div class="h-fit bg-neutral-50 dark:bg-neutral-900 p-4 space-y-8 mb-16">
     <Concept />
     <DdSeparator />
     <p class="max-w-4xl mx-auto text-2xl font-bold break-keep">
