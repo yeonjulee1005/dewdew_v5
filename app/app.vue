@@ -41,6 +41,8 @@ useHead({
       : translatedTitle
   },
   link: [
+    { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
+    { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
     { rel: 'canonical', href: seoUrl },
     { rel: 'manifest', href: '/manifest.webmanifest' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/image/apple-touch-icon.png' },
@@ -48,6 +50,15 @@ useHead({
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/image/favicon-96x96.png' },
     { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
+    // LCP 이미지 프리로드 (greeting 배너)
+    {
+      rel: 'preload',
+      as: 'image',
+      href: import.meta.env.PROD
+        ? '/api/images/assets/banner/main_banner_v5.webp'
+        : `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`,
+      fetchpriority: 'high',
+    },
   ],
   meta: [
     { name: 'naver-site-verification', content: '7c406de71b03c1e444a4fe2630a29bd7a8e17559' },
