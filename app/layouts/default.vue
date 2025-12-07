@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { path } = useRoute()
 const { isDesktopOrTablet, isMobileOrTablet } = useDevice()
 const { url } = useImageStorage()
 const { t } = useI18n()
@@ -15,7 +16,10 @@ const handlePagination = (path: string, external: boolean = false) => {
 </script>
 
 <template>
-  <div class="w-dvw xl:w-[1024px] h-screen">
+  <div
+    class="w-dvw xl:w-[1024px]"
+    :class="path === '/ai' ? 'h-screen' : 'h-full'"
+  >
     <header class="h-20 flex items-center justify-between gap-x-4 px-4">
       <NuxtImg
         class="cursor-pointer rounded-full ring-2 ring-amber-500 hover:ring-amber-500/50 transition-all duration-200 ease-in-out m-1.5"

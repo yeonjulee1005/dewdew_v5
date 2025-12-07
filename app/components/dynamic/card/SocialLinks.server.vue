@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { isMobile } = useDevice()
+
 withDefaults(defineProps<{
   title?: string
 }>(), {
@@ -28,7 +30,8 @@ const { data: socialLinksData } = await useFetch('/api/resume/socialLinks', {
         </h3>
         <div
           v-if="socialLinksData && socialLinksData.length > 0"
-          class="flex flex-wrap gap-4 justify-center"
+          class="flex flex-wrap gap-4"
+          :class="isMobile ? 'justify-start' : 'justify-center'"
         >
           <ATooltipButton
             v-for="(link, index) in socialLinksData"

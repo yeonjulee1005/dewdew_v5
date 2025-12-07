@@ -39,7 +39,7 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
             arrows
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 w-20 h-10', prev: '!left-0', next: '!right-0' }"
           >
-            <div class="min-h-[220px] flex flex-col gap-y-3">
+            <div class="min-h-[240px] flex flex-col gap-y-3">
               <div class="flex flex-col items-center gap-y-3">
                 <DdAvatar
                   v-if="hobby.icon_url"
