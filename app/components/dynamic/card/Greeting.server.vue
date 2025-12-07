@@ -7,9 +7,6 @@ withDefaults(defineProps<{
 }>(), {
   title: '',
 })
-
-// LCP 이미지는 프록시를 우회하여 직접 Supabase Storage URL 사용 (지연 최소화)
-const bannerImageUrl = `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`
 </script>
 
 <template>
@@ -23,13 +20,13 @@ const bannerImageUrl = `${config.public.supabaseUrl}/storage/v1/object/public/as
     <DdCard :ui="{ body: 'p-2 sm:p-4' }">
       <div class="relative w-full flex flex-col gap-y-2">
         <NuxtImg
-          :src="bannerImageUrl"
-          class="w-full h-full object-cover rounded-md max-h-[270px] min-h-[100px]"
+          :src="`${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`"
+          class="w-full h-full object-cover rounded-md max-h-[300px] min-h-[100px]"
           format="webp"
           :quality="80"
           :width="1024"
           :height="270"
-          sizes="(max-width: 1024px) 100vw, 1024px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
           loading="eager"
           fetchpriority="high"
           alt="greeting"
