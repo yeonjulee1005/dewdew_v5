@@ -19,6 +19,7 @@ type ExtendedUIMessage = {
 const { isMobile } = useDevice()
 const { width } = useWindowSize()
 const { url } = useImageStorage()
+const { t } = useI18n()
 const {
   messages,
   status,
@@ -332,10 +333,6 @@ onUnmounted(() => {
         :assistant="{
           variant: 'subtle',
           side: 'left',
-          avatar: {
-            src: url(true, '/assets/logo/dewdew_v4_logo.webp'),
-            size: 'xl',
-          },
           ui: {
             root: isMobile ? 'max-w-full ' : 'max-w-[80%]',
             content: 'text-lg break-keep bg-amber-100 dark:bg-amber-600/50 ring-0',
@@ -345,12 +342,22 @@ onUnmounted(() => {
           autoScroll: isMobile ? 'bottom-28' : 'bottom-54',
         }"
       >
+        <!-- Assistant 메시지 Avatar -->
+        <template #leading="{ message }">
+          <DdAvatar
+            v-if="message.role === 'assistant'"
+            :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
+            size="xl"
+            :alt="t('texts.logo')"
+          />
+        </template>
         <!-- 🆕 생각 중 인디케이터 -->
         <template #indicator>
-          <div class="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 py-2 px-4">
+          <div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 py-2 px-4">
             <DdAvatar
               :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
               size="sm"
+              :alt="t('texts.logo')"
             />
             <div class="flex items-center gap-1.5">
               <Icon
@@ -402,6 +409,7 @@ onUnmounted(() => {
           variant="ghost"
           color="neutral"
           size="lg"
+          :aria-label="$t('ai.scrollLeft')"
           class="absolute left-4 top-1/2 -translate-y-1/2 z-10 opacity-90 dark:bg-neutral-900/80 backdrop-blur-sm cursor-pointer"
           @click="scrollSuggestions('left')"
         />
@@ -412,6 +420,7 @@ onUnmounted(() => {
           variant="ghost"
           color="neutral"
           size="lg"
+          :aria-label="$t('ai.scrollRight')"
           class="absolute right-4 top-1/2 -translate-y-1/2 z-10 opacity-90 dark:bg-neutral-900/80 backdrop-blur-sm cursor-pointer"
           @click="scrollSuggestions('right')"
         />
@@ -470,12 +479,14 @@ onUnmounted(() => {
             variant="outline"
             color="neutral"
             trailing-icon="i-lucide-chevron-up"
+            :aria-label="$t('ai.quickQuestion')"
             :content="{
               side: 'top',
               sideOffset: 16,
             }"
             :ui="{
               base: 'bg-neutral-200/50 dark:bg-neutral-800/50 w-fit',
+              placeholder: 'text-neutral-600 dark:text-neutral-500',
               itemLabel: 'break-keep whitespace-normal',
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
             }"
@@ -510,6 +521,7 @@ onUnmounted(() => {
               size="md"
               variant="ghost"
               color="neutral"
+              :aria-label="$t('ai.selectModel')"
               :ui="{
                 base: 'w-fit text-md',
                 itemLabel: 'text-md',
@@ -532,7 +544,7 @@ onUnmounted(() => {
                 />
               </template>
             </DdSelect>
-            <span class="text-md text-neutral-500 dark:text-neutral-400">
+            <span class="text-md text-neutral-600 dark:text-neutral-500">
               {{ selectedModel.label }}
             </span>
           </div>
