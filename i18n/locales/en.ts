@@ -139,6 +139,7 @@ export default {
     name: 'Name',
     email: 'Email',
     message: 'Message',
+    logo: 'Dewdew logo',
   },
   pwa: {
     readyPwa: 'PWA is ready!',

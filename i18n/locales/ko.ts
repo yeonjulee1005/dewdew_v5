@@ -37,6 +37,8 @@ export default {
     ai: 'Dewdew, AI에게 묻다',
     aiComponents: 'AI 컴포넌트',
     v4: 'Dewdew V4',
+    openMenu: '메뉴 열기',
+    closeMenu: '메뉴 닫기',
   },
   error: {
     title: '404',
@@ -50,6 +52,10 @@ export default {
       tryAgain: '재시도',
     },
     placeholder: '저에게 무엇이 궁금하세요?',
+    scrollLeft: '추천 질문 왼쪽으로 스크롤',
+    scrollRight: '추천 질문 오른쪽으로 스크롤',
+    quickQuestion: '빠른 질문 선택',
+    selectModel: 'AI 모델 선택',
   },
   aiComponents: {
     concept: {
@@ -139,6 +145,7 @@ export default {
     name: '이름',
     email: '이메일',
     message: '메시지',
+    logo: 'Dewdew 로고',
   },
   pwa: {
     readyPwa: 'PWA를 사용할 준비가 됬어요!',
