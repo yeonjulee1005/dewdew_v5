@@ -8,6 +8,48 @@
 	font-display: swap;
 	src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
 }
-@import 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap';
-@import 'https://fonts.googleapis.com/css2?family=Anton&family=BIZ+UDPGothic&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap';
+
+/**
+* ! Source Code Pro Font Family!
+* TODO: 폰트 파일 다운로드 후 주석 해제
+* 다운로드: https://fonts.google.com/specimen/Source+Code+Pro → Download family
+* 또는: https://github.com/adobe-fonts/source-code-pro 에서 woff2 파일 다운로드
+*/
+@font-face {
+	font-family: 'Source Code Pro';
+	font-style: normal;
+	font-weight: 200 900;
+	font-display: swap;
+	src: url('/fonts/SourceCodeVFUpright.woff2') format('woff2');
+}
+
+/**
+* ! Anton Font Family!
+*/
+@font-face {
+	font-family: 'Anton';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/Anton-Regular.ttf') format('truetype');
+}
+
+/**
+* ! BIZ UDPGothic Font Family!
+* 다운로드: https://fonts.google.com/specimen/BIZ+UDPGothic → Download family
+*/
+@font-face {
+	font-family: 'BIZ UDPGothic';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/BIZUDPGothic-Regular.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'BIZ UDPGothic';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/BIZUDPGothic-Bold.woff2') format('woff2');
+}
 

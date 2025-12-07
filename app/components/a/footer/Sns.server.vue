@@ -19,6 +19,7 @@ const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
       :use-image="menu.image_url ? true : false"
       :icon-lead-name="menu.icon ?? ''"
       :image-url="url(true, menu.image_url ?? '')"
+      :image-size="20"
       button-variant="outline"
       button-color="neutral"
       :tooltip-text="$t(`externalMenu.${menu.code}`)"

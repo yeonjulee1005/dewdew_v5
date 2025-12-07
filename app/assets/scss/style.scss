@@ -1,5 +1,15 @@
 @use 'fonts' as *;
-@import 'https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css';
+
+/**
+* ! SUIT Font Family!
+*/
+@font-face {
+	font-family: 'SUIT Variable';
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+	src: url('/fonts/SUIT-Variable.woff2') format('woff2-variations');
+}
 
 html {
   overflow-x: hidden;
@@ -13,7 +23,7 @@ html {
 body {
   position: relative;
   display: flex;
-  font-family: 'Pretendard Variable', 'Anton', 'Source Code Pro', sans-serif;
+  font-family: 'Pretendard Variable', sans-serif;
   flex-direction: column;
   align-items: center;
   -webkit-font-smoothing: antialiased;
@@ -29,6 +39,11 @@ body {
   // -moz-user-select: none;
   // -ms-use-select: none;
   -ms-overflow-style: none;
+}
+
+// Anton 폰트 유틸리티 클래스
+.font-anton {
+  font-family: 'Anton', sans-serif;
 }
 
 // .layout-enter-active,

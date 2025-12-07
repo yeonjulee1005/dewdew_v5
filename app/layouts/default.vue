@@ -20,7 +20,7 @@ const handlePagination = (path: string, external: boolean = false) => {
         class="cursor-pointer rounded-full ring-2 ring-amber-500 hover:ring-amber-500/50 transition-all duration-200 ease-in-out m-1.5"
         :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
         format="webp"
-        sizes="100px sm:100px md:100px lg:100px xl:100px xxl:100px 2xl:100px"
+        sizes="48px"
         :width="48"
         :height="48"
         loading="eager"
