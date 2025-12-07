@@ -1,6 +1,6 @@
 <script setup lang="ts">
+const { url } = useImageStorage()
 const { width } = useWindowSize()
-const config = useRuntimeConfig()
 
 withDefaults(defineProps<{
   title?: string
@@ -20,15 +20,14 @@ withDefaults(defineProps<{
     <DdCard :ui="{ body: 'p-2 sm:p-4' }">
       <div class="relative w-full flex flex-col gap-y-2">
         <NuxtImg
-          :src="`${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`"
+          :src="url(true, '/assets/banner/main_banner_v5.webp')"
           class="w-full h-full object-cover rounded-md max-h-[300px] min-h-[100px]"
           format="webp"
-          :quality="80"
+          :quality="60"
           :width="1024"
           :height="270"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
-          loading="eager"
-          fetchpriority="high"
+          loading="lazy"
           alt="greeting"
         />
         <span

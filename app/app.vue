@@ -6,7 +6,7 @@ const { coords, resume } = useGeolocation()
 const isProduction = import.meta.env.VERCEL
 
 const appConfig = useAppConfig()
-const { meta, path } = useRoute()
+const { meta } = useRoute()
 
 const { t } = useI18n()
 
@@ -18,11 +18,10 @@ const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 const { filteredLocations } = useKorLocation()
 const { dfsXyConvert } = useTranslateCoords()
 
-const config = useRuntimeConfig()
+const { url } = useImageStorage()
 const seoTitle = t('seoTitle.intro')
 const seoDescription = t('seoDescription.intro')
-const seoUrl = `https://www.dewdew.dev${path}`
-const seoImage = `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v4.webp`
+const seoImage = '/assets/banner/main_banner_v4.webp'
 
 useHead({
   title: (meta.title as string) ?? t('pageTitle.dewdew'),
@@ -43,23 +42,13 @@ useHead({
   link: [
     { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
     { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
-    // Supabase Storage preconnect (LCP 이미지 로드 최적화)
-    { rel: 'dns-prefetch', href: config.public.supabaseUrl },
-    { rel: 'preconnect', href: config.public.supabaseUrl, crossorigin: 'anonymous' },
-    { rel: 'canonical', href: seoUrl },
+    { rel: 'canonical', href: url(true, seoImage) },
     { rel: 'manifest', href: '/manifest.webmanifest' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/image/apple-touch-icon.png' },
     { rel: 'icon', type: 'image/svg+xml', href: '/image/favicon.svg' },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/image/favicon-96x96.png' },
     { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
-    // LCP 이미지 프리로드 (greeting 배너) - Nuxt Image가 자동으로 최적화
-    {
-      rel: 'preload',
-      as: 'image',
-      href: `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`,
-      fetchpriority: 'high',
-    },
   ],
   meta: [
     { name: 'naver-site-verification', content: '7c406de71b03c1e444a4fe2630a29bd7a8e17559' },
