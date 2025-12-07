@@ -13,9 +13,9 @@ const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.web
       </h3>
       <NuxtImg
         :src="selectedImageSrc"
-        class="w-full h-full object-cover rounded-md"
+        class="w-full h-full object-cover rounded-md cursor-pointer"
         format="webp"
-        :quality="80"
+        :quality="60"
         :width="1024"
         :height="691"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"

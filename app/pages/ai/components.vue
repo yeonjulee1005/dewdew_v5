@@ -15,21 +15,11 @@ import ImageCarousel from '~/components/dynamic/card/ImageCarousel.server.vue'
 import ContactForm from '~/components/dynamic/card/ContactForm.client.vue'
 
 const { t } = useI18n()
-const { url } = useImageStorage()
 
 useHead({
   title: t('pageTitle.aiComponents'),
   meta: [
     { name: 'description', content: t('seoDescription.aiComponents') },
-  ],
-  link: [
-    // LCP 이미지 프리로드 (chatbot-architecture)
-    {
-      rel: 'preload',
-      as: 'image',
-      href: url(true, '/assets/concept/chatbot-architecture.webp'),
-      fetchpriority: 'high',
-    },
   ],
 })
 
