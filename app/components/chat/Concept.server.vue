@@ -8,7 +8,7 @@ const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.web
 <template>
   <div>
     <div class="flex flex-col gap-y-4 max-w-4xl mx-auto">
-      <h3 class="text-2xl font-bold">
+      <h3 class="text-2xl font-bold break-keep">
         {{ $t('aiComponents.concept.title') }}
       </h3>
       <NuxtImg
