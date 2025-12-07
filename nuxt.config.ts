@@ -5,7 +5,8 @@ import packageJson from './package.json'
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/hints',
+    // @nuxt/hints는 개발 환경에서만 활성화 (알파 버전 hydration 버그 방지)
+    ...(process.env.NODE_ENV === 'development' ? ['@nuxt/hints'] : []),
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxtjs/color-mode',
@@ -160,13 +161,6 @@ export default defineNuxtConfig({
         },
         cors: true,
       },
-      // 이미지 프록시 API 캐싱 최적화 (Supabase Storage 이미지)
-      '/api/images/**': {
-        headers: {
-          'Cache-Control': 'public, max-age=31536000, immutable',
-        },
-        cors: true,
-      },
     },
   },
   vite: {
@@ -217,8 +211,6 @@ export default defineNuxtConfig({
       'xxl': 1536,
       '2xl': 1536,
     },
-    // Supabase Storage 도메인 허용 (외부 이미지 최적화)
-    domains: process.env.SUPABASE_URL ? [new URL(process.env.SUPABASE_URL).hostname] : [],
   },
   ogImage: {
     fonts: [

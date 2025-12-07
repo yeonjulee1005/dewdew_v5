@@ -1,9 +1,18 @@
 <script setup lang="ts">
-const { t } = useI18n()
+// i18n이 초기화되지 않았을 수 있으므로 안전하게 처리
+let errorTitle = '404'
+let errorDescription = '페이지를 찾을 수 없습니다!'
+let errorButton = '홈으로 이동'
 
-const errorTitle = t('error.title')
-const errorDescription = t('error.description')
-const errorButton = t('error.button')
+try {
+  const { t } = useI18n()
+  errorTitle = t('error.title')
+  errorDescription = t('error.description')
+  errorButton = t('error.button')
+}
+catch {
+  // i18n이 초기화되지 않은 경우 기본값 사용
+}
 </script>
 
 <template>
