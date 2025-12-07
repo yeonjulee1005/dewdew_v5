@@ -1,12 +1,15 @@
 <script setup lang="ts">
 const { width } = useWindowSize()
-const { url } = useImageStorage()
+const config = useRuntimeConfig()
 
 withDefaults(defineProps<{
   title?: string
 }>(), {
   title: '',
 })
+
+// LCP 이미지는 프록시를 우회하여 직접 Supabase Storage URL 사용 (지연 최소화)
+const bannerImageUrl = `${config.public.supabaseUrl}/storage/v1/object/public/assets/banner/main_banner_v5.webp`
 </script>
 
 <template>
@@ -20,7 +23,7 @@ withDefaults(defineProps<{
     <DdCard :ui="{ body: 'p-2 sm:p-4' }">
       <div class="relative w-full flex flex-col gap-y-2">
         <NuxtImg
-          :src="url(true, '/assets/banner/main_banner_v5.webp')"
+          :src="bannerImageUrl"
           class="w-full h-full object-cover rounded-md max-h-[270px] min-h-[100px]"
           format="webp"
           :quality="80"
