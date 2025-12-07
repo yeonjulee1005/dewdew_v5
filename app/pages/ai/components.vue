@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Concept from '~/components/chat/Concept.server.vue'
 import Greeting from '~/components/dynamic/card/Greeting.server.vue'
 import Profile from '~/components/dynamic/card/Profile.server.vue'
 import ExperienceCarousel from '~/components/dynamic/card/ExperienceCarousel.server.vue'
@@ -29,6 +30,8 @@ definePageMeta({
 
 <template>
   <div class="h-fit bg-neutral-50 dark:bg-neutral-900 p-4 space-y-8">
+    <Concept />
+    <DdSeparator />
     <p class="max-w-4xl mx-auto text-2xl font-bold break-keep">
       {{ $t('seoDescription.aiComponents') }}
     </p>

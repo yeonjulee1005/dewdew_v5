@@ -52,6 +52,15 @@ export default {
     placeholder: '저에게 무엇이 궁금하세요?',
   },
   aiComponents: {
+    concept: {
+      title: '문맥 유사도 기반 검색 증강 생성(RAG) AI 채팅 시스템 구조',
+      description: [
+        '본 포트폴리오의 AI 채팅 시스템은 Serverless Functions 기반으로 한 RAG(검색 증강 생성) 및 Vector Search를 이용하여 구현하였습니다.',
+        '사용자가 질문을 하게 되면 다음과 같은 흐름으로 답변을 호출합니다.',
+        '1단계 키워드 매칭을 통해 명시적인 정보를 Database에서 찾고, 명시적 검색결과가 없을 경우, 2단계로 OpenAI 임베딩 모델(text-embedding-3-small, 768차원)을 활용한 벡터 유사도 검색(Vector Search)을 진행합니다.',
+        'HNSW 인덱스를 적용한 고성능 벡터 DB에서 의미적으로 가장 유사한 이력서 데이터를 찾아내어, GPT-5/Sonet/Gemini 등 선택된 LLM에게 최적의 컨텍스트를 제공함으로써 Hallucination가 발생하지 않는 정확한 답변을 생성합니다.',
+      ],
+    },
     greetingCard: '그리팅 카드',
     profileCard: '프로필 카드',
     experienceCard: '경력 카드',
