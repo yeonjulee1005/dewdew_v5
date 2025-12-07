@@ -5,7 +5,7 @@
     "email": "yeonju.lee1005@gmail.com"
   },
   "private": true,
-  "version": "1.2512.10",
+  "version": "1.2512.11",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
