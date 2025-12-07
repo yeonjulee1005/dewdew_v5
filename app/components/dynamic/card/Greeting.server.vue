@@ -24,10 +24,15 @@ withDefaults(defineProps<{
           class="w-full h-full object-cover rounded-md max-h-[270px] min-h-[100px]"
           format="webp"
           :quality="80"
+          :width="1024"
+          :height="270"
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          loading="eager"
+          fetchpriority="high"
           alt="greeting"
         />
         <span
-          class="w-fit font-['anton'] text-2xl sm:text-5xl md:text-6xl bg-linear-to-tl from-amber-900 via-amber-400/90 to-orange-700 bg-clip-text text-transparent transform"
+          class="w-fit font-anton text-2xl sm:text-5xl md:text-6xl bg-linear-to-tl from-amber-900 via-amber-400/90 to-orange-700 bg-clip-text text-transparent transform"
           :class="[width > 1024 ? 'absolute bottom-20 -left-18 max-w-66 rotate-270' : 'absolute bottom-1 left-1 w-full rotate-0']"
         >
           {{ $t('dynamic.greeting.title') }}
