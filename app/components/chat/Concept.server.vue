@@ -16,7 +16,12 @@ const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.web
         class="w-full h-full object-cover rounded-md"
         format="webp"
         :quality="80"
+        :width="1024"
+        :height="691"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
         alt="chatbot-architecture"
+        loading="eager"
+        fetchpriority="high"
         @click="imageModalOpen = true"
       />
       <div class="space-y-1.5">
