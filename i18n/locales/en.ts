@@ -52,6 +52,15 @@ export default {
     placeholder: 'What is your question?',
   },
   aiComponents: {
+    concept: {
+      title: 'Context-based similarity-based search-augmented generation (RAG) AI chat system architecture',
+      description: [
+        'The AI chat system in this portfolio is implemented using Serverless Functions based RAG (retrieval-augmented generation) and Vector Search.',
+        'When the user asks a question, the answer is called in the following flow.',
+        '1st step keyword matching to find explicit information in the Database, and if the explicit search result is not found, the 2nd step is vector similarity search (Vector Search) using the OpenAI embedding model (text-embedding-3-small, 768 dimensions).',
+        'The high-performance vector DB with HNSW index is used to find the most similar resume data semantically, and the optimal context is provided to the selected LLM such as GPT-5/Sonet/Gemini to generate accurate answers without hallucination.',
+      ],
+    },
     greetingCard: 'Greeting Card',
     profileCard: 'Profile Card',
     experienceCard: 'Experience Card',
