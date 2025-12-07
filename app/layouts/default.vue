@@ -58,7 +58,6 @@ const handlePagination = (path: string, external: boolean = false) => {
             use-leading
             use-icon
             icon-lead-name="i-lucide-menu"
-            :button-text="$t('menu.openMenu')"
             :tooltip-text="$t('menu.openMenu')"
           />
           <template #header>
@@ -68,7 +67,6 @@ const handlePagination = (path: string, external: boolean = false) => {
                 use-leading
                 use-icon
                 icon-lead-name="i-lucide-x"
-                :button-text="$t('menu.closeMenu')"
                 :tooltip-text="$t('menu.closeMenu')"
                 @click="slideoverTrigger = false"
               />
