@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     ...(process.env.NODE_ENV === 'development' ? ['@nuxt/hints'] : []),
     '@nuxt/image',
     '@nuxt/scripts',
+    '@nuxt/content',
     '@nuxtjs/color-mode',
     '@nuxt/ui',
     '@nuxtjs/mdc',
@@ -19,6 +20,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
+    'nuxt-time',
     'dayjs-nuxt',
     'pinia-plugin-persistedstate',
     '@nuxtjs/seo',
@@ -88,6 +90,20 @@ export default defineNuxtConfig({
     fallback: 'dark',
     storage: 'localStorage',
     storageKey: 'nuxt-color-mode',
+  },
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          preload: ['js', 'ts', 'json', 'vue'],
+          theme: {
+            default: 'github-light',
+            dark: 'github-dark',
+            sepia: 'dracula-soft',
+          },
+        },
+      },
+    },
   },
   mdc: {
     components: {
@@ -235,8 +251,7 @@ export default defineNuxtConfig({
     workbox: {
       navigateFallback: undefined,
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
-      // _nuxt 디렉토리의 해시가 변경되는 파일들은 프리캐시에서 제외 (런타임 캐싱으로 처리)
-      globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs'],
+      globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
       skipWaiting: true,

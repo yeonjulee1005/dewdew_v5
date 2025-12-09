@@ -4,16 +4,19 @@ export default {
     dewdew: 'Dewdew',
     ai: 'Dewdew, AI에게 묻다',
     aiComponents: 'Dewdew, AI 컴포넌트',
+    blog: '회고 블로그',
   },
   seoTitle: {
     intro: 'Dewdew | Software Engineer 이연주',
     ai: 'Dewdew, AI에게 묻다',
     aiComponents: 'Dewdew AI에서 사용한 컴포넌트 목록입니다',
+    blog: 'Dewdew, 회고하다.',
   },
   seoDescription: {
     intro: 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 제품에 대한 많은 고민과 주도적인 개발을 지향하고 있습니다. Nuxt4 프레임워크 생태계에 기여하고 있습니다.',
     ai: 'LLM+RAG+AGENT 기반의 AI에게 저에 대해서 물어보세요.',
     aiComponents: 'Dewdew AI 답변시 표시되는 서버컴포넌트 리스트입니다.',
+    blog: '지난 일들을 되돌아보며, 생각하다.',
   },
   externalMenu: {
     SMC001: '듀듀월드',
@@ -36,7 +39,8 @@ export default {
     home: '홈',
     ai: 'Dewdew, AI에게 묻다',
     aiComponents: 'AI 컴포넌트',
-    v4: 'Dewdew V4',
+    blog: '회고 블로그',
+    world: '듀듀월드',
     openMenu: '메뉴 열기',
     closeMenu: '메뉴 닫기',
   },
@@ -44,6 +48,9 @@ export default {
     title: '404',
     description: '페이지를 찾을 수 없어요!',
     button: '홈 이동',
+  },
+  blog: {
+    recentPost: '최근 포스팅',
   },
   ai: {
     error: {
