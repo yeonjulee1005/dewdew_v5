@@ -4,16 +4,19 @@ export default {
     dewdew: 'Dewdew',
     ai: 'Dewdew, Ask Dewdew AI',
     aiComponents: 'Dewdew, AI Components',
+    blog: 'Blog',
   },
   seoTitle: {
     intro: 'Dewdew | Software Engineer Yeonju Lee',
     ai: 'Dewdew, Ask Dewdew AI',
     aiComponents: 'Dewdew AI Components',
+    blog: 'Dewdew, Reflect on the past.',
   },
   seoDescription: {
     intro: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
     ai: 'Ask me about me based on LLM+RAG+AGENT.',
     aiComponents: 'The list of server components displayed when answering Dewdew AI.',
+    blog: 'Reflect on the past by looking back on the past.',
   },
   externalMenu: {
     SMC001: 'Dewdew World',
@@ -36,12 +39,18 @@ export default {
     home: 'Home',
     ai: 'Dewdew, Ask Dewdew AI',
     aiComponents: 'AI Components',
-    v4: 'Dewdew V4',
+    world: 'Dewdew World',
+    blog: 'Blog',
+    openMenu: 'Open Menu',
+    closeMenu: 'Close Menu',
   },
   error: {
     title: '404',
     description: 'Page not found!',
     button: 'Move to home',
+  },
+  blog: {
+    recentPost: 'Recent Posts',
   },
   ai: {
     error: {
