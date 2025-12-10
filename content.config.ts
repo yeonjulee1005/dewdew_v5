@@ -6,22 +6,38 @@ export default defineContentConfig({
       type: 'page',
       source: 'blog/*.md',
       schema: z.object({
+        path: z.string(),
         title: z.string(),
-        description: z.string().optional(),
-        date: z.string().optional(),
-        tags: z.array(z.string()).optional(),
-        authors: z.array(z.object({
-          name: z.string(),
-          avatarUrl: z.string().optional(),
-          link: z.string().optional(),
-        })).optional(),
-        category: z.string().optional(),
-        head: z.object({
-          meta: z.array(z.object({
-            name: z.string().optional(),
-            content: z.string().optional(),
-          })).optional(),
-        }).optional(),
+        description: z.string(),
+        tags: z.array(z.string()),
+        image: z.string(),
+        date: z.date(),
+        updated: z.date(),
+        author: z.string(),
+        category: z.string(),
+        content: z.string(),
+        seo: z.intersection(
+          z.object({
+            title: z.string().optional(),
+            description: z.string().optional(),
+            meta: z.array(z.record(z.string(), z.any())).optional(),
+            link: z.array(z.record(z.string(), z.any())).optional(),
+          }),
+          z.record(z.string(), z.any()),
+        ).optional().default({}),
+        body: z.object({
+          type: z.string(),
+          children: z.any(),
+          toc: z.any(),
+        }),
+        navigation: z.union([
+          z.boolean(),
+          z.object({
+            title: z.string(),
+            description: z.string(),
+            icon: z.string(),
+          }),
+        ]).default(true),
       }),
     }),
   },

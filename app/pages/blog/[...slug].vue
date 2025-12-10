@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Giscus from '@giscus/vue'
 
+const { isMobile } = useDevice()
 const { t } = useLocale()
 const route = useRoute()
 
@@ -38,9 +39,10 @@ const { data: navigation } = await useAsyncData('navigation', () => {
       <DdContentToc
         v-if="blog?.title !== 'Blog Home'"
         title="목차"
-        :links="blog?.body?.toc?.links"
+        :links="(blog?.body?.toc as any)?.links"
         highlight
         highlight-color="neutral"
+        class="sticky top-0"
       />
       <ul v-if="navigation && blog?.id.includes('index')">
         <li
@@ -87,10 +89,10 @@ const { data: navigation } = await useAsyncData('navigation', () => {
       <Giscus
         v-if="blog?.path !== '/blog'"
         id="comments"
-        repo="yeonjulee1005/dewdew_v4"
-        repo-id="R_kgDONZHIhA"
-        category="Blog"
-        category-id="DIC_kwDONZHIhM4Ck7BA"
+        repo="yeonjulee1005/dewdew_v5"
+        repo-id="R_kgDOQcC63w"
+        category="General"
+        category-id="DIC_kwDOQcC6384Czn_h"
         mapping="pathname"
         strict="0"
         reactions-enabled="1"
