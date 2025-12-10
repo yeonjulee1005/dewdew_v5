@@ -94,6 +94,9 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
+        toc: {
+          depth: 3,
+        },
         highlight: {
           preload: ['js', 'ts', 'json', 'vue'],
           theme: {
