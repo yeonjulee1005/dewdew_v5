@@ -127,21 +127,34 @@ const handlePagination = (path: string, external: boolean = false) => {
                   custom-class="w-full cursor-pointer"
                   use-leading
                   use-icon
+                  icon-lead-name="i-lucide-book-open"
+                  icon-lead-class="w-6 h-6"
+                  button-size="xl"
+                  button-variant="ghost"
+                  button-color="neutral"
+                  button-label-class="text-xl font-bold truncate"
+                  :button-text="$t('menu.blog')"
+                  @click:button="handlePagination('/blog', false)"
+                />
+                <ATooltipButton
+                  custom-class="w-full cursor-pointer mb-2"
+                  use-leading
+                  use-icon
                   icon-lead-name="i-lucide-chess-knight"
                   icon-lead-class="w-6 h-6"
                   button-size="xl"
                   button-variant="ghost"
                   button-color="neutral"
                   button-label-class="text-xl font-bold truncate"
-                  :button-text="$t('menu.v4')"
-                  @click:button="handlePagination('https://v4.dewdew.dev', true)"
+                  :button-text="$t('menu.world')"
+                  @click:button="handlePagination('https://www.dewdew.world', true)"
                 />
               </div>
               <DdSeparator />
               <div class="flex items-center gap-x-2">
                 <AThemeChange
                   custom-class="gap-0"
-                  icon-lead-class="w-7 h-7"
+                  icon-lead-class="w-8 h-8"
                   button-variant="ghost"
                 />
                 <ALanguageChange
@@ -157,8 +170,6 @@ const handlePagination = (path: string, external: boolean = false) => {
     <main>
       <slot />
     </main>
-    <footer>
-      <AFooterGroup />
-    </footer>
+    <AFooterGroup />
   </div>
 </template>

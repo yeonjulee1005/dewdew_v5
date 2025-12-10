@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/nuxt'
+
 const { coords, resume } = useGeolocation()
 
 // Vercel 프로덕션 환경에서만 Speed Insights 활성화
@@ -123,6 +125,7 @@ watch(() => coords.value, () => {
       <NuxtPage />
       <InstallPwa />
     </NuxtLayout>
+    <Analytics v-if="isProduction" />
     <SpeedInsights v-if="isProduction" />
   </DdApp>
 </template>
