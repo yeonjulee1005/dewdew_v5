@@ -17,10 +17,10 @@ const handlePagination = (path: string, external: boolean = false) => {
 
 <template>
   <div
-    class="w-dvw xl:w-[1024px]"
-    :class="path === '/ai' ? 'h-screen' : 'h-full'"
+    class="w-dvw xl:w-[1024px] flex flex-col"
+    :class="path === '/ai' ? 'h-screen' : 'min-h-screen'"
   >
-    <header class="h-20 flex items-center justify-between gap-x-4 px-4">
+    <header class="h-20 flex items-center justify-between gap-x-4 px-4 shrink-0">
       <NuxtImg
         class="cursor-pointer rounded-full ring-2 ring-amber-500 hover:ring-amber-500/50 transition-all duration-200 ease-in-out m-1.5"
         :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
@@ -167,7 +167,7 @@ const handlePagination = (path: string, external: boolean = false) => {
         </DdSlideover>
       </nav>
     </header>
-    <main>
+    <main class="flex-1 flex flex-col">
       <slot />
     </main>
     <AFooterGroup />

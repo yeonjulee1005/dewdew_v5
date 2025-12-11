@@ -18,7 +18,7 @@ const accordionItems = [
 <template>
   <footer
     class="w-full h-fit flex flex-col gap-y-2 items-center justify-center mb-4"
-    :class="[isMobile ? 'absolute bottom-0 mt-2 px-4' : 'mt-6 px-4']"
+    :class="[isMobile ? 'mt-2 px-4' : 'mt-6 px-4']"
   >
     <DdAccordion
       v-if="isMobile"
