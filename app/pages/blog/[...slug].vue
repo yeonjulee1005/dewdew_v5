@@ -15,13 +15,21 @@ useHead({
 })
 
 const { data: blog } = await useAsyncData(route.path, () => {
+  // /blog 경로일 때 index.md를 찾기 위해 경로 정규화
+  const normalizedPath = route.path === '/blog' || route.path === '/blog/'
+    ? '/blog/index'
+    : route.path
   return queryCollection('blog')
-    .path(route.path)
+    .path(normalizedPath)
     .first()
 })
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('blog', route.path, {
+  // /blog 경로일 때 index.md를 찾기 위해 경로 정규화
+  const normalizedPath = route.path === '/blog' || route.path === '/blog/'
+    ? '/blog/index'
+    : route.path
+  return queryCollectionItemSurroundings('blog', normalizedPath, {
     fields: ['title'],
   }).order('date', 'DESC')
 })
