@@ -5,8 +5,6 @@ const { coords, resume } = useGeolocation()
 
 // Vercel 프로덕션 환경에서만 Speed Insights 활성화
 // 로컬 preview에서는 VERCEL 환경 변수가 없으므로 비활성화
-const isProduction = import.meta.env.VERCEL
-
 const appConfig = useAppConfig()
 const { meta } = useRoute()
 
@@ -125,7 +123,7 @@ watch(() => coords.value, () => {
       <NuxtPage />
       <InstallPwa />
     </NuxtLayout>
-    <Analytics v-if="isProduction" />
-    <SpeedInsights v-if="isProduction" />
+    <Analytics />
+    <SpeedInsights />
   </DdApp>
 </template>
