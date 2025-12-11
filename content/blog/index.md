@@ -26,7 +26,7 @@ head:
       content: '© 2023 Dewdew'
 ---
 
-## 회고 블로그
+# 회고 블로그
 
 ::callout{icon="i-lucide-notebook-pen" title="회고 블로그" color="primary"}
   기술 외적인 포스팅(개발회고, 일상 이야기 등)을 올리기 위한 블로그입니다.<br>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Giscus from '@giscus/vue'
 
-const { isMobile } = useDevice()
 const { t } = useLocale()
 const route = useRoute()
 
@@ -72,7 +71,7 @@ const { data: navigation } = await useAsyncData('navigation', () => {
     <div class="w-full flex flex-col gap-y-4 px-4">
       <h1
         v-if="!blog?.id.includes('index')"
-        class="text-4xl font-bold text-amber-500 break-keep mt-8"
+        class="text-4xl font-bold text-amber-500 break-keep mt-2"
       >
         {{ blog?.title }}
       </h1>

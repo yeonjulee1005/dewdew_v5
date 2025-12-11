@@ -145,6 +145,8 @@ export default defineNuxtConfig({
       failOnError: false,
     },
     routeRules: {
+      // 블로그 페이지 정적 렌더링 (빌드 시 생성)
+      '/blog/**': { prerender: true },
       // 서비스 워커 파일을 정적 파일로 처리 (Vue Router에서 제외)
       '/sw.js': {
         headers: {
