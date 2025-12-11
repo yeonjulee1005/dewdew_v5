@@ -14,22 +14,44 @@ useHead({
   ],
 })
 
-const { data: blog } = await useAsyncData(route.path, () => {
+const { data: blog } = await useAsyncData(route.path, async () => {
   // /blog 경로일 때 index.md를 찾기 위해 경로 정규화
-  const normalizedPath = route.path === '/blog' || route.path === '/blog/'
-    ? '/blog/index'
-    : route.path
+  // Nuxt Content에서 blog/index.md는 /blog/index 또는 /blog 경로로 매핑될 수 있음
+  let searchPath = route.path
+
+  if (route.path === '/blog' || route.path === '/blog/') {
+    // 먼저 /blog/index 시도
+    const indexResult = await queryCollection('blog')
+      .path('/blog/index')
+      .first()
+    if (indexResult) return indexResult
+
+    // 없으면 /blog 시도
+    searchPath = '/blog'
+  }
+
   return queryCollection('blog')
-    .path(normalizedPath)
+    .path(searchPath)
     .first()
 })
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
+const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
   // /blog 경로일 때 index.md를 찾기 위해 경로 정규화
-  const normalizedPath = route.path === '/blog' || route.path === '/blog/'
-    ? '/blog/index'
-    : route.path
-  return queryCollectionItemSurroundings('blog', normalizedPath, {
+  let searchPath = route.path
+  if (route.path === '/blog' || route.path === '/blog/') {
+    // 먼저 /blog/index 시도
+    const indexResult = await queryCollection('blog')
+      .path('/blog/index')
+      .first()
+    if (indexResult) {
+      searchPath = '/blog/index'
+    }
+    else {
+      searchPath = '/blog'
+    }
+  }
+
+  return queryCollectionItemSurroundings('blog', searchPath, {
     fields: ['title'],
   }).order('date', 'DESC')
 })
