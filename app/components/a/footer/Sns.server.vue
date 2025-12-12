@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics/server'
+
 const { url } = useImageStorage()
 
 const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
@@ -7,6 +9,11 @@ const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
   immediate: true,
   dedupe: 'defer',
 })
+
+const handleClick = (url: string) => {
+  track('sns_click', { sns: url })
+  navigateTo(url, { external: true, open: { target: '_blank' } })
+}
 </script>
 
 <template>
@@ -23,7 +30,7 @@ const { data: externalMenu } = await useFetch('/api/menu/externalMenu', {
       button-variant="outline"
       button-color="neutral"
       :tooltip-text="$t(`externalMenu.${menu.code}`)"
-      @click:button="navigateTo(menu.url ?? '', { external: true, open: { target: '_blank' } })"
+      @click:button="handleClick(menu.url ?? '')"
     />
   </div>
 </template>

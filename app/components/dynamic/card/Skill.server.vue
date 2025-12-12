@@ -52,7 +52,7 @@ const categoryColor = (category: string) => {
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.skill.title') }}
