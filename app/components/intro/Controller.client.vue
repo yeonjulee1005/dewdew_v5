@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
 import AThemeChange from '../a/ThemeChange.vue'
+
+const moveToMain = () => {
+  track('move_to_main', { path: '/ai' })
+  navigateTo('/ai')
+}
 </script>
 
 <template>
@@ -10,7 +16,7 @@ import AThemeChange from '../a/ThemeChange.vue'
       block
       variant="subtle"
       :label="$t('button.moveMain')"
-      @click="navigateTo('/ai')"
+      @click="moveToMain"
     />
     <AThemeChange custom-class="gap-0" />
   </div>

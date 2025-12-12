@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
+
 const { path } = useRoute()
 const { isDesktopOrTablet, isMobileOrTablet } = useDevice()
 const { url } = useImageStorage()
@@ -10,6 +12,8 @@ const handlePagination = (path: string, external: boolean = false) => {
   external
     ? navigateTo(path, { external: true, open: { target: '_blank' } })
     : navigateTo(path)
+
+  track('page_view', { path })
 
   slideoverTrigger.value = false
 }

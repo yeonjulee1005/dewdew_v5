@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
+
 import { object, string, type InferType } from 'yup'
 import { send } from '@emailjs/browser'
 import type { FormSubmitEvent } from '@nuxt/ui'
@@ -41,6 +43,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     return
   }
 
+  track('contact_form_submit', { name: event.data.name, email: event.data.email, message: event.data.message })
+
   try {
     await send(
       'dewdew',
@@ -69,7 +73,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.contact.title') }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { width } = useWindowSize()
+const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
 withDefaults(defineProps<{
@@ -35,11 +35,8 @@ const personalityData = computed(() => {
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
-      <div
-        class="flex items-start gap-y-4 gap-x-8"
-        :class="[width > 1024 ? 'flex-row' : 'flex-col']"
-      >
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
+      <div class="flex flex-wrap items-start gap-y-4 gap-x-8">
         <NuxtImg
           :src="url(true, profilesData?.profile?.avatar_url?.split('/public')[1] ?? '')"
           class="w-fit h-full object-contain max-h-100 rounded-md"
@@ -51,7 +48,10 @@ const personalityData = computed(() => {
           :alt="profilesData?.profile?.full_name || 'Profile image'"
           loading="lazy"
         />
-        <div class="flex flex-col items-start gap-y-2">
+        <div
+          class="flex flex-col items-start gap-y-2"
+          :class="[isDesktopOrTablet ? 'max-w-[380px]' : 'max-w-full']"
+        >
           <h3 class="flex flex-wrap justify-start items-end gap-x-2">
             <span class="text-2xl font-bold">
               {{ profilesData?.profile?.full_name }}
@@ -90,7 +90,7 @@ const personalityData = computed(() => {
           />
           <DdSeparator class="my-2" />
           <div class="flex flex-col gap-y-2">
-            <div class="flex items-center gap-x-2">
+            <div class="flex flex-wrap items-center gap-x-2">
               <DdBadge
                 :label="personalityData.type"
                 variant="solid"

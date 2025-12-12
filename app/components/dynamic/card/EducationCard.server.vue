@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
 withDefaults(defineProps<{
@@ -29,7 +30,7 @@ const formatDate = (dateString: string | null) => {
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.education.title') }}
@@ -68,6 +69,7 @@ const formatDate = (dateString: string | null) => {
                     {{ education.degree }}
                   </span>
                   <DdSeparator
+                    v-if="isDesktopOrTablet"
                     orientation="vertical"
                     class="h-4"
                   />

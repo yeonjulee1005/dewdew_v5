@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
+
 const colorMode = useColorMode()
 
 withDefaults(
@@ -19,7 +21,8 @@ const isDark = computed({
     return colorMode.value === 'dark'
   },
   set() {
-    colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+    colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+    track('theme_change', { theme: colorMode.preference })
   },
 })
 </script>

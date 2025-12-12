@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import Concept from '~/components/chat/Concept.server.vue'
-import Greeting from '~/components/dynamic/card/Greeting.server.vue'
-import Profile from '~/components/dynamic/card/Profile.server.vue'
-import ExperienceCarousel from '~/components/dynamic/card/ExperienceCarousel.server.vue'
-import ExperienceTimeline from '~/components/dynamic/card/ExperienceTimeline.server.vue'
-import Skill from '~/components/dynamic/card/Skill.server.vue'
-import SkillRadar from '~/components/dynamic/card/SkillRadar.server.vue'
-import ProjectCarousel from '~/components/dynamic/card/ProjectCarousel.server.vue'
-import EducationCard from '~/components/dynamic/card/EducationCard.server.vue'
-import WeaknessesCard from '~/components/dynamic/card/WeaknessesCard.server.vue'
-import HobbyCarousel from '~/components/dynamic/card/HobbyCarousel.server.vue'
-import SocialLinks from '~/components/dynamic/card/SocialLinks.server.vue'
-import ImageCarousel from '~/components/dynamic/card/ImageCarousel.server.vue'
-import ContactForm from '~/components/dynamic/card/ContactForm.client.vue'
+// 동적 컴포넌트 로딩 (코드 스플리팅)
+const Concept = defineAsyncComponent(() => import('~/components/chat/Concept.server.vue'))
+const Greeting = defineAsyncComponent(() => import('~/components/dynamic/card/Greeting.server.vue'))
+const Profile = defineAsyncComponent(() => import('~/components/dynamic/card/Profile.server.vue'))
+const ExperienceCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceCarousel.server.vue'))
+const ExperienceTimeline = defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceTimeline.server.vue'))
+const Skill = defineAsyncComponent(() => import('~/components/dynamic/card/Skill.server.vue'))
+const SkillRadar = defineAsyncComponent(() => import('~/components/dynamic/card/SkillRadar.server.vue'))
+const ProjectCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ProjectCarousel.server.vue'))
+const EducationCard = defineAsyncComponent(() => import('~/components/dynamic/card/EducationCard.server.vue'))
+const WeaknessesCard = defineAsyncComponent(() => import('~/components/dynamic/card/WeaknessesCard.server.vue'))
+const HobbyCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/HobbyCarousel.server.vue'))
+const SocialLinks = defineAsyncComponent(() => import('~/components/dynamic/card/SocialLinks.server.vue'))
+const ImageCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ImageCarousel.server.vue'))
+const ContactForm = defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue'))
 
 const { t } = useI18n()
 
