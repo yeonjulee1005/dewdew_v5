@@ -5,7 +5,7 @@
     "email": "yeonju.lee1005@gmail.com"
   },
   "private": true,
-  "version": "1.2512.19",
+  "version": "1.2512.20",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
@@ -47,7 +47,6 @@
     "@unhead/vue": "^2.0.3",
     "@vercel/speed-insights": "^1.3.1",
     "ai": "^5.0.106",
-    "better-sqlite3": "^12.5.0",
     "eslint": "^9.0.0",
     "nuxt": "^4.2.1",
     "nuxt-time": "^1.0.3",
@@ -72,8 +71,7 @@
     "@vercel/analytics": "^1.6.1",
     "@vite-pwa/nuxt": "^1.1.0",
     "@vueuse/nuxt": "^14.0.0",
-    "date-fns": "^4.1.0",
-    "date-fns-tz": "^3.2.0",
+    "better-sqlite3": "^12.5.0",
     "dayjs-nuxt": "^2.1.11",
     "pinia-plugin-persistedstate": "^4.7.1",
     "sass": "^1.94.2",

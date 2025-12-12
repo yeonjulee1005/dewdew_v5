@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
+
 import ChatDynamicComponent from './DynamicComponent.vue'
 import type { ChatMessage, ComponentType } from '~/types/chat'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
@@ -183,6 +185,8 @@ const scheduleEnhance = () => {
 const handleSubmit = async () => {
   if (!inputMessage.value.trim() || isStreaming.value) return
 
+  track('message_submit', { message: inputMessage.value })
+
   const message = inputMessage.value
   inputMessage.value = ''
 
@@ -190,12 +194,16 @@ const handleSubmit = async () => {
 }
 
 const handleSuggestion = (suggestion: string) => {
+  track('suggestion_click', { suggestion })
+
   inputMessage.value = suggestion
   handleSubmit()
 }
 
 // 좌우 스크롤 함수
 const scrollSuggestions = (direction: 'left' | 'right') => {
+  track('scroll_suggestions', { direction })
+
   if (!suggestionsContainer.value) return
   const scrollAmount = 300 // 스크롤 거리
   const currentScroll = suggestionsContainer.value.scrollLeft
@@ -234,10 +242,22 @@ const handleSuggestionsScroll = () => {
 
 // Select 변경 핸들러
 const handleSelectChange = (value: string) => {
+  track('suggestion_click', { suggestion: value })
+
   const selectedItem = suggestionItems.value.find(item => item.value === value)
   if (selectedItem) {
     handleSuggestion(selectedItem.label)
     selectedSuggestion.value = undefined // 선택 후 초기화
+  }
+}
+
+// 모델 변경 핸들러
+const handleModelChange = (value: string) => {
+  const model = availableModels.find(m => m.model === value)
+  if (model) {
+    track('model_select', { model: model.label })
+
+    setModel(model)
   }
 }
 
@@ -526,10 +546,7 @@ onUnmounted(() => {
                 base: 'w-fit text-md',
                 itemLabel: 'text-md',
               }"
-              @update:model-value="(value: string) => {
-                const model = availableModels.find(m => m.model === value)
-                if (model) setModel(model)
-              }"
+              @update:model-value="handleModelChange"
             >
               <template #leading>
                 <Icon
