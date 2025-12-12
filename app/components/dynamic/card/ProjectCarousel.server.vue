@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { track } from '@vercel/analytics/server'
+import { track } from '@vercel/analytics'
 
 const { url } = useImageStorage()
 
