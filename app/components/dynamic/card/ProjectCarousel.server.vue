@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics/server'
+
 const { url } = useImageStorage()
 
 withDefaults(defineProps<{
@@ -29,7 +31,7 @@ const formatDate = (dateString: string | null) => {
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.project.title') }}
@@ -126,6 +128,7 @@ const formatDate = (dateString: string | null) => {
                     variant="outline"
                     size="xl"
                     color="primary"
+                    @click="track('project_view', { project: project.title })"
                   >
                     {{ $t('dynamic.project.viewProject') }}
                   </DdButton>
@@ -136,6 +139,7 @@ const formatDate = (dateString: string | null) => {
                     variant="outline"
                     size="xl"
                     color="secondary"
+                    @click="track('github_view', { github: project.github_url })"
                   >
                     {{ $t('dynamic.project.viewGithub') }}
                   </DdButton>

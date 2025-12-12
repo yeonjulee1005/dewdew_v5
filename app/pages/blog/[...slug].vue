@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
 import Giscus from '@giscus/vue'
 
 const { t } = useLocale()
@@ -72,6 +73,7 @@ const { data: navigation } = await useAsyncData('navigation', () => {
         highlight
         highlight-color="neutral"
         class="sticky top-0"
+        @click:link="track('toc_click', { link: $event.target.href })"
       />
       <ul v-if="navigation && blog?.id.includes('index')">
         <li
@@ -91,6 +93,7 @@ const { data: navigation } = await useAsyncData('navigation', () => {
               :key="index"
               class="text-lg break-keep cursor-pointer hover:text-amber-600 hover:dark:text-amber-400 transition-colors duration-200 ease-in-out"
               :to="child.path"
+              @click="track('recent_post_click', { post: child.title })"
             >
               {{ child.title }}
             </NuxtLink>

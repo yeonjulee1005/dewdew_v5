@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { track } from '@vercel/analytics'
+
 const { locale, setLocale } = useI18n()
 
 withDefaults(
@@ -20,6 +22,7 @@ const selectLocale = computed({
   },
   set(value) {
     setLocale(value)
+    track('language_change', { locale: value })
   },
 })
 </script>

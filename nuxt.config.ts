@@ -2,6 +2,10 @@
 import process from 'node:process'
 import packageJson from './package.json'
 
+// 프로덕션 환경 체크
+const isProduction = process.env.NODE_ENV === 'production'
+const isVercelProduction = process.env.VERCEL_ENV === 'production'
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -33,9 +37,9 @@ export default defineNuxtConfig({
     ],
   },
   devtools: {
-    enabled: true,
+    enabled: !isProduction, // 프로덕션에서 비활성화
     timeline: {
-      enabled: true,
+      enabled: !isProduction,
     },
   },
   app: {
@@ -131,8 +135,8 @@ export default defineNuxtConfig({
     },
   },
   sourcemap: {
-    server: true,
-    client: true,
+    server: !isProduction, // 프로덕션에서 비활성화
+    client: !isProduction,
   },
   compatibilityDate: '2025-07-15',
   nitro: {
@@ -144,7 +148,12 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false,
     },
+    experimental: {
+      wasm: true, // better-sqlite3 최적화
+    },
     routeRules: {
+      // 홈페이지 정적 렌더링 (가능한 경우)
+      '/': { prerender: true },
       // 블로그 페이지 정적 렌더링 (빌드 시 생성)
       '/blog/**': { prerender: true },
       // 서비스 워커 파일을 정적 파일로 처리 (Vue Router에서 제외)
@@ -186,12 +195,14 @@ export default defineNuxtConfig({
   },
   vite: {
     build: {
-      sourcemap: true,
+      sourcemap: !isProduction, // 프로덕션에서 비활성화
       cssMinify: true,
       minify: 'terser',
       terserOptions: {
         compress: {
-          drop_console: process.env.VERCEL_ENV === 'production',
+          drop_console: isVercelProduction,
+          drop_debugger: isVercelProduction,
+          pure_funcs: isVercelProduction ? ['console.log', 'console.info', 'console.debug'] : [],
         },
       },
     },

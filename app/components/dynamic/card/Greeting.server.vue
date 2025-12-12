@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { url } = useImageStorage()
-const { width } = useWindowSize()
+const { isDesktop } = useDevice()
 
 withDefaults(defineProps<{
   title?: string
@@ -17,7 +17,7 @@ withDefaults(defineProps<{
     >
       {{ title }}
     </h3>
-    <DdCard :ui="{ body: 'p-2 sm:p-4' }">
+    <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="relative w-full flex flex-col gap-y-2">
         <NuxtImg
           :src="url(true, '/assets/banner/main_banner_v5.webp')"
@@ -32,7 +32,7 @@ withDefaults(defineProps<{
         />
         <span
           class="w-fit font-anton text-2xl sm:text-5xl md:text-6xl bg-linear-to-tl from-amber-900 via-amber-400/90 to-orange-700 bg-clip-text text-transparent transform"
-          :class="[width > 1024 ? 'absolute bottom-20 -left-18 max-w-66 rotate-270' : 'absolute bottom-1 left-1 w-full rotate-0']"
+          :class="[isDesktop ? 'absolute bottom-20 -left-18 max-w-66 rotate-270' : 'absolute bottom-1 left-1 w-full rotate-0']"
         >
           {{ $t('dynamic.greeting.title') }}
         </span>
