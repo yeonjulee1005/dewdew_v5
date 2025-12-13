@@ -156,10 +156,13 @@ export default {
   },
   pwa: {
     readyPwa: 'PWA를 사용할 준비가 됬어요!',
+    readyPwaDescription: '오프라인에서도 사용할 수 있게 준비되었습니다.',
     newContent: '새로운 컨첸츠가 있어요! 업데이트 해주세요!',
+    newContentDescription: '새 버전이 있습니다. 업데이트하여 최신 기능을 사용하세요.',
     reload: '새로고침',
     close: '닫기',
     installPwa: 'PWA 설치',
+    installPwaDescription: '앱을 설치하여 더 빠르고 편리하게 이용하세요.',
     install: '설치하기',
     cancel: '취소',
   },

@@ -7,7 +7,7 @@ export const useInstallPwa = () => {
   const readyToUsePwaToast = () => {
     toast.add({
       title: t('pwa.readyPwa'),
-      description: 'PWA 설치 완료',
+      description: t('pwa.readyPwaDescription'),
       color: 'success',
       duration: 3000,
       actions: [
@@ -30,7 +30,7 @@ export const useInstallPwa = () => {
   const reloadPwaToast = () => {
     toast.add({
       title: t('pwa.newContent'),
-      description: 'PWA 설치 완료',
+      description: t('pwa.newContentDescription'),
       color: 'info',
       duration: 3000,
       actions: [
@@ -62,7 +62,7 @@ export const useInstallPwa = () => {
   const installPwaToast = () => {
     toast.add({
       title: t('pwa.installPwa'),
-      description: 'PWA 설치 완료',
+      description: t('pwa.installPwaDescription'),
       color: 'info',
       duration: 3000,
       actions: [
@@ -81,7 +81,7 @@ export const useInstallPwa = () => {
           color: 'warning' as const,
           label: t('pwa.cancel'),
           onClick: () => {
-            pwa?.cancelPrompt()
+            pwa?.cancelInstall()
           },
         },
       ],
