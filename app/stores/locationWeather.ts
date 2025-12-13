@@ -33,6 +33,16 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   const weatherFirstData = ref<WeatherFirstData>()
   const weatherSecondData = ref<WeatherSecondData>()
 
+  // 요청 상태 관리
+  const isFetchingWeather = ref(false)
+  const isFetchingLiving = ref(false)
+  const lastFetchTime = ref<number>(0)
+  const lastLocationKey = ref<string>('')
+  const retryCount = ref<number>(0)
+  const MAX_RETRY = 3
+  const MIN_FETCH_INTERVAL = 30000 // 30초 최소 요청 간격
+  const RETRY_DELAY_BASE = 2000 // 재시도 기본 지연 시간 (2초)
+
   const getForecastHour = () => {
     forecastHour.value = acceptableMinute() ? getLastHour().concat('00') : genDateFormat('HH').concat('00')
     return forecastHour.value
@@ -42,25 +52,98 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
     return parseInt(getMinute('mm')) < 35
   }
 
-  const fetchLivingData = async () => {
-    const uvIndexData: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getUVIdxV4?serviceKey=${livingIndexQuery(currentLocationCode.value?.code ?? 0, genDateFormat('YYYYMMDDHH'))}`)
-    const diffusionData: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getAirDiffusionIdxV4?serviceKey=${livingIndexQuery(currentLocationCode.value?.code ?? 0, genDateFormat('YYYYMMDDHH'))}`)
-
-    if (!uvIndexData.response || !uvIndexData.response.body || !uvIndexData.response.body.items.item[0] || !diffusionData.response || !diffusionData.response.body.items.item[0]) {
+  const fetchLivingData = async (retryAttempt = 0): Promise<void> => {
+    // 중복 요청 방지
+    if (isFetchingLiving.value) {
       return
     }
 
-    recordLivingData(parseInt(uvIndexData.response.body.items.item[0].h0 ?? ''), parseInt(diffusionData.response.body.items.item[0].h3 ?? ''))
+    // 최소 요청 간격 체크
+    const now = Date.now()
+    if (now - lastFetchTime.value < MIN_FETCH_INTERVAL && retryAttempt === 0) {
+      return
+    }
+
+    isFetchingLiving.value = true
+
+    try {
+      const uvIndexData: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getUVIdxV4?serviceKey=${livingIndexQuery(currentLocationCode.value?.code ?? 0, genDateFormat('YYYYMMDDHH'))}`)
+      const diffusionData: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getAirDiffusionIdxV4?serviceKey=${livingIndexQuery(currentLocationCode.value?.code ?? 0, genDateFormat('YYYYMMDDHH'))}`)
+
+      if (!uvIndexData.response || !uvIndexData.response.body || !uvIndexData.response.body.items.item[0] || !diffusionData.response || !diffusionData.response.body.items.item[0]) {
+        return
+      }
+
+      recordLivingData(parseInt(uvIndexData.response.body.items.item[0].h0 ?? ''), parseInt(diffusionData.response.body.items.item[0].h3 ?? ''))
+      lastFetchTime.value = now
+      retryCount.value = 0
+    }
+    catch (error: any) {
+      // 429 에러 처리 (Too Many Requests)
+      if (error.status === 429 || error.statusCode === 429) {
+        if (retryAttempt < MAX_RETRY) {
+          const delay = RETRY_DELAY_BASE * Math.pow(2, retryAttempt) // Exponential backoff
+          await new Promise(resolve => setTimeout(resolve, delay))
+          isFetchingLiving.value = false
+          return fetchLivingData(retryAttempt + 1)
+        }
+        console.warn('기상청 API 요청 제한 초과. 잠시 후 다시 시도해주세요.')
+      }
+      else {
+        console.error('Living 데이터 조회 실패:', error)
+      }
+    }
+    finally {
+      isFetchingLiving.value = false
+    }
   }
 
-  const fetchWeatherData = async () => {
-    const data: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${weatherQuery(genDateFormat('YYYYMMDD'), getForecastHour(), geoX.value ?? 0, geoY.value ?? 0)}`)
-
-    if (!data.response || !data.response.body || !data.response.body.items || !data.response.body.items.item) {
+  const fetchWeatherData = async (retryAttempt = 0): Promise<void> => {
+    // 중복 요청 방지
+    if (isFetchingWeather.value) {
       return
     }
 
-    recordWeatherData(data.response.body.items.item as WeatherItem[])
+    // 위치 키 생성 (같은 위치인지 확인)
+    const locationKey = `${geoX.value}-${geoY.value}-${getForecastHour()}`
+    // 최소 요청 간격 체크 및 같은 위치/시간 체크
+    const now = Date.now()
+    if (now - lastFetchTime.value < MIN_FETCH_INTERVAL && locationKey === lastLocationKey.value && retryAttempt === 0) {
+      return
+    }
+
+    isFetchingWeather.value = true
+
+    try {
+      const data: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${weatherQuery(genDateFormat('YYYYMMDD'), getForecastHour(), geoX.value ?? 0, geoY.value ?? 0)}`)
+
+      if (!data.response || !data.response.body || !data.response.body.items || !data.response.body.items.item) {
+        return
+      }
+
+      recordWeatherData(data.response.body.items.item as WeatherItem[])
+      lastFetchTime.value = now
+      lastLocationKey.value = locationKey
+      retryCount.value = 0
+    }
+    catch (error: any) {
+      // 429 에러 처리 (Too Many Requests)
+      if (error.status === 429 || error.statusCode === 429) {
+        if (retryAttempt < MAX_RETRY) {
+          const delay = RETRY_DELAY_BASE * Math.pow(2, retryAttempt) // Exponential backoff
+          await new Promise(resolve => setTimeout(resolve, delay))
+          isFetchingWeather.value = false
+          return fetchWeatherData(retryAttempt + 1)
+        }
+        console.warn('기상청 API 요청 제한 초과. 잠시 후 다시 시도해주세요.')
+      }
+      else {
+        console.error('날씨 데이터 조회 실패:', error)
+      }
+    }
+    finally {
+      isFetchingWeather.value = false
+    }
   }
 
   const recordLivingData = (uvKey: number, diffusionKey: number) => {
