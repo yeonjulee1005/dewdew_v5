@@ -156,6 +156,8 @@ export default defineNuxtConfig({
       '/': { prerender: true },
       // 블로그 페이지 정적 렌더링 (빌드 시 생성)
       '/blog/**': { prerender: true },
+      // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
+      '/_vercel/**': { prerender: false, ssr: false },
       // 서비스 워커 파일을 정적 파일로 처리 (Vue Router에서 제외)
       '/sw.js': {
         headers: {
@@ -261,7 +263,7 @@ export default defineNuxtConfig({
     scope: '/',
     base: '/',
     injectRegister: 'auto',
-    registerType: 'autoUpdate',
+    registerType: 'prompt',
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
@@ -270,8 +272,8 @@ export default defineNuxtConfig({
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
-      skipWaiting: true,
-      clientsClaim: true,
+      skipWaiting: false,
+      clientsClaim: false,
       // 404 응답을 무시하고 계속 진행 (프리캐시 실패 시에도 Service Worker가 정상 작동)
       dontCacheBustURLsMatching: /\.\w{8}\./,
       // 런타임 캐싱 전략 설정
@@ -435,7 +437,6 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true,
-      periodicSyncForUpdates: 20,
     },
     devOptions: {
       enabled: false,

@@ -157,10 +157,10 @@ export default {
   pwa: {
     readyPwa: 'PWA를 사용할 준비가 됬어요!',
     newContent: '새로운 컨첸츠가 있어요! 업데이트 해주세요!',
-    reload: '재로딩',
+    reload: '새로고침',
     close: '닫기',
-    installPwa: 'PWA 설치하기',
-    install: '설치',
+    installPwa: 'PWA 설치',
+    install: '설치하기',
     cancel: '취소',
   },
   localeMenu: {
