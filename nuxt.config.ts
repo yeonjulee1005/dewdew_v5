@@ -267,7 +267,8 @@ export default defineNuxtConfig({
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
-      navigateFallback: undefined,
+      navigateFallback: '/', // 오프라인 폴백 페이지 설정
+      navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//], // API와 빌드 파일은 제외
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
@@ -280,7 +281,7 @@ export default defineNuxtConfig({
       runtimeCaching: [
         // 페이지 요청: 네트워크 우선, 실패 시 캐시 사용
         {
-          urlPattern: /^https?:\/\/.*$/,
+          urlPattern: ({ request }) => request.mode === 'navigate', // 네비게이션 요청만
           handler: 'NetworkFirst',
           options: {
             cacheName: 'pages-cache',
@@ -289,6 +290,9 @@ export default defineNuxtConfig({
               maxAgeSeconds: 24 * 60 * 60, // 24시간
             },
             networkTimeoutSeconds: 3,
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
           },
         },
         // Supabase Storage 이미지: 캐시 우선 (변경이 거의 없으므로 긴 캐시)
@@ -354,7 +358,11 @@ export default defineNuxtConfig({
         },
         // Supabase Storage API (이미지 제외): 네트워크 우선 (최신 데이터 중요)
         {
-          urlPattern: /^https:\/\/.*\.supabase\.co\/.*$/,
+          urlPattern: ({ url }) => {
+            // 이미지 URL은 제외
+            return url.href.includes('supabase.co')
+              && !/\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/.test(url.pathname)
+          },
           handler: 'NetworkFirst',
           options: {
             cacheName: 'supabase-api-cache',
@@ -398,6 +406,22 @@ export default defineNuxtConfig({
               maxEntries: 200,
               maxAgeSeconds: 7 * 24 * 60 * 60, // 7일
             },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        // 로컬 API 요청: 네트워크 우선, 실패 시 캐시 사용
+        {
+          urlPattern: ({ url }) => url.pathname.startsWith('/api/'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api-cache',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 5 * 60, // 5분
+            },
+            networkTimeoutSeconds: 3,
             cacheableResponse: {
               statuses: [0, 200],
             },
