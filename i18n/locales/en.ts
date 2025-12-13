@@ -152,10 +152,13 @@ export default {
   },
   pwa: {
     readyPwa: 'PWA is ready!',
+    readyPwaDescription: 'Ready to use offline.',
     newContent: 'There is new content! Please update!',
+    newContentDescription: 'A new version is available. Update to use the latest features.',
     reload: 'Reload',
     close: 'Close',
     installPwa: 'Install PWA',
+    installPwaDescription: 'Install the app for a faster and more convenient experience.',
     install: 'Install',
     cancel: 'Cancel',
   },

@@ -9,7 +9,6 @@ const appConfig = useAppConfig()
 const { meta } = useRoute()
 
 const { t } = useI18n()
-
 const { genDateFormat } = useDateFormatter()
 
 const { geoX, geoY, latitude, longitude, forecastHour, currentLocationCode } = storeToRefs(useLocWeatherStore())
@@ -80,16 +79,63 @@ useSeoMeta({
   twitterCreator: '@dewdew',
 })
 
+// 위치 변화 임계값 (미터 단위, 약 100m)
+const LOCATION_CHANGE_THRESHOLD = 0.001 // 약 100m (위도/경도 차이)
+
+// 마지막 위치 저장
+interface LastCoords {
+  latitude: number
+  longitude: number
+}
+const lastCoords = ref<LastCoords | null>(null)
+
+// 위치가 크게 변경되었는지 확인
+const hasLocationChanged = (newLat: number, newLng: number): boolean => {
+  if (!lastCoords.value) {
+    return true
+  }
+
+  const latDiff = Math.abs(newLat - lastCoords.value.latitude)
+  const lngDiff = Math.abs(newLng - lastCoords.value.longitude)
+
+  return latDiff > LOCATION_CHANGE_THRESHOLD || lngDiff > LOCATION_CHANGE_THRESHOLD
+}
+
 const initWeatherData = () => {
+  // 좌표 유효성 검사
+  if (coords.value.latitude === undefined || coords.value.longitude === undefined) {
+    return
+  }
+
   const rs = dfsXyConvert('toXY', coords.value.latitude, coords.value.longitude)
 
-  geoX.value = Math.floor(rs.x ?? 0)
-  geoY.value = Math.floor(rs.y ?? 0)
+  // 변환 결과 유효성 검사
+  if (rs.x === undefined || rs.y === undefined || rs.lat === undefined || rs.lng === undefined) {
+    return
+  }
 
-  latitude.value = rs.lat
-  longitude.value = rs.lng
+  const newGeoX = Math.floor(rs.x)
+  const newGeoY = Math.floor(rs.y)
+  const newLat = rs.lat
+  const newLng = rs.lng
 
-  currentLocationCode.value = filteredLocations(geoX.value, geoY.value)
+  // 위치가 크게 변경되지 않았으면 스킵
+  if (!hasLocationChanged(newLat, newLng) && geoX.value === newGeoX && geoY.value === newGeoY) {
+    return
+  }
+
+  geoX.value = newGeoX
+  geoY.value = newGeoY
+  latitude.value = newLat
+  longitude.value = newLng
+
+  // geoX, geoY가 undefined가 아님을 보장
+  if (geoX.value !== undefined && geoY.value !== undefined) {
+    currentLocationCode.value = filteredLocations(geoX.value, geoY.value)
+  }
+
+  // 마지막 위치 업데이트
+  lastCoords.value = { latitude: newLat, longitude: newLng }
 
   fetchLivingData()
   fetchWeatherData()
@@ -102,14 +148,39 @@ watch(() => genDateFormat('HH'), () => {
   }
 })
 
+// 디바운싱을 위한 타이머
+let debounceTimer: ReturnType<typeof setTimeout> | null = null
+const DEBOUNCE_DELAY = 2000 // 2초 디바운스
+
 watch(() => coords.value, () => {
   if (coords.value.latitude === Infinity) {
     resume()
     return
   }
 
-  initWeatherData()
+  // 기존 타이머 클리어
+  if (debounceTimer) {
+    clearTimeout(debounceTimer)
+  }
+
+  // 디바운싱: 2초 후에 실행
+  debounceTimer = setTimeout(() => {
+    initWeatherData()
+    debounceTimer = null
+  }, DEBOUNCE_DELAY)
 }, { immediate: true })
+
+// PWA 상태 감시 초기화
+const { watchPwaStates } = useInstallPwa()
+watchPwaStates()
+
+// 컴포넌트 언마운트 시 타이머 클리어
+onUnmounted(() => {
+  if (debounceTimer) {
+    clearTimeout(debounceTimer)
+    debounceTimer = null
+  }
+})
 </script>
 
 <template>
@@ -121,7 +192,6 @@ watch(() => coords.value, () => {
         :height="5"
       />
       <NuxtPage />
-      <InstallPwa />
     </NuxtLayout>
     <Analytics />
     <SpeedInsights />
