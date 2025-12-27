@@ -1,7 +1,7 @@
 export default {
   pageTitle: {
     yeonju: 'Developer Yeonju Lee',
-    dewdew: 'Dewdew',
+    dewdew: 'Dewdew Portfolio Website',
     ai: 'Dewdew, Ask Dewdew AI',
     aiComponents: 'Dewdew, AI Components',
     blog: 'Blog',

@@ -1,7 +1,7 @@
 export default {
   pageTitle: {
     yeonju: '개발자 이연주',
-    dewdew: 'Dewdew',
+    dewdew: 'Dewdew Portfolio Website',
     ai: 'Dewdew, AI에게 묻다',
     aiComponents: 'Dewdew, AI 컴포넌트',
     blog: '회고 블로그',

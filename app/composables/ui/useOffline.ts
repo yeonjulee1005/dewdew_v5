@@ -1,19 +1,25 @@
 export const useOffline = () => {
-  const isOnline = ref(navigator.onLine)
+  const isOnline = ref(import.meta.client ? navigator.onLine : true)
 
-  onMounted(() => {
-    window.addEventListener('online', () => {
-      isOnline.value = true
-    })
-    window.addEventListener('offline', () => {
-      isOnline.value = false
-    })
-  })
+  const handleOnline = () => {
+    isOnline.value = true
+  }
 
-  onUnmounted(() => {
-    window.removeEventListener('online', () => {})
-    window.removeEventListener('offline', () => {})
-  })
+  const handleOffline = () => {
+    isOnline.value = false
+  }
+
+  if (import.meta.client) {
+    onMounted(() => {
+      window.addEventListener('online', handleOnline)
+      window.addEventListener('offline', handleOffline)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    })
+  }
 
   return { isOnline }
 }
