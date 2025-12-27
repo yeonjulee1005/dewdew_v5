@@ -16,16 +16,37 @@ const ImageCarousel = defineAsyncComponent(() => import('~/components/dynamic/ca
 const ContactForm = defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue'))
 
 const { t } = useI18n()
+const route = useRoute()
 
 useHead({
   title: t('pageTitle.aiComponents'),
   meta: [
     { name: 'description', content: t('seoDescription.aiComponents') },
+    { name: 'og:title', content: t('seoTitle.aiComponents') },
+    { name: 'og:description', content: t('seoDescription.aiComponents') },
+    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
   ],
 })
 
 definePageMeta({
   layout: 'default',
+})
+
+useSchemaFaq({
+  mainEntity: [
+    {
+      name: 'What is Dewdew AI Components?',
+      acceptedAnswer: {
+        text: 'Dewdew AI Components is a list of server components displayed when answering Dewdew AI.',
+      },
+    },
+    {
+      name: 'How to make Dewdew AI Components?',
+      acceptedAnswer: {
+        text: 'Dewdew AI Components is a list of server components displayed when answering Dewdew AI.',
+      },
+    },
+  ],
 })
 </script>
 
@@ -33,9 +54,9 @@ definePageMeta({
   <div class="h-fit bg-white dark:bg-neutral-900 p-4 space-y-8 mb-16">
     <Concept />
     <DdSeparator />
-    <p class="max-w-4xl mx-auto text-2xl font-bold break-keep">
+    <h1 class="max-w-4xl mx-auto text-2xl font-bold break-keep">
       {{ $t('seoDescription.aiComponents') }}
-    </p>
+    </h1>
     <div class="max-w-4xl mx-auto space-y-8">
       <Greeting :title="$t('aiComponents.greetingCard')" />
       <Profile :title="$t('aiComponents.profileCard')" />

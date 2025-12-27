@@ -17,14 +17,24 @@ const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 const { filteredLocations } = useKorLocation()
 const { dfsXyConvert } = useTranslateCoords()
 
-const { url } = useImageStorage()
 const seoTitle = t('seoTitle.intro')
 const seoDescription = t('seoDescription.intro')
-const seoImage = '/assets/banner/main_banner_v4.webp'
+const seoImage = '/assets/dewdew.webp'
+const route = useRoute()
 
 useHead({
-  title: (meta.title as string) ?? t('pageTitle.dewdew'),
+  title: meta.title as string,
   titleTemplate: (title?: string | undefined): string | null => {
+    // index 페이지 처리
+    if (route.path === '/') {
+      const isValidTitle = title
+        && title !== t('pageTitle.dewdew')
+        && (title === seoTitle || title.includes('Software Engineer'))
+
+      return isValidTitle ? title : seoTitle
+    }
+
+    // title이 없는 경우 기본값 반환
     if (!title) {
       return t('pageTitle.dewdew').concat(' | ', '메인')
     }
@@ -34,14 +44,16 @@ useHead({
       ? title
       : t(title.startsWith('pageTitle.') ? title : `pageTitle.${title.toLowerCase()}`, title)
 
-    return !translatedTitle.includes(t('pageTitle.dewdew'))
-      ? t('pageTitle.dewdew').concat(' | ', translatedTitle)
-      : translatedTitle
+    // seoTitle.intro를 포함하는 경우 그대로 반환
+    if (translatedTitle.includes(seoTitle) || translatedTitle === seoTitle) {
+      return translatedTitle
+    }
+
+    return t('pageTitle.dewdew').concat(' | ', translatedTitle)
   },
   link: [
     { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
     { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
-    { rel: 'canonical', href: url(true, seoImage) },
     { rel: 'manifest', href: '/manifest.webmanifest' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/image/apple-touch-icon.png' },
     { rel: 'icon', type: 'image/svg+xml', href: '/image/favicon.svg' },

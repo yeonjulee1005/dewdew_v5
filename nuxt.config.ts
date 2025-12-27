@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-time',
+    'nuxt-aeo',
     'dayjs-nuxt',
     'pinia-plugin-persistedstate',
     '@nuxtjs/seo',
@@ -60,20 +61,6 @@ export default defineNuxtConfig({
         {
           rel: 'preload',
           as: 'font',
-          type: 'font/woff2',
-          href: '/fonts/SUIT-Variable.woff2',
-          crossorigin: 'anonymous',
-        },
-        {
-          rel: 'preload',
-          as: 'font',
-          type: 'font/woff2',
-          href: '/fonts/SourceCodeVFUpright.woff2',
-          crossorigin: 'anonymous',
-        },
-        {
-          rel: 'preload',
-          as: 'font',
           type: 'font/ttf',
           href: '/fonts/Anton-Regular.ttf',
           crossorigin: 'anonymous',
@@ -86,8 +73,10 @@ export default defineNuxtConfig({
     '~/assets/css/main.css',
   ],
   site: {
-    name: 'Dewdew',
+    name: 'Dewdew Dev Portfolio Website',
+    description: 'Dewdew, Software Engineer.',
     url: process.env.NUXT_PUBLIC_SITE_URL ?? process.env.NUXT_ENV_VERCEL_URL ?? 'http://localhost:4110',
+    indexable: true,
   },
   colorMode: {
     preference: 'system',
@@ -102,6 +91,9 @@ export default defineNuxtConfig({
           depth: 3,
         },
         highlight: {
+          langs: [
+            'javascript', 'typescript', 'vue', 'html', 'css', 'json', 'bash',
+          ],
           preload: ['js', 'ts', 'json', 'vue'],
           theme: {
             default: 'github-light',
@@ -153,7 +145,14 @@ export default defineNuxtConfig({
     },
     routeRules: {
       // 홈페이지 정적 렌더링 (가능한 경우)
-      '/': { prerender: true },
+      '/': {
+        prerender: true,
+        ...(!isProduction && {
+          headers: {
+            'X-Robots-Tag': 'noindex, nofollow',
+          },
+        }),
+      },
       // 블로그 페이지 정적 렌더링 (빌드 시 생성)
       '/blog/**': { prerender: true },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
@@ -197,6 +196,18 @@ export default defineNuxtConfig({
   },
   vite: {
     build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('@egjs/flicking')) return 'carousel'
+            if (id.includes('shiki')) return 'syntax-highlight'
+            if (id.includes('@supabase')) return 'supabase'
+            if (id.includes('motion')) return 'animation'
+            if (id.includes('syntax-highlight')) return 'syntax-highlight'
+            if (id.includes('entry')) return 'entry'
+          },
+        },
+      },
       sourcemap: !isProduction, // 프로덕션에서 비활성화
       cssMinify: true,
       minify: 'terser',
@@ -211,6 +222,70 @@ export default defineNuxtConfig({
   },
   typescript: {
     shim: false,
+  },
+  aeo: {
+    schemas: [
+      {
+        type: 'WebSite',
+        name: 'Dewdew Portfolio',
+        description: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
+        logo: '/image/web-app-manifest-192x192.png',
+        url: '/',
+        publisher: {
+          name: 'Yeonju Lee',
+          url: 'https://www.dewdew.dev',
+        },
+        copyright: '2025 Yeonju Lee',
+        keywords: ['Dewdew', 'Software Engineer', 'Nuxt4', 'Frontend Development'],
+        category: 'Technology',
+        genre: 'Technology',
+      },
+      {
+        type: 'AI Chat to her resume data',
+        name: 'Dewdew AI Chat to her resume data',
+        description: 'Dewdew AI Chat to her resume data is a chatbot that answers questions about her resume data.',
+        logo: '/image/web-app-manifest-192x192.png',
+        url: '/ai',
+        publisher: {
+          name: 'Yeonju Lee',
+          url: 'https://www.dewdew.dev',
+        },
+        copyright: '2025 Yeonju Lee',
+        keywords: ['Dewdew', 'AI Chat', 'Nuxt4', 'Frontend Development'],
+        category: 'Technology',
+        genre: 'Technology',
+      },
+      {
+        type: 'Introduction',
+        name: 'Dewdew AI Components',
+        description: 'Dewdew AI Components is a list of server components displayed when answering Dewdew AI.',
+        logo: '/image/web-app-manifest-192x192.png',
+        url: '/ai/components',
+        publisher: {
+          name: 'Yeonju Lee',
+          url: 'https://www.dewdew.dev',
+        },
+        copyright: '2025 Yeonju Lee',
+        keywords: ['Dewdew', 'Software Engineer', 'Nuxt4', 'Frontend Development'],
+        category: 'Technology',
+        genre: 'Technology',
+      },
+      {
+        type: 'Blog',
+        name: 'Dewdew Blog',
+        description: 'Dewdew Blog is a blog that writes about her life and reflection.',
+        logo: '/image/web-app-manifest-192x192.png',
+        url: '/blog',
+        publisher: {
+          name: 'Yeonju Lee',
+          url: 'https://www.dewdew.dev',
+        },
+        copyright: '2025 Yeonju Lee',
+        keywords: ['Dewdew', 'Blog', 'Reflection', 'Life'],
+        category: 'Technology',
+        genre: 'Technology',
+      },
+    ],
   },
   dayjs: {
     locales: ['ko'],
@@ -233,6 +308,19 @@ export default defineNuxtConfig({
     defaultLocale: 'ko',
     strategy: 'no_prefix',
   },
+  icon: {
+    serverBundle: {
+      collections: [
+        'lucide',
+        'simple-icons',
+      ],
+    },
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256,
+    },
+    provider: 'iconify',
+  },
   image: {
     format: ['svg', 'png', 'jpg', 'jpeg', 'webp'],
     quality: 80,
@@ -248,7 +336,11 @@ export default defineNuxtConfig({
   },
   ogImage: {
     fonts: [
-      'Source Code Pro',
+      {
+        name: 'Anton',
+        weight: '400',
+        path: '/fonts/Anton-Regular.ttf',
+      },
     ],
     defaults: {
       renderer: 'satori',
@@ -468,6 +560,22 @@ export default defineNuxtConfig({
       navigateFallbackAllowlist: [/^\/$/],
       type: 'module',
     },
+  },
+  robots: {
+    groups: [
+      {
+        userAgent: '*',
+        allow: '/',
+        contentUsage: {
+          'bots': 'y',
+          'train-ai': 'y',
+        },
+        contentSignal: {
+          'ai-train': 'yes',
+          'search': 'yes',
+        },
+      },
+    ],
   },
   stylelint: {
     lintOnStart: true,
