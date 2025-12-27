@@ -4,15 +4,43 @@ import IntroTransitionMessage from '../components/intro/TransitionMessage.server
 import IntroController from '../components/intro/Controller.client.vue'
 
 const { t } = useI18n()
+const route = useRoute()
 
 useHead({
-  title: t('pageTitle.dewdew'),
+  title: t('seoTitle.intro'),
   meta: [
-    { name: 'description', content: 'Main Page' },
+    { name: 'description', content: t('seoDescription.intro') },
+    { name: 'og:title', content: t('seoTitle.intro') },
+    { name: 'og:description', content: t('seoDescription.intro') },
+    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
   ],
 })
+
 definePageMeta({
   layout: 'center',
+})
+
+useSchemaFaq({
+  mainEntity: [
+    {
+      name: 'What is Dewdew Dev?',
+      acceptedAnswer: {
+        text: 'Dewdew Dev is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
+      },
+    },
+    {
+      name: 'What made of this website?',
+      acceptedAnswer: {
+        text: 'This website is made of Nuxt4, Tailwind CSS, and TypeScript. And it is hosted on Vercel.',
+      },
+    },
+    {
+      name: 'Who is Yeonju Lee?',
+      acceptedAnswer: {
+        text: 'Yeonju Lee is a Software Engineer who is interested in frontend development (Nuxt4) and has contributed to the Nuxt4 framework ecosystem.',
+      },
+    },
+  ],
 })
 
 let redirectTimer: ReturnType<typeof setTimeout> | null = null

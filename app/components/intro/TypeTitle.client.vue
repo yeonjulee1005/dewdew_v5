@@ -29,7 +29,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <span
+  <h1
     v-if="isMounted"
     ref="helloIntroTitle"
     class="text-2xl sm:text-4xl font-bold break-keep py-2"

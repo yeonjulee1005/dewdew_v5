@@ -2,16 +2,27 @@
 import { track } from '@vercel/analytics'
 import Giscus from '@giscus/vue'
 
-const { t } = useLocale()
+const { t } = useI18n()
 const route = useRoute()
 
 useHead({
   title: t('pageTitle.blog'),
   meta: [
-    { property: 'description', content: t('seoDescription.blog') },
-    { property: 'og:title', content: t('seoTitle.blog') },
-    { property: 'og:description', content: t('seoDescription.blog') },
-    { property: 'og:url', content: `https://www.dewdew.dev${route.path}` },
+    { name: 'description', content: t('seoDescription.blog') },
+    { name: 'og:title', content: t('seoTitle.blog') },
+    { name: 'og:description', content: t('seoDescription.blog') },
+    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
+  ],
+})
+
+useSchemaFaq({
+  mainEntity: [
+    {
+      name: 'What is Dewdew Blog?',
+      acceptedAnswer: {
+        text: 'Dewdew Blog is an Development Tech retrospective blog.',
+      },
+    },
   ],
 })
 

@@ -1,130 +1,138 @@
 <script setup lang="ts">
-import Flicking from '@egjs/vue3-flicking'
-import { AutoPlay } from '@egjs/flicking-plugins'
-import '@egjs/vue3-flicking/dist/flicking.css'
+import type { UvData, AirDiffusionData, WeatherFirstData, WeatherSecondData } from '@/types/weather'
 
 const { uvData, airDiffusionData, weatherFirstData, weatherSecondData } = storeToRefs(useLocWeatherStore())
-
 const { airDiffusionColor, uvColor, humidityColor, weatherColor, temperatureColor } = useColorUtils()
 
-const plugin = [
-  new AutoPlay({
-    animationDuration: 2000,
-    direction: 'NEXT',
-    stopOnHover: true,
-  }),
-]
+// 캐러셀 아이템 배열 생성
+const carouselItems = computed(() => {
+  const items: Array<{ type: string, data: UvData | AirDiffusionData | WeatherFirstData | WeatherSecondData }> = []
 
-const option = {
-  inputType: ['touch', 'mouse'],
-  circular: true,
-  horizontal: false,
-  deceleration: 0.004,
-}
+  if (uvData.value) {
+    items.push({ type: 'uv', data: uvData.value })
+  }
+
+  if (airDiffusionData.value) {
+    items.push({ type: 'airDiffusion', data: airDiffusionData.value })
+  }
+
+  if (weatherFirstData.value) {
+    items.push({ type: 'weatherFirst', data: weatherFirstData.value })
+  }
+
+  if (weatherSecondData.value) {
+    items.push({ type: 'weatherSecond', data: weatherSecondData.value })
+  }
+
+  return items
+})
 </script>
 
 <template>
-  <Flicking
+  <DdCarousel
+    v-if="carouselItems.length > 0"
+    v-slot="{ item }"
+    :items="carouselItems"
+    orientation="vertical"
+    loop
+    :autoplay="{ delay: 2000 }"
+    :ui="{
+      container: 'h-14',
+      item: 'basis-full h-14',
+    }"
     class="h-10 w-full max-w-fit"
-    :plugins="plugin"
-    :options="option"
   >
+    <!-- UV 데이터 -->
     <div
-      :key="1"
+      v-if="item.type === 'uv'"
       class="h-10 w-full flex items-center"
     >
-      <div
-        v-if="uvData"
-        class="flex gap-4"
-      >
+      <div class="flex gap-4">
         <AIconText
           :use-icon="false"
-          :text="uvData.location"
+          :text="(item.data as UvData).location"
         />
         <AIconText
           :use-icon="false"
           :text="$t('texts.uv')"
         />
         <AIconText
-          :custom-class="uvColor(uvData.uvIndex)"
-          :icon-name="uvData.uv.split(',')[1]"
-          :text-class="uvColor(uvData.uvIndex)"
-          :text="uvData.uv.split(',')[0]"
+          :custom-class="uvColor((item.data as UvData).uvIndex)"
+          :icon-name="(item.data as UvData).uv.split(',')[1]"
+          :text-class="uvColor((item.data as UvData).uvIndex)"
+          :text="(item.data as UvData).uv.split(',')[0]"
         />
       </div>
     </div>
+
+    <!-- 대기정체 데이터 -->
     <div
-      :key="2"
+      v-else-if="item.type === 'airDiffusion'"
       class="h-10 w-full flex items-center"
     >
-      <div
-        v-if="airDiffusionData"
-        class="flex gap-4"
-      >
+      <div class="flex gap-4">
         <AIconText
           :use-icon="false"
-          :text="airDiffusionData.location"
+          :text="(item.data as AirDiffusionData).location"
         />
         <AIconText
           :use-icon="false"
           :text="$t('texts.diffusion')"
         />
         <AIconText
-          :custom-class="airDiffusionColor(airDiffusionData.diffusionIndex)"
-          :icon-name="airDiffusionData.diffusion.split(',')[1]"
-          :text-class="airDiffusionColor(airDiffusionData.diffusionIndex)"
-          :text="airDiffusionData.diffusion.split(',')[0]"
+          :custom-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex)"
+          :icon-name="(item.data as AirDiffusionData).diffusion.split(',')[1]"
+          :text-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex)"
+          :text="(item.data as AirDiffusionData).diffusion.split(',')[0]"
         />
       </div>
     </div>
+
+    <!-- 날씨 첫 번째 데이터 -->
     <div
-      :key="3"
+      v-else-if="item.type === 'weatherFirst'"
       class="h-10 w-full flex items-center"
     >
-      <div
-        v-if="weatherFirstData"
-        class="flex gap-4"
-      >
+      <div class="flex gap-4">
         <AIconText
-          :custom-class="weatherColor(weatherFirstData.sky.split(',')[0] ?? '')"
-          :icon-name="weatherFirstData.sky.split(',')[1]"
-          :text="weatherFirstData.sky.split(',')[0]"
+          :custom-class="weatherColor((item.data as WeatherFirstData).sky.split(',')[0] ?? '')"
+          :icon-name="(item.data as WeatherFirstData).sky.split(',')[1]"
+          :text="(item.data as WeatherFirstData).sky.split(',')[0]"
         />
         <AIconText
           :use-icon="false"
-          :text-class="temperatureColor(weatherFirstData.t1h)"
-          :text="`${weatherFirstData.t1h} ℃`"
+          :text-class="temperatureColor((item.data as WeatherFirstData).t1h)"
+          :text="`${(item.data as WeatherFirstData).t1h} ℃`"
         />
         <AIconText
           custom-class="gap-2"
-          :icon-name="weatherFirstData.vec.split(',')[1]"
-          :text="weatherFirstData.wsd"
+          :icon-name="(item.data as WeatherFirstData).vec.split(',')[1]"
+          :text="(item.data as WeatherFirstData).wsd"
         />
       </div>
     </div>
+
+    <!-- 날씨 두 번째 데이터 -->
     <div
-      key="4"
+      v-else-if="item.type === 'weatherSecond'"
       class="h-10 w-full flex items-center"
     >
-      <div
-        v-if="weatherSecondData"
-        class="flex gap-4"
-      >
+      <div class="flex gap-4">
         <AIconText
-          :icon-name="weatherSecondData.pty.split(',')[1]"
-          :text="weatherSecondData.pty.split(',')[0]"
+          :icon-name="(item.data as WeatherSecondData).pty.split(',')[1]"
+          :text="(item.data as WeatherSecondData).pty.split(',')[0]"
         />
         <AIconText
           :use-icon="false"
-          :text="weatherSecondData.r1n"
+          :text="(item.data as WeatherSecondData).r1n"
         />
         <AIconText
-          :custom-class="humidityColor(parseInt(weatherSecondData.reh))"
+          :custom-class="humidityColor(parseInt((item.data as WeatherSecondData).reh))"
           icon-name="wi:humidity"
-          :text-class="humidityColor(parseInt(weatherSecondData.reh))"
-          :text="weatherSecondData.reh"
+          :text-class="humidityColor(parseInt((item.data as WeatherSecondData).reh))"
+          :text="(item.data as WeatherSecondData).reh"
         />
       </div>
     </div>
-  </Flicking>
+  </DdCarousel>
 </template>
