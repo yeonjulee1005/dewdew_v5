@@ -1,5 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow: 
+Allow: /
 
 sitemap: https://www.dewdew.dev/sitemap.xml
