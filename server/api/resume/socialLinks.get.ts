@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: socialLinksData, error: socialLinksError } = await client
     .schema('resume')
     .from('social_links')
-    .select('*')
+    .select('platform, url, icon_url, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: true })
 
