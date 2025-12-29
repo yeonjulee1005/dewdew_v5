@@ -8,6 +8,9 @@ const { coords, resume } = useGeolocation()
 const appConfig = useAppConfig()
 const { meta } = useRoute()
 
+// Vercel 환경 체크 (템플릿에서 사용)
+const isVercel = import.meta.env.VERCEL
+
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
 
@@ -222,7 +225,7 @@ onUnmounted(() => {
       />
       <NuxtPage />
     </NuxtLayout>
-    <Analytics v-if="import.meta.env.VERCEL" />
-    <SpeedInsights v-if="import.meta.env.VERCEL" />
+    <Analytics v-if="isVercel" />
+    <SpeedInsights v-if="isVercel" />
   </DdApp>
 </template>
