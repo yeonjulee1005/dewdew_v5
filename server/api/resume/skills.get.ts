@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: skillsData, error: skillsError } = await client
     .schema('resume')
     .from('skills')
-    .select('*')
+    .select('category, name, proficiency, icon_url, order_index, deleted')
     .order('proficiency', { ascending: false })
     .order('order_index', { ascending: true })
 

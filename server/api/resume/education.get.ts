@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: educationData, error: educationError } = await client
     .schema('resume')
     .from('education')
-    .select('*')
+    .select('school_name, degree, major, description, start_date, end_date, image_url, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: false })
 
