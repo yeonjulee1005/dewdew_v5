@@ -1,5 +1,6 @@
 import { serverSupabaseClient } from '#supabase/server'
 import type { ResumeDatabase } from '~/types/database.types'
+import { filterStream } from '../../utils/stream-filter'
 
 /**
  * 채팅 히스토리를 데이터베이스에 저장하는 함수
@@ -87,8 +88,9 @@ export default defineEventHandler(async (event) => {
     setResponseHeader(event, 'Connection', 'keep-alive')
     setResponseHeader(event, 'X-Accel-Buffering', 'no')
 
-    // 스트리밍 응답 전달
-    return sendStream(event, response.body as ReadableStream)
+    // 스트림 필터링 후 전달 (민감한 정보 제거)
+    const filteredStream = await filterStream(response.body)
+    return sendStream(event, filteredStream)
   }
   catch (error: any) {
     console.error('Chat proxy error:', error)

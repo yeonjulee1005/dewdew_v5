@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: imageArchiveData, error: imageArchiveError } = await client
     .schema('resume')
     .from('image_archive')
-    .select('*')
+    .select('title, image_url, year, season, tags, category, order_index, year_description, deleted')
     .eq('deleted', false)
     .order('year', { ascending: false })
     .order('order_index', { ascending: true })

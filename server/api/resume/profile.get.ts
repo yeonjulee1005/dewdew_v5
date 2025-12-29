@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: profileData, error: profileError } = await client
     .schema('resume')
     .from('profile')
-    .select('*')
+    .select('ai_personality_data, full_name, title, avatar_url, location, email, phone, bio, detailed_bio, weaknesses, deleted')
     .single()
 
   if (profileError) {
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   const { data: experienceData, error: experienceError } = await client
     .schema('resume')
     .from('experience')
-    .select('*')
+    .select('company_name, company_logo_url, position, description, start_date, end_date, is_current, order_index, deleted')
     .order('order_index', { ascending: false })
     .limit(1)
     .maybeSingle()
@@ -26,8 +26,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusMessage: experienceError.message })
   }
 
+  // 민감한 정보 제거 (네트워크 응답에서 숨김)
+  const sanitizedProfile = {
+    ...profileData,
+    phone: undefined,
+  }
+  delete sanitizedProfile.phone
+
   return {
-    profile: profileData,
+    profile: sanitizedProfile,
     experience: experienceData,
   }
 })

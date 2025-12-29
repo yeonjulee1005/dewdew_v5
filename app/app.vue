@@ -8,6 +8,9 @@ const { coords, resume } = useGeolocation()
 const appConfig = useAppConfig()
 const { meta } = useRoute()
 
+// Vercel 환경 체크 (템플릿에서 사용)
+const isVercel = import.meta.env.VERCEL
+
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
 
@@ -68,7 +71,7 @@ useHead({
 })
 
 useSeoMeta({
-  charset: 'utf-16',
+  charset: 'utf-8',
   formatDetection: 'telephone=no',
   viewport: 'width=device-width, initial-scale=1',
   title: (meta.title as string) || seoTitle,
@@ -91,22 +94,26 @@ useSeoMeta({
   twitterCreator: '@dewdew',
 })
 
-// 위치 변화 임계값 (미터 단위, 약 100m)
-const LOCATION_CHANGE_THRESHOLD = 0.001 // 약 100m (위도/경도 차이)
+// 위치 변화 임계값 및 상태 관리
+const LOCATION_CHANGE_THRESHOLD = 0.001 // 약 100m
+const lastCoords = ref<{ latitude: number, longitude: number } | null>(null)
+const lastGridCoords = ref<{ x: number, y: number } | null>(null)
 
-// 마지막 위치 저장
-interface LastCoords {
-  latitude: number
-  longitude: number
-}
-const lastCoords = ref<LastCoords | null>(null)
-
-// 위치가 크게 변경되었는지 확인
-const hasLocationChanged = (newLat: number, newLng: number): boolean => {
-  if (!lastCoords.value) {
+/**
+ * 위치가 실제로 유의미하게 변경되었는지 확인
+ */
+const hasSignificantLocationChange = (newLat: number, newLng: number, newX: number, newY: number): boolean => {
+  // 1. 처음 호출인 경우
+  if (!lastCoords.value || !lastGridCoords.value) {
     return true
   }
 
+  // 2. 격자 좌표(nx, ny)가 변했는지 확인 (기상청 API 호출 기준)
+  if (lastGridCoords.value.x !== newX || lastGridCoords.value.y !== newY) {
+    return true
+  }
+
+  // 3. 물리적 거리가 임계값 이상 변했는지 확인 (약 100m)
   const latDiff = Math.abs(newLat - lastCoords.value.latitude)
   const lngDiff = Math.abs(newLng - lastCoords.value.longitude)
 
@@ -115,11 +122,20 @@ const hasLocationChanged = (newLat: number, newLng: number): boolean => {
 
 const initWeatherData = () => {
   // 좌표 유효성 검사
-  if (coords.value.latitude === undefined || coords.value.longitude === undefined) {
+  if (!coords.value || coords.value.latitude === undefined || coords.value.longitude === undefined) {
     return
   }
 
-  const rs = dfsXyConvert('toXY', coords.value.latitude, coords.value.longitude)
+  const lat = coords.value.latitude
+  const lng = coords.value.longitude
+
+  // Infinity 또는 0 제외
+  if (lat === Infinity || lng === Infinity || !lat || !lng) {
+    return
+  }
+
+  // 격자 좌표 변환
+  const rs = dfsXyConvert('toXY', lat, lng)
 
   // 변환 결과 유효성 검사
   if (rs.x === undefined || rs.y === undefined || rs.lat === undefined || rs.lng === undefined) {
@@ -131,11 +147,12 @@ const initWeatherData = () => {
   const newLat = rs.lat
   const newLng = rs.lng
 
-  // 위치가 크게 변경되지 않았으면 스킵
-  if (!hasLocationChanged(newLat, newLng) && geoX.value === newGeoX && geoY.value === newGeoY) {
+  // 유의미한 위치 변화가 없으면 중단 (불필요한 API 호출 방지)
+  if (!hasSignificantLocationChange(newLat, newLng, newGeoX, newGeoY)) {
     return
   }
 
+  // 상태 업데이트
   geoX.value = newGeoX
   geoY.value = newGeoY
   latitude.value = newLat
@@ -146,9 +163,11 @@ const initWeatherData = () => {
     currentLocationCode.value = filteredLocations(geoX.value, geoY.value)
   }
 
-  // 마지막 위치 업데이트
+  // 마지막 위치 저장 (변환된 좌표 사용)
   lastCoords.value = { latitude: newLat, longitude: newLng }
+  lastGridCoords.value = { x: newGeoX, y: newGeoY }
 
+  // 데이터 호출
   fetchLivingData()
   fetchWeatherData()
 }
@@ -165,6 +184,7 @@ let debounceTimer: ReturnType<typeof setTimeout> | null = null
 const DEBOUNCE_DELAY = 2000 // 2초 디바운스
 
 watch(() => coords.value, () => {
+  // 위치 정보가 아직 없으면 재개 시도
   if (coords.value.latitude === Infinity) {
     resume()
     return
@@ -175,7 +195,7 @@ watch(() => coords.value, () => {
     clearTimeout(debounceTimer)
   }
 
-  // 디바운싱: 2초 후에 실행
+  // 디바운싱: 2초 후에 정확한 위치 정보로 데이터 요청
   debounceTimer = setTimeout(() => {
     initWeatherData()
     debounceTimer = null
@@ -205,7 +225,7 @@ onUnmounted(() => {
       />
       <NuxtPage />
     </NuxtLayout>
-    <Analytics />
-    <SpeedInsights />
+    <Analytics v-if="isVercel" />
+    <SpeedInsights v-if="isVercel" />
   </DdApp>
 </template>

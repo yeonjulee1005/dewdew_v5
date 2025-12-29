@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: projectsData, error: projectsError } = await client
     .schema('resume')
     .from('projects')
-    .select('*')
+    .select('title, description, tech_stack, thumbnail_url, project_url, github_url, description_image_url, start_date, end_date, highlights, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: false })
 
