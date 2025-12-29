@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: hobbiesData, error: hobbiesError } = await client
     .schema('resume')
     .from('hobbies')
-    .select('*')
+    .select('title, description, icon_url, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: true })
 

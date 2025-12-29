@@ -122,19 +122,19 @@ export const useChat = () => {
     abortController.value = new AbortController()
 
     try {
-      const response = await fetch('/api/chat/greeting', {
+      const { data: response } = await useFetch('/api/chat/greeting', {
         signal: abortController.value.signal,
       })
 
-      if (!response.ok) {
-        throw new Error(`Greeting failed: ${response.status}`)
+      if (!response.value) {
+        throw new Error('No response from greeting API', { cause: response.value })
       }
 
       let componentType: ComponentType | null = null
       let componentData: Record<string, any> | null = null
 
       await parseStreamResponse(
-        response,
+        response.value as Response,
         (text) => {
           streamingText.value += text
         },
@@ -246,7 +246,7 @@ export const useChat = () => {
     abortController.value = new AbortController()
 
     try {
-      const response = await fetch('/api/chat', {
+      const { data: response } = await useFetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -263,11 +263,11 @@ export const useChat = () => {
         signal: abortController.value.signal,
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+      if (!response.value) {
+        throw new Error('No response from chat API', { cause: response.value })
       }
 
-      if (!response.body) {
+      if (!response.value) {
         throw new Error('No response body')
       }
 
@@ -275,7 +275,7 @@ export const useChat = () => {
       let componentData: Record<string, any> | null = null
 
       await parseStreamResponse(
-        response,
+        response.value as Response,
         (text) => {
           streamingText.value += text
         },

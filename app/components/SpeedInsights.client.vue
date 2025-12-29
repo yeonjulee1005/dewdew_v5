@@ -3,5 +3,5 @@ import { SpeedInsights } from '@vercel/speed-insights/vue'
 </script>
 
 <template>
-  <SpeedInsights />
+  <SpeedInsights v-if="import.meta.env.VERCEL" />
 </template>
