@@ -42,9 +42,35 @@ const { data: blog } = await useAsyncData(route.path, async () => {
     searchPath = '/blog'
   }
 
-  return queryCollection('blog')
+  // draft 포스트도 포함하여 검색
+  // Content 모듈은 파일명을 경로로 변환: blog/20260102.md → /blog/20260102
+  let result = await queryCollection('blog')
     .path(searchPath)
     .first()
+
+  // 경로로 찾지 못한 경우, 파일명으로 직접 검색 시도
+  if (!result && searchPath.startsWith('/blog/') && searchPath !== '/blog' && searchPath !== '/blog/index') {
+    // /blog/20260102 → 20260102
+    const fileName = searchPath.replace('/blog/', '')
+    // 모든 블로그 포스트를 가져와서 파일명으로 필터링 (draft 포함)
+    const allPosts = await queryCollection('blog').all()
+    const foundPost = allPosts.find((post: any) => {
+      const postId = post.id || ''
+      const postPath = post.path || ''
+      return postId.includes(fileName) || postPath === searchPath || postPath.includes(fileName)
+    })
+    result = foundPost || null
+  }
+
+  // 블로그 포스트를 찾을 수 없으면 404 에러 발생
+  if (!result && searchPath !== '/blog' && searchPath !== '/blog/index') {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Blog post not found',
+    })
+  }
+
+  return result
 })
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
@@ -128,6 +154,14 @@ const { data: navigation } = await useAsyncData('navigation', () => {
         v-if="blog"
         :value="blog"
       />
+      <div
+        v-else
+        class="text-center py-8"
+      >
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+          블로그 포스트를 찾을 수 없습니다.
+        </p>
+      </div>
       <DdContentSurround :surround="(surround as any)" />
       <Giscus
         v-if="blog?.path !== '/blog'"

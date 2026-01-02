@@ -15,6 +15,7 @@ export default defineContentConfig({
         updated: z.date(),
         author: z.string(),
         category: z.string(),
+        isDraft: z.boolean().optional().default(false),
         content: z.string(),
         seo: z.intersection(
           z.object({
