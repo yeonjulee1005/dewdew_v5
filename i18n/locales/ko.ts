@@ -91,6 +91,7 @@ export default {
     socialLinks: '소셜 링크',
     contactForm: '연락처 양식',
     imageCarousel: '이미지 캐러셀',
+    threejsCarousel: 'Three.js 작업물 캐러셀',
   },
   dynamic: {
     greeting: {
@@ -139,6 +140,10 @@ export default {
     image: {
       archive: '이미지 아카이브',
       empty: '이미지 정보가 없습니다.',
+    },
+    threejs: {
+      title: 'Three.js 작업물',
+      empty: 'Three.js 작업물 정보가 없습니다.',
     },
     contact: {
       title: '메일 보내기',

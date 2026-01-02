@@ -87,6 +87,7 @@ export default {
     socialLinks: 'Social Links',
     contactForm: 'Contact Form',
     imageCarousel: 'Image Carousel',
+    threejsCarousel: 'Three.js Works Carousel',
   },
   dynamic: {
     greeting: {
@@ -135,6 +136,10 @@ export default {
     image: {
       archive: 'Image Archive',
       empty: 'No image information available.',
+    },
+    threejs: {
+      title: 'Three.js Works',
+      empty: 'No Three.js works information available.',
     },
     contact: {
       title: 'Send Email',

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { track } from '@vercel/analytics'
+import type { ResumeDatabase } from '~/types/supabase-resume'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -29,33 +30,25 @@ useSchemaFaq({
   ],
 })
 
-// 작업물 데이터 타입
-interface ThreeJsWork {
-  id: string
-  title: string
-  url: string
-  description?: string
-  thumbnail?: string
-}
-
-// 작업물 리스트
-const works = ref<ThreeJsWork[]>([
-  {
-    id: 'spiral-galaxy',
-    title: 'Spiral Galaxy',
-    url: 'https://three.dewdew.dev/spiral-galaxy',
-    description: '나선 은하를 Three.js로 구현한 작업물입니다.',
+// API에서 작업물 데이터 가져오기
+const { data: threejsData } = await useFetch('/api/resume/threejs', {
+  method: 'GET',
+  headers: useRequestHeaders(['cookie']),
+  immediate: true,
+  dedupe: 'defer',
+  transform: (data: ResumeDatabase['resume']['Tables']['threejs']['Row'][]) => {
+    return data
   },
-])
+})
 
 const loadingStates = ref<Record<string, boolean>>({})
 const hoveredWork = ref<string | null>(null)
 const loadTimeouts = ref<Record<string, ReturnType<typeof setTimeout> | undefined>>({})
 
 // 작업물 클릭 핸들러
-const handleWorkClick = (work: ThreeJsWork) => {
+const handleWorkClick = (work: ResumeDatabase['resume']['Tables']['threejs']['Row']) => {
   track('threejs_work_click', { work: work.title, url: work.url })
-  window.open(work.url, '_blank', 'noopener,noreferrer')
+  window.open(work.url || '', '_blank', 'noopener,noreferrer')
 }
 
 // 타임아웃 클리어 헬퍼
@@ -85,13 +78,17 @@ const setupLoadTimeout = (workId: string) => {
   }, TIMEOUT_DURATION)
 }
 
-// 초기화
-onMounted(() => {
-  works.value.forEach((work) => {
-    loadingStates.value[work.id] = true
-    setupLoadTimeout(work.id)
-  })
-})
+// 작업물 데이터가 로드되면 초기화
+watch(threejsData, (newWorks) => {
+  if (newWorks && newWorks.length > 0) {
+    newWorks.forEach((work) => {
+      if (!loadingStates.value[work.id]) {
+        loadingStates.value[work.id] = true
+        setupLoadTimeout(work.id)
+      }
+    })
+  }
+}, { immediate: true })
 
 // 정리
 onUnmounted(() => {
@@ -113,8 +110,8 @@ onUnmounted(() => {
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
-          v-for="work in works"
-          :key="work.id"
+          v-for="(work, index) in threejsData"
+          :key="index"
           class="group relative rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg"
           @click="handleWorkClick(work)"
           @mouseenter="hoveredWork = work.id"
@@ -133,19 +130,9 @@ onUnmounted(() => {
               />
             </div>
 
-            <!-- Thumbnail (로딩 중 또는 fallback) -->
-            <NuxtImg
-              v-if="work.thumbnail"
-              :src="work.thumbnail"
-              class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-30 transition-opacity"
-              format="webp"
-              :quality="60"
-              :alt="work.title"
-            />
-
             <!-- iframe Preview (Vercel 스타일) -->
             <iframe
-              :src="work.url"
+              :src="work.url || ''"
               class="absolute inset-0 w-full h-full border-0 transform scale-[0.25] origin-top-left"
               :style="{
                 width: '400%',

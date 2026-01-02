@@ -527,6 +527,39 @@ export type ResumeDatabase = {
         }
         Relationships: []
       }
+      threejs: {
+        Row: {
+          created_at: string | null
+          deleted: boolean | null
+          description: string | null
+          id: string
+          order_index: number | null
+          title: string
+          updated_at: string | null
+          url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          deleted?: boolean | null
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          title: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          deleted?: boolean | null
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          title?: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
