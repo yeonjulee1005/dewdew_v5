@@ -12,6 +12,7 @@ import type {
   Hobby,
   SocialLink,
   ImageArchive,
+  Threejs,
 } from './types.ts'
 import { getSupabaseClient } from './supabase.ts'
 
@@ -301,6 +302,34 @@ export const buildImageArchiveText = (images: ImageArchive[]): string => {
 }
 
 /**
+ * Three.js 작업물 데이터를 텍스트로 변환
+ */
+export const buildThreejsText = (threejs: Threejs[]): string => {
+  return threejs.map((work) => {
+    const fieldMap: Record<string, { label: string, value: string | null | undefined }> = {
+      title: { label: '작업물', value: work.title },
+      description: { label: '설명', value: work.description },
+      url: { label: 'URL', value: work.url },
+    }
+
+    const requiredFields = ['title']
+
+    const parts: string[] = Object.entries(fieldMap)
+      .filter(([key, { value }]) => {
+        // 필수 필드는 항상 포함
+        if (requiredFields.includes(key)) {
+          return true
+        }
+        // 선택 필드는 값이 있을 때만 포함
+        return !!value
+      })
+      .map(([, { label, value }]) => `${label}: ${value}`)
+
+    return parts.join('\n')
+  }).join('\n\n')
+}
+
+/**
  * 모든 데이터를 조합하여 종합 문서 생성
  */
 export const buildComprehensiveDocument = async (): Promise<string> => {
@@ -396,6 +425,18 @@ export const buildComprehensiveDocument = async (): Promise<string> => {
   if (images && images.length > 0) {
     parts.push('\n=== 이미지 아카이브 ===')
     parts.push(buildImageArchiveText(images))
+  }
+
+  // Three.js 작업물
+  const { data: threejs } = await supabase
+    .schema('resume')
+    .from('threejs')
+    .select('*')
+    .eq('deleted', false)
+    .order('order_index', { ascending: false })
+  if (threejs && threejs.length > 0) {
+    parts.push('\n=== Three.js 작업물 ===')
+    parts.push(buildThreejsText(threejs))
   }
 
   return parts.join('\n\n')

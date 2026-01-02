@@ -158,34 +158,65 @@ const initWeatherData = () => {
   latitude.value = newLat
   longitude.value = newLng
 
-  // geoX, geoY가 undefined가 아님을 보장
+  // geoX, geoY가 undefined가 아님을 보장하고 currentLocationCode 설정
   if (geoX.value !== undefined && geoY.value !== undefined) {
     currentLocationCode.value = filteredLocations(geoX.value, geoY.value)
+
+    // currentLocationCode가 설정된 후에만 API 호출
+    if (currentLocationCode.value) {
+      // 마지막 위치 저장 (변환된 좌표 사용)
+      lastCoords.value = { latitude: newLat, longitude: newLng }
+      lastGridCoords.value = { x: newGeoX, y: newGeoY }
+
+      // 데이터 호출 (순차적으로 실행하여 중복 호출 방지)
+      // 생활지수 API를 먼저 호출하고, 완료 후 날씨 API 호출
+      fetchLivingData()
+        .catch(() => {
+          // 에러는 store에서 처리하므로 여기서는 무시
+        })
+        .finally(() => {
+          // 생활지수 API 완료 후 날씨 API 호출 (약간의 지연을 두어 API 부하 분산)
+          setTimeout(() => {
+            fetchWeatherData().catch(() => {
+              // 에러는 store에서 처리하므로 여기서는 무시
+            })
+          }, 500) // 0.5초 지연
+        })
+    }
   }
-
-  // 마지막 위치 저장 (변환된 좌표 사용)
-  lastCoords.value = { latitude: newLat, longitude: newLng }
-  lastGridCoords.value = { x: newGeoX, y: newGeoY }
-
-  // 데이터 호출
-  fetchLivingData()
-  fetchWeatherData()
 }
 
-watch(() => genDateFormat('HH'), () => {
-  if (genDateFormat('HH').concat('00') !== forecastHour.value) {
-    fetchLivingData()
-    fetchWeatherData()
+// 시간 변경 감시 (실제 시간이 바뀔 때만 실행)
+const lastHour = ref<string | null>(null)
+watch(() => genDateFormat('HH'), (currentHour) => {
+  // 시간이 실제로 바뀌었을 때만 실행
+  if (lastHour.value !== null && lastHour.value !== currentHour) {
+    const newForecastHour = currentHour.concat('00')
+    // forecastHour가 다를 때만 API 호출
+    if (newForecastHour !== forecastHour.value) {
+      fetchLivingData()
+      fetchWeatherData()
+    }
   }
-})
+  lastHour.value = currentHour
+}, { immediate: false })
 
 // 디바운싱을 위한 타이머
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 const DEBOUNCE_DELAY = 2000 // 2초 디바운스
 
+// 초기 로드 여부 추적 (새로고침 시 딱 한 번만 실행하기 위함)
+const isInitialLoad = ref(true)
+
+// 좌표 변경 감시 (초기 로드 완료 후에만 동작)
 watch(() => coords.value, () => {
+  // 초기 로드 중이면 watch는 실행하지 않음 (onMounted에서 처리)
+  if (isInitialLoad.value) {
+    return
+  }
+
   // 위치 정보가 아직 없으면 재개 시도
-  if (coords.value.latitude === Infinity) {
+  if (!coords.value || coords.value.latitude === Infinity || coords.value.longitude === Infinity) {
     resume()
     return
   }
@@ -200,7 +231,27 @@ watch(() => coords.value, () => {
     initWeatherData()
     debounceTimer = null
   }, DEBOUNCE_DELAY)
-}, { immediate: true })
+}, { immediate: false })
+
+// 초기 로드 시 딱 한 번만 실행
+onMounted(() => {
+  if (coords.value && coords.value.latitude !== Infinity && coords.value.longitude !== Infinity) {
+    // 초기 로드는 약간의 지연 후 실행 (위치 정보가 안정화될 때까지)
+    setTimeout(() => {
+      initWeatherData()
+      isInitialLoad.value = false // 초기 로드 완료 표시
+    }, 1000)
+  }
+  else {
+    // 위치 정보가 없으면 재개 시도
+    resume()
+    // 위치 정보를 기다리는 경우, watch에서 처리하도록 하지 않고
+    // resume() 후 좌표가 설정되면 onMounted의 setTimeout이 완료된 후에야 watch가 동작
+    setTimeout(() => {
+      isInitialLoad.value = false // 초기 로드 완료 표시
+    }, 2000) // resume() 후 좌표 설정까지 시간을 고려
+  }
+})
 
 // PWA 상태 감시 초기화
 const { watchPwaStates } = useInstallPwa()

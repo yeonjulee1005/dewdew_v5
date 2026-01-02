@@ -131,6 +131,19 @@ const handlePagination = (path: string, external: boolean = false) => {
                   custom-class="w-full cursor-pointer"
                   use-leading
                   use-icon
+                  icon-lead-name="i-lucide-origami"
+                  icon-lead-class="w-6 h-6"
+                  button-size="xl"
+                  button-variant="ghost"
+                  button-color="neutral"
+                  button-label-class="text-xl font-bold truncate"
+                  :button-text="$t('menu.threejs')"
+                  @click:button="handlePagination('/threejs', false)"
+                />
+                <ATooltipButton
+                  custom-class="w-full cursor-pointer"
+                  use-leading
+                  use-icon
                   icon-lead-name="i-lucide-book-open"
                   icon-lead-class="w-6 h-6"
                   button-size="xl"
