@@ -36,12 +36,15 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   // 요청 상태 관리
   const isFetchingWeather = ref(false)
   const isFetchingLiving = ref(false)
-  const lastFetchTime = ref<number>(0)
+  const lastWeatherFetchTime = ref<number>(0) // 날씨 API 전용 마지막 호출 시간
+  const lastLivingFetchTime = ref<number>(0) // 생활지수 API 전용 마지막 호출 시간
   const lastLocationKey = ref<string>('')
+  const lastLivingLocationKey = ref<string>('') // 생활지수 API 전용 위치 키
   const retryCount = ref<number>(0)
   const MAX_RETRY = 3
-  const MIN_FETCH_INTERVAL = 30000 // 30초 최소 요청 간격
+  const MIN_FETCH_INTERVAL = 60000 // 60초 최소 요청 간격 (30초에서 증가)
   const RETRY_DELAY_BASE = 2000 // 재시도 기본 지연 시간 (2초)
+  const isAnyFetching = ref(false) // 전역 요청 락
 
   const getForecastHour = () => {
     forecastHour.value = acceptableMinute() ? getLastHour().concat('00') : genDateFormat('HH').concat('00')
@@ -53,18 +56,26 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   }
 
   const fetchLivingData = async (retryAttempt = 0): Promise<void> => {
+    // 전역 요청 락 체크 (다른 API 호출 중이면 대기)
+    if (isAnyFetching.value && retryAttempt === 0) {
+      return
+    }
+
     // 중복 요청 방지
     if (isFetchingLiving.value) {
       return
     }
 
-    // 최소 요청 간격 체크
+    // 위치 키 생성 (같은 위치인지 확인)
+    const locationKey = `${currentLocationCode.value?.code ?? 0}-${genDateFormat('YYYYMMDDHH')}`
+    // 최소 요청 간격 체크 및 같은 위치/시간 체크
     const now = Date.now()
-    if (now - lastFetchTime.value < MIN_FETCH_INTERVAL && retryAttempt === 0) {
+    if (now - lastLivingFetchTime.value < MIN_FETCH_INTERVAL && locationKey === lastLivingLocationKey.value && retryAttempt === 0) {
       return
     }
 
     isFetchingLiving.value = true
+    isAnyFetching.value = true
 
     try {
       const uvIndexData: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getUVIdxV4?serviceKey=${livingIndexQuery(currentLocationCode.value?.code ?? 0, genDateFormat('YYYYMMDDHH'))}`)
@@ -75,7 +86,8 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
       }
 
       recordLivingData(parseInt(uvIndexData.response.body.items.item[0].h0 ?? ''), parseInt(diffusionData.response.body.items.item[0].h3 ?? ''))
-      lastFetchTime.value = now
+      lastLivingFetchTime.value = now
+      lastLivingLocationKey.value = locationKey
       retryCount.value = 0
     }
     catch (error: any) {
@@ -85,6 +97,7 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
           const delay = RETRY_DELAY_BASE * Math.pow(2, retryAttempt) // Exponential backoff
           await new Promise(resolve => setTimeout(resolve, delay))
           isFetchingLiving.value = false
+          isAnyFetching.value = false
           return fetchLivingData(retryAttempt + 1)
         }
         console.warn('기상청 API 요청 제한 초과. 잠시 후 다시 시도해주세요.')
@@ -95,10 +108,16 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
     }
     finally {
       isFetchingLiving.value = false
+      isAnyFetching.value = false
     }
   }
 
   const fetchWeatherData = async (retryAttempt = 0): Promise<void> => {
+    // 전역 요청 락 체크 (다른 API 호출 중이면 대기)
+    if (isAnyFetching.value && retryAttempt === 0) {
+      return
+    }
+
     // 중복 요청 방지
     if (isFetchingWeather.value) {
       return
@@ -108,11 +127,12 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
     const locationKey = `${geoX.value}-${geoY.value}-${getForecastHour()}`
     // 최소 요청 간격 체크 및 같은 위치/시간 체크
     const now = Date.now()
-    if (now - lastFetchTime.value < MIN_FETCH_INTERVAL && locationKey === lastLocationKey.value && retryAttempt === 0) {
+    if (now - lastWeatherFetchTime.value < MIN_FETCH_INTERVAL && locationKey === lastLocationKey.value && retryAttempt === 0) {
       return
     }
 
     isFetchingWeather.value = true
+    isAnyFetching.value = true
 
     try {
       const data: WeatherData = await $fetch(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${weatherQuery(genDateFormat('YYYYMMDD'), getForecastHour(), geoX.value ?? 0, geoY.value ?? 0)}`)
@@ -122,7 +142,7 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
       }
 
       recordWeatherData(data.response.body.items.item as WeatherItem[])
-      lastFetchTime.value = now
+      lastWeatherFetchTime.value = now
       lastLocationKey.value = locationKey
       retryCount.value = 0
     }
@@ -133,6 +153,7 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
           const delay = RETRY_DELAY_BASE * Math.pow(2, retryAttempt) // Exponential backoff
           await new Promise(resolve => setTimeout(resolve, delay))
           isFetchingWeather.value = false
+          isAnyFetching.value = false
           return fetchWeatherData(retryAttempt + 1)
         }
         console.warn('기상청 API 요청 제한 초과. 잠시 후 다시 시도해주세요.')
@@ -143,6 +164,7 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
     }
     finally {
       isFetchingWeather.value = false
+      isAnyFetching.value = false
     }
   }
 
