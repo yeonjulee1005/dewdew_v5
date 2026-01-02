@@ -13,6 +13,7 @@ const WeaknessesCard = defineAsyncComponent(() => import('~/components/dynamic/c
 const HobbyCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/HobbyCarousel.server.vue'))
 const SocialLinks = defineAsyncComponent(() => import('~/components/dynamic/card/SocialLinks.server.vue'))
 const ImageCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ImageCarousel.server.vue'))
+const ThreejsCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ThreejsCarousel.server.vue'))
 const ContactForm = defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue'))
 
 const { t } = useI18n()
@@ -65,6 +66,7 @@ useSchemaFaq({
       <Skill :title="$t('aiComponents.skillCard')" />
       <SkillRadar :title="$t('aiComponents.skillRadar')" />
       <ProjectCarousel :title="$t('aiComponents.projectCarousel')" />
+      <ThreejsCarousel :title="$t('aiComponents.threejsCarousel')" />
       <EducationCard :title="$t('aiComponents.educationCard')" />
       <WeaknessesCard :title="$t('aiComponents.weaknessesCard')" />
       <HobbyCarousel :title="$t('aiComponents.hobbyCarousel')" />

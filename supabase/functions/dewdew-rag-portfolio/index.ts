@@ -380,22 +380,37 @@ serve(async (req: Request): Promise<Response> => {
       componentType = 'experience-list'
     }
 
+    // Three.js 관련 질문인 경우 threejs-carousel 보장 (가장 먼저 체크)
+    const messageLower = message.toLowerCase()
+    const isThreejsQuestion = ['three.js', 'threejs', 'three js', 'webgl', '웹gl', '3d', 'three.js 작업물', 'threejs 작업물', 'three.js 작품', 'threejs 작품', 'three.js 보여줘', 'threejs 보여줘', 'webgl 작업물', '3d 작업물', '3d 작품', 'webgl도', 'webgl도 관심', 'webgl 관심']
+      .some(keyword => messageLower.includes(keyword.toLowerCase()))
+    // 프로젝트 키워드가 함께 있으면 제외 (Three.js가 더 구체적이므로 우선)
+    const hasThreejsProjectKeyword = ['프로젝트', 'project', 'portfolio', 'product'].some(keyword => messageLower.includes(keyword.toLowerCase()))
+    if (isThreejsQuestion && !hasThreejsProjectKeyword) {
+      if (componentType !== 'threejs-carousel') {
+        console.log(`[Component Mapper] Three.js question detected but got ${componentType}, forcing to threejs-carousel`)
+      }
+      componentType = 'threejs-carousel'
+    }
+
     // 소셜 링크 관련 질문인 경우 social-links 보장
     const isSocialQuestion = ['소셜', '소셜 링크', '소셜링크', '링크', '깃헙', 'github', '깃허브', '링크드인', 'linkedin', 'social', 'link', 'sns', '레포', 'repo', '오픈소스', 'open source', '코드', 'code', '링크인', '연결', '연락처', '연락 방법']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => messageLower.includes(keyword.toLowerCase()))
     // 프로젝트 키워드가 함께 있으면 제외
-    const hasProjectKeyword = ['프로젝트', 'project', 'portfolio', '작업', '작품'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
-    if (isSocialQuestion && !hasProjectKeyword && componentType !== 'social-links') {
+    const hasSocialProjectKeyword = ['프로젝트', 'project', 'portfolio', '작업', '작품'].some(keyword => messageLower.includes(keyword.toLowerCase()))
+    if (isSocialQuestion && !hasSocialProjectKeyword && componentType !== 'social-links') {
       console.log(`[Component Mapper] Social question detected but got ${componentType}, forcing to social-links`)
       componentType = 'social-links'
     }
 
     // 프로젝트 관련 질문인 경우 project-carousel 보장
     const isProjectQuestion = ['프로젝트', '토이프로젝트', '작업', '작품', '진행', '했던', '최근 프로젝트', '최근 진행', 'project', 'made', 'portfolio', 'product', 'recent project']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => messageLower.includes(keyword.toLowerCase()))
     // 소셜 링크 키워드가 함께 있으면 제외
-    const hasSocialKeyword = ['소셜', '링크', 'social', 'link', 'sns', '깃헙', 'github', 'linkedin'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
-    if (isProjectQuestion && !hasSocialKeyword && componentType !== 'project-carousel') {
+    const hasSocialKeyword = ['소셜', '링크', 'social', 'link', 'sns', '깃헙', 'github', 'linkedin'].some(keyword => messageLower.includes(keyword.toLowerCase()))
+    // Three.js 키워드가 함께 있으면 제외 (Three.js가 더 구체적이므로 우선)
+    const hasThreejsKeyword = ['three.js', 'threejs', 'webgl', '3d'].some(keyword => messageLower.includes(keyword.toLowerCase()))
+    if (isProjectQuestion && !hasSocialKeyword && !hasThreejsKeyword && componentType !== 'project-carousel') {
       console.log(`[Component Mapper] Project question detected but got ${componentType}, forcing to project-carousel`)
       componentType = 'project-carousel'
     }

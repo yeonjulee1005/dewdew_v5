@@ -104,6 +104,17 @@ export interface ImageArchive {
   updated_at: string
 }
 
+export interface Threejs {
+  id: string
+  title: string
+  description: string | null
+  url: string | null
+  order_index: number | null
+  created_at: string
+  updated_at: string
+  deleted: boolean
+}
+
 export interface AISetting {
   id: string
   setting_key: string
@@ -133,6 +144,7 @@ export const ALLOWED_COMPONENTS = [
   'image-timeline',
   'contact-form',
   'chat-response',
+  'threejs-carousel',
 ] as const
 
 export type ComponentType = typeof ALLOWED_COMPONENTS[number]
@@ -151,6 +163,7 @@ export interface RAGContext {
   socialLinks?: SocialLink[] | null
   images?: ImageArchive[] | null
   imageYear?: number | null
+  threejs?: Threejs[] | null
   // 외부 프로필 데이터 (GitHub, LinkedIn 등)
   externalProfiles?: {
     github?: {

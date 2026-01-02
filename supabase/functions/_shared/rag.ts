@@ -15,6 +15,7 @@ import type {
   Hobby,
   SocialLink,
   ImageArchive,
+  Threejs,
   AISetting,
 } from './types.ts'
 
@@ -41,6 +42,7 @@ const hasRelevantData = (context: RAGContext): boolean => {
     || (context.hobbies && context.hobbies.length > 0)
     || (context.socialLinks && context.socialLinks.length > 0)
     || (context.images && context.images.length > 0)
+    || (context.threejs && context.threejs.length > 0)
   )
 }
 
@@ -68,6 +70,7 @@ const enrichContextFromVectorMatches = async (
     hobbies: () => !!(context.hobbies && context.hobbies.length > 0),
     social_links: () => !!(context.socialLinks && context.socialLinks.length > 0),
     image_archive: () => !!(context.images && context.images.length > 0),
+    threejs: () => !!(context.threejs && context.threejs.length > 0),
     weaknesses: () => !!(context.profile?.weaknesses && context.profile.weaknesses.length > 0),
     contact: () => !!(context.profile && context.socialLinks && context.socialLinks.length > 0),
   }
@@ -228,6 +231,20 @@ const enrichContextFromVectorMatches = async (
           .returns<SocialLink[]>()
         if (data) {
           context.socialLinks = data
+        }
+      }
+    },
+    threejs: async () => {
+      if (!context.threejs) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('threejs')
+          .select('*')
+          .eq('deleted', false)
+          .order('order_index', { ascending: false })
+          .returns<Threejs[]>()
+        if (data) {
+          context.threejs = data
         }
       }
     },
@@ -459,6 +476,19 @@ const tryKeywordMatching = async (
     matched = true
   }
 
+  // Three.js 작업물
+  if (matchKeywords(queryLower, ['three.js', 'threejs', 'webgl', '웹gl', 'WEBGL', '웹지엘', '3d', '작업물', '작업', 'three.js 작업물', 'threejs 작업물', '3d 작업물', '웹gl 작업물', 'three.js 작품', 'threejs 작품'])) {
+    const { data } = await supabase
+      .schema('resume')
+      .from('threejs')
+      .select('*')
+      .eq('deleted', false)
+      .order('order_index', { ascending: false })
+      .returns<Threejs[]>()
+    context.threejs = data
+    matched = true
+  }
+
   return matched
 }
 
@@ -480,11 +510,13 @@ export const fetchRelevantData = async (query: string): Promise<RAGContext> => {
   try {
     const queryEmbedding = await getEmbedding(query, 'openai')
 
-    const { data: matches, error } = await supabase.rpc('match_documents', {
-      query_embedding: `[${queryEmbedding.join(',')}]`,
-      match_threshold: 0.7,
-      match_count: 5,
-    })
+    const { data: matches, error } = await supabase
+      .schema('resume')
+      .rpc('match_documents', {
+        query_embedding: `[${queryEmbedding.join(',')}]`,
+        match_threshold: 0.7,
+        match_count: 5,
+      })
 
     if (error) {
       console.error('Vector search error:', error)

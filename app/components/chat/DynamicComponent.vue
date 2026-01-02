@@ -21,6 +21,7 @@ const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
   'social-links': defineAsyncComponent(() => import('~/components/dynamic/card/SocialLinks.server.vue')),
   'contact-form': defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue')),
   'image-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/ImageCarousel.server.vue')),
+  'threejs-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/ThreejsCarousel.server.vue')),
 }
 
 // 컴포넌트 렌더링 조건 체크

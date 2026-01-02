@@ -8,10 +8,10 @@ const matchKeywords = (text: string, keywords: string[]): boolean => {
 }
 
 // 카테고리 타입 정의
-type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'weakness' | 'profile' | 'experience' | 'education' | 'hobby' | 'social' | 'fallback' | 'none'
+type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'threejs' | 'weakness' | 'profile' | 'experience' | 'education' | 'hobby' | 'social' | 'fallback' | 'none'
 
 // Fallback 컨텍스트 데이터 타입 정의
-type FallbackContextType = 'skills' | 'projects' | 'experience' | 'profile' | 'education' | 'hobbies' | 'socialLinks' | 'images' | 'none'
+type FallbackContextType = 'skills' | 'projects' | 'threejs' | 'experience' | 'profile' | 'education' | 'hobbies' | 'socialLinks' | 'images' | 'none'
 
 // 카테고리 감지 (우선순위 순서대로 체크)
 const detectCategory = (query: string, context: RAGContext): CategoryType => {
@@ -72,23 +72,28 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
     }
   }
 
-  // 10. 단점/부족한 점
+  // 10. Three.js 작업물 (프로젝트 카테고리 이후 체크)
+  if (matchKeywords(query, ['three.js', 'threejs', 'three js', 'webgl', '3d', 'three.js 작업물', '웹gl', 'threejs 작업물', 'three.js 작품', 'threejs 작품', 'three.js 보여줘', 'threejs 보여줘', 'webgl 작업물', '3d 작업물', '3d 작품'])) {
+    return 'threejs'
+  }
+
+  // 11. 단점/부족한 점
   if (matchKeywords(query, ['단점', '부족', '아쉬운', '개선', '약점', '한계', '어려움', 'weakness', 'weaknesses', 'improvement', 'limitation', 'challenge', 'difficulty', '부족한 점', '아쉬운 점', '개선점', '개선할 점'])) {
     return 'weakness'
   }
 
-  // 11. 프로필
+  // 12. 프로필
   if (matchKeywords(query, ['자기소개', '누구', '프로필', '소개', 'introduce', 'name', 'who', 'profile', 'introduction', '철학', '가치관', '성격', '장점', '강점', 'philosophy', 'value', 'personality', 'strength'])) {
     return 'profile'
   }
 
-  // 12. 취미
+  // 13. 취미
   if (matchKeywords(query, ['취미', '관심사', '좋아하', '여가', '취향', 'hobby', 'interest', 'like', 'leisure'])) {
     return 'hobby'
   }
 
-  // 13. Fallback: 컨텍스트 데이터 기반
-  if (context.skills?.length || context.projects?.length || context.experience?.length || context.profile || context.education?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
+  // 14. Fallback: 컨텍스트 데이터 기반
+  if (context.skills?.length || context.projects?.length || context.threejs?.length || context.experience?.length || context.profile || context.education?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
     return 'fallback'
   }
 
@@ -102,6 +107,9 @@ const detectFallbackContext = (context: RAGContext): FallbackContextType => {
   }
   if (context.projects && context.projects.length > 0) {
     return 'projects'
+  }
+  if (context.threejs && context.threejs.length > 0) {
+    return 'threejs'
   }
   if (context.experience && context.experience.length > 0) {
     return 'experience'
@@ -133,6 +141,8 @@ const getFallbackComponentType = (context: RAGContext): ComponentType => {
       return 'skill-radar'
     case 'projects':
       return 'project-carousel'
+    case 'threejs':
+      return 'threejs-carousel'
     case 'experience':
       return 'experience-list'
     case 'profile':
@@ -182,6 +192,9 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
     case 'project': {
       return 'project-carousel'
     }
+    case 'threejs':
+      // threejs 키워드가 감지되었으면 항상 threejs-carousel 반환 (데이터는 컴포넌트에서 처리)
+      return 'threejs-carousel'
     case 'weakness':
       return (context.profile?.weaknesses && context.profile.weaknesses.length > 0) ? 'weaknesses-card' : 'chat-response'
     case 'profile':

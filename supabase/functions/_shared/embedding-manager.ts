@@ -16,6 +16,7 @@ import {
   buildImageArchiveText,
   buildWeaknessesText,
   buildContactText,
+  buildThreejsText,
 } from './document-builder.ts'
 import type {
   Profile,
@@ -26,6 +27,7 @@ import type {
   Hobby,
   SocialLink,
   ImageArchive,
+  Threejs,
 } from './types.ts'
 
 /**
@@ -224,6 +226,31 @@ export const createContactEmbedding = async (profile: Profile, socialLinks?: Soc
 }
 
 /**
+ * Three.js 작업물 임베딩 생성 및 저장
+ */
+export const createThreejsEmbeddings = async (threejs: Threejs[]): Promise<void> => {
+  console.log(`[createThreejsEmbeddings] Processing ${threejs.length} threejs works...`)
+  for (const work of threejs) {
+    try {
+      const content = buildThreejsText([work])
+      const embedding = await getEmbedding(content, 'openai')
+
+      await saveDocumentEmbedding(
+        'threejs',
+        work.id,
+        content,
+        embedding,
+        { title: work.title, url: work.url },
+      )
+    }
+    catch (error) {
+      console.error(`[createThreejsEmbeddings] ❌ Error creating embedding for ${work.id}:`, error)
+      throw error
+    }
+  }
+}
+
+/**
  * 이미지 아카이브 임베딩 생성 및 저장
  */
 export const createImageArchiveEmbeddings = async (images: ImageArchive[]): Promise<void> => {
@@ -332,6 +359,19 @@ export const initializeAllEmbeddings = async (): Promise<void> => {
   if (profile) {
     console.log('Creating contact embedding...')
     await createContactEmbedding(profile, socialLinks || [])
+  }
+
+  // Three.js 작업물
+  const { data: threejs } = await supabase
+    .schema('resume')
+    .from('threejs')
+    .select('*')
+    .eq('deleted', false)
+    .order('order_index', { ascending: false })
+
+  if (threejs && threejs.length > 0) {
+    console.log(`Creating ${threejs.length} threejs embeddings...`)
+    await createThreejsEmbeddings(threejs)
   }
 
   // 이미지 아카이브

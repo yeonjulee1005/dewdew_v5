@@ -160,6 +160,8 @@ export default defineNuxtConfig({
       },
       // 블로그 페이지 정적 렌더링 (프로덕션에서만)
       '/blog/**': { prerender: isProduction },
+      // Three.js 페이지 정적 렌더링 (프로덕션에서만)
+      '/threejs': { prerender: isProduction },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
       '/_vercel/**': { prerender: false, ssr: false },
       // 서비스 워커 파일을 정적 파일로 처리 (Vue Router에서 제외)
@@ -601,9 +603,14 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
-      // exclude: [
-      //   '/',
-      // ],
+      exclude: [
+        '/',
+        '/blog',
+        '/blog/**',
+        '/ai',
+        '/ai/**',
+        '/threejs',
+      ],
     },
     clientOptions: {
       auth: {
