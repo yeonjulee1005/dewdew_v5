@@ -75,7 +75,10 @@ export default defineNuxtConfig({
   site: {
     name: 'Dewdew Dev Portfolio Website',
     description: 'Dewdew, Software Engineer.',
-    url: process.env.NUXT_PUBLIC_SITE_URL ?? process.env.NUXT_ENV_VERCEL_URL ?? 'http://localhost:4110',
+    // 프로덕션에서는 항상 https://www.dewdew.dev 사용 (Vercel preview URL 제외)
+    url: isVercelProduction
+      ? 'https://www.dewdew.dev'
+      : (process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:4110'),
     indexable: true,
   },
   colorMode: {
@@ -118,7 +121,9 @@ export default defineNuxtConfig({
     supabaseKey: process.env.SUPABASE_KEY ?? '',
     public: {
       appVersion: JSON.stringify(packageJson.version),
-      siteUrl: process.env.BASE_URL ?? process.env.NUXT_PUBLIC_SITE_URL ?? process.env.NUXT_ENV_VERCEL_URL ?? 'http://localhost:4500',
+      siteUrl: isVercelProduction
+        ? 'https://www.dewdew.dev'
+        : (process.env.BASE_URL ?? process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:4500'),
       supabaseUrl: process.env.SUPABASE_URL ?? '',
       supabaseKey: process.env.SUPABASE_KEY ?? '',
       emailJsKey: process.env.EMAILJS_KEY,
@@ -144,21 +149,23 @@ export default defineNuxtConfig({
       wasm: true, // better-sqlite3 최적화
     },
     routeRules: {
-      // 홈페이지 정적 렌더링 (가능한 경우)
+      // 홈페이지 정적 렌더링 (프로덕션에서만)
       '/': {
-        prerender: true,
+        prerender: isProduction,
         ...(!isProduction && {
           headers: {
             'X-Robots-Tag': 'noindex, nofollow',
           },
         }),
       },
-      // 블로그 페이지 정적 렌더링 (빌드 시 생성)
-      '/blog/**': { prerender: true },
+      // 블로그 페이지 정적 렌더링 (프로덕션에서만)
+      '/blog/**': { prerender: isProduction },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
       '/_vercel/**': { prerender: false, ssr: false },
       // 서비스 워커 파일을 정적 파일로 처리 (Vue Router에서 제외)
       '/sw.js': {
+        prerender: false,
+        ssr: false,
         headers: {
           'Cache-Control': 'public, max-age=0, must-revalidate',
           'Content-Type': 'application/javascript',
@@ -166,6 +173,8 @@ export default defineNuxtConfig({
         cors: true,
       },
       '/workbox-*.js': {
+        prerender: false,
+        ssr: false,
         headers: {
           'Cache-Control': 'public, max-age=31536000, immutable',
           'Content-Type': 'application/javascript',
@@ -195,6 +204,13 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    server: {
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost',
+        port: 4110,
+      },
+    },
     build: {
       rollupOptions: {
         output: {
