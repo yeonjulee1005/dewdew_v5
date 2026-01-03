@@ -98,10 +98,24 @@ const { data: navigation } = await useAsyncData('navigation', () => {
   return queryCollectionNavigation('blog')
     .order('date', 'DESC')
 })
+
+// Accordion items 생성
+const accordionItems = computed(() => {
+  if (!navigation.value || navigation.value.length === 0) {
+    return []
+  }
+
+  return navigation.value.map(link => ({
+    label: t('blog.recentPost'),
+    value: link.path,
+    trailingIcon: 'i-lucide-chevron-down',
+    children: link.children || [],
+  }))
+})
 </script>
 
 <template>
-  <DdPage class="mx-2">
+  <DdPage>
     <template #right>
       <DdContentToc
         v-if="blog?.title !== 'Blog Home'"
@@ -109,34 +123,33 @@ const { data: navigation } = await useAsyncData('navigation', () => {
         :links="(blog?.body?.toc as any)?.links"
         highlight
         highlight-color="neutral"
-        class="sticky top-0"
+        :ui="{
+          root: 'mx-4',
+        }"
         @click:link="track('toc_click', { link: $event.target.href })"
       />
-      <ul v-if="navigation && blog?.id.includes('index')">
-        <li
-          v-for="link in navigation"
-          :key="link.path"
-          class="w-fit"
-        >
-          <div class="min-w-fit w-48 h-fit flex flex-col gap-2 px-2 py-1 mt-2 mx-2 my-4 border-l-2 border-amber-300/50">
-            <span
-              v-if="navigation.length"
-              class="text-xl font-semibold"
-            >
-              {{ $t('blog.recentPost') }}
-            </span>
-            <NuxtLink
-              v-for="(child, index) of link.children"
-              :key="index"
-              class="text-lg break-keep cursor-pointer hover:text-amber-600 hover:dark:text-amber-400 transition-colors duration-200 ease-in-out"
-              :to="child.path"
-              @click="track('recent_post_click', { post: child.title })"
-            >
-              {{ child.title }}
-            </NuxtLink>
-          </div>
-        </li>
-      </ul>
+      <DdAccordion
+        v-if="navigation && blog?.id.includes('index') && navigation.length > 0"
+        :items="accordionItems"
+        :ui="{
+          root: 'px-4',
+          item: 'border-l-2 border-amber-300/50 pl-2',
+          trigger: 'py-1.5 text-lg font-semibold',
+          body: 'flex flex-col gap-2 pt-2',
+        }"
+      >
+        <template #body="{ item }">
+          <NuxtLink
+            v-for="(child, index) in item.children"
+            :key="index"
+            class="text-sm cursor-pointer hover:text-amber-600 hover:dark:text-amber-400 transition-colors duration-200 ease-in-out break-keep"
+            :to="child.path"
+            @click="track('recent_post_click', { post: child.title })"
+          >
+            {{ child.title }}
+          </NuxtLink>
+        </template>
+      </DdAccordion>
     </template>
     <div class="w-full flex flex-col gap-y-4 px-4">
       <h1
