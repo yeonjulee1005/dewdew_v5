@@ -38,7 +38,7 @@ head:
 
 ::card-group
 
-::card{title="신년에 바라보는 2025년 회고 (20260102)" color="secondary" icon="i-lucide-external-link" to="/blog/20260102" target="_self"}
+::card{title="신년에 바라보는 2025년 회고 (20260103)" color="secondary" icon="i-lucide-external-link" to="/blog/20260103" target="_self"}
 ::
 
 ::card{title="2024년 12월 회고 (20241205)" color="secondary" icon="i-lucide-external-link" to="/blog/20241205" target="_self"}
