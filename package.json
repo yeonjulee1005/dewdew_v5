@@ -72,6 +72,7 @@
     "@vercel/analytics": "^1.6.1",
     "@vite-pwa/nuxt": "^1.1.0",
     "@vueuse/nuxt": "^14.0.0",
+    "better-sqlite3": "^12.5.0",
     "dayjs-nuxt": "^2.1.11",
     "pinia-plugin-persistedstate": "^4.7.1",
     "sass": "^1.94.2",
