@@ -5,26 +5,64 @@ import Giscus from '@giscus/vue'
 const { t } = useI18n()
 const route = useRoute()
 
-useHead({
-  title: t('pageTitle.blog'),
-  meta: [
-    { name: 'description', content: t('seoDescription.blog') },
-    { name: 'og:title', content: t('seoTitle.blog') },
-    { name: 'og:description', content: t('seoDescription.blog') },
-    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
-  ],
-})
+// 블로그 포스트의 첫 번째 이미지 URL 추출
+const extractFirstImage = (blog: any): string | null => {
+  if (!blog) return null
 
-useSchemaFaq({
-  mainEntity: [
-    {
-      name: 'What is Dewdew Blog?',
-      acceptedAnswer: {
-        text: 'Dewdew Blog is an Development Tech retrospective blog.',
-      },
-    },
-  ],
-})
+  // frontmatter에 image 필드가 있으면 우선 사용
+  if (blog.image && typeof blog.image === 'string') {
+    // 절대 URL이 아니면 절대 URL로 변환
+    if (blog.image.startsWith('http')) {
+      return blog.image
+    }
+    if (blog.image.startsWith('/')) {
+      return `https://www.dewdew.dev${blog.image}`
+    }
+    return `https://www.dewdew.dev/${blog.image}`
+  }
+
+  // body에서 첫 번째 이미지 찾기
+  if (blog.body?.children) {
+    const findImageInChildren = (children: any[]): string | null => {
+      for (const child of children) {
+        if (child.type === 'element' && child.tag === 'img' && child.props?.src) {
+          const src = child.props.src
+          // 절대 URL이 아니면 절대 URL로 변환
+          if (src.startsWith('http')) {
+            return src
+          }
+          if (src.startsWith('/')) {
+            return `https://www.dewdew.dev${src}`
+          }
+          return `https://www.dewdew.dev/${src}`
+        }
+        if (child.children && Array.isArray(child.children)) {
+          const found = findImageInChildren(child.children)
+          if (found) return found
+        }
+      }
+      return null
+    }
+    return findImageInChildren(blog.body.children)
+  }
+
+  // content에서 정규식으로 이미지 URL 추출 (fallback)
+  if (blog.content) {
+    const imageMatch = blog.content.match(/!\[.*?\]\((.*?)\)/)
+    if (imageMatch && imageMatch[1]) {
+      const src = imageMatch[1]
+      if (src.startsWith('http')) {
+        return src
+      }
+      if (src.startsWith('/')) {
+        return `https://www.dewdew.dev${src}`
+      }
+      return `https://www.dewdew.dev/${src}`
+    }
+  }
+
+  return null
+}
 
 const { data: blog } = await useAsyncData(route.path, async () => {
   let searchPath = route.path
@@ -131,6 +169,58 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
 const { data: navigation } = await useAsyncData('navigation', () => {
   return queryCollectionNavigation('blog')
     .order('date', 'DESC')
+})
+
+// og:image URL 계산
+const ogImage = computed(() => {
+  const imageUrl = extractFirstImage(blog.value)
+  return imageUrl || 'https://www.dewdew.dev/assets/dewdew.webp'
+})
+
+// SEO 메타 태그 설정 (blog가 로드된 후에 호출)
+useHead({
+  title: computed(() => blog.value?.title || t('pageTitle.blog')),
+  meta: computed(() => {
+    const baseMeta = [
+      { name: 'description', content: blog.value?.description || t('seoDescription.blog') },
+      { property: 'og:title', content: blog.value?.title || t('seoTitle.blog') },
+      { property: 'og:description', content: blog.value?.description || t('seoDescription.blog') },
+      { property: 'og:url', content: `https://www.dewdew.dev${route.path}` },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:image', content: ogImage.value },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:type', content: 'image/webp' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:image', content: ogImage.value },
+    ]
+
+    // 블로그 포스트인 경우 추가 메타 태그
+    if (blog.value && !blog.value.id?.includes('index')) {
+      baseMeta.push(
+        { property: 'article:published_time', content: blog.value.date ? new Date(blog.value.date).toISOString() : '' },
+        { property: 'article:author', content: blog.value.author || '이연주' },
+      )
+      if (blog.value.tags && Array.isArray(blog.value.tags)) {
+        blog.value.tags.forEach((tag: string) => {
+          baseMeta.push({ property: 'article:tag', content: tag })
+        })
+      }
+    }
+
+    return baseMeta
+  }),
+})
+
+useSchemaFaq({
+  mainEntity: [
+    {
+      name: 'What is Dewdew Blog?',
+      acceptedAnswer: {
+        text: 'Dewdew Blog is an Development Tech retrospective blog.',
+      },
+    },
+  ],
 })
 
 // Accordion items 생성
