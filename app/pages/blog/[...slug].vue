@@ -27,66 +27,84 @@ useSchemaFaq({
 })
 
 const { data: blog } = await useAsyncData(route.path, async () => {
-  // /blog 경로일 때 index.md를 찾기 위해 경로 정규화
-  // Nuxt Content에서 blog/index.md는 /blog/index 또는 /blog 경로로 매핑될 수 있음
   let searchPath = route.path
 
+  // /blog 경로일 때는 index.md를 찾아야 함
   if (route.path === '/blog' || route.path === '/blog/') {
-    // 먼저 /blog/index 시도
+    // 먼저 /blog/index로 시도
     const indexResult = await queryCollection('blog')
       .path('/blog/index')
       .first()
     if (indexResult) return indexResult
 
-    // /blog/index로 찾지 못한 경우, 모든 포스트를 가져와서 index.md 찾기
-    // Nuxt Content는 index.md를 /blog/index로 매핑하지만, 때로는 찾지 못할 수 있음
+    // /blog/index로 찾지 못하면 /blog로 시도
+    const blogResult = await queryCollection('blog')
+      .path('/blog')
+      .first()
+    if (blogResult) return blogResult
+
+    // 여전히 찾지 못하면 모든 포스트를 가져와서 index.md 찾기
     const allPosts = await queryCollection('blog').all()
     const foundIndex = allPosts.find((post: any) => {
       const postId = post.id || ''
       const postPath = post.path || ''
-      return postId === 'blog/index' || postPath === '/blog/index' || postPath === '/blog'
+      return postId === 'blog/index'
+        || postId === 'index'
+        || postPath === '/blog/index'
+        || postPath === '/blog'
+        || post.title === 'Blog Home'
     })
     if (foundIndex) return foundIndex
 
-    // 여전히 찾지 못하면 /blog로 시도
     searchPath = '/blog'
   }
 
-  // draft 포스트도 포함하여 검색
-  // Content 모듈은 파일명을 경로로 변환: blog/20260102.md → /blog/20260102
-  let result = await queryCollection('blog')
+  // 일반 경로로 검색 (예: /blog/20260102)
+  const result = await queryCollection('blog')
     .path(searchPath)
     .first()
+  if (result) return result
 
-  // 경로로 찾지 못한 경우, 파일명으로 직접 검색 시도
-  if (!result && searchPath.startsWith('/blog/') && searchPath !== '/blog' && searchPath !== '/blog/index') {
-    // /blog/20260102 → 20260102
+  // 경로로 찾지 못한 경우, where 절로 파일명으로 검색 시도
+  if (searchPath.startsWith('/blog/') && searchPath !== '/blog' && searchPath !== '/blog/index') {
     const fileName = searchPath.replace('/blog/', '')
-    // 모든 블로그 포스트를 가져와서 파일명으로 필터링 (draft 포함)
+
+    // id 필드로 검색 시도 (blog/20260102 형식)
+    const foundById = await queryCollection('blog')
+      .where('id', '=', `blog/${fileName}`)
+      .first()
+    if (foundById) return foundById
+
+    // path 필드로 검색 시도
+    const foundByPath = await queryCollection('blog')
+      .where('path', '=', searchPath)
+      .first()
+    if (foundByPath) return foundByPath
+
+    // 모든 포스트를 가져와서 수동 검색
     const allPosts = await queryCollection('blog').all()
     const foundPost = allPosts.find((post: any) => {
       const postId = post.id || ''
       const postPath = post.path || ''
-      // 파일명이 id에 포함되거나 경로가 일치하는지 확인
-      // post.id는 'blog/20260102' 형식일 수 있음
       return postId === `blog/${fileName}`
         || postId === fileName
         || postPath === searchPath
         || postPath === `/blog/${fileName}`
         || postId.includes(fileName)
     })
-    result = foundPost || null
+    if (foundPost) return foundPost
   }
 
   // 블로그 포스트를 찾을 수 없으면 404 에러 발생
-  if (!result && searchPath !== '/blog' && searchPath !== '/blog/index') {
+  if (searchPath !== '/blog' && searchPath !== '/blog/index') {
     throw createError({
       statusCode: 404,
       statusMessage: 'Blog post not found',
     })
   }
 
-  return result
+  // /blog 경로인데 index.md를 찾지 못한 경우 null 반환
+  return null
 })
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, async () => {
@@ -169,10 +187,10 @@ const accordionItems = computed(() => {
     </template>
     <div class="w-full flex flex-col gap-y-4 px-4">
       <h1
-        v-if="!blog?.id.includes('index')"
+        v-if="blog && !blog.id?.includes('index')"
         class="text-4xl font-bold text-amber-500 break-keep mt-2"
       >
-        {{ blog?.title }}
+        {{ blog.title }}
       </h1>
       <NuxtTime
         v-if="blog?.date"
