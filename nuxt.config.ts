@@ -328,6 +328,12 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ko',
     strategy: 'no_prefix',
+    // 브라우저 언어 감지 시 리디렉션 비활성화
+    detectBrowserLanguage: {
+      useCookie: false,
+      alwaysRedirect: false,
+      redirectOn: 'no prefix', // 리디렉션 비활성화
+    },
   },
   icon: {
     serverBundle: {
@@ -380,22 +386,17 @@ export default defineNuxtConfig({
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
-      // navigateFallback 제거: 새 배포 시 404 문제 방지
-      // navigateFallback: '/',
       navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//, /^\/__nuxt\//], // API와 빌드 파일은 제외
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
-      skipWaiting: true, // 새 Service Worker 즉시 활성화 (배포 시 캐시 문제 방지)
-      clientsClaim: true, // 새 Service Worker 즉시 클라이언트 제어 (배포 시 캐시 문제 방지)
-      // 404 응답을 무시하고 계속 진행 (프리캐시 실패 시에도 Service Worker가 정상 작동)
+      skipWaiting: true,
+      clientsClaim: true,
       dontCacheBustURLsMatching: /\.\w{8}\./,
-      // 런타임 캐싱 전략 설정
       runtimeCaching: [
-        // 페이지 요청: 네트워크 우선, 실패 시 캐시 사용
         {
-          urlPattern: ({ request }) => request.mode === 'navigate', // 네비게이션 요청만
+          urlPattern: ({ request }) => request.mode === 'navigate',
           handler: 'NetworkFirst',
           options: {
             cacheName: 'pages-cache',
@@ -604,6 +605,20 @@ export default defineNuxtConfig({
   },
   supabase: {
     redirect: false,
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: [
+        '/',
+        '/blog',
+        '/blog/**',
+        '/ai',
+        '/ai/**',
+        '/threejs',
+        '/threejs/**',
+      ],
+      cookieRedirect: false, // 쿠키 기반 리디렉션 비활성화
+    },
     clientOptions: {
       auth: {
         flowType: 'pkce',
