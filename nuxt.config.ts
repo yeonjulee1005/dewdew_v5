@@ -146,7 +146,10 @@ export default defineNuxtConfig({
       failOnError: false,
     },
     experimental: {
-      wasm: true, // better-sqlite3 최적화
+      wasm: true,
+    },
+    externals: {
+      inline: ['better-sqlite3'],
     },
     routeRules: {
       // 홈페이지 정적 렌더링 (프로덕션에서만)
@@ -600,18 +603,6 @@ export default defineNuxtConfig({
   },
   supabase: {
     redirect: false,
-    redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
-      exclude: [
-        '/',
-        '/blog',
-        '/blog/**',
-        '/ai',
-        '/ai/**',
-        '/threejs',
-      ],
-    },
     clientOptions: {
       auth: {
         flowType: 'pkce',
