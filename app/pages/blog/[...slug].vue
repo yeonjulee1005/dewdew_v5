@@ -303,7 +303,7 @@ watch(() => blog.value, () => {
         highlight
         highlight-color="neutral"
         :ui="{
-          root: 'mx-4',
+          root: 'mx-4 sticky top-0',
         }"
         @click:link="track('toc_click', { link: $event.target.href })"
       />
