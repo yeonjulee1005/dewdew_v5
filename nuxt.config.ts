@@ -328,11 +328,10 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ko',
     strategy: 'no_prefix',
-    // 브라우저 언어 감지 시 리디렉션 비활성화
     detectBrowserLanguage: {
       useCookie: false,
       alwaysRedirect: false,
-      redirectOn: 'no prefix', // 리디렉션 비활성화
+      redirectOn: 'root',
     },
   },
   icon: {
@@ -386,7 +385,8 @@ export default defineNuxtConfig({
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
-      navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//, /^\/__nuxt\//], // API와 빌드 파일은 제외
+      navigateFallback: null,
+      navigateFallbackDenylist: [/.*/],
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
@@ -396,19 +396,10 @@ export default defineNuxtConfig({
       dontCacheBustURLsMatching: /\.\w{8}\./,
       runtimeCaching: [
         {
+          // 페이지 요청: 네트워크만 사용 (캐시 사용 안 함)
+          // 새 배포 시 오래된 페이지로 리디렉션되는 문제 방지
           urlPattern: ({ request }) => request.mode === 'navigate',
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'pages-cache',
-            expiration: {
-              maxEntries: 50,
-              maxAgeSeconds: 24 * 60 * 60, // 24시간
-            },
-            networkTimeoutSeconds: 3,
-            cacheableResponse: {
-              statuses: [0, 200],
-            },
-          },
+          handler: 'NetworkOnly', // 캐시를 전혀 사용하지 않음
         },
         // Supabase Storage 이미지: 캐시 우선 (변경이 거의 없으므로 긴 캐시)
         {
@@ -580,7 +571,6 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: false,
       suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
       type: 'module',
     },
   },
