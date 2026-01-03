@@ -88,6 +88,11 @@ export default defineNuxtConfig({
     storageKey: 'nuxt-color-mode',
   },
   content: {
+    // Vercel 서버리스 환경에서 better-sqlite3 에러 방지
+    // Node.js v22.5.0+ 네이티브 SQLite 모듈 사용
+    experimental: {
+      sqliteConnector: 'native',
+    },
     build: {
       markdown: {
         toc: {
@@ -160,12 +165,12 @@ export default defineNuxtConfig({
           },
         }),
       },
-      // 블로그 페이지: SSR 사용 (동적 경로이므로 prerender 대신 SSR)
-      // prerender는 모든 경로를 자동으로 생성하지 못하므로 SSR로 처리
-      // '/blog/**': {
-      //   ssr: true,
-      //   prerender: false, // prerender 비활성화, SSR로 처리
-      // },
+      // 블로그 페이지: prerender하여 정적 파일로 생성
+      // Vercel 서버리스 환경에서 better-sqlite3 에러를 방지하기 위해
+      // 모든 블로그 페이지를 빌드 시점에 prerender
+      '/blog/**': {
+        prerender: true,
+      },
       // Three.js 페이지 정적 렌더링 (프로덕션에서만)
       '/threejs': { prerender: isProduction },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
