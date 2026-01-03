@@ -33,6 +33,8 @@ head:
   본 블로그는 [Nuxt Content](https://content.nuxt.com/)를 이용하여, `markdown`으로 간편하게 작성할 수 있도록 구현되였습니다.
 ::
 
+![블로그 메인](./assets/blog/index-cover.webp){width="300" height="200" class="object-contain" alt="블로그 메인"}
+
 ::card-group
 
 ::card{title="신년에 바라보는 2025년 회고 (20260102)" color="secondary" icon="i-lucide-external-link" to="/blog/20260102" target="_self"}
