@@ -144,6 +144,8 @@ export default defineNuxtConfig({
     },
     prerender: {
       failOnError: false,
+      // 블로그 포스트를 자동으로 크롤링하여 prerender
+      crawlLinks: true,
     },
     experimental: {
       wasm: true,
@@ -161,8 +163,12 @@ export default defineNuxtConfig({
           },
         }),
       },
-      // 블로그 페이지 정적 렌더링 (프로덕션에서만)
-      '/blog/**': { prerender: isProduction },
+      // 블로그 페이지: SSR 사용 (동적 경로이므로 prerender 대신 SSR)
+      // prerender는 모든 경로를 자동으로 생성하지 못하므로 SSR로 처리
+      '/blog/**': {
+        ssr: true,
+        prerender: false, // prerender 비활성화, SSR로 처리
+      },
       // Three.js 페이지 정적 렌더링 (프로덕션에서만)
       '/threejs': { prerender: isProduction },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
