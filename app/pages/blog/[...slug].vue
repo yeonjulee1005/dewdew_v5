@@ -146,6 +146,61 @@ const accordionItems = computed(() => {
     children: link.children || [],
   }))
 })
+
+// ContentRenderer가 렌더링한 후 이미지에 blog-image 클래스 추가
+const blogContentRef = ref<HTMLElement | null>(null)
+
+onMounted(() => {
+  nextTick(() => {
+    if (blogContentRef.value) {
+      const images = blogContentRef.value.querySelectorAll('img')
+      images.forEach((img) => {
+        if (!img.classList.contains('blog-image')) {
+          img.classList.add('blog-image')
+        }
+        // width, height 속성을 style로 적용 (CSS가 속성을 오버라이드하는 경우 대비)
+        if (img.hasAttribute('width') && !img.style.width) {
+          const width = img.getAttribute('width')
+          if (width) {
+            img.style.width = width.includes('px') ? width : `${width}px`
+          }
+        }
+        if (img.hasAttribute('height') && !img.style.height) {
+          const height = img.getAttribute('height')
+          if (height) {
+            img.style.height = height.includes('px') ? height : `${height}px`
+          }
+        }
+      })
+    }
+  })
+})
+
+watch(() => blog.value, () => {
+  nextTick(() => {
+    if (blogContentRef.value) {
+      const images = blogContentRef.value.querySelectorAll('img')
+      images.forEach((img) => {
+        if (!img.classList.contains('blog-image')) {
+          img.classList.add('blog-image')
+        }
+        // width, height 속성을 style로 적용 (CSS가 속성을 오버라이드하는 경우 대비)
+        if (img.hasAttribute('width') && !img.style.width) {
+          const width = img.getAttribute('width')
+          if (width) {
+            img.style.width = width.includes('px') ? width : `${width}px`
+          }
+        }
+        if (img.hasAttribute('height') && !img.style.height) {
+          const height = img.getAttribute('height')
+          if (height) {
+            img.style.height = height.includes('px') ? height : `${height}px`
+          }
+        }
+      })
+    }
+  })
+})
 </script>
 
 <template>
@@ -197,17 +252,22 @@ const accordionItems = computed(() => {
         :datetime="blog.date"
         class="text-lg text-right"
       />
-      <ContentRenderer
-        v-if="blog"
-        :value="blog"
-      />
       <div
-        v-else
-        class="text-center py-8"
+        ref="blogContentRef"
+        class="blog-content"
       >
-        <p class="text-lg text-neutral-600 dark:text-neutral-400">
-          블로그 포스트를 찾을 수 없습니다.
-        </p>
+        <ContentRenderer
+          v-if="blog"
+          :value="blog"
+        />
+        <div
+          v-else
+          class="text-center py-8"
+        >
+          <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            블로그 포스트를 찾을 수 없습니다.
+          </p>
+        </div>
       </div>
       <DdContentSurround :surround="(surround as any)" />
       <Giscus
@@ -232,3 +292,25 @@ const accordionItems = computed(() => {
     </div>
   </DdPage>
 </template>
+
+<style scoped>
+/* 블로그 콘텐츠 내의 이미지 스타일 */
+.blog-content :deep(img) {
+  /* 기본 스타일: 최대 높이 제한 */
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* blog-image 클래스가 있는 경우에도 동일하게 적용 */
+.blog-content :deep(.blog-image) {
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* width, height 속성이 있는 이미지는 JavaScript로 처리됨 */
+/* CSS는 기본 스타일만 제공 */
+</style>
