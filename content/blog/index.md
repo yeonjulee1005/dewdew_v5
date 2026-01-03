@@ -1,6 +1,7 @@
 ---
 title: Blog Home
 description: 개발자 이연주의 블로그입니다.
+isDraft: false
 authors:
   - name: "개발자 이연주"
     avatarUrl: https://avatars.githubusercontent.com/u/57179957?v=4

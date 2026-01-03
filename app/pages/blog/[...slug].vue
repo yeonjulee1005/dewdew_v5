@@ -38,7 +38,17 @@ const { data: blog } = await useAsyncData(route.path, async () => {
       .first()
     if (indexResult) return indexResult
 
-    // 없으면 /blog 시도
+    // /blog/index로 찾지 못한 경우, 모든 포스트를 가져와서 index.md 찾기
+    // Nuxt Content는 index.md를 /blog/index로 매핑하지만, 때로는 찾지 못할 수 있음
+    const allPosts = await queryCollection('blog').all()
+    const foundIndex = allPosts.find((post: any) => {
+      const postId = post.id || ''
+      const postPath = post.path || ''
+      return postId === 'blog/index' || postPath === '/blog/index' || postPath === '/blog'
+    })
+    if (foundIndex) return foundIndex
+
+    // 여전히 찾지 못하면 /blog로 시도
     searchPath = '/blog'
   }
 
@@ -57,7 +67,13 @@ const { data: blog } = await useAsyncData(route.path, async () => {
     const foundPost = allPosts.find((post: any) => {
       const postId = post.id || ''
       const postPath = post.path || ''
-      return postId.includes(fileName) || postPath === searchPath || postPath.includes(fileName)
+      // 파일명이 id에 포함되거나 경로가 일치하는지 확인
+      // post.id는 'blog/20260102' 형식일 수 있음
+      return postId === `blog/${fileName}`
+        || postId === fileName
+        || postPath === searchPath
+        || postPath === `/blog/${fileName}`
+        || postId.includes(fileName)
     })
     result = foundPost || null
   }
