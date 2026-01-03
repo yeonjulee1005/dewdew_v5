@@ -1,6 +1,7 @@
 ---
 title: Blog Home
 description: 개발자 이연주의 블로그입니다.
+isDraft: false
 authors:
   - name: "개발자 이연주"
     avatarUrl: https://avatars.githubusercontent.com/u/57179957?v=4
@@ -33,7 +34,7 @@ head:
   본 블로그는 [Nuxt Content](https://content.nuxt.com/)를 이용하여, `markdown`으로 간편하게 작성할 수 있도록 구현되였습니다.
 ::
 
-![블로그 메인](./assets/blog/index-cover.webp){width="300" height="200" class="object-contain" alt="블로그 메인"}
+![블로그 메인](https://api.dewdew.dev/storage/v1/object/public/blog/index-cover.webp){height="400" alt="블로그 메인"}
 
 ::card-group
 

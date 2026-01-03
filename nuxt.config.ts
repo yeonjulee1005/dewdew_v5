@@ -88,6 +88,11 @@ export default defineNuxtConfig({
     storageKey: 'nuxt-color-mode',
   },
   content: {
+    // Vercel 서버리스 환경에서 better-sqlite3 에러 방지
+    // Node.js v22.5.0+ 네이티브 SQLite 모듈 사용
+    experimental: {
+      sqliteConnector: 'native',
+    },
     build: {
       markdown: {
         toc: {
@@ -144,9 +149,11 @@ export default defineNuxtConfig({
     },
     prerender: {
       failOnError: false,
+      // 블로그 포스트를 자동으로 크롤링하여 prerender
+      crawlLinks: true,
     },
     experimental: {
-      wasm: true, // better-sqlite3 최적화
+      wasm: true,
     },
     routeRules: {
       // 홈페이지 정적 렌더링 (프로덕션에서만)
@@ -158,8 +165,12 @@ export default defineNuxtConfig({
           },
         }),
       },
-      // 블로그 페이지 정적 렌더링 (프로덕션에서만)
-      '/blog/**': { prerender: isProduction },
+      // 블로그 페이지: prerender하여 정적 파일로 생성
+      // Vercel 서버리스 환경에서 better-sqlite3 에러를 방지하기 위해
+      // 모든 블로그 페이지를 빌드 시점에 prerender
+      '/blog/**': {
+        prerender: true,
+      },
       // Three.js 페이지 정적 렌더링 (프로덕션에서만)
       '/threejs': { prerender: isProduction },
       // Vercel Speed Insights 경로 무시 (Vue Router에서 제외)
@@ -325,6 +336,11 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ko',
     strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: false,
+      alwaysRedirect: false,
+      redirectOn: 'root',
+    },
   },
   icon: {
     serverBundle: {
@@ -377,33 +393,21 @@ export default defineNuxtConfig({
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
-      navigateFallback: '/', // 오프라인 폴백 페이지 설정
-      navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//], // API와 빌드 파일은 제외
+      navigateFallback: null,
+      navigateFallbackDenylist: [/.*/],
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
-      skipWaiting: false,
-      clientsClaim: false,
-      // 404 응답을 무시하고 계속 진행 (프리캐시 실패 시에도 Service Worker가 정상 작동)
+      skipWaiting: true,
+      clientsClaim: true,
       dontCacheBustURLsMatching: /\.\w{8}\./,
-      // 런타임 캐싱 전략 설정
       runtimeCaching: [
-        // 페이지 요청: 네트워크 우선, 실패 시 캐시 사용
         {
-          urlPattern: ({ request }) => request.mode === 'navigate', // 네비게이션 요청만
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'pages-cache',
-            expiration: {
-              maxEntries: 50,
-              maxAgeSeconds: 24 * 60 * 60, // 24시간
-            },
-            networkTimeoutSeconds: 3,
-            cacheableResponse: {
-              statuses: [0, 200],
-            },
-          },
+          // 페이지 요청: 네트워크만 사용 (캐시 사용 안 함)
+          // 새 배포 시 오래된 페이지로 리디렉션되는 문제 방지
+          urlPattern: ({ request }) => request.mode === 'navigate',
+          handler: 'NetworkOnly', // 캐시를 전혀 사용하지 않음
         },
         // Supabase Storage 이미지: 캐시 우선 (변경이 거의 없으므로 긴 캐시)
         {
@@ -575,7 +579,6 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: false,
       suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
       type: 'module',
     },
   },
@@ -610,7 +613,9 @@ export default defineNuxtConfig({
         '/ai',
         '/ai/**',
         '/threejs',
+        '/threejs/**',
       ],
+      cookieRedirect: false, // 쿠키 기반 리디렉션 비활성화
     },
     clientOptions: {
       auth: {
