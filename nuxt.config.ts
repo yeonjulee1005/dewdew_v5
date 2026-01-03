@@ -380,14 +380,15 @@ export default defineNuxtConfig({
     filename: 'sw.js',
     strategies: 'generateSW',
     workbox: {
-      navigateFallback: '/', // 오프라인 폴백 페이지 설정
-      navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//], // API와 빌드 파일은 제외
+      // navigateFallback 제거: 새 배포 시 404 문제 방지
+      // navigateFallback: '/',
+      navigateFallbackDenylist: [/^\/api\//, /^\/_nuxt\//, /^\/__nuxt\//], // API와 빌드 파일은 제외
       globPatterns: ['**/*.{js,json,css,html,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}'],
       globIgnores: ['**/_nuxt/**/*.js', '**/_nuxt/**/*.mjs', '**/_payload.json'],
       // 정적 자산 캐싱 전략
       cleanupOutdatedCaches: true,
-      skipWaiting: false,
-      clientsClaim: false,
+      skipWaiting: true, // 새 Service Worker 즉시 활성화 (배포 시 캐시 문제 방지)
+      clientsClaim: true, // 새 Service Worker 즉시 클라이언트 제어 (배포 시 캐시 문제 방지)
       // 404 응답을 무시하고 계속 진행 (프리캐시 실패 시에도 Service Worker가 정상 작동)
       dontCacheBustURLsMatching: /\.\w{8}\./,
       // 런타임 캐싱 전략 설정
