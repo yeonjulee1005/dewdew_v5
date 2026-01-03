@@ -34,7 +34,7 @@ head:
   본 블로그는 [Nuxt Content](https://content.nuxt.com/)를 이용하여, `markdown`으로 간편하게 작성할 수 있도록 구현되였습니다.
 ::
 
-![블로그 메인](./assets/blog/index-cover.webp){width="300" height="200" class="object-contain" alt="블로그 메인"}
+![블로그 메인](https://api.dewdew.dev/storage/v1/object/public/blog/index-cover.webp){width="300" height="200" alt="블로그 메인"}
 
 ::card-group
 
