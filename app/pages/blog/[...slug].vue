@@ -297,20 +297,9 @@ watch(() => blog.value, () => {
 /* 블로그 콘텐츠 내의 이미지 스타일 */
 .blog-content :deep(img) {
   /* 기본 스타일: 최대 높이 제한 */
-  max-height: 400px;
-  width: auto;
+  max-height: 680px;
+  width: 100%;
   height: auto;
   object-fit: cover;
 }
-
-/* blog-image 클래스가 있는 경우에도 동일하게 적용 */
-.blog-content :deep(.blog-image) {
-  max-height: 400px;
-  width: auto;
-  height: auto;
-  object-fit: cover;
-}
-
-/* width, height 속성이 있는 이미지는 JavaScript로 처리됨 */
-/* CSS는 기본 스타일만 제공 */
 </style>
