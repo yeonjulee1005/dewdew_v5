@@ -13,6 +13,7 @@ import type {
   Project,
   Education,
   Hobby,
+  Certificate,
   SocialLink,
   ImageArchive,
   Threejs,
@@ -68,6 +69,7 @@ const enrichContextFromVectorMatches = async (
     project: () => !!(context.projects && context.projects.length > 0),
     education: () => !!(context.education && context.education.length > 0),
     hobbies: () => !!(context.hobbies && context.hobbies.length > 0),
+    certificates: () => !!(context.certificates && context.certificates.length > 0),
     social_links: () => !!(context.socialLinks && context.socialLinks.length > 0),
     image_archive: () => !!(context.images && context.images.length > 0),
     threejs: () => !!(context.threejs && context.threejs.length > 0),
@@ -231,6 +233,20 @@ const enrichContextFromVectorMatches = async (
           .returns<SocialLink[]>()
         if (data) {
           context.socialLinks = data
+        }
+      }
+    },
+    certificates: async () => {
+      if (!context.certificates) {
+        const { data } = await supabase
+          .schema('resume')
+          .from('certifications')
+          .select('*')
+          .eq('deleted', false)
+          .order('order_index', { ascending: true })
+          .returns<Certificate[]>()
+        if (data) {
+          context.certificates = data
         }
       }
     },
@@ -406,6 +422,19 @@ const tryKeywordMatching = async (
       .order('order_index')
       .returns<Hobby[]>()
     context.hobbies = data
+    matched = true
+  }
+
+  // 인증서 자격증
+  if (matchKeywords(queryLower, ['인증서', '자격증', '인증', '증명서', '자격', 'certificate', 'certification'])) {
+    const { data } = await supabase
+      .schema('resume')
+      .from('certifications')
+      .select('*')
+      .eq('deleted', false)
+      .order('order_index', { ascending: true })
+      .returns<Certificate[]>()
+    context.certificates = data
     matched = true
   }
 

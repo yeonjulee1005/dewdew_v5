@@ -47,6 +47,9 @@ export default {
     blog: 'Blog',
     openMenu: 'Open Menu',
     closeMenu: 'Close Menu',
+    changeTheme: 'Change Theme',
+    changeLanguage: 'Change Language',
+    title: 'Main Menu',
   },
   error: {
     title: '404',
@@ -63,6 +66,7 @@ export default {
       tryAgain: 'Try again',
     },
     placeholder: 'What is your question?',
+    imageModal: 'Enlarged image',
   },
   aiComponents: {
     concept: {
@@ -80,6 +84,7 @@ export default {
     experienceTimeline: 'Experience Timeline',
     skillCard: 'Skill Card',
     skillRadar: 'Skill Radar',
+    certificationCard: 'Certification Card',
     projectCarousel: 'Project Carousel',
     educationCard: 'Education Card',
     weaknessesCard: 'Weaknesses Card',
@@ -88,6 +93,7 @@ export default {
     contactForm: 'Contact Form',
     imageCarousel: 'Image Carousel',
     threejsCarousel: 'Three.js Works Carousel',
+    imageModal: 'Enlarged image',
   },
   dynamic: {
     greeting: {
@@ -102,6 +108,8 @@ export default {
       current: 'Current',
       present: 'Present',
       empty: 'No experience information available.',
+      scrollableRegion: 'Experience details scrollable region',
+      carousel: 'Experience carousel',
     },
     skill: {
       title: 'Tech Stack',
@@ -115,11 +123,17 @@ export default {
       highlights: 'Highlights',
       viewProject: 'View Project',
       viewGithub: 'View GitHub',
+      scrollableRegion: 'Project details scrollable region',
+      carousel: 'Project carousel',
     },
     education: {
       title: 'Education',
       present: 'Currently Enrolled',
       empty: 'No education information available.',
+    },
+    certification: {
+      title: 'Certification',
+      empty: 'No certification information available.',
     },
     weaknesses: {
       title: 'Weaknesses & Areas for Improvement',
@@ -128,6 +142,7 @@ export default {
     hobby: {
       title: 'Hobbies & Interests',
       empty: 'No hobby information available.',
+      carousel: 'Hobbies and interests carousel',
     },
     social: {
       title: 'Social Links',
@@ -136,10 +151,12 @@ export default {
     image: {
       archive: 'Image Archive',
       empty: 'No image information available.',
+      thumbnailScrollableRegion: 'Image thumbnail scrollable region',
     },
     threejs: {
       title: 'Three.js Works',
       empty: 'No Three.js works information available.',
+      carousel: 'Three.js works carousel',
     },
     contact: {
       title: 'Send Email',
@@ -158,6 +175,7 @@ export default {
     email: 'Email',
     message: 'Message',
     logo: 'Dewdew logo',
+    weatherCarousel: 'Weather information carousel',
   },
   pwa: {
     readyPwa: 'PWA is ready!',

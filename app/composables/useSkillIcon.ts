@@ -24,6 +24,7 @@ export const useSkillIcon = () => {
       'element plus': 'i-simple-icons-element',
       'element-plus': 'i-simple-icons-element',
       'elementplus': 'i-simple-icons-element',
+      'three.js': 'i-simple-icons-threedotjs',
 
       // 백엔드
       'node.js': 'i-simple-icons-nodedotjs',

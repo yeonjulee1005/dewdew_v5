@@ -11,6 +11,7 @@ import {
   buildSkillsText,
   buildProjectsText,
   buildEducationText,
+  buildCertificatesText,
   buildHobbiesText,
   buildSocialLinksText,
   buildImageArchiveText,
@@ -25,6 +26,7 @@ import type {
   Project,
   Education,
   Hobby,
+  Certificate,
   SocialLink,
   ImageArchive,
   Threejs,
@@ -145,6 +147,24 @@ export const createEducationEmbeddings = async (education: Education[]): Promise
       content,
       embedding,
       { school_name: edu.school_name, degree: edu.degree },
+    )
+  }
+}
+
+/**
+ * 인증서 임베딩 생성 및 저장
+ */
+export const createCertificateEmbeddings = async (certificates: Certificate[]): Promise<void> => {
+  for (const cert of certificates) {
+    const content = buildCertificatesText([cert])
+    const embedding = await getEmbedding(content, 'openai')
+
+    await saveDocumentEmbedding(
+      'certificate',
+      cert.id,
+      content,
+      embedding,
+      { title: cert.title, issuer: cert.issuer },
     )
   }
 }
@@ -342,6 +362,18 @@ export const initializeAllEmbeddings = async (): Promise<void> => {
   if (hobbies && hobbies.length > 0) {
     console.log('Creating hobbies embedding...')
     await createHobbiesEmbedding(hobbies)
+  }
+
+  // 인증서
+  const { data: certificates } = await supabase
+    .schema('resume')
+    .from('certifications')
+    .select('*')
+    .eq('deleted', false)
+    .order('order_index', { ascending: true })
+  if (certificates && certificates.length > 0) {
+    console.log(`Creating ${certificates.length} certificate embeddings...`)
+    await createCertificateEmbeddings(certificates)
   }
 
   // 소셜 링크

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { ResumeDatabase } from '~/types/supabase-resume'
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: skills } = await useFetch<ResumeDatabase['resume']['Tables']['skills']['Row'][]>('/api/resume/skills', {
   method: 'GET',
@@ -47,7 +50,7 @@ const coreSkills = computed(() => {
             :key="skill.id"
             :label="skill.name"
             variant="subtle"
-            :color="skill.proficiency ? 'primary' : 'neutral'"
+            :color="skill.proficiency ? 'error' : 'neutral'"
             size="lg"
             class="px-3 py-1.5"
           >
@@ -62,16 +65,18 @@ const coreSkills = computed(() => {
             <template #trailing>
               <Icon
                 name="i-lucide-star"
-                class="w-4 h-4 mr-1 text-amber-500 dark:text-amber-400"
+                class="w-4 h-4 mr-1 text-rose-500 dark:text-rose-400"
               />
-              <span class="text-sm text-neutral-600 dark:text-neutral-300">{{ skill.proficiency }} / 5</span>
+              <span class="text-md text-neutral-800 dark:text-neutral-200">
+                {{ skill.proficiency }} / 5
+              </span>
             </template>
           </DdBadge>
         </div>
 
         <div
           v-else
-          class="text-sm text-neutral-500"
+          class="text-md text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.skill.empty') }}
         </div>

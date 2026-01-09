@@ -9,6 +9,7 @@ const Skill = defineAsyncComponent(() => import('~/components/dynamic/card/Skill
 const SkillRadar = defineAsyncComponent(() => import('~/components/dynamic/card/SkillRadar.server.vue'))
 const ProjectCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ProjectCarousel.server.vue'))
 const EducationCard = defineAsyncComponent(() => import('~/components/dynamic/card/EducationCard.server.vue'))
+const CertificationCard = defineAsyncComponent(() => import('~/components/dynamic/card/CertificationCard.server.vue'))
 const WeaknessesCard = defineAsyncComponent(() => import('~/components/dynamic/card/WeaknessesCard.server.vue'))
 const HobbyCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/HobbyCarousel.server.vue'))
 const SocialLinks = defineAsyncComponent(() => import('~/components/dynamic/card/SocialLinks.server.vue'))
@@ -63,11 +64,12 @@ useSchemaFaq({
       <Profile :title="$t('aiComponents.profileCard')" />
       <ExperienceCarousel :title="$t('aiComponents.experienceCard')" />
       <ExperienceTimeline :title="$t('aiComponents.experienceTimeline')" />
-      <Skill :title="$t('aiComponents.skillCard')" />
       <SkillRadar :title="$t('aiComponents.skillRadar')" />
+      <Skill :title="$t('aiComponents.skillCard')" />
       <ProjectCarousel :title="$t('aiComponents.projectCarousel')" />
       <ThreejsCarousel :title="$t('aiComponents.threejsCarousel')" />
       <EducationCard :title="$t('aiComponents.educationCard')" />
+      <CertificationCard :title="$t('aiComponents.certificationCard')" />
       <WeaknessesCard :title="$t('aiComponents.weaknessesCard')" />
       <HobbyCarousel :title="$t('aiComponents.hobbyCarousel')" />
       <SocialLinks :title="$t('aiComponents.socialLinks')" />

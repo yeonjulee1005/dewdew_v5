@@ -108,67 +108,86 @@ onUnmounted(() => {
         {{ $t('seoDescription.threejs') }}
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          v-for="(work, index) in threejsData"
-          :key="index"
-          class="group relative rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg"
-          @click="handleWorkClick(work)"
-          @mouseenter="hoveredWork = work.id"
-          @mouseleave="hoveredWork = null"
+      <div
+        v-if="threejsData && threejsData.length > 0"
+        class="w-full flex flex-col gap-y-4"
+      >
+        <DdCarousel
+          v-slot="{ item: work }"
+          :items="threejsData"
+          loop
+          arrows
+          :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
+          :aria-label="$t('dynamic.threejs.carousel', 'Three.js 작업물 캐러셀')"
         >
-          <!-- Preview Canvas Container -->
-          <div class="relative w-full aspect-video bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
-            <!-- 로딩 상태 -->
+          <div class="flex flex-col gap-y-4">
             <div
-              v-if="loadingStates[work.id] !== false"
-              class="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10"
-            >
-              <Icon
-                name="i-svg-spinners-dot-revolve"
-                class="w-12 h-12 text-primary-500"
-              />
-            </div>
-
-            <!-- iframe Preview (Vercel 스타일) -->
-            <iframe
-              :src="work.url || ''"
-              class="absolute inset-0 w-full h-full border-0 transform scale-[0.25] origin-top-left"
-              :style="{
-                width: '400%',
-                height: '400%',
-                pointerEvents: hoveredWork === work.id ? 'auto' : 'none',
-              }"
-              :aria-label="`Preview of ${work.title}`"
-              @load="() => completeIframeLoad(work.id)"
-              @error="() => completeIframeLoad(work.id)"
-            />
-
-            <!-- Visit 버튼 (호버 시 표시) -->
-            <DdButton
-              class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity z-30 cursor-pointer"
-              color="primary"
-              size="xl"
-              variant="subtle"
-              icon="i-lucide-external-link"
-              label="Visit"
+              class="group relative rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-lg"
               @click="handleWorkClick(work)"
-            />
-          </div>
-
-          <!-- 작업물 정보 -->
-          <div class="flex flex-col gap-y-1 p-4">
-            <h3 class="font-bold text-lg break-keep">
-              {{ work.title }}
-            </h3>
-            <p
-              v-if="work.description"
-              class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 break-keep"
+              @mouseenter="hoveredWork = work.id"
+              @mouseleave="hoveredWork = null"
             >
-              {{ work.description }}
-            </p>
+              <!-- Preview Canvas Container -->
+              <div class="relative w-full aspect-video bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
+                <!-- 로딩 상태 -->
+                <div
+                  v-if="loadingStates[work.id] !== false"
+                  class="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10"
+                >
+                  <Icon
+                    name="i-svg-spinners-dot-revolve"
+                    class="w-12 h-12 text-primary-500"
+                  />
+                </div>
+
+                <!-- iframe Preview (Vercel 스타일) -->
+                <iframe
+                  :src="work.url || ''"
+                  class="absolute inset-0 w-full h-full border-0 transform scale-[0.25] origin-top-left"
+                  :style="{
+                    width: '400%',
+                    height: '400%',
+                    pointerEvents: hoveredWork === work.id ? 'auto' : 'none',
+                  }"
+                  :aria-label="`Preview of ${work.title}`"
+                  @load="() => completeIframeLoad(work.id)"
+                  @error="() => completeIframeLoad(work.id)"
+                />
+
+                <!-- Visit 버튼 (호버 시 표시) -->
+                <DdButton
+                  class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity z-30 cursor-pointer"
+                  color="primary"
+                  size="xl"
+                  variant="subtle"
+                  icon="i-lucide-external-link"
+                  label="Visit"
+                  @click.stop="handleWorkClick(work)"
+                />
+              </div>
+
+              <!-- 작업물 정보 -->
+              <div class="flex flex-col gap-y-1 p-4">
+                <h2 class="font-bold text-lg break-keep">
+                  {{ work.title }}
+                </h2>
+                <p
+                  v-if="work.description"
+                  class="text-md text-neutral-700 dark:text-neutral-300 line-clamp-2 break-keep"
+                >
+                  {{ work.description }}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </DdCarousel>
+      </div>
+
+      <div
+        v-else
+        class="text-md text-neutral-500 dark:text-neutral-400"
+      >
+        {{ $t('dynamic.threejs.empty', '작업물이 없습니다.') }}
       </div>
     </div>
   </DdPage>

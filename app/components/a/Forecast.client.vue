@@ -41,6 +41,8 @@ const carouselItems = computed(() => {
       item: 'basis-full h-14',
     }"
     class="h-10 w-full max-w-fit"
+    :aria-label="$t('texts.weatherCarousel', '날씨 정보 캐러셀')"
+    role="region"
   >
     <!-- UV 데이터 -->
     <div
@@ -57,9 +59,9 @@ const carouselItems = computed(() => {
           :text="$t('texts.uv')"
         />
         <AIconText
-          :custom-class="uvColor((item.data as UvData).uvIndex)"
+          :custom-class="uvColor((item.data as UvData).uvIndex) || undefined"
           :icon-name="(item.data as UvData).uv.split(',')[1]"
-          :text-class="uvColor((item.data as UvData).uvIndex)"
+          :text-class="uvColor((item.data as UvData).uvIndex) || undefined"
           :text="(item.data as UvData).uv.split(',')[0]"
         />
       </div>
@@ -80,9 +82,9 @@ const carouselItems = computed(() => {
           :text="$t('texts.diffusion')"
         />
         <AIconText
-          :custom-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex)"
+          :custom-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex) || undefined"
           :icon-name="(item.data as AirDiffusionData).diffusion.split(',')[1]"
-          :text-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex)"
+          :text-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex) || undefined"
           :text="(item.data as AirDiffusionData).diffusion.split(',')[0]"
         />
       </div>
@@ -95,13 +97,13 @@ const carouselItems = computed(() => {
     >
       <div class="flex gap-4">
         <AIconText
-          :custom-class="weatherColor((item.data as WeatherFirstData).sky.split(',')[0] ?? '')"
+          :custom-class="weatherColor((item.data as WeatherFirstData).sky.split(',')[0] ?? '') || undefined"
           :icon-name="(item.data as WeatherFirstData).sky.split(',')[1]"
           :text="(item.data as WeatherFirstData).sky.split(',')[0]"
         />
         <AIconText
           :use-icon="false"
-          :text-class="temperatureColor((item.data as WeatherFirstData).t1h)"
+          :text-class="temperatureColor((item.data as WeatherFirstData).t1h) || undefined"
           :text="`${(item.data as WeatherFirstData).t1h} ℃`"
         />
         <AIconText
@@ -127,9 +129,9 @@ const carouselItems = computed(() => {
           :text="(item.data as WeatherSecondData).r1n"
         />
         <AIconText
-          :custom-class="humidityColor(parseInt((item.data as WeatherSecondData).reh))"
+          :custom-class="humidityColor(parseInt((item.data as WeatherSecondData).reh)) || undefined"
           icon-name="wi:humidity"
-          :text-class="humidityColor(parseInt((item.data as WeatherSecondData).reh))"
+          :text-class="humidityColor(parseInt((item.data as WeatherSecondData).reh)) || undefined"
           :text="(item.data as WeatherSecondData).reh"
         />
       </div>

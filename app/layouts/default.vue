@@ -7,6 +7,7 @@ const { url } = useImageStorage()
 const { t } = useI18n()
 
 const slideoverTrigger = ref(false)
+const slideoverTitle = computed(() => t('menu.title'))
 
 const handlePagination = (path: string, external: boolean = false) => {
   external
@@ -51,11 +52,12 @@ const handlePagination = (path: string, external: boolean = false) => {
         <DdSlideover
           v-model:open="slideoverTrigger"
           :overlay="false"
-          :close="{
-            color: 'primary',
-            variant: 'outline',
-            class: 'rounded-full h-12 w-12 flex items-center justify-center',
-          }"
+          :close="false"
+          :title="$t('menu.title')"
+          :content="{
+            'aria-label': slideoverTitle,
+            'aria-labelledby': 'slideover-title',
+          } as any"
           :ui="{
             header: 'h-20 flex items-center',
             close: 'top-6 right-6',
@@ -67,7 +69,16 @@ const handlePagination = (path: string, external: boolean = false) => {
             use-icon
             icon-lead-name="i-lucide-menu"
             :tooltip-text="$t('menu.openMenu')"
+            :aria-label="$t('menu.openMenu')"
           />
+          <template #title>
+            <h2
+              id="slideover-title"
+              class="sr-only"
+            >
+              {{ $t('menu.title') }}
+            </h2>
+          </template>
           <template #header>
             <div class="w-full flex items-center justify-end">
               <ATooltipButton
@@ -76,6 +87,7 @@ const handlePagination = (path: string, external: boolean = false) => {
                 use-icon
                 icon-lead-name="i-lucide-x"
                 :tooltip-text="$t('menu.closeMenu')"
+                :aria-label="$t('menu.closeMenu')"
                 @click="slideoverTrigger = false"
               />
             </div>
@@ -173,10 +185,12 @@ const handlePagination = (path: string, external: boolean = false) => {
                   custom-class="gap-0"
                   icon-lead-class="w-8 h-8"
                   button-variant="ghost"
+                  :aria-label="$t('menu.changeTheme')"
                 />
                 <ALanguageChange
                   custom-class="gap-0"
                   icon-lead-class="w-8 h-8"
+                  :aria-label="$t('menu.changeLanguage')"
                 />
               </div>
             </div>

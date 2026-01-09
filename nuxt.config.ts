@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     // @nuxt/hints는 개발 환경에서만 활성화 (알파 버전 hydration 버그 방지)
     ...(process.env.NODE_ENV === 'development' ? ['@nuxt/hints'] : []),
+    '@nuxt/a11y',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/content',

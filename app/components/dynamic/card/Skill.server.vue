@@ -1,11 +1,14 @@
 <script setup lang="ts">
 const { getSkillIcon } = useSkillIcon()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: skills } = await useFetch('/api/resume/skills', {
   method: 'GET',
@@ -65,10 +68,10 @@ const categoryColor = (category: string) => {
             class="flex flex-col gap-y-2 mb-4 last:mb-0"
           >
             <DdSeparator v-if="index > 0" />
-            <h4 class="text-lg font-semibold break-keep truncate text-neutral-500 uppercase tracking-wider">
+            <h4 class="text-lg font-semibold break-keep truncate text-neutral-800 dark:text-neutral-200 uppercase tracking-wider">
               {{ category }}
             </h4>
-            <div class="flex flex-wrap gap-2.5">
+            <div class="flex flex-wrap gap-3">
               <DdBadge
                 v-for="skill in groupedSkills[category]"
                 :key="skill.id"
@@ -77,6 +80,9 @@ const categoryColor = (category: string) => {
                 :color="categoryColor(category)"
                 size="xl"
                 class="px-3 py-1.5"
+                :ui="{
+                  label: 'text-neutral-800 dark:text-neutral-200',
+                }"
               >
                 <template #leading>
                   <NuxtImg
@@ -98,7 +104,7 @@ const categoryColor = (category: string) => {
 
         <div
           v-else
-          class="text-sm text-neutral-500"
+          class="text-md text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.skill.empty') }}
         </div>

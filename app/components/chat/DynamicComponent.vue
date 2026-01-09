@@ -14,6 +14,7 @@ const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
   'experience-timeline': defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceTimeline.server.vue')),
   'skill-card': defineAsyncComponent(() => import('~/components/dynamic/card/Skill.server.vue')),
   'skill-radar': defineAsyncComponent(() => import('~/components/dynamic/card/SkillRadar.server.vue')),
+  'certification-card': defineAsyncComponent(() => import('~/components/dynamic/card/CertificationCard.server.vue')),
   'project-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/ProjectCarousel.server.vue')),
   'education-card': defineAsyncComponent(() => import('~/components/dynamic/card/EducationCard.server.vue')),
   'weaknesses-card': defineAsyncComponent(() => import('~/components/dynamic/card/WeaknessesCard.server.vue')),

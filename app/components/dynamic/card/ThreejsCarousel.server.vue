@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { track } from '@vercel/analytics'
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: threejsData } = await useFetch('/api/resume/threejs', {
   method: 'GET',
@@ -100,7 +103,9 @@ onUnmounted(() => {
             v-slot="{ item: work }"
             :items="threejsData"
             arrows
+            loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
+            :aria-label="$t('dynamic.threejs.carousel', 'Three.js 작업물 캐러셀')"
           >
             <div class="flex flex-col gap-y-4 p-3 rounded-md border border-neutral-200 dark:border-neutral-700">
               <!-- Preview Canvas Container -->
@@ -167,7 +172,7 @@ onUnmounted(() => {
 
         <div
           v-else
-          class="text-sm text-neutral-500 dark:text-neutral-500"
+          class="text-sm text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.threejs.empty', 'Three.js 작업물 정보가 없습니다.') }}
         </div>
