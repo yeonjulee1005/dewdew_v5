@@ -3,16 +3,9 @@ import { Analytics } from '@vercel/analytics/nuxt'
 
 const { coords, resume } = useGeolocation()
 
-// Vercel 프로덕션 환경에서만 Speed Insights 활성화
-// 로컬 preview에서는 VERCEL 환경 변수가 없으므로 비활성화
 const appConfig = useAppConfig()
+const config = useRuntimeConfig()
 const { meta } = useRoute()
-
-const isVercel = ref(false)
-
-onMounted(() => {
-  isVercel.value = !!(import.meta.env.VERCEL === '1' || import.meta.env.VERCEL === true || import.meta.env.VERCEL)
-})
 
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
@@ -279,7 +272,13 @@ onUnmounted(() => {
       />
       <NuxtPage />
     </NuxtLayout>
-    <Analytics v-if="isVercel" />
-    <SpeedInsights v-if="isVercel" />
+    <Analytics
+      debug
+      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+    />
+    <SpeedInsights
+      debug
+      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+    />
   </DdApp>
 </template>
