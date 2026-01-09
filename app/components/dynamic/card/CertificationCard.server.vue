@@ -17,8 +17,6 @@ const { data: certificationData } = await useFetch('/api/resume/certification', 
   dedupe: 'defer',
 })
 
-console.log(certificationData.value)
-
 const formatDate = (dateString: string | null) => {
   if (!dateString) return ''
   const date = new Date(dateString)
