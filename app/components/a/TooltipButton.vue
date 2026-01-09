@@ -37,6 +37,7 @@ withDefaults(
     imageTrailSize?: number
     imageTrailClass?: string
     buttonText?: string
+    ariaLabel?: string
     tooltipText?: string
     tooltipArrow?: boolean
     tooltipSide?: 'bottom' | 'top' | 'right' | 'left' | undefined
@@ -79,6 +80,7 @@ withDefaults(
     imageTrailSize: 30,
     imageTrailClass: '',
     buttonText: '',
+    ariaLabel: '',
     tooltipText: '',
     tooltipArrow: false,
     tooltipSide: 'bottom',
@@ -116,7 +118,7 @@ defineEmits([
       :class="[
         customClass,
         roundButton ? 'rounded-full' : 'rounded-md',
-        buttonVariant === 'outline' ? 'text-neutral-500 dark:text-neutral-500 ring-neutral-300 dark:ring-neutral-300 focus:ring-neutral-400 dark:focus:ring-neutral-400' : '',
+        buttonVariant === 'outline' ? 'text-neutral-500 dark:text-neutral-400 ring-neutral-300 dark:ring-neutral-300 focus:ring-neutral-400 dark:focus:ring-neutral-400' : '',
         buttonSize === 'xl' && isMobile ? 'text-sm' : buttonSize === 'xl' ? 'text-base' : '',
         buttonCustomPadding || '',
         'cursor-pointer',
@@ -130,7 +132,7 @@ defineEmits([
       :loading="buttonLoading"
       :size="buttonSize"
       :variant="buttonVariant"
-      :aria-label="buttonText"
+      :aria-label="buttonText || ariaLabel || tooltipText"
       @click="$emit('click:button')"
       @mouseenter="$emit('mouseenter:button')"
       @mouseleave="$emit('mouseleave:button')"

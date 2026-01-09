@@ -1,9 +1,12 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: experienceData } = await useFetch('/api/resume/experience', {
   method: 'GET',
@@ -40,9 +43,16 @@ const formatDate = (dateString: string | null) => {
             v-slot="{ item: experience }"
             :items="experienceData"
             arrows
+            loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
+            :aria-label="$t('dynamic.experience.carousel', '경력 캐러셀')"
           >
-            <div class="flex flex-col h-[300px] overflow-y-auto p-3 rounded-md border border-neutral-200 dark:border-neutral-700 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+            <div
+              class="flex flex-col h-[300px] overflow-y-auto p-3 rounded-md border border-neutral-200 dark:border-neutral-700 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent"
+              role="region"
+              tabindex="0"
+              :aria-label="`${$t('dynamic.experience.scrollableRegion', '경력 상세 정보 스크롤 영역')} - ${experience.company_name}`"
+            >
               <div class="flex flex-col gap-y-3 shrink-0">
                 <div class="flex flex-col">
                   <div class="flex items-center gap-x-2">
@@ -58,14 +68,14 @@ const formatDate = (dateString: string | null) => {
                     />
                   </div>
                   <div class="flex items-center gap-x-2">
-                    <span class="text-lg font-semibold text-neutral-600 dark:text-neutral-400">
+                    <span class="text-lg font-semibold text-amber-600 dark:text-amber-400">
                       {{ experience.position }}
                     </span>
                     <DdSeparator
                       orientation="vertical"
                       class="h-4"
                     />
-                    <div class="flex items-center gap-x-2 text-sm text-neutral-500 dark:text-neutral-500">
+                    <div class="flex items-center gap-x-2 text-md text-neutral-500 dark:text-neutral-400">
                       <span>{{ formatDate(experience.start_date) }}</span>
                       <span>~</span>
                       <span>{{ experience.end_date ? formatDate(experience.end_date) : $t('dynamic.experience.present') }}</span>
@@ -75,7 +85,7 @@ const formatDate = (dateString: string | null) => {
                 <DdSeparator />
                 <p
                   v-if="experience.description"
-                  class="text-md text-neutral-600 dark:text-neutral-400 whitespace-pre-line"
+                  class="text-md text-neutral-600 dark:text-neutral-400 leading-relaxed whitespace-pre-line"
                 >
                   {{ experience.description }}
                 </p>
@@ -85,7 +95,7 @@ const formatDate = (dateString: string | null) => {
         </div>
         <div
           v-else
-          class="text-sm text-neutral-500 dark:text-neutral-500"
+          class="text-sm text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.experience.empty') }}
         </div>

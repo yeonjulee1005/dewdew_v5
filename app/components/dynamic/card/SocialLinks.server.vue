@@ -3,11 +3,14 @@ import { track } from '@vercel/analytics/server'
 
 const { isMobile } = useDevice()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: socialLinksData } = await useFetch('/api/resume/socialLinks', {
   method: 'GET',
@@ -35,30 +38,28 @@ const clickSocialLink = (url: string) => {
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.social.title') }}
         </h3>
-        <div
+        <DdPageGrid
           v-if="socialLinksData && socialLinksData.length > 0"
-          class="flex flex-wrap gap-4"
-          :class="isMobile ? 'justify-start' : 'justify-center'"
+          :ui="{ base: `relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ${isMobile ? 'justify-start' : 'justify-center'}` }"
         >
-          <ATooltipButton
+          <DdPageCard
             v-for="(link, index) in socialLinksData"
             :key="index"
-            use-leading
-            use-icon
-            :icon-lead-name="link.icon_url ?? `i-logos-${link.platform.toLowerCase()}-icon`"
-            icon-lead-class="w-8 h-8 text-primary-500 dark:text-primary-400"
-            :button-text="link.platform"
-            :button-url="link.url"
-            button-variant="outline"
-            button-color="primary"
-            button-size="xl"
-            custom-class="cursor-pointer"
-            @click:button="clickSocialLink(link.url)"
+            :title="link.platform"
+            :icon="link.icon_url ?? `i-logos-${link.platform.toLowerCase()}-icon`"
+            :to="link.url"
+            target="_blank"
+            variant="outline"
+            :ui="{
+              leadingIcon: 'w-8 h-8 text-blue-500 dark:text-blue-400',
+              title: 'text-lg font-semibold',
+            }"
+            @click="clickSocialLink(link.url)"
           />
-        </div>
+        </DdPageGrid>
         <div
           v-else
-          class="text-md text-neutral-500 dark:text-neutral-500"
+          class="text-md text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.social.empty') }}
         </div>

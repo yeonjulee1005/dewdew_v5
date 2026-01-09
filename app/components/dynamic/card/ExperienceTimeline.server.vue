@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import type { TimelineItem } from '@nuxt/ui'
+import type { ResumeDatabase } from '~/types/database.types'
 
 const { t } = useI18n()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const activeItem = ref(0)
 const isAutoPlaying = ref(true)
@@ -37,12 +41,12 @@ const timelineItems = computed(() => {
     return []
   }
 
-  return experienceData.value.map((experience, index) => ({
+  return experienceData.value.map((experience: ResumeDatabase['resume']['Tables']['experience']['Row'], index: number) => ({
     date: formatDateRange(experience.start_date, experience.end_date, index === 0),
     title: experience.company_name,
     description: experience.description,
     icon: experience.is_current ? 'i-lucide-briefcase' : 'i-lucide-building',
-    value: experience.id ?? experience.order_index ?? undefined,
+    value: experience.order_index ?? undefined,
     is_current: experience.is_current,
   }))
 })
@@ -105,7 +109,7 @@ onUnmounted(() => {
             orientation="vertical"
             :ui="{
               title: 'text-xl font-bold',
-              date: 'text-md float-end ms-1',
+              date: 'text-md float-end ms-1 text-neutral-600 dark:text-neutral-300',
               description: 'mt-2 text-md break-keep',
             }"
           >
@@ -123,18 +127,23 @@ onUnmounted(() => {
                 />
               </div>
             </template>
+            <template #date="{ item }">
+              <span class="text-md float-end ms-1 text-neutral-600 dark:text-neutral-300">
+                {{ item.date }}
+              </span>
+            </template>
             <template #description="{ item }">
               <div
                 v-if="item.description"
                 v-dompurify-html="item.description"
-                class="mt-2 ring rounded-md py-2 px-3 text-md text-neutral-600 dark:text-neutral-400 whitespace-pre-line [&_p]:mb-2 [&_p]:last:mb-0 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 [&_li]:mb-1"
+                class="mt-2 ring rounded-md py-2 px-3 text-md text-neutral-600 dark:text-neutral-400 leading-relaxed whitespace-pre-line [&_p]:mb-2 [&_p]:last:mb-0 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 [&_li]:mb-1"
               />
             </template>
           </DdTimeline>
         </div>
         <div
           v-else
-          class="text-sm text-neutral-500 dark:text-neutral-500"
+          class="text-sm text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.experience.empty') }}
         </div>

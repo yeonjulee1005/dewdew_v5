@@ -4,8 +4,6 @@ import AFooterSns from './Sns.server.vue'
 import AFooterInformation from './Information.server.vue'
 
 const { isMobile } = useDevice()
-
-const colorMode = useColorMode()
 const { t } = useI18n()
 
 const accordionItems = [
@@ -43,7 +41,7 @@ const accordionItems = [
     </DdAccordion>
 
     <template v-else>
-      <div :class="colorMode.value === 'dark' ? 'footer-dark-zigzag' : 'footer-zigzag'" />
+      <div class="footer-zigzag" />
       <AFooterMenu />
       <AFooterSns />
       <AFooterInformation />
@@ -58,13 +56,10 @@ const accordionItems = [
   border: none;
   background-image: var(--zigzag-footer-pattern);
   background-repeat: repeat-x;
-}
-.footer-dark-zigzag {
-  height: 20px;
-  width: 100%;
-  border: none;
-  background-image: var(--zigzag-footer-dark-pattern);
-  background-repeat: repeat-x;
+
+  :global(.dark) & {
+    background-image: var(--zigzag-footer-dark-pattern);
+  }
 }
 
 // 아코디언이 위쪽으로 펼쳐지도록

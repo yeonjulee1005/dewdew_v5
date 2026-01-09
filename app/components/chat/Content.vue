@@ -46,10 +46,12 @@ const suggestions = [
   '앞으로의 커리어 패스를 어떻게 가져가고 싶어요?',
   '최근 진행했던 프로젝트를 알려주세요!',
   'WebGL도 관심이 있나요?',
+  '학력이 어떻게 되요?',
+  '어떤 기술 스택을 즐겨 사용해요?',
+  '보유한 자격증이 있나요?',
+  '커피챗 하고싶어요!',
   'Github에서 어떤 오픈소스에 기여했었는지 살펴봐줘!',
   '취미가 뭐에요? 평소에 어떤것을 하면서 리프레쉬 하고 있어요?',
-  '학력이 어떻게 되요?',
-  '커피챗 하고싶어요!',
   '소셜 링크들을 알려주세요!',
   '이 웹사이트는 어떻게 만들었어요?',
   '부족한 점이나 단점이 있다면 알려줄 수 있어요?',
@@ -374,7 +376,7 @@ onUnmounted(() => {
         </template>
         <!-- 🆕 생각 중 인디케이터 -->
         <template #indicator>
-          <div class="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 py-2 px-4">
+          <div class="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 py-2 px-4">
             <DdAvatar
               :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
               size="sm"
@@ -507,7 +509,7 @@ onUnmounted(() => {
             }"
             :ui="{
               base: 'bg-neutral-200/50 dark:bg-neutral-800/50 w-fit',
-              placeholder: 'text-neutral-600 dark:text-neutral-500',
+              placeholder: 'text-neutral-500 dark:text-neutral-400',
               itemLabel: 'break-keep whitespace-normal',
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
             }"
@@ -562,7 +564,7 @@ onUnmounted(() => {
                 />
               </template>
             </DdSelect>
-            <span class="text-md text-neutral-600 dark:text-neutral-500">
+            <span class="text-md text-neutral-500 dark:text-neutral-400">
               {{ selectedModel.label }}
             </span>
           </div>
@@ -574,6 +576,7 @@ onUnmounted(() => {
     <DdModal
       v-model:open="imageModalOpen"
       :ui="{ content: 'max-w-4xl' }"
+      :title="$t('ai.imageModal', '확대된 이미지')"
     >
       <template #body>
         <div class="flex justify-center items-center p-4">

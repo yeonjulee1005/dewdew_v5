@@ -1,11 +1,12 @@
 <script setup lang="ts">
-const { url } = useImageStorage()
-
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
   method: 'GET',
@@ -37,41 +38,28 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
             v-slot="{ item: hobby }"
             :items="hobbiesData"
             arrows
+            loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 w-20 h-10', prev: '!left-0', next: '!right-0' }"
+            :aria-label="$t('dynamic.hobby.carousel', '취미 및 관심사 캐러셀')"
           >
-            <div class="min-h-[240px] flex flex-col gap-y-3">
-              <div class="flex flex-col items-center gap-y-3">
-                <DdAvatar
-                  v-if="hobby.icon_url"
-                  :src="url(true, hobby.icon_url.split('/public')[1] ?? '')"
-                  :alt="hobby.title"
-                  :text="hobby.icon_url"
-                  size="xl"
-                  class="w-20 h-20 text-4xl"
-                />
-                <Icon
-                  v-else
-                  name="i-lucide-heart"
-                  class="w-16 h-16 text-primary-500 dark:text-primary-400"
-                />
-                <h4 class="text-xl font-bold text-center">
-                  {{ hobby.title }}
-                </h4>
-              </div>
-
-              <p
-                v-if="hobby.description"
-                class="text-base break-keep text-neutral-600 dark:text-neutral-400 whitespace-pre-line text-center leading-relaxed"
-              >
-                {{ hobby.description }}
-              </p>
-            </div>
+            <DdPageCard
+              :title="hobby.title"
+              :description="hobby.description || undefined"
+              :icon="hobby.icon_url"
+              variant="soft"
+              orientation="vertical"
+              :ui="{
+                title: 'text-xl font-bold',
+                description: 'text-md break-keep whitespace-pre-line leading-relaxed',
+                leadingIcon: 'w-8 h-8 text-primary-500 dark:text-primary-400',
+              }"
+            />
           </DdCarousel>
         </div>
 
         <div
           v-else
-          class="text-sm text-neutral-500 dark:text-neutral-500"
+          class="text-md text-neutral-700 dark:text-neutral-300"
         >
           {{ $t('dynamic.hobby.empty') }}
         </div>

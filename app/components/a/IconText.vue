@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     useIcon?: boolean
     useLink?: boolean
@@ -23,10 +23,18 @@ withDefaults(
     text: '',
   },
 )
+
+const containerClass = computed(() => {
+  const classes = [props.defaultClass]
+  if (props.customClass && props.customClass.trim()) {
+    classes.push(props.customClass)
+  }
+  return classes.join(' ')
+})
 </script>
 
 <template>
-  <div :class="`${defaultClass} ${customClass}`">
+  <div :class="containerClass">
     <Icon
       v-if="useIcon && iconName"
       :name="iconName"
@@ -41,9 +49,12 @@ withDefaults(
       {{ text }}
     </NuxtLink>
     <span
-      v-else
-      :class="textClass"
+      v-else-if="props.textClass && props.textClass.trim()"
+      :class="props.textClass"
     >
+      {{ text }}
+    </span>
+    <span v-else>
       {{ text }}
     </span>
   </div>

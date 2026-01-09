@@ -2,11 +2,14 @@
 const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: educationData } = await useFetch('/api/resume/education', {
   method: 'GET',
@@ -35,32 +38,29 @@ const formatDate = (dateString: string | null) => {
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.education.title') }}
         </h3>
-        <div
+        <DdPageGrid
           v-if="educationData && educationData.length > 0"
-          class="flex flex-col gap-y-4"
+          class="grid-cols-1 sm:grid-cols-1 lg:grid-cols-2"
         >
-          <div
+          <DdPageCard
             v-for="(education, index) in educationData"
             :key="index"
-            class="flex items-center gap-x-9 p-4 rounded-md border border-neutral-200 dark:border-neutral-700"
+            :title="education.school_name"
+            orientation="vertical"
+            variant="outline"
+            :ui="{
+              title: 'text-xl font-bold',
+              description: 'text-sm text-neutral-600 dark:text-neutral-400',
+            }"
           >
-            <NuxtImg
-              v-if="education.image_url"
-              :src="url(true, education.image_url.split('/public')[1] ?? '')"
-              class="w-24 h-auto object-cover rounded-md"
-              format="webp"
-              :quality="60"
-              :width="200"
-              :height="200"
-              sizes="96px"
-              :alt="education.school_name"
-              loading="lazy"
-            />
-            <div class="flex flex-col gap-y-4">
-              <div class="flex flex-col gap-y-1">
+            <template #description>
+              <div class="flex flex-col gap-y-2">
                 <div class="flex flex-wrap items-center gap-2">
-                  <span class="text-xl font-bold">
-                    {{ education.school_name }}
+                  <span
+                    v-if="education.major"
+                    class="text-lg font-semibold text-neutral-600 dark:text-neutral-400"
+                  >
+                    {{ education.major }}
                   </span>
                   <span
                     v-if="education.degree"
@@ -69,36 +69,42 @@ const formatDate = (dateString: string | null) => {
                     {{ education.degree }}
                   </span>
                   <DdSeparator
-                    v-if="isDesktopOrTablet"
+                    v-if="education.degree && isDesktopOrTablet"
                     orientation="vertical"
                     class="h-4"
                   />
-                  <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-500">
+                  <div class="flex flex-wrap items-center gap-2 text-md text-neutral-700 dark:text-neutral-300">
                     <span>{{ formatDate(education.start_date) }}</span>
                     <span>~</span>
                     <span>{{ education.end_date ? formatDate(education.end_date) : $t('dynamic.education.present') }}</span>
                   </div>
                 </div>
-                <span
-                  v-if="education.major"
-                  class="text-md text-neutral-500 dark:text-neutral-500"
+                <DdSeparator v-if="education.description" />
+                <p
+                  v-if="education.description"
+                  class="text-md text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed break-keep"
                 >
-                  {{ education.major }}
-                </span>
+                  {{ education.description }}
+                </p>
               </div>
-              <DdSeparator />
-              <p
-                v-if="education.description"
-                class="text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line"
-              >
-                {{ education.description }}
-              </p>
-            </div>
-          </div>
-        </div>
+            </template>
+            <NuxtImg
+              v-if="education.image_url"
+              :src="url(true, education.image_url.split('/public')[1] ?? '')"
+              class="w-full h-full object-contain rounded-md"
+              format="webp"
+              :quality="60"
+              :width="200"
+              :height="200"
+              sizes="96px"
+              :alt="education.school_name"
+              loading="lazy"
+            />
+          </DdPageCard>
+        </DdPageGrid>
         <div
           v-else
-          class="text-sm text-neutral-500 dark:text-neutral-500"
+          class="text-sm text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.education.empty') }}
         </div>

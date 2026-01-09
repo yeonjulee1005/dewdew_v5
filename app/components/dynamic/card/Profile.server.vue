@@ -2,11 +2,14 @@
 const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: profilesData } = await useFetch('/api/resume/profile', {
   method: 'GET',
@@ -52,25 +55,25 @@ const personalityData = computed(() => {
           class="flex flex-col items-start gap-y-2"
           :class="[isDesktopOrTablet ? 'max-w-[380px]' : 'max-w-full']"
         >
-          <h3 class="flex flex-wrap justify-start items-end gap-x-2">
+          <h4 class="flex flex-wrap justify-start items-end gap-x-2">
             <span class="text-2xl font-bold">
               {{ profilesData?.profile?.full_name }}
             </span>
             <span class="text-md font-normal text-neutral-400">
               {{ profilesData?.profile?.title }}
             </span>
-          </h3>
-          <h3 class="flex flex-wrap justify-start items-end gap-x-2">
+          </h4>
+          <div class="flex flex-wrap justify-start items-end gap-x-2">
             <span class="text-lg font-bold">
               재직중:
             </span>
             <span class="text-lg">
               {{ profilesData?.experience?.company_name }}
             </span>
-            <span class="text-lg text-amber-300 dark:text-amber-700">
+            <span class="text-lg text-amber-200 dark:text-amber-600">
               {{ profilesData?.experience?.position }}
             </span>
-          </h3>
+          </div>
           <DdSeparator class="my-2" />
           <AIconText
             use-icon
@@ -116,9 +119,9 @@ const personalityData = computed(() => {
             v-if="personalityData.soft_skills && personalityData.soft_skills.length > 0"
             class="flex flex-col gap-y-2"
           >
-            <h5 class="text-md font-semibold text-neutral-700 dark:text-neutral-300">
+            <h4 class="text-md font-semibold text-neutral-700 dark:text-neutral-300">
               {{ $t('dynamic.profile.softSkills') }}
-            </h5>
+            </h4>
             <div class="flex flex-wrap gap-2">
               <DdBadge
                 v-for="(skill, index) in personalityData.soft_skills"
@@ -150,28 +153,26 @@ const personalityData = computed(() => {
           v-if="personalityData.strengths && personalityData.strengths.length > 0"
           class="flex flex-col gap-y-2"
         >
-          <h5 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300">
+          <h4 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300">
             {{ $t('dynamic.profile.strengths') }}
-          </h5>
+          </h4>
           <div class="flex flex-col gap-y-3">
             <div
               v-for="(strength, index) in personalityData.strengths"
               :key="index"
               class="flex flex-col gap-y-1"
             >
-              <div class="flex items-center justify-between gap-x-2">
-                <div class="flex items-center gap-x-2">
-                  <span class="text-lg font-semibold">
-                    {{ strength.name }}
-                  </span>
-                </div>
+              <div class="flex items-baseline flex-wrap gap-x-4">
                 <span class="text-lg font-semibold text-primary-500">
                   {{ strength.score }}점
                 </span>
+                <span class="min-w-22 text-lg font-semibold">
+                  {{ strength.name }}
+                </span>
+                <span class="min-w-60 text-md break-keep text-neutral-600 dark:text-neutral-400">
+                  {{ strength.description }}
+                </span>
               </div>
-              <p class="text-sm break-keep text-neutral-600 dark:text-neutral-400">
-                {{ strength.description }}
-              </p>
             </div>
           </div>
         </div>

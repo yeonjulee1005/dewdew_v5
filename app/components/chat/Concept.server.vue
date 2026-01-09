@@ -3,6 +3,17 @@ const { url } = useImageStorage()
 
 const imageModalOpen = ref(false)
 const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.webp'))
+
+useHead({
+  link: [
+    {
+      rel: 'preload',
+      as: 'image',
+      href: selectedImageSrc.value,
+      fetchpriority: 'high',
+    },
+  ],
+})
 </script>
 
 <template>
@@ -15,13 +26,14 @@ const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.web
         :src="selectedImageSrc"
         class="w-full h-full object-cover rounded-md cursor-pointer"
         format="webp"
-        :quality="60"
+        :quality="50"
         :width="1024"
         :height="691"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
         alt="chatbot-architecture"
         loading="eager"
         fetchpriority="high"
+        preload
         @click="imageModalOpen = true"
       />
       <div class="space-y-1.5">
@@ -38,6 +50,7 @@ const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.web
     <DdModal
       v-model:open="imageModalOpen"
       :ui="{ content: 'max-w-dvw' }"
+      :title="$t('aiComponents.imageModal', '확대된 이미지')"
     >
       <template #body>
         <div class="flex justify-center items-center p-4">
