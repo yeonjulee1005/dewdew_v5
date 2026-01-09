@@ -23,15 +23,12 @@ const defaultAriaLabel = computed(() => {
   return props.ariaLabel ?? t('menu.changeTheme')
 })
 
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set() {
-    colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
-    track('theme_change', { theme: colorMode.preference })
-  },
-})
+const isDark = computed(() => colorMode.value === 'dark')
+
+const toggleTheme = () => {
+  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+  track('theme_change', { theme: colorMode.preference })
+}
 </script>
 
 <template>
@@ -42,6 +39,6 @@ const isDark = computed({
     :icon="isDark ? 'i-lucide-moon-star' : 'i-lucide-sun'"
     :icon-class="iconLeadClass"
     :aria-label="defaultAriaLabel"
-    @click="isDark = !isDark"
+    @click="toggleTheme"
   />
 </template>
