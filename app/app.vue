@@ -8,8 +8,11 @@ const { coords, resume } = useGeolocation()
 const appConfig = useAppConfig()
 const { meta } = useRoute()
 
-// Vercel 환경 체크 (템플릿에서 사용)
-const isVercel = import.meta.env.VERCEL
+const isVercel = ref(false)
+
+onMounted(() => {
+  isVercel.value = !!(import.meta.env.VERCEL === '1' || import.meta.env.VERCEL === true || import.meta.env.VERCEL)
+})
 
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
