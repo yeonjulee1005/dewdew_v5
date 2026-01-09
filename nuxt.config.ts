@@ -123,9 +123,11 @@ export default defineNuxtConfig({
     prefix: 'Dd',
   },
   runtimeConfig: {
+    nodeEnv: process.env.NODE_ENV ?? 'development',
     supabaseUrl: process.env.SUPABASE_URL ?? '',
     supabaseKey: process.env.SUPABASE_KEY ?? '',
     public: {
+      nodeEnv: process.env.NODE_ENV ?? 'development',
       appVersion: JSON.stringify(packageJson.version),
       siteUrl: isVercelProduction
         ? 'https://www.dewdew.dev'

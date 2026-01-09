@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { track } from '@vercel/analytics'
-import AThemeChange from '../a/ThemeChange.vue'
+import AThemeChange from '../a/ThemeChange.client.vue'
 
 const moveToMain = () => {
   track('move_to_main', { path: '/ai' })
