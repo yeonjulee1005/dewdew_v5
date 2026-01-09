@@ -80,6 +80,18 @@ export interface Hobby {
   created_at: string
 }
 
+export interface Certificate {
+  id: string
+  title: string
+  description: string | null
+  credential_url: string | null
+  expiry_date: string | null
+  issue_date: string | null
+  issuer: string | null
+  order_index: number | null
+  created_at: string
+}
+
 export interface SocialLink {
   id: string
   platform: string
@@ -134,6 +146,7 @@ export const ALLOWED_COMPONENTS = [
   'experience-timeline',
   'skill-card',
   'skill-radar',
+  'certification-card',
   'project-carousel',
   'education-card',
   'weaknesses-card',

@@ -2,11 +2,14 @@
 const { isMobile } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const { data: imageArchiveData } = await useFetch('/api/resume/imageArchive', {
   method: 'GET',
@@ -138,7 +141,7 @@ const isImageLoading = (imageUrl: string) => {
             :orientation="isMobile ? 'vertical' : 'horizontal'"
             :ui="{
               root: 'flex-col',
-              list: isMobile ? 'relative w-full flex p-1 group' : 'relative flex p-1 group',
+              list: isMobile ? 'relative w-full flex p-1 group' : 'relative flex p-1 group overflow-x-auto',
             }"
           >
             <template #content="{ item }">
@@ -151,6 +154,7 @@ const isImageLoading = (imageUrl: string) => {
                   ref="carousel"
                   v-slot="{ item: image }"
                   :items="getYearImages(item.value)"
+                  loop
                   :ui="{ item: 'basis-full' }"
                   @select="onSelect"
                 >
@@ -221,7 +225,12 @@ const isImageLoading = (imageUrl: string) => {
                 </DdCarousel>
 
                 <!-- 썸네일 -->
-                <div class="flex gap-1 overflow-x-auto py-2 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+                <div
+                  class="flex gap-1 overflow-x-auto py-2 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent"
+                  role="region"
+                  tabindex="0"
+                  :aria-label="$t('dynamic.image.thumbnailScrollableRegion', '이미지 썸네일 스크롤 영역')"
+                >
                   <div
                     v-for="(image, index) in getYearImages(item.value)"
                     :key="index"
@@ -244,7 +253,7 @@ const isImageLoading = (imageUrl: string) => {
 
               <div
                 v-else
-                class="text-md text-neutral-500 dark:text-neutral-500 text-center py-8"
+                class="text-md text-neutral-500 dark:text-neutral-400 text-center py-8"
               >
                 {{ $t('dynamic.image.empty') }}
               </div>
@@ -254,7 +263,7 @@ const isImageLoading = (imageUrl: string) => {
 
         <div
           v-else
-          class="text-md text-neutral-500 dark:text-neutral-500"
+          class="text-md text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.image.empty') }}
         </div>

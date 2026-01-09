@@ -47,6 +47,9 @@ export default {
     world: '듀듀월드',
     openMenu: '메뉴 열기',
     closeMenu: '메뉴 닫기',
+    changeTheme: '테마 변경',
+    changeLanguage: '언어 변경',
+    title: '메인 메뉴',
   },
   error: {
     title: '404',
@@ -67,6 +70,7 @@ export default {
     scrollRight: '추천 질문 오른쪽으로 스크롤',
     quickQuestion: '빠른 질문 선택',
     selectModel: 'AI 모델 선택',
+    imageModal: '확대된 이미지',
   },
   aiComponents: {
     concept: {
@@ -86,12 +90,14 @@ export default {
     skillRadar: '기술 별점 카드',
     projectCarousel: '프로젝트 캐러셀',
     educationCard: '학력 카드',
+    certificationCard: '자격증 카드',
     weaknessesCard: '단점 및 개선 영역 카드',
     hobbyCarousel: '취미 및 관심사 캐러셀',
     socialLinks: '소셜 링크',
     contactForm: '연락처 양식',
     imageCarousel: '이미지 캐러셀',
     threejsCarousel: 'Three.js 작업물 캐러셀',
+    imageModal: '확대된 이미지',
   },
   dynamic: {
     greeting: {
@@ -106,6 +112,8 @@ export default {
       current: '재직중',
       present: '현재',
       empty: '경력 정보가 없습니다.',
+      scrollableRegion: '경력 상세 정보 스크롤 영역',
+      carousel: '경력 캐러셀',
     },
     skill: {
       title: '기술 스택',
@@ -119,11 +127,17 @@ export default {
       highlights: '주요 특징',
       viewProject: '프로젝트 보기',
       viewGithub: 'GitHub 보기',
+      scrollableRegion: '프로젝트 상세 정보 스크롤 영역',
+      carousel: '프로젝트 캐러셀',
     },
     education: {
       title: '학력',
       present: '재학중',
       empty: '학력 정보가 없습니다.',
+    },
+    certification: {
+      title: '자격증',
+      empty: '자격증 정보가 없습니다.',
     },
     weaknesses: {
       title: '단점 및 개선 영역',
@@ -132,6 +146,7 @@ export default {
     hobby: {
       title: '취미 및 관심사',
       empty: '취미 정보가 없습니다.',
+      carousel: '취미 및 관심사 캐러셀',
     },
     social: {
       title: '소셜 링크',
@@ -140,10 +155,12 @@ export default {
     image: {
       archive: '이미지 아카이브',
       empty: '이미지 정보가 없습니다.',
+      thumbnailScrollableRegion: '이미지 썸네일 스크롤 영역',
     },
     threejs: {
       title: 'Three.js 작업물',
       empty: 'Three.js 작업물 정보가 없습니다.',
+      carousel: 'Three.js 작업물 캐러셀',
     },
     contact: {
       title: '메일 보내기',
@@ -162,6 +179,7 @@ export default {
     email: '이메일',
     message: '메시지',
     logo: 'Dewdew 로고',
+    weatherCarousel: '날씨 정보 캐러셀',
   },
   pwa: {
     readyPwa: 'PWA를 사용할 준비가 됬어요!',

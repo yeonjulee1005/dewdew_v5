@@ -11,6 +11,7 @@ import type {
   Education,
   Hobby,
   SocialLink,
+  Certificate,
   ImageArchive,
   Threejs,
 } from './types.ts'
@@ -153,6 +154,37 @@ export const buildEducationText = (education: Education[]): string => {
     }
 
     const requiredFields = ['school_name']
+
+    const parts: string[] = Object.entries(fieldMap)
+      .filter(([key, { value }]) => {
+        // 필수 필드는 항상 포함
+        if (requiredFields.includes(key)) {
+          return true
+        }
+        // 선택 필드는 값이 있을 때만 포함
+        return !!value
+      })
+      .map(([, { label, value }]) => `${label}: ${value}`)
+
+    return parts.join('\n')
+  }).join('\n\n')
+}
+
+/**
+ * 인증서 데이터를 텍스트로 변환
+ */
+export const buildCertificatesText = (certificates: Certificate[]): string => {
+  return certificates.map((certificate) => {
+    const fieldMap: Record<string, { label: string, value: string | null | undefined }> = {
+      title: { label: '인증서', value: certificate.title },
+      issuer: { label: '발급기관', value: certificate.issuer },
+      issue_date: { label: '발급일', value: certificate.issue_date },
+      expiry_date: { label: '만료일', value: certificate.expiry_date },
+      description: { label: '설명', value: certificate.description },
+      credential_url: { label: '인증서 URL', value: certificate.credential_url },
+    }
+
+    const requiredFields = ['title']
 
     const parts: string[] = Object.entries(fieldMap)
       .filter(([key, { value }]) => {
@@ -390,6 +422,18 @@ export const buildComprehensiveDocument = async (): Promise<string> => {
   if (education && education.length > 0) {
     parts.push('\n=== 학력 ===')
     parts.push(buildEducationText(education))
+  }
+
+  // 인증서
+  const { data: certificates } = await supabase
+    .schema('resume')
+    .from('certifications')
+    .select('*')
+    .eq('deleted', false)
+    .order('order_index', { ascending: false })
+  if (certificates && certificates.length > 0) {
+    parts.push('\n=== 인증서 ===')
+    parts.push(buildCertificatesText(certificates))
   }
 
   // 취미

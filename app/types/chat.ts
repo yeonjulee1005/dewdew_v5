@@ -6,13 +6,15 @@ export const ALLOWED_COMPONENTS = [
   'experience-timeline',
   'skill-card',
   'skill-radar',
+  'certification-card',
   'project-carousel',
   'education-card',
   'weaknesses-card',
   'hobby-carousel',
   'social-links',
-  'image-carousel',
   'contact-form',
+  'image-carousel',
+  'threejs-carousel',
   'chat-response',
 ] as const
 

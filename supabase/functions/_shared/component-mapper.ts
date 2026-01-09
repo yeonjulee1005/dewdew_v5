@@ -8,10 +8,10 @@ const matchKeywords = (text: string, keywords: string[]): boolean => {
 }
 
 // 카테고리 타입 정의
-type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'threejs' | 'weakness' | 'profile' | 'experience' | 'education' | 'hobby' | 'social' | 'fallback' | 'none'
+type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'threejs' | 'weakness' | 'profile' | 'experience' | 'education' | 'certification' | 'hobby' | 'social' | 'fallback' | 'none'
 
 // Fallback 컨텍스트 데이터 타입 정의
-type FallbackContextType = 'skills' | 'projects' | 'threejs' | 'experience' | 'profile' | 'education' | 'hobbies' | 'socialLinks' | 'images' | 'none'
+type FallbackContextType = 'skills' | 'projects' | 'threejs' | 'experience' | 'profile' | 'education' | 'certifications' | 'hobbies' | 'socialLinks' | 'images' | 'none'
 
 // 카테고리 감지 (우선순위 순서대로 체크)
 const detectCategory = (query: string, context: RAGContext): CategoryType => {
@@ -43,6 +43,11 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
   // 6. 학력 (경력보다 먼저 체크 - "학력이 어떻게 되요" 같은 경우 충돌 방지)
   if (matchKeywords(query, ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university', '학력이', '학력은', '학력이 어떻게', '학력이 어떻게 되', '학력이 어떻게 되요', '학력이 어떻게 되나'])) {
     return 'education'
+  }
+
+  // 6-1. 인증서 (학력과 취미 사이에 추가)
+  if (matchKeywords(query, ['인증서', '자격증', '인증', '증명서', '자격', 'certificate', 'certification', '자격증이', '자격증은', '인증서가', '인증서는', '보유한 자격증', '보유 자격증', '취득한 자격증'])) {
+    return 'certification'
   }
 
   // 7. 경력 (프로젝트보다 먼저 체크 - "최근 경력" 같은 경우 충돌 방지)
@@ -93,7 +98,7 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
   }
 
   // 14. Fallback: 컨텍스트 데이터 기반
-  if (context.skills?.length || context.projects?.length || context.threejs?.length || context.experience?.length || context.profile || context.education?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
+  if (context.skills?.length || context.projects?.length || context.threejs?.length || context.experience?.length || context.profile || context.education?.length || context.certificates?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
     return 'fallback'
   }
 
@@ -120,6 +125,9 @@ const detectFallbackContext = (context: RAGContext): FallbackContextType => {
   if (context.education && context.education.length > 0) {
     return 'education'
   }
+  if (context.certificates && context.certificates.length > 0) {
+    return 'certifications'
+  }
   if (context.hobbies && context.hobbies.length > 0) {
     return 'hobbies'
   }
@@ -138,17 +146,19 @@ const getFallbackComponentType = (context: RAGContext): ComponentType => {
 
   switch (fallbackContext) {
     case 'skills':
-      return 'skill-radar'
+      return Math.random() < 0.5 ? 'skill-radar' : 'skill-card'
     case 'projects':
       return 'project-carousel'
     case 'threejs':
       return 'threejs-carousel'
     case 'experience':
-      return 'experience-list'
+      return Math.random() < 0.5 ? 'experience-list' : 'experience-timeline'
     case 'profile':
       return 'profile-card'
     case 'education':
       return 'education-card'
+    case 'certifications':
+      return 'certification-card'
     case 'hobbies':
       return 'hobby-carousel'
     case 'socialLinks':
@@ -175,19 +185,12 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
     case 'image':
       return 'image-carousel'
     case 'skill': {
-      // 핵심 역량/선호 기술 관련 키워드가 있으면 skill-radar 우선 반환
-      if (matchKeywords(query, [
-        '핵심역량', '핵심 역량', 'core skills', 'core competency',
-        '어떤 기술을 사용하길 좋아해요', '어떤 기술을 사용하길 좋아해', '어떤 기술 좋아해', '어떤 기술 선호해',
-        '좋아하는 기술', '선호하는 기술', '자주 사용하는 기술', '주로 사용하는 기술',
-        '잘하는 기술', '강점 기술', '강점이 되는 기술', '특기 기술',
-        '어떤 기술 자주 써', '어떤 기술 주로 써', '어떤 기술 잘해', '어떤 기술 강점',
-        '능력치', '기술 수준', '기술 레벨',
-      ])) {
-        return 'skill-radar'
+      // 데이터가 있으면 skill-radar 또는 skill-card를 랜덤으로 반환
+      if (context.skills && context.skills.length > 0) {
+        return Math.random() < 0.5 ? 'skill-radar' : 'skill-card'
       }
-      // 데이터가 있으면 skill-card, 없으면 skill-radar
-      return (context.skills && context.skills.length > 0) ? 'skill-card' : 'skill-radar'
+      // 데이터가 없으면 skill-radar 반환
+      return 'skill-radar'
     }
     case 'project': {
       return 'project-carousel'
@@ -204,9 +207,11 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
         return matchKeywords(query, ['이력', '타임라인', 'timeline']) ? 'experience-timeline' : 'experience-list'
       }
       // 데이터가 없어도 키워드가 있으면 experience-list 반환
-      return 'experience-list'
+      return Math.random() < 0.5 ? 'experience-list' : 'experience-timeline'
     case 'education':
       return (context.education && context.education.length > 0) ? 'education-card' : 'chat-response'
+    case 'certification':
+      return (context.certificates && context.certificates.length > 0) ? 'certification-card' : 'chat-response'
     case 'hobby':
       return (context.hobbies && context.hobbies.length > 0) ? 'hobby-carousel' : 'chat-response'
     case 'social':

@@ -113,42 +113,6 @@ export type ResumeDatabase = {
         }
         Relationships: []
       }
-      component_types: {
-        Row: {
-          created_at: string | null
-          data_source: string | null
-          deleted: boolean | null
-          description: string | null
-          example_query: string | null
-          id: string
-          is_active: boolean | null
-          type_name: string
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          data_source?: string | null
-          deleted?: boolean | null
-          description?: string | null
-          example_query?: string | null
-          id?: string
-          is_active?: boolean | null
-          type_name: string
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          data_source?: string | null
-          deleted?: boolean | null
-          description?: string | null
-          example_query?: string | null
-          id?: string
-          is_active?: boolean | null
-          type_name?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
       document_embeddings: {
         Row: {
           content: string
@@ -593,7 +557,7 @@ export type ResumeDatabase = {
 
 type DatabaseWithoutInternals = Omit<ResumeDatabase, '__InternalSupabase'>
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof ResumeDatabase, 'public'>]
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof ResumeDatabase, 'resume'>]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends

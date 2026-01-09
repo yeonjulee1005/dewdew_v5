@@ -36,6 +36,9 @@ useSchemaFaq({
 
 <template>
   <div class="h-fit bg-white dark:bg-neutral-900">
+    <h1 class="sr-only">
+      {{ $t('pageTitle.ai') }}
+    </h1>
     <ChatContainer />
   </div>
 </template>

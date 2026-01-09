@@ -8,11 +8,13 @@ withDefaults(
     customClass?: string
     iconLeadClass?: string
     buttonVariant?: 'solid' | 'link' | 'outline' | 'soft' | 'subtle' | 'ghost'
+    ariaLabel?: string
   }>(),
   {
     customClass: '',
     iconLeadClass: 'w-8 h-8',
     buttonVariant: 'ghost',
+    ariaLabel: '',
   },
 )
 
@@ -33,6 +35,7 @@ const selectLocale = computed({
     :variant="buttonVariant"
     :icon="selectLocale === 'ko' ? 'i-circle-flags-kr' : 'i-circle-flags-us'"
     :icon-class="iconLeadClass"
+    :aria-label="ariaLabel"
     @click="selectLocale = selectLocale === 'ko' ? 'en' : 'ko'"
   />
 </template>

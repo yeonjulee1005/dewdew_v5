@@ -11,11 +11,14 @@ const { t } = useI18n()
 const { patterns } = useValidation()
 const emailRegex = patterns.email
 
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(),
+  {
+    title: '',
+  },
+)
 
 const schema = object({
   name: string()

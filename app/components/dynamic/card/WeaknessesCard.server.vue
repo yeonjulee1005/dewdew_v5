@@ -1,9 +1,11 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  title?: string
-}>(), {
-  title: '',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+  }>(), {
+    title: '',
+  },
+)
 
 const { data: profileData } = await useFetch('/api/resume/profile', {
   method: 'GET',
@@ -26,29 +28,27 @@ const { data: profileData } = await useFetch('/api/resume/profile', {
         <h3 class="text-2xl font-bold">
           {{ $t('dynamic.weaknesses.title') }}
         </h3>
-        <div
+        <DdPageGrid
           v-if="profileData?.profile?.weaknesses && profileData.profile.weaknesses.length > 0"
-          class="flex flex-col gap-y-3"
+          class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4"
         >
-          <div
+          <DdPageCard
             v-for="(weakness, index) in profileData.profile.weaknesses"
             :key="index"
-            class="flex items-start gap-x-3 p-3 rounded-md border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50"
-          >
-            <div class="shrink-0 mt-0.5">
-              <Icon
-                name="i-lucide-alert-circle"
-                class="w-5 h-5 text-amber-500 dark:text-amber-400"
-              />
-            </div>
-            <p class="text-base break-keep text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              {{ weakness }}
-            </p>
-          </div>
-        </div>
+            icon="i-lucide-alert-circle"
+            :title="`단점 및 개선 영역 ${index + 1}`"
+            :description="weakness"
+            variant="soft"
+            :ui="{
+              leadingIcon: 'w-5 h-5 text-rose-600 dark:text-rose-400',
+              title: 'text-xl font-bold text-neutral-800 dark:text-neutral-200',
+              description: 'text-md break-keep text-neutral-800 dark:text-neutral-200 leading-relaxed',
+            }"
+          />
+        </DdPageGrid>
         <div
           v-else
-          class="text-md text-neutral-500 dark:text-neutral-500"
+          class="text-md text-neutral-500 dark:text-neutral-400"
         >
           {{ $t('dynamic.weaknesses.empty') }}
         </div>
