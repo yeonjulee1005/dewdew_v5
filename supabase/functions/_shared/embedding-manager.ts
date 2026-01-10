@@ -11,7 +11,7 @@ import {
   buildSkillsText,
   buildProjectsText,
   buildEducationText,
-  buildCertificatesText,
+  buildCertificationsText,
   buildHobbiesText,
   buildSocialLinksText,
   buildImageArchiveText,
@@ -26,7 +26,7 @@ import type {
   Project,
   Education,
   Hobby,
-  Certificate,
+  Certification,
   SocialLink,
   ImageArchive,
   Threejs,
@@ -154,17 +154,17 @@ export const createEducationEmbeddings = async (education: Education[]): Promise
 /**
  * 인증서 임베딩 생성 및 저장
  */
-export const createCertificateEmbeddings = async (certificates: Certificate[]): Promise<void> => {
-  for (const cert of certificates) {
-    const content = buildCertificatesText([cert])
+export const createCertificationEmbeddings = async (certifications: Certification[]): Promise<void> => {
+  for (const certification of certifications) {
+    const content = buildCertificationsText([certification])
     const embedding = await getEmbedding(content, 'openai')
 
     await saveDocumentEmbedding(
-      'certificate',
-      cert.id,
+      'certifications',
+      certification.id,
       content,
       embedding,
-      { title: cert.title, issuer: cert.issuer },
+      { title: certification.title, issuer: certification.issuer },
     )
   }
 }
@@ -365,15 +365,15 @@ export const initializeAllEmbeddings = async (): Promise<void> => {
   }
 
   // 인증서
-  const { data: certificates } = await supabase
+  const { data: certifications } = await supabase
     .schema('resume')
     .from('certifications')
     .select('*')
     .eq('deleted', false)
     .order('order_index', { ascending: true })
-  if (certificates && certificates.length > 0) {
-    console.log(`Creating ${certificates.length} certificate embeddings...`)
-    await createCertificateEmbeddings(certificates)
+  if (certifications && certifications.length > 0) {
+    console.log(`Creating ${certifications.length} certification embeddings...`)
+    await createCertificationEmbeddings(certifications)
   }
 
   // 소셜 링크

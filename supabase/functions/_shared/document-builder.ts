@@ -11,7 +11,7 @@ import type {
   Education,
   Hobby,
   SocialLink,
-  Certificate,
+  Certification,
   ImageArchive,
   Threejs,
 } from './types.ts'
@@ -173,15 +173,15 @@ export const buildEducationText = (education: Education[]): string => {
 /**
  * 인증서 데이터를 텍스트로 변환
  */
-export const buildCertificatesText = (certificates: Certificate[]): string => {
-  return certificates.map((certificate) => {
+export const buildCertificationsText = (certifications: Certification[]): string => {
+  return certifications.map((certification: Certification) => {
     const fieldMap: Record<string, { label: string, value: string | null | undefined }> = {
-      title: { label: '인증서', value: certificate.title },
-      issuer: { label: '발급기관', value: certificate.issuer },
-      issue_date: { label: '발급일', value: certificate.issue_date },
-      expiry_date: { label: '만료일', value: certificate.expiry_date },
-      description: { label: '설명', value: certificate.description },
-      credential_url: { label: '인증서 URL', value: certificate.credential_url },
+      title: { label: '인증서', value: certification.title },
+      issuer: { label: '발급기관', value: certification.issuer },
+      issue_date: { label: '발급일', value: certification.issue_date },
+      expiry_date: { label: '만료일', value: certification.expiry_date },
+      description: { label: '설명', value: certification.description },
+      credential_url: { label: '인증서 URL', value: certification.credential_url },
     }
 
     const requiredFields = ['title']
@@ -425,15 +425,15 @@ export const buildComprehensiveDocument = async (): Promise<string> => {
   }
 
   // 인증서
-  const { data: certificates } = await supabase
+  const { data: certifications } = await supabase
     .schema('resume')
     .from('certifications')
     .select('*')
     .eq('deleted', false)
     .order('order_index', { ascending: false })
-  if (certificates && certificates.length > 0) {
+  if (certifications && certifications.length > 0) {
     parts.push('\n=== 인증서 ===')
-    parts.push(buildCertificatesText(certificates))
+    parts.push(buildCertificationsText(certifications))
   }
 
   // 취미
