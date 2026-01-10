@@ -80,7 +80,7 @@ export interface Hobby {
   created_at: string
 }
 
-export interface Certificate {
+export interface Certification {
   id: string
   title: string
   description: string | null
@@ -174,6 +174,8 @@ export interface RAGContext {
   education?: Education[] | null
   hobbies?: Hobby[] | null
   socialLinks?: SocialLink[] | null
+  certifications?: Certification[] | null
+  weaknesses?: string[] | null
   images?: ImageArchive[] | null
   imageYear?: number | null
   threejs?: Threejs[] | null

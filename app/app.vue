@@ -9,8 +9,9 @@ const beforeSend = (event: BeforeSendEvent) => {
 const { coords, resume } = useGeolocation()
 
 const appConfig = useAppConfig()
-const config = useRuntimeConfig()
 const { meta } = useRoute()
+
+const isVercelProduction = import.meta.env.VERCEL_ENV === 'production'
 
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
@@ -280,13 +281,13 @@ onUnmounted(() => {
       </NuxtLayout>
     </DdApp>
     <Analytics
-      debug
-      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+      :debug="!isVercelProduction"
+      :mode="isVercelProduction ? 'production' : 'development'"
       :before-send="beforeSend"
     />
     <SpeedInsights
-      debug
-      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+      :debug="!isVercelProduction"
+      :mode="isVercelProduction ? 'production' : 'development'"
     />
   </div>
 </template>

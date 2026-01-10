@@ -46,7 +46,7 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
   }
 
   // 6-1. 인증서 (학력과 취미 사이에 추가)
-  if (matchKeywords(query, ['인증서', '자격증', '인증', '증명서', '자격', 'certificate', 'certification', '자격증이', '자격증은', '인증서가', '인증서는', '보유한 자격증', '보유 자격증', '취득한 자격증'])) {
+  if (matchKeywords(query, ['인증서', '자격증', '인증', '증명서', '자격', 'certificate', 'certification', 'certifications', '자격증이', '자격증은', '인증서가', '인증서는', '보유한 자격증', '보유 자격증', '취득한 자격증'])) {
     return 'certification'
   }
 
@@ -98,7 +98,7 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
   }
 
   // 14. Fallback: 컨텍스트 데이터 기반
-  if (context.skills?.length || context.projects?.length || context.threejs?.length || context.experience?.length || context.profile || context.education?.length || context.certificates?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
+  if (context.skills?.length || context.projects?.length || context.threejs?.length || context.experience?.length || context.profile || context.education?.length || context.certifications?.length || context.hobbies?.length || context.socialLinks?.length || context.images?.length) {
     return 'fallback'
   }
 
@@ -125,7 +125,7 @@ const detectFallbackContext = (context: RAGContext): FallbackContextType => {
   if (context.education && context.education.length > 0) {
     return 'education'
   }
-  if (context.certificates && context.certificates.length > 0) {
+  if (context.certifications && context.certifications.length > 0) {
     return 'certifications'
   }
   if (context.hobbies && context.hobbies.length > 0) {
@@ -211,7 +211,7 @@ export const determineComponentType = (query: string, context: RAGContext): Comp
     case 'education':
       return (context.education && context.education.length > 0) ? 'education-card' : 'chat-response'
     case 'certification':
-      return (context.certificates && context.certificates.length > 0) ? 'certification-card' : 'chat-response'
+      return (context.certifications && context.certifications.length > 0) ? 'certification-card' : 'chat-response'
     case 'hobby':
       return (context.hobbies && context.hobbies.length > 0) ? 'hobby-carousel' : 'chat-response'
     case 'social':
