@@ -2,7 +2,11 @@
 import { Analytics, type BeforeSendEvent } from '@vercel/analytics/nuxt'
 
 const beforeSend = (event: BeforeSendEvent) => {
-  console.log('Sending event:', event)
+  // 개발 환경에서만 로그 출력
+  if (!isVercelProduction) {
+    console.log('Sending event:', event)
+  }
+  // 이벤트를 항상 반환 (필터링하지 않음)
   return event
 }
 
@@ -11,7 +15,8 @@ const { coords, resume } = useGeolocation()
 const appConfig = useAppConfig()
 const { meta } = useRoute()
 
-const isVercelProduction = import.meta.env.VERCEL_ENV === 'production'
+const isVercel = import.meta.env.VERCEL === '1'
+const isVercelProduction = import.meta.env.VERCEL_ENV === 'production' || (isVercel && import.meta.env.PROD)
 
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
@@ -282,7 +287,6 @@ onUnmounted(() => {
     </DdApp>
     <Analytics
       :debug="!isVercelProduction"
-      :mode="isVercelProduction ? 'production' : 'development'"
       :before-send="beforeSend"
     />
     <SpeedInsights
