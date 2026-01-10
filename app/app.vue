@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { Analytics } from '@vercel/analytics/nuxt'
+import { Analytics, type BeforeSendEvent } from '@vercel/analytics/nuxt'
+
+const beforeSend = (event: BeforeSendEvent) => {
+  console.log('Sending event:', event)
+  return event
+}
 
 const { coords, resume } = useGeolocation()
 
 const appConfig = useAppConfig()
-const config = useRuntimeConfig()
 const { meta } = useRoute()
+
+const isVercelProduction = import.meta.env.VERCEL_ENV === 'production'
 
 const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
@@ -263,22 +269,25 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <DdApp :toaster="appConfig.toaster">
-    <VitePwaManifest />
-    <NuxtLayout>
-      <NuxtLoadingIndicator
-        color="repeating-linear-gradient(to right,#f59e42 0%,#fbbf24 100%)"
-        :height="5"
-      />
-      <NuxtPage />
-    </NuxtLayout>
+  <div>
+    <DdApp :toaster="appConfig.toaster">
+      <VitePwaManifest />
+      <NuxtLayout>
+        <NuxtLoadingIndicator
+          color="repeating-linear-gradient(to right,#f59e42 0%,#fbbf24 100%)"
+          :height="5"
+        />
+        <NuxtPage />
+      </NuxtLayout>
+    </DdApp>
     <Analytics
-      debug
-      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+      :debug="!isVercelProduction"
+      :mode="isVercelProduction ? 'production' : 'development'"
+      :before-send="beforeSend"
     />
     <SpeedInsights
-      debug
-      :mode="config.nodeEnv === 'production' ? 'production' : 'development'"
+      :debug="!isVercelProduction"
+      :mode="isVercelProduction ? 'production' : 'development'"
     />
-  </DdApp>
+  </div>
 </template>

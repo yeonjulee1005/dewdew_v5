@@ -3,6 +3,7 @@ import IntroTypeTitle from '../components/intro/TypeTitle.server.vue'
 import IntroTransitionMessage from '../components/intro/TransitionMessage.server.vue'
 import IntroController from '../components/intro/Controller.client.vue'
 
+const { idle, reset } = useIdle(60 * 1000)
 const { t } = useI18n()
 const route = useRoute()
 
@@ -43,17 +44,10 @@ useSchemaFaq({
   ],
 })
 
-let redirectTimer: ReturnType<typeof setTimeout> | null = null
-
-onMounted(() => {
-  redirectTimer = setTimeout(() => {
+watch(idle, (idleValue) => {
+  if (idleValue) {
     navigateTo('/ai')
-  }, 20000)
-})
-
-onUnmounted(() => {
-  if (redirectTimer) {
-    clearTimeout(redirectTimer)
+    reset()
   }
 })
 </script>
