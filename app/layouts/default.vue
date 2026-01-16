@@ -22,7 +22,7 @@ const handlePagination = (path: string, external: boolean = false) => {
 
 <template>
   <div
-    class="w-dvw xl:w-[1024px] flex flex-col"
+    class="relative w-dvw xl:w-[1024px] flex flex-col"
     :class="path === '/ai' ? 'h-screen' : 'min-h-screen'"
   >
     <header class="h-20 flex items-center justify-between gap-x-4 px-4 shrink-0">
@@ -40,6 +40,7 @@ const handlePagination = (path: string, external: boolean = false) => {
       />
       <div class="flex-auto" />
       <AForecast v-if="isDesktopOrTablet" />
+      <APresence v-if="isDesktopOrTablet" />
       <DdSeparator
         v-if="isDesktopOrTablet"
         orientation="vertical"
@@ -94,6 +95,7 @@ const handlePagination = (path: string, external: boolean = false) => {
           </template>
           <template #body>
             <div class="h-full flex flex-col space-y-4">
+              <APresence v-if="isMobileOrTablet" />
               <AForecast
                 v-if="isMobileOrTablet"
                 class="my-4"
