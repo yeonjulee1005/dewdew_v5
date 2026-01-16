@@ -29,6 +29,8 @@
     "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase-data.ts",
     "supabase:deploy-rag-portfolio": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc",
     "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc",
+    "partykit:dev": "partykit dev",
+    "partykit:deploy": "partykit deploy",
     "fonts:download": "node scripts/download-fonts.js"
   },
   "dependencies": {
@@ -45,7 +47,6 @@
     "@nuxtjs/color-mode": "4.0.0",
     "@nuxtjs/device": "3.2.4",
     "@nuxtjs/seo": "3.2.2",
-    "@unhead/vue": "^2.0.3",
     "@vercel/analytics": "^1.6.1",
     "@vercel/speed-insights": "^1.3.1",
     "ai": "^5.0.106",
@@ -56,10 +57,10 @@
     "typescript": "^5.6.3",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3",
-    "yup": "^1.7.1"
+    "yup": "^1.7.1",
+    "partysocket": "1.1.10"
   },
   "devDependencies": {
-    "@egjs/flicking-plugins": "^4.7.1",
     "@emailjs/browser": "^4.4.1",
     "@giscus/vue": "^3.1.1",
     "@iconify-json/lucide": "^1.2.75",
@@ -74,6 +75,7 @@
     "@vite-pwa/nuxt": "^1.1.0",
     "@vueuse/nuxt": "^14.0.0",
     "dayjs-nuxt": "^2.1.11",
+    "partykit": "^0.0.115",
     "pinia-plugin-persistedstate": "^4.7.1",
     "sass": "^1.94.2",
     "stylelint": "^16.26.0",
