@@ -137,6 +137,7 @@ export default defineNuxtConfig({
       emailJsKey: process.env.EMAILJS_KEY,
       emailJSsTemplate: process.env.EMAILJS_TEMPLATE,
       dataPortalApiKey: process.env.DATA_PORTAL_API_KEY,
+      partykitHost: process.env.PARTYKIT_HOST,
     },
   },
   sourcemap: {
