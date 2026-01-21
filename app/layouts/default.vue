@@ -55,10 +55,8 @@ const handlePagination = (path: string, external: boolean = false) => {
           :overlay="false"
           :close="false"
           :title="$t('menu.title')"
-          :content="{
-            'aria-label': slideoverTitle,
-            'aria-labelledby': 'slideover-title',
-          } as any"
+          :aria-label="slideoverTitle"
+          aria-labelledby="slideover-title"
           :ui="{
             header: 'h-20 flex items-center',
             close: 'top-6 right-6',
@@ -95,10 +93,13 @@ const handlePagination = (path: string, external: boolean = false) => {
           </template>
           <template #body>
             <div class="h-full flex flex-col space-y-4">
-              <APresence v-if="isMobileOrTablet" />
               <AForecast
                 v-if="isMobileOrTablet"
                 class="my-4"
+              />
+              <APresence
+                v-if="isMobileOrTablet"
+                class="w-fit mb-3"
               />
               <DdSeparator v-if="isMobileOrTablet" />
               <div class="space-y-2">
