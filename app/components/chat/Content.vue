@@ -328,8 +328,8 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="flex flex-col overflow-hidden bg-white dark:bg-neutral-900 mt-8"
-    :class="[isMobile ? 'h-[calc(100vh-180px)]' : 'h-[calc(100vh-320px)]']"
+    class="flex flex-col overflow-hidden bg-white dark:bg-neutral-900"
+    :class="[isMobile ? 'h-[calc(100vh-148px)]' : 'h-[calc(100vh-320px)]']"
   >
     <!-- 메시지 영역 -->
     <div
@@ -362,7 +362,7 @@ onUnmounted(() => {
           },
         }"
         :ui="{
-          autoScroll: isMobile ? 'bottom-28' : 'bottom-54',
+          autoScroll: isMobile ? 'bottom-46' : 'bottom-54',
         }"
       >
         <!-- Assistant 메시지 Avatar -->
@@ -510,7 +510,8 @@ onUnmounted(() => {
             :ui="{
               base: 'bg-neutral-200/50 dark:bg-neutral-800/50 w-fit',
               placeholder: 'text-neutral-500 dark:text-neutral-400',
-              itemLabel: 'break-keep whitespace-normal',
+              value: 'break-keep whitespace-break-spaces',
+              itemLabel: 'break-keep whitespace-normal truncate',
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
             }"
             @update:model-value="handleSelectChange"
@@ -534,7 +535,7 @@ onUnmounted(() => {
           </div>
         </template>
         <template #footer>
-          <div class="flex items-center gap-1.5">
+          <div class="flex items-center flex-wrap gap-1.5">
             <DdSelect
               :model-value="selectedModel.model"
               :items="availableModels"
@@ -564,7 +565,12 @@ onUnmounted(() => {
                 />
               </template>
             </DdSelect>
-            <span class="text-md text-neutral-500 dark:text-neutral-400">
+            <span
+              :class="[
+                isMobile ? 'text-sm' : 'text-md',
+                'text-neutral-500 dark:text-neutral-400',
+              ]"
+            >
               {{ selectedModel.label }}
             </span>
           </div>
