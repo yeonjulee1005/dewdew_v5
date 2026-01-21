@@ -1,5 +1,7 @@
 import PartySocket from 'partysocket'
 
+const config = useRuntimeConfig()
+
 /**
  * Presence 메시지 타입 정의
  */
@@ -13,7 +15,7 @@ type PresenceMessage = {
  */
 const RECONNECT_DELAY = 3000 // 3초
 const MAX_RECONNECT_ATTEMPTS = 5 // 최대 재연결 시도 횟수
-const DEFAULT_PARTYKIT_HOST = 'dewdew-v5.yeonjulee1005.partykit.dev'
+const DEFAULT_PARTYKIT_HOST = config.public.partykitHost
 
 /**
  * PartyKit을 사용한 실시간 접속자 수 추적 Composable
