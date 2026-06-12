@@ -223,6 +223,30 @@ export default defineNuxtConfig({
     },
     build: {
       rollupOptions: {
+        treeshake: {
+          // unified/remark/rehype/micromark are pure utilities — no true side effects
+          // Allows Rollup to tree-shake the markdown parser when parseMarkdown() isn't called
+          moduleSideEffects: (id) => {
+            const pureParsers = [
+              '/unified/',
+              '/remark-parse/',
+              '/remark-rehype/',
+              '/micromark',
+              '/mdast-',
+              '/hast-util',
+              '/hast-to-',
+              '/unist-',
+              '/vfile',
+              '/remark-mdc/',
+              '/remark-stringify/',
+              '/rehype-',
+              '@nuxtjs/mdc/dist/runtime/parser',
+              '@nuxtjs/mdc/dist/runtime/stringify',
+            ]
+            if (pureParsers.some(p => id.includes(p))) return false
+            return true
+          },
+        },
         output: {
           manualChunks(id) {
             if (id.includes('@egjs/flicking')) return 'carousel'
