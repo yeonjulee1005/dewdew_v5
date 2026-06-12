@@ -2,18 +2,7 @@
 import { track } from '@vercel/analytics'
 import type { ResumeDatabase } from '~/types/supabase-resume'
 
-const { t } = useI18n()
-const route = useRoute()
-
-useHead({
-  title: t('pageTitle.threejs'),
-  meta: [
-    { name: 'description', content: t('seoDescription.threejs') },
-    { name: 'og:title', content: t('seoTitle.threejs') },
-    { name: 'og:description', content: t('seoDescription.threejs') },
-    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
-  ],
-})
+usePageSeo('threejs')
 
 definePageMeta({
   layout: 'default',

@@ -4,6 +4,7 @@ import Giscus from '@giscus/vue'
 
 const { t } = useI18n()
 const route = useRoute()
+const site = useSiteConfig()
 
 // 블로그 포스트의 첫 번째 이미지 URL 추출
 const extractFirstImage = (blog: any): string | null => {
@@ -16,9 +17,9 @@ const extractFirstImage = (blog: any): string | null => {
       return blog.image
     }
     if (blog.image.startsWith('/')) {
-      return `https://www.dewdew.dev${blog.image}`
+      return `${site.url}${blog.image}`
     }
-    return `https://www.dewdew.dev/${blog.image}`
+    return `${site.url}/${blog.image}`
   }
 
   // body에서 첫 번째 이미지 찾기
@@ -32,9 +33,9 @@ const extractFirstImage = (blog: any): string | null => {
             return src
           }
           if (src.startsWith('/')) {
-            return `https://www.dewdew.dev${src}`
+            return `${site.url}${src}`
           }
-          return `https://www.dewdew.dev/${src}`
+          return `${site.url}/${src}`
         }
         if (child.children && Array.isArray(child.children)) {
           const found = findImageInChildren(child.children)
@@ -172,9 +173,11 @@ const { data: navigation } = await useAsyncData('navigation', () => {
 })
 
 // og:image URL 계산
+const pageUrl = computed(() => `${site.url}${route.path}`)
+
 const ogImage = computed(() => {
   const imageUrl = extractFirstImage(blog.value)
-  return imageUrl || 'https://www.dewdew.dev/assets/dewdew.webp'
+  return imageUrl || `${site.url}/image/web-app-manifest-512x512.png`
 })
 
 // SEO 메타 태그 설정 (blog가 로드된 후에 호출)
@@ -185,7 +188,7 @@ useHead({
       { name: 'description', content: blog.value?.description || t('seoDescription.blog') },
       { property: 'og:title', content: blog.value?.title || t('seoTitle.blog') },
       { property: 'og:description', content: blog.value?.description || t('seoDescription.blog') },
-      { property: 'og:url', content: `https://www.dewdew.dev${route.path}` },
+      { property: 'og:url', content: pageUrl.value },
       { property: 'og:type', content: 'article' },
       { property: 'og:image', content: ogImage.value },
       { property: 'og:image:width', content: '1200' },
@@ -210,6 +213,12 @@ useHead({
 
     return baseMeta
   }),
+  link: computed(() => [
+    { rel: 'canonical', href: pageUrl.value },
+    { rel: 'alternate', hreflang: 'x-default', href: pageUrl.value },
+    { rel: 'alternate', hreflang: 'ko', href: pageUrl.value },
+    { rel: 'alternate', hreflang: 'en', href: pageUrl.value },
+  ]),
 })
 
 useSchemaFaq({
