@@ -41,14 +41,19 @@ async function main() {
   await mkdir(fontDir, { recursive: true })
 
   const downloads = [
-    // SUIT Variable Font (JSDelivr CDN) - 가장 간단함
+    // Anton Regular woff2 (Google Fonts CSS2 API → Latin subset)
+    {
+      url: 'https://fonts.gstatic.com/s/anton/v25/1Ptgg87LROyAm3K9-C8.woff2',
+      dest: join(fontDir, 'Anton-Regular.woff2'),
+      name: 'Anton Regular (woff2)',
+    },
+    // SUIT Variable Font (JSDelivr CDN)
     {
       url: 'https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.woff2',
       dest: join(fontDir, 'SUIT-Variable.woff2'),
       name: 'SUIT Variable',
     },
     // Source Code Pro Variable Fonts
-    // GitHub에서 직접 다운로드 (woff2 변환 필요할 수 있음)
     {
       url: 'https://github.com/adobe-fonts/source-code-pro/releases/download/2.042R-u/1.062R-i/1.026R-vf/SourceCodeVariable-Roman.otf',
       dest: join(fontDir, 'SourceCodePro-VariableFont_wght.otf'),
@@ -72,19 +77,15 @@ async function main() {
 
   console.log('\n폰트 다운로드 완료!')
   console.log('\n다음 폰트들은 수동으로 다운로드해야 합니다:')
-  console.log('1. Anton: https://fonts.google.com/specimen/Anton')
-  console.log('   - "Download family" 버튼 클릭')
-  console.log('   - 압축 해제 후 Regular.woff2 파일을 public/fonts/Anton-Regular.woff2로 복사')
-  console.log('\n2. BIZ UDPGothic: https://fonts.google.com/specimen/BIZ+UDPGothic')
+  console.log('1. BIZ UDPGothic: https://fonts.google.com/specimen/BIZ+UDPGothic')
   console.log('   - "Download family" 버튼 클릭')
   console.log('   - 압축 해제 후 Regular.woff2와 Bold.woff2 파일을 public/fonts/로 복사')
-  console.log('\n3. Source Code Pro (woff2 변환 필요 시):')
+  console.log('\n2. Source Code Pro (woff2 변환 필요 시):')
   console.log('   - 다운로드된 .otf 파일을 https://cloudconvert.com/otf-to-woff2 에서 변환')
   console.log('   - 또는 https://github.com/adobe-fonts/source-code-pro 에서 woff2 버전 확인')
   console.log('\n필요한 파일 목록:')
   console.log('  - public/fonts/SourceCodePro-VariableFont_wght.woff2')
   console.log('  - public/fonts/SourceCodePro-Italic-VariableFont_wght.woff2')
-  console.log('  - public/fonts/Anton-Regular.woff2')
   console.log('  - public/fonts/BIZUDPGothic-Regular.woff2')
   console.log('  - public/fonts/BIZUDPGothic-Bold.woff2')
   console.log('  - public/fonts/SUIT-Variable.woff2')

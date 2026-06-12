@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-time',
-    'nuxt-aeo',
+    'nuxt-ai-ready',
     'dayjs-nuxt',
     'pinia-plugin-persistedstate',
     '@nuxtjs/seo',
@@ -49,21 +49,18 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'ko' },
       link: [
-        { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
-        { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
-        // 폰트 preload (렌더링 차단 최소화)
+        // Pretendard 동적 서브셋 (unicode-range 분할 로딩 — 2MB full font 대비 대폭 절감)
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css',
+          crossorigin: 'anonymous',
+        },
+        // Anton preload
         {
           rel: 'preload',
           as: 'font',
           type: 'font/woff2',
-          href: '/fonts/PretendardVariable.woff2',
-          crossorigin: 'anonymous',
-        },
-        {
-          rel: 'preload',
-          as: 'font',
-          type: 'font/ttf',
-          href: '/fonts/Anton-Regular.ttf',
+          href: '/fonts/Anton-Regular.woff2',
           crossorigin: 'anonymous',
         },
       ],
@@ -80,6 +77,7 @@ export default defineNuxtConfig({
     url: isVercelProduction
       ? 'https://www.dewdew.dev'
       : (process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:4110'),
+    defaultLocale: 'ko',
     indexable: true,
   },
   colorMode: {
@@ -156,9 +154,6 @@ export default defineNuxtConfig({
       // 블로그 포스트를 자동으로 크롤링하여 prerender
       crawlLinks: true,
     },
-    experimental: {
-      wasm: true,
-    },
     routeRules: {
       // 홈페이지 정적 렌더링 (프로덕션에서만)
       '/': {
@@ -228,14 +223,58 @@ export default defineNuxtConfig({
     },
     build: {
       rollupOptions: {
+        treeshake: {
+          // unified/remark/rehype/micromark are pure utilities — no true side effects
+          // Allows Rollup to tree-shake the markdown parser when parseMarkdown() isn't called
+          moduleSideEffects: (id) => {
+            const pureParsers = [
+              '/unified/',
+              '/remark-parse/',
+              '/remark-rehype/',
+              '/micromark',
+              '/mdast-',
+              '/hast-util',
+              '/hast-to-',
+              '/unist-',
+              '/vfile',
+              '/remark-mdc/',
+              '/remark-stringify/',
+              '/rehype-',
+              '@nuxtjs/mdc/dist/runtime/parser',
+              '@nuxtjs/mdc/dist/runtime/stringify',
+            ]
+            if (pureParsers.some(p => id.includes(p))) return false
+            return true
+          },
+        },
         output: {
           manualChunks(id) {
             if (id.includes('@egjs/flicking')) return 'carousel'
-            if (id.includes('shiki')) return 'syntax-highlight'
+            if (id.includes('shiki') || id.includes('syntax-highlight')) return 'syntax-highlight'
             if (id.includes('@supabase')) return 'supabase'
             if (id.includes('motion')) return 'animation'
-            if (id.includes('syntax-highlight')) return 'syntax-highlight'
-            if (id.includes('entry')) return 'entry'
+            if (id.includes('three') || id.includes('Three')) return 'threejs'
+            if (id.includes('@giscus')) return 'giscus'
+            // Separate heavy markdown parser (unified/remark/rehype) from MDC components
+            if (
+              id.includes('/unified/')
+              || id.includes('/remark-parse/')
+              || id.includes('/remark-rehype/')
+              || id.includes('/remark-mdc/')
+              || id.includes('/micromark')
+              || id.includes('/mdast-')
+              || id.includes('/hast-util')
+              || id.includes('/hast-to-')
+              || id.includes('/unist-')
+              || id.includes('/vfile')
+              || (id.includes('@nuxtjs/mdc') && (id.includes('/parser') || id.includes('/stringify')))
+            ) return 'markdown-parser'
+            if (id.includes('@nuxt/content') || id.includes('@nuxtjs/mdc')) return 'content'
+            if (id.includes('dayjs')) return 'dayjs'
+            if (id.includes('typeit')) return 'typeit'
+            if (id.includes('partysocket')) return 'partykit'
+            if (id.includes('@emailjs')) return 'emailjs'
+            if (id.includes('yup')) return 'form-validation'
           },
         },
       },
@@ -254,69 +293,26 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
   },
-  aeo: {
-    schemas: [
-      {
-        type: 'WebSite',
-        name: 'Dewdew Portfolio',
-        description: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
-        logo: '/image/web-app-manifest-192x192.png',
-        url: '/',
-        publisher: {
-          name: 'Yeonju Lee',
-          url: 'https://www.dewdew.dev',
+  aiReady: {
+    contentSignal: {
+      aiTrain: false,
+      search: true,
+      aiInput: true,
+    },
+    llmsTxt: {
+      sections: [
+        {
+          title: 'Pages',
+          links: [
+            { title: 'Home', href: '/', description: 'Portfolio intro and navigation' },
+            { title: 'AI Chat', href: '/ai', description: 'RAG-based AI chat about resume data' },
+            { title: 'Three.js', href: '/threejs', description: 'WebGL works gallery' },
+            { title: 'Blog', href: '/blog', description: 'Reflection and tech blog posts' },
+          ],
         },
-        copyright: '2025 Yeonju Lee',
-        keywords: ['Dewdew', 'Software Engineer', 'Nuxt4', 'Frontend Development'],
-        category: 'Technology',
-        genre: 'Technology',
-      },
-      {
-        type: 'AI Chat to her resume data',
-        name: 'Dewdew AI Chat to her resume data',
-        description: 'Dewdew AI Chat to her resume data is a chatbot that answers questions about her resume data.',
-        logo: '/image/web-app-manifest-192x192.png',
-        url: '/ai',
-        publisher: {
-          name: 'Yeonju Lee',
-          url: 'https://www.dewdew.dev',
-        },
-        copyright: '2025 Yeonju Lee',
-        keywords: ['Dewdew', 'AI Chat', 'Nuxt4', 'Frontend Development'],
-        category: 'Technology',
-        genre: 'Technology',
-      },
-      {
-        type: 'Introduction',
-        name: 'Dewdew AI Components',
-        description: 'Dewdew AI Components is a list of server components displayed when answering Dewdew AI.',
-        logo: '/image/web-app-manifest-192x192.png',
-        url: '/ai/components',
-        publisher: {
-          name: 'Yeonju Lee',
-          url: 'https://www.dewdew.dev',
-        },
-        copyright: '2025 Yeonju Lee',
-        keywords: ['Dewdew', 'Software Engineer', 'Nuxt4', 'Frontend Development'],
-        category: 'Technology',
-        genre: 'Technology',
-      },
-      {
-        type: 'Blog',
-        name: 'Dewdew Blog',
-        description: 'Dewdew Blog is a blog that writes about her life and reflection.',
-        logo: '/image/web-app-manifest-192x192.png',
-        url: '/blog',
-        publisher: {
-          name: 'Yeonju Lee',
-          url: 'https://www.dewdew.dev',
-        },
-        copyright: '2025 Yeonju Lee',
-        keywords: ['Dewdew', 'Blog', 'Reflection', 'Life'],
-        category: 'Technology',
-        genre: 'Technology',
-      },
-    ],
+      ],
+      notes: 'AI component demo at /ai/components is excluded from search indexing.',
+    },
   },
   dayjs: {
     locales: ['ko'],
@@ -328,7 +324,7 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     },
-    checker: true,
+    checker: false,
   },
   i18n: {
     langDir: 'locales',
@@ -371,15 +367,11 @@ export default defineNuxtConfig({
     },
   },
   ogImage: {
-    fonts: [
-      {
-        name: 'Anton',
-        weight: '400',
-        path: '/fonts/Anton-Regular.ttf',
-      },
-    ],
-    defaults: {
-      renderer: 'satori',
+    zeroRuntime: true,
+    compatibility: {
+      dev: { takumi: false, browser: false },
+      runtime: { takumi: false, browser: false },
+      prerender: { takumi: false, browser: false },
     },
   },
   pinia: {
@@ -585,19 +577,27 @@ export default defineNuxtConfig({
     },
   },
   robots: {
-    groups: [
-      {
-        userAgent: '*',
-        allow: '/',
-        contentUsage: {
-          'bots': 'y',
-          'train-ai': 'y',
-        },
-        contentSignal: {
-          'ai-train': 'yes',
-          'search': 'yes',
-        },
-      },
+    disallow: ['/ai/components'],
+  },
+  schemaOrg: {
+    identity: {
+      type: 'Person',
+      name: 'Yeonju Lee',
+      url: 'https://www.dewdew.dev',
+      sameAs: [
+        'https://twitter.com/dewdew',
+        'https://github.com/yeonjulee1005',
+        'https://www.linkedin.com/in/yeonjulee1005/',
+      ],
+    },
+  },
+  sitemap: {
+    exclude: ['/ai/components'],
+    urls: [
+      { loc: '/', priority: 1, changefreq: 'monthly' },
+      { loc: '/ai', priority: 0.9, changefreq: 'monthly' },
+      { loc: '/threejs', priority: 0.8, changefreq: 'monthly' },
+      { loc: '/blog', priority: 0.8, changefreq: 'weekly' },
     ],
   },
   stylelint: {

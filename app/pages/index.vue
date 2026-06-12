@@ -4,18 +4,7 @@ import IntroTransitionMessage from '../components/intro/TransitionMessage.server
 import IntroController from '../components/intro/Controller.client.vue'
 
 const { idle, reset } = useIdle(60 * 1000)
-const { t } = useI18n()
-const route = useRoute()
-
-useHead({
-  title: t('seoTitle.intro'),
-  meta: [
-    { name: 'description', content: t('seoDescription.intro') },
-    { name: 'og:title', content: t('seoTitle.intro') },
-    { name: 'og:description', content: t('seoDescription.intro') },
-    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
-  ],
-})
+usePageSeo('index')
 
 definePageMeta({
   layout: 'center',

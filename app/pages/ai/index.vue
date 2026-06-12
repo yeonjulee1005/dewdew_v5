@@ -1,16 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
-const route = useRoute()
-
-useHead({
-  title: t('pageTitle.ai'),
-  meta: [
-    { name: 'description', content: t('seoDescription.ai') },
-    { name: 'og:title', content: t('seoTitle.ai') },
-    { name: 'og:description', content: t('seoDescription.ai') },
-    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
-  ],
-})
+usePageSeo('ai')
 
 definePageMeta({
   layout: 'default',

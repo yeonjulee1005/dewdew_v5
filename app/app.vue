@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Analytics, type BeforeSendEvent } from '@vercel/analytics/nuxt'
+import { Analytics, type BeforeSendEvent } from '@vercel/analytics/vue'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 
 const beforeSend = (event: BeforeSendEvent) => {
   // 개발 환경에서만 로그 출력
@@ -13,13 +14,13 @@ const beforeSend = (event: BeforeSendEvent) => {
 const { coords, resume } = useGeolocation()
 
 const appConfig = useAppConfig()
-const { meta } = useRoute()
 
 const isVercel = import.meta.env.VERCEL === '1'
 const isVercelProduction = import.meta.env.VERCEL_ENV === 'production' || (isVercel && import.meta.env.PROD)
 
-const { t } = useI18n()
 const { genDateFormat } = useDateFormatter()
+
+useAppSeo()
 
 const { geoX, geoY, latitude, longitude, forecastHour, currentLocationCode } = storeToRefs(useLocWeatherStore())
 const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
@@ -27,46 +28,10 @@ const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
 const { filteredLocations } = useKorLocation()
 const { dfsXyConvert } = useTranslateCoords()
 
-const seoTitle = t('seoTitle.intro')
-const seoDescription = t('seoDescription.intro')
-const seoImage = '/assets/dewdew.webp'
-const route = useRoute()
-
 useHead({
-  title: meta.title as string,
-  titleTemplate: (title?: string | undefined): string | null => {
-    // index 페이지 처리
-    if (route.path === '/') {
-      const isValidTitle = title
-        && title !== t('pageTitle.dewdew')
-        && (title === seoTitle || title.includes('Software Engineer'))
-
-      return isValidTitle ? title : seoTitle
-    }
-
-    // title이 없는 경우 기본값 반환
-    if (!title) {
-      return t('pageTitle.dewdew').concat(' | ', '메인')
-    }
-
-    const isTranslatedString = !title.startsWith('pageTitle.') && !title.includes('pageTitle.')
-    const translatedTitle = isTranslatedString
-      ? title
-      : t(title.startsWith('pageTitle.') ? title : `pageTitle.${title.toLowerCase()}`, title)
-
-    // seoTitle.intro를 포함하는 경우 그대로 반환
-    if (translatedTitle.includes(seoTitle) || translatedTitle === seoTitle) {
-      return translatedTitle
-    }
-
-    return t('pageTitle.dewdew').concat(' | ', translatedTitle)
-  },
   link: [
-    { rel: 'dns-prefetch', href: 'https://api.dewdew.dev' },
-    { rel: 'preconnect', href: 'https://api.dewdew.dev', crossorigin: 'anonymous' },
     { rel: 'manifest', href: '/manifest.webmanifest' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/image/apple-touch-icon.png' },
-    { rel: 'icon', type: 'image/svg+xml', href: '/image/favicon.svg' },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/image/favicon-96x96.png' },
     { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
@@ -75,30 +40,6 @@ useHead({
     { name: 'naver-site-verification', content: '7c406de71b03c1e444a4fe2630a29bd7a8e17559' },
     { property: 'imagetoolbar', content: 'no' },
   ],
-})
-
-useSeoMeta({
-  charset: 'utf-8',
-  formatDetection: 'telephone=no',
-  viewport: 'width=device-width, initial-scale=1',
-  title: (meta.title as string) || seoTitle,
-  author: 'Dewdew',
-  description: (meta.description as string) || seoDescription,
-  themeColor: '#6a64c7',
-  msapplicationTileColor: '#6a64c7',
-  ogTitle: (meta.title as string) || seoTitle,
-  ogDescription: (meta.description as string) || seoDescription,
-  ogImage: seoImage,
-  ogImageType: 'image/png',
-  ogType: 'website',
-  ogImageWidth: '1200',
-  ogImageHeight: '630',
-  twitterCard: 'summary_large_image',
-  twitterTitle: (meta.title as string) || seoTitle,
-  twitterDescription: (meta.description as string) || seoDescription,
-  twitterImage: seoImage,
-  twitterSite: '@dewdew',
-  twitterCreator: '@dewdew',
 })
 
 // 위치 변화 임계값 및 상태 관리
@@ -285,13 +226,15 @@ onUnmounted(() => {
         <NuxtPage />
       </NuxtLayout>
     </DdApp>
-    <Analytics
-      :debug="!isVercelProduction"
-      :before-send="beforeSend"
-    />
-    <SpeedInsights
-      :debug="!isVercelProduction"
-      :mode="isVercelProduction ? 'production' : 'development'"
-    />
+    <ClientOnly>
+      <Analytics
+        :debug="!isVercelProduction"
+        :before-send="beforeSend"
+      />
+      <SpeedInsights
+        :debug="!isVercelProduction"
+        :mode="isVercelProduction ? 'production' : 'development'"
+      />
+    </ClientOnly>
   </div>
 </template>

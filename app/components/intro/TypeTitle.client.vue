@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import TypeIt from 'typeit'
-
 const props = defineProps<{
   title: string[]
 }>()
@@ -8,16 +6,16 @@ const props = defineProps<{
 const helloIntroTitle = ref<HTMLElement | null>(null)
 const isMounted = ref(false)
 
-const typeItHello = () => {
-  if (helloIntroTitle.value) {
-    new TypeIt(helloIntroTitle.value, {
-      strings: props.title,
-      lifeLike: true,
-      speed: 50,
-      deleteSpeed: 30,
-      loop: true,
-    }).go()
-  }
+const typeItHello = async () => {
+  if (!helloIntroTitle.value) return
+  const { default: TypeIt } = await import('typeit')
+  new TypeIt(helloIntroTitle.value, {
+    strings: props.title,
+    lifeLike: true,
+    speed: 50,
+    deleteSpeed: 30,
+    loop: true,
+  }).go()
 }
 
 onMounted(() => {
