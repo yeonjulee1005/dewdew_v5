@@ -223,30 +223,6 @@ export default defineNuxtConfig({
     },
     build: {
       rollupOptions: {
-        treeshake: {
-          // unified/remark/rehype/micromark are pure utilities — no true side effects
-          // Allows Rollup to tree-shake the markdown parser when parseMarkdown() isn't called
-          moduleSideEffects: (id) => {
-            const pureParsers = [
-              '/unified/',
-              '/remark-parse/',
-              '/remark-rehype/',
-              '/micromark',
-              '/mdast-',
-              '/hast-util',
-              '/hast-to-',
-              '/unist-',
-              '/vfile',
-              '/remark-mdc/',
-              '/remark-stringify/',
-              '/rehype-',
-              '@nuxtjs/mdc/dist/runtime/parser',
-              '@nuxtjs/mdc/dist/runtime/stringify',
-            ]
-            if (pureParsers.some(p => id.includes(p))) return false
-            return true
-          },
-        },
         output: {
           manualChunks(id) {
             if (id.includes('@egjs/flicking')) return 'carousel'
@@ -255,20 +231,6 @@ export default defineNuxtConfig({
             if (id.includes('motion')) return 'animation'
             if (id.includes('three') || id.includes('Three')) return 'threejs'
             if (id.includes('@giscus')) return 'giscus'
-            // Separate heavy markdown parser (unified/remark/rehype) from MDC components
-            if (
-              id.includes('/unified/')
-              || id.includes('/remark-parse/')
-              || id.includes('/remark-rehype/')
-              || id.includes('/remark-mdc/')
-              || id.includes('/micromark')
-              || id.includes('/mdast-')
-              || id.includes('/hast-util')
-              || id.includes('/hast-to-')
-              || id.includes('/unist-')
-              || id.includes('/vfile')
-              || (id.includes('@nuxtjs/mdc') && (id.includes('/parser') || id.includes('/stringify')))
-            ) return 'markdown-parser'
             if (id.includes('@nuxt/content') || id.includes('@nuxtjs/mdc')) return 'content'
             if (id.includes('dayjs')) return 'dayjs'
             if (id.includes('typeit')) return 'typeit'
