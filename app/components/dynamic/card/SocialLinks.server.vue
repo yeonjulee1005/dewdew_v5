@@ -19,9 +19,18 @@ const { data: socialLinksData } = await useFetch('/api/resume/socialLinks', {
   dedupe: 'defer',
 })
 
+const toSocialLink = (url: string) => {
+  if (url.includes('@') && !/^[a-z][a-z0-9+.-]*:/i.test(url)) {
+    return `mailto:${url}`
+  }
+
+  return url
+}
+
 const clickSocialLink = (url: string) => {
-  track('social_link_click', { social: url })
-  navigateTo(url, { external: true, open: { target: '_blank' } })
+  const href = toSocialLink(url)
+  track('social_link_click', { social: href })
+  navigateTo(href, { external: true, open: { target: '_blank' } })
 }
 </script>
 
@@ -47,7 +56,7 @@ const clickSocialLink = (url: string) => {
             :key="index"
             :title="link.platform"
             :icon="link.icon_url ?? `i-logos-${link.platform.toLowerCase()}-icon`"
-            :to="link.url"
+            :to="toSocialLink(link.url)"
             target="_blank"
             variant="outline"
             :ui="{

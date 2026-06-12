@@ -1,0 +1,26 @@
+---
+description: Nuxt 4 디렉터리·코딩 컨벤션
+globs: "{app/**/*,server/**/*,nuxt.config.ts,i18n/**/*}"
+alwaysApply: false
+---
+
+# Nuxt 4 컨벤션
+
+참고: https://nuxt.com/docs/4.x/getting-started/introduction
+
+## 구조
+
+- `app/pages/` — 라우팅
+- `app/components/` — 컴포넌트 (auto-import, `Dd` prefix UI)
+- `app/composables/`, `app/stores/` — auto-import
+- `server/api/` — Nitro API
+- `i18n/locales/*.json` — i18n (ko/en 동시 반영)
+
+## 원칙
+
+- `<script setup lang="ts">` + Composition API
+- Nuxt composable auto-import (`useFetch`, `useI18n`, `useHead`)
+- SSR: `.client.vue` suffix, `import.meta.client` 구분
+- 패키지 매니저: **bun**
+- Vercel analytics: `@vercel/*/vue` import (nuxt/runtime 금지 — node-server preview 이슈)
+- SEO·AEO: `.cursor/rules/seo-nuxt.mdc` 및 `/seo-*` 커맨드 참고

@@ -17,21 +17,11 @@ const ImageCarousel = defineAsyncComponent(() => import('~/components/dynamic/ca
 const ThreejsCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ThreejsCarousel.server.vue'))
 const ContactForm = defineAsyncComponent(() => import('~/components/dynamic/card/ContactForm.client.vue'))
 
-const { t } = useI18n()
-const route = useRoute()
-
-useHead({
-  title: t('pageTitle.aiComponents'),
-  meta: [
-    { name: 'description', content: t('seoDescription.aiComponents') },
-    { name: 'og:title', content: t('seoTitle.aiComponents') },
-    { name: 'og:description', content: t('seoDescription.aiComponents') },
-    { name: 'og:url', content: `https://www.dewdew.dev${route.path}` },
-  ],
-})
+usePageSeo('aiComponents')
 
 definePageMeta({
   layout: 'default',
+  robots: 'noindex, nofollow',
 })
 
 useSchemaFaq({

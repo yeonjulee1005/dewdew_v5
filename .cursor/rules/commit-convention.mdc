@@ -1,0 +1,25 @@
+---
+description: 커밋 메시지 prefix·한글 작성 규칙
+alwaysApply: true
+---
+
+# 커밋 컨벤션
+
+**형식**: `<prefix>: <메시지>` (한글)
+
+| Prefix | 설명 |
+|--------|------|
+| `feat` | 새 기능 |
+| `fix` | 버그 수정 |
+| `docs` | 문서 |
+| `style` | 포맷만 변경 |
+| `modify` | 기존 기능 추가·변경 |
+| `refactor` | 리팩토링 |
+| `test` | 테스트 |
+| `chore` | 빌드·패키지 |
+| `remove` | 삭제 |
+| `rename` | 이름 변경 |
+
+예: `feat: 균일도 테스트 UI 추가`
+
+커밋 전: `bunx nuxi typecheck` → `bun run lint` 통과 필수.

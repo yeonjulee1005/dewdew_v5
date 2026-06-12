@@ -7,6 +7,28 @@ export default {
     threejs: 'Dewdew, Three.js Jobs',
     blog: 'Blog',
   },
+  seo: {
+    index: {
+      title: 'Dewdew | Software Engineer Yeonju Lee',
+      description: 'Dewdew is a website of Software Engineer Yeonju Lee. I am interested in frontend development (Nuxt4) and have contributed to the Nuxt4 framework ecosystem.',
+    },
+    ai: {
+      title: 'Dewdew, Ask Dewdew AI',
+      description: 'Ask me about me based on LLM+RAG+AGENT.',
+    },
+    aiComponents: {
+      title: 'Dewdew AI Components',
+      description: 'The list of server components displayed when answering Dewdew AI.',
+    },
+    threejs: {
+      title: 'A list of WebGL works created with Three.js.',
+      description: 'A list of WebGL works created with Three.js.',
+    },
+    blog: {
+      title: 'Dewdew, Reflect on the past.',
+      description: 'Reflect on the past by looking back on the past.',
+    },
+  },
   seoTitle: {
     intro: 'Dewdew | Software Engineer Yeonju Lee',
     ai: 'Dewdew, Ask Dewdew AI',

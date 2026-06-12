@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TimelineItem } from '@nuxt/ui'
-import type { ResumeDatabase } from '~/types/database.types'
 
 const { t } = useI18n()
 
@@ -41,7 +40,7 @@ const timelineItems = computed(() => {
     return []
   }
 
-  return experienceData.value.map((experience: ResumeDatabase['resume']['Tables']['experience']['Row'], index: number) => ({
+  return experienceData.value.map((experience, index) => ({
     date: formatDateRange(experience.start_date, experience.end_date, index === 0),
     title: experience.company_name,
     description: experience.description,

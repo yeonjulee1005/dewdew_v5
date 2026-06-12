@@ -7,6 +7,28 @@ export default {
     threejs: 'Dewdew, Three.js Jobs',
     blog: '회고 블로그',
   },
+  seo: {
+    index: {
+      title: 'Dewdew | Software Engineer 이연주',
+      description: 'Dewdew는 소프트웨어 엔지니어 이연주의 웹페이지 입니다. 제품에 대한 많은 고민과 주도적인 개발을 지향하고 있습니다. Nuxt4 프레임워크 생태계에 기여하고 있습니다.',
+    },
+    ai: {
+      title: 'Dewdew, AI에게 묻다',
+      description: 'LLM+RAG+AGENT 기반의 AI에게 저에 대해서 물어보세요.',
+    },
+    aiComponents: {
+      title: 'Dewdew AI에서 사용한 컴포넌트 목록입니다',
+      description: 'Dewdew AI 답변시 표시되는 서버컴포넌트 리스트입니다.',
+    },
+    threejs: {
+      title: 'Three.js 를 이용한 WebGL 작업물에 대한 목록입니다.',
+      description: 'Three.js 를 이용한 WebGL 작업물에 대한 목록입니다.',
+    },
+    blog: {
+      title: 'Dewdew, 회고하다.',
+      description: '지난 일들을 되돌아보며, 생각하다.',
+    },
+  },
   seoTitle: {
     intro: 'Dewdew | Software Engineer 이연주',
     ai: 'Dewdew, AI에게 묻다',
