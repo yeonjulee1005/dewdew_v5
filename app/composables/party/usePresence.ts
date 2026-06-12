@@ -1,4 +1,4 @@
-import PartySocket from 'partysocket'
+import type { PartySocket } from 'partysocket'
 
 const config = useRuntimeConfig()
 
@@ -154,7 +154,7 @@ export const usePresence = () => {
   /**
    * PartyKit 서버에 연결
    */
-  const connect = () => {
+  const connect = async () => {
     // 이미 연결되어 있으면 중복 연결 방지
     if (socket.value?.readyState === WebSocket.OPEN) {
       return
@@ -174,17 +174,18 @@ export const usePresence = () => {
         socket.value.close()
       }
 
-      // PartySocket은 호스트명만 받고, 프로토콜은 자동으로 결정됨
+      // 초기 번들에 포함되지 않도록 동적 import
+      const { default: PartySocket } = await import('partysocket')
       socket.value = new PartySocket({
         host: partyHost,
         room: roomId,
       })
 
       // 이벤트 리스너 등록
-      socket.value.addEventListener('open', handleOpen)
-      socket.value.addEventListener('message', handleMessage)
-      socket.value.addEventListener('error', handleError)
-      socket.value.addEventListener('close', handleClose)
+      socket.value?.addEventListener('open', handleOpen)
+      socket.value?.addEventListener('message', handleMessage)
+      socket.value?.addEventListener('error', handleError)
+      socket.value?.addEventListener('close', handleClose)
     }
     catch (error) {
       console.error('Failed to create PartyKit connection:', error)
