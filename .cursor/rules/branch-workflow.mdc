@@ -1,0 +1,17 @@
+---
+description: feature → develop → main 브랜치 워크플로
+alwaysApply: true
+---
+
+# 브랜치 워크플로
+
+```
+feature/*  →  develop  →  main
+```
+
+- 로컬 PR은 **항상 `feature/*` → `develop`**
+- PR/MR 생성 시 `main`/`main`을 타겟으로 두지 않는다
+- diff base·리뷰 기준: **`develop`**
+- `develop`/`main`에서 직접 작업 중이면 feature 브랜치 생성을 안내한다
+
+브랜치명: `feature/<짧은-설명>`

@@ -1,0 +1,61 @@
+# Nuxt SEO·AEO 컨벤션
+
+참고: [Google SEO 기본 가이드](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko), [Google AI 최적화 가이드](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide?hl=ko), [Nuxt SEO](https://nuxtseo.com/)
+
+## Google 원칙 (요약)
+
+- **필수**: 크롤링·색인 가능, 유용한 콘텐츠, 메타·canonical, 페이지 경험, 의미론적 HTML
+- **AI 검색**: 기존 SEO·RAG 기반 — AEO/GEO 해킹(키워드 스팸, 인위적 청킹, 가짜 언급) 금지
+- **llms.txt**: Google 기준 필수 아님. HTML 콘텐츠 품질 우선, AI Ready는 보조
+
+## 모듈 매핑
+
+| 모듈 | 역할 | 설정 위치 |
+|------|------|-----------|
+| `@nuxtjs/robots` | `/robots.txt`, env별 차단 | `nuxt.config.ts` `robots` |
+| `@nuxtjs/sitemap` | `/sitemap.xml` | `nuxt.config.ts` `sitemap` |
+| `nuxt-seo-utils` | canonical, OG, site 메타 | `site` + `useAppSeo` |
+| `nuxt-schema-org` | JSON-LD | `useAppSeo`, 페이지별 |
+| `nuxt-ai-ready` | `llms.txt`, `.md` | `nuxt.config.ts` `aiReady` |
+
+## 페이지 정책
+
+- **Index**: `/`, `/guide`
+- **Noindex**: `/testing` — `definePageMeta({ robots: 'noindex, nofollow' })` + sitemap·robots exclude
+
+## i18n (`strategy: no_prefix`)
+
+- 동일 URL, locale cookie 전환 → `html lang`은 `useI18n().locale` 동기화
+- hreflang: `x-default`, `ko`, `en` 동일 URL
+
+## 앱 WebView 분기
+
+```
+SEO 메타 / Schema / Sitemap / Robots / AI Ready → 항상 적용
+AdSense / 광고 메타                         → !isApp (APP_Monitors UA)
+useAppSeo에서 window / isPwa 사용          → 금지 (SSR)
+```
+
+## 구현 규칙
+
+- canonical·OG URL: `useSiteConfig().url` + `route.path` (절대 URL)
+- `charset`: `utf-8` (utf-16 금지)
+- `public/_robots.txt` 사용 금지 — `@nuxtjs/robots` 단일 소스
+- 페이지 SEO: `i18n/locales` `seo.*` + `usePageSeo()` 또는 `definePageMeta`
+- i18n 키 `ko.json` / `en.json` 동시 반영
+
+## 검증 체크리스트
+
+1. `bun run build` 성공
+2. `/robots.txt`, `/sitemap.xml`, `/llms.txt` 응답 확인
+3. `/testing` noindex, sitemap 미포함
+4. `bunx nuxi typecheck` + `bun run lint`
+
+## 커맨드
+
+- `/seo-audit` — 감사만
+- `/seo-page` — 페이지 단위
+- `/seo-config` — 전역 설정
+- `/seo-apply` — 일괄 적용
+
+Skill: `.claude/skills/seo-optimizer/SKILL.md`
