@@ -192,7 +192,7 @@ export default {
     send: 'Send',
     regenerate: 'Regenerate',
     uv: 'UV',
-    diffusion: 'Diffusion',
+    visibility: 'Visibility',
     name: 'Name',
     email: 'Email',
     message: 'Message',

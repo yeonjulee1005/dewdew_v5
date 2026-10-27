@@ -37,10 +37,8 @@ dewdew_v5/
 │   │   └── intro/                # 인트로 애니메이션 컴포넌트
 │   ├── composables/
 │   │   ├── chat/                 # useChat (스트리밍 처리)
-│   │   ├── data/                 # 위치·날씨 데이터
-│   │   ├── forecast/             # 좌표 변환
+│   │   ├── data/                 # 날씨 매핑 데이터
 │   │   ├── formatting/           # 날짜·데이터 포맷팅
-│   │   ├── query/                # 쿼리 유틸
 │   │   ├── ui/                   # 이미지·색상·UI 헬퍼
 │   │   └── validation/           # 입력 유효성 검사
 │   ├── layouts/                  # center, default
@@ -53,6 +51,7 @@ dewdew_v5/
 ├── server/api/                   # Nuxt Server API 엔드포인트
 │   ├── chat/                     # AI 채팅 API
 │   ├── menu/                     # 메뉴 API
+│   ├── weather/                  # 기상청 API허브 관측자료 프록시
 │   └── resume/                   # 이력서 데이터 API
 ├── supabase/functions/           # Supabase Edge Functions
 │   ├── _shared/                  # 공유 모듈 (RAG, AI provider 등)
@@ -99,6 +98,7 @@ bun install
 SUPABASE_URL=
 SUPABASE_KEY=
 OPENAI_API_KEY=
+KMA_APIHUB_KEY=      # 기상청 API허브 (날씨 위젯, 서버 전용)
 ```
 
 ### 개발 서버
@@ -145,6 +145,7 @@ bun run lint:fix
 | `bun run partykit:dev` | PartyKit 로컬 서버 |
 | `bun run partykit:deploy` | PartyKit 배포 |
 | `bun run fonts:download` | 폰트 다운로드 |
+| `bun run kma:stations` | 기상청 관측 지점정보 갱신 (`server/data/kmaStations.json`) |
 | `bun run version:patch` | YYMM 패치 버전 bump |
 | `bun run version:minor` | YYMM 마이너 버전 bump |
 | `bun run version:major` | YYMM 메이저 버전 bump |

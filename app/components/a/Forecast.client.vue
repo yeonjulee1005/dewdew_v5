@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import type { UvData, AirDiffusionData, WeatherFirstData, WeatherSecondData } from '@/types/weather'
+import type { UvData, VisibilityData, WeatherFirstData, WeatherSecondData } from '@/types/weather'
 
-const { uvData, airDiffusionData, weatherFirstData, weatherSecondData } = storeToRefs(useLocWeatherStore())
-const { airDiffusionColor, uvColor, humidityColor, weatherColor, temperatureColor } = useColorUtils()
+const { uvData, visibilityData, weatherFirstData, weatherSecondData } = storeToRefs(useLocWeatherStore())
+const { visibilityColor, uvColor, humidityColor, weatherColor, temperatureColor } = useColorUtils()
 
 // 캐러셀 아이템 배열 생성
 const carouselItems = computed(() => {
-  const items: Array<{ type: string, data: UvData | AirDiffusionData | WeatherFirstData | WeatherSecondData }> = []
+  const items: Array<{ type: string, data: UvData | VisibilityData | WeatherFirstData | WeatherSecondData }> = []
 
   if (uvData.value) {
     items.push({ type: 'uv', data: uvData.value })
   }
 
-  if (airDiffusionData.value) {
-    items.push({ type: 'airDiffusion', data: airDiffusionData.value })
+  if (visibilityData.value) {
+    items.push({ type: 'visibility', data: visibilityData.value })
   }
 
   if (weatherFirstData.value) {
@@ -67,25 +67,25 @@ const carouselItems = computed(() => {
       </div>
     </div>
 
-    <!-- 대기정체 데이터 -->
+    <!-- 시정 데이터 -->
     <div
-      v-else-if="item.type === 'airDiffusion'"
+      v-else-if="item.type === 'visibility'"
       class="h-10 w-full flex items-center"
     >
       <div class="flex gap-4">
         <AIconText
           :use-icon="false"
-          :text="(item.data as AirDiffusionData).location"
+          :text="(item.data as VisibilityData).location"
         />
         <AIconText
           :use-icon="false"
-          :text="$t('texts.diffusion')"
+          :text="$t('texts.visibility')"
         />
         <AIconText
-          :custom-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex) || undefined"
-          :icon-name="(item.data as AirDiffusionData).diffusion.split(',')[1]"
-          :text-class="airDiffusionColor((item.data as AirDiffusionData).diffusionIndex) || undefined"
-          :text="(item.data as AirDiffusionData).diffusion.split(',')[0]"
+          :custom-class="visibilityColor((item.data as VisibilityData).visibilityLevel) || undefined"
+          :icon-name="(item.data as VisibilityData).visibility.split(',')[1]"
+          :text-class="visibilityColor((item.data as VisibilityData).visibilityLevel) || undefined"
+          :text="`${(item.data as VisibilityData).visibility.split(',')[0]} ${(item.data as VisibilityData).visibilityKm}km`"
         />
       </div>
     </div>
@@ -97,6 +97,7 @@ const carouselItems = computed(() => {
     >
       <div class="flex gap-4">
         <AIconText
+          v-if="(item.data as WeatherFirstData).sky"
           :custom-class="weatherColor((item.data as WeatherFirstData).sky.split(',')[0] ?? '') || undefined"
           :icon-name="(item.data as WeatherFirstData).sky.split(',')[1]"
           :text="(item.data as WeatherFirstData).sky.split(',')[0]"
@@ -107,6 +108,7 @@ const carouselItems = computed(() => {
           :text="`${(item.data as WeatherFirstData).t1h} ℃`"
         />
         <AIconText
+          v-if="(item.data as WeatherFirstData).wsd"
           custom-class="gap-2"
           :icon-name="(item.data as WeatherFirstData).vec.split(',')[1]"
           :text="(item.data as WeatherFirstData).wsd"

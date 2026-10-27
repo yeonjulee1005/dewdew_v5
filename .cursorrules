@@ -184,7 +184,7 @@
   - `OPENAI_API_KEY` (AI 채팅 기능용)
 - 선택 변수:
   - `EMAILJS_KEY`, `EMAILJS_TEMPLATE` (연락 폼용)
-  - `DATA_PORTAL_API_KEY` (기상청 API용)
+  - `KMA_APIHUB_KEY` (기상청 API허브 인증키, 서버 전용)
   - `NUXT_PUBLIC_SITE_URL` (SEO용)
 
 ### 빌드 및 배포

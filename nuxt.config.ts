@@ -123,6 +123,8 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV ?? 'development',
     supabaseUrl: process.env.SUPABASE_URL ?? '',
     supabaseKey: process.env.SUPABASE_KEY ?? '',
+    // 기상청 API허브 인증키 (서버 전용 — 클라이언트 노출 금지)
+    kmaApihubKey: process.env.KMA_APIHUB_KEY ?? '',
     public: {
       nodeEnv: process.env.NODE_ENV ?? 'development',
       appVersion: JSON.stringify(packageJson.version),
@@ -133,7 +135,6 @@ export default defineNuxtConfig({
       supabaseKey: process.env.SUPABASE_KEY ?? '',
       emailJsKey: process.env.EMAILJS_KEY,
       emailJSsTemplate: process.env.EMAILJS_TEMPLATE,
-      dataPortalApiKey: process.env.DATA_PORTAL_API_KEY,
       partykitHost: process.env.PARTYKIT_HOST,
     },
   },

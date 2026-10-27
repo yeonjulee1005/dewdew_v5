@@ -196,7 +196,7 @@ export default {
     send: '보내기',
     regenerate: '색상 생성',
     uv: '자외선',
-    diffusion: '대기정체',
+    visibility: '시정',
     name: '이름',
     email: '이메일',
     message: '메시지',

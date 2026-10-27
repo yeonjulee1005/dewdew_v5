@@ -33,7 +33,8 @@
     "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc",
     "partykit:dev": "partykit dev",
     "partykit:deploy": "partykit deploy",
-    "fonts:download": "node scripts/download-fonts.js"
+    "fonts:download": "node scripts/download-fonts.js",
+    "kma:stations": "node --env-file=.env scripts/fetch-kma-stations.js"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.103",
