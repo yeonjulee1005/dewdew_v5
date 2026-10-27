@@ -3,6 +3,7 @@
 /**
  * 기상청 API허브 지점정보 다운로드 스크립트
  * 지상(ASOS)·자외선 관측 지점의 위경도를 받아 server/data/kmaStations.json에 저장합니다.
+ * 방재(AWS) 지점은 관측값이 아닌 지역명(시·군·구) 표시용으로만 사용합니다. (ASOS보다 지점 밀도가 높음)
  * 지점 목록은 거의 바뀌지 않으므로 런타임에 호출하지 않고 정적 JSON으로 사용합니다.
  *
  * 사용법: node --env-file=.env scripts/fetch-kma-stations.js
@@ -22,6 +23,7 @@ const STATION_INFO_URL = 'https://apihub.kma.go.kr/api/typ01/url/stn_inf.php'
 /**
  * stn_inf.php 응답(고정폭 텍스트)을 지점 배열로 변환
  * 컬럼: STN_ID LON LAT STN_SP HT ... STN_AD STN_KO STN_EN FCT_ID LAW_ID BASIN LAW_ADDR
+ * AWS는 HT_WD·LAU_ID 컬럼이 추가되어 지점명 위치가 다름
  */
 const parseStations = (text, type) => {
   return text
@@ -31,13 +33,14 @@ const parseStations = (text, type) => {
       const tokens = line.trim().split(/\s+/)
       const [id, lon, lat] = tokens
 
-      // SFC: 법정동 주소(시·도 시·군·구)를 지역명으로 사용
+      // SFC·AWS: 법정동 주소(시·도 시·군·구)를 지역명으로 사용
       // UV: 주소가 없으므로 지점명(STN_KO)을 사용
-      const name = type === 'SFC' ? tokens[10] : tokens[5]
+      const hasAddress = type !== 'UV'
+      const name = { SFC: tokens[10], AWS: tokens[8], UV: tokens[5] }[type]
       // 영문명(STN_EN)이 비어 있는 지점이 있어 법정동코드(10자리) 다음 BASIN 뒤부터를 주소로 사용
       // 산지 지점은 주소 앞에 '(산지)' 접두어가 붙어 있어 제거
       const lawIdIndex = tokens.findIndex((token, index) => index > 10 && /^\d{10}$/.test(token))
-      const address = type === 'SFC' && lawIdIndex > 0
+      const address = hasAddress && lawIdIndex > 0
         ? tokens.slice(lawIdIndex + 2).join(' ').replace(/^\(.+?\)/, '').split(' ')
         : []
 
@@ -78,15 +81,16 @@ const main = async () => {
     process.exit(1)
   }
 
-  const [sfc, uv] = await Promise.all([
+  const [sfc, uv, aws] = await Promise.all([
     fetchStations('SFC', authKey),
     fetchStations('UV', authKey),
+    fetchStations('AWS', authKey),
   ])
 
   await mkdir(dirname(outputPath), { recursive: true })
-  await writeFile(outputPath, `${JSON.stringify({ sfc, uv }, null, 2)}\n`)
+  await writeFile(outputPath, `${JSON.stringify({ sfc, uv, aws }, null, 2)}\n`)
 
-  console.log(`✅ 지상 ${sfc.length}개 / 자외선 ${uv.length}개 지점 저장: ${outputPath}`)
+  console.log(`✅ 지상 ${sfc.length}개 / 자외선 ${uv.length}개 / AWS ${aws.length}개 지점 저장: ${outputPath}`)
 }
 
 main().catch((error) => {

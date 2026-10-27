@@ -1,6 +1,7 @@
 /**
  * 현재 위치 기준 기상 관측 정보
  * 가장 가까운 지상관측(ASOS)·자외선 관측 지점의 최신 자료를 반환합니다.
+ * 지역명은 지점 밀도가 높은 방재(AWS) 지점 주소를 사용합니다. (ASOS 지점 주소는 실제 위치와 구가 다를 수 있음)
  * 인증키는 서버에서만 사용하며, 관측자료는 전체 지점 단위로 캐싱합니다.
  */
 
@@ -52,8 +53,10 @@ export default defineEventHandler(async (event) => {
     return null
   }
 
+  const location = sortStationsByDistance('aws', lat, lon)[0]?.location ?? sfcStation.location
+
   return {
-    location: sfcStation.location,
+    location,
     observedAt: sfc.tm,
     temperature: sfc.temperature,
     humidity: sfc.humidity,
