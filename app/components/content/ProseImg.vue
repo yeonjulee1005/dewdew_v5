@@ -1,7 +1,8 @@
 <script setup lang="ts">
 /**
  * 블로그 본문 이미지 (Nuxt UI ProseImg 대체)
- * - Supabase Storage 이미지는 원본(수 MB) 대신 표시 크기에 맞춘 변환 이미지(webp)를 받음
+ * - Supabase Storage 이미지는 원본(수 MB) 대신 본문 폭에 맞춘 변환 이미지(webp)를 받음
+ *   (Supabase 변환은 기본 resize=cover라 한 축만 지정하면 원본을 띠 모양으로 잘라내므로 contain으로 비율 유지)
  * - 확대 보기는 클릭 시에만 모달을 불러와 motion-v 등 애니메이션 번들을 초기 로딩에서 제외
  * - 마크다운에서 {loading="eager" fetchpriority="high"} 로 LCP 이미지 우선 로딩 지정
  */
@@ -48,12 +49,10 @@ const openZoom = () => {
     provider="supabase"
     :src="storagePath"
     :alt="alt"
-    :width="width"
-    :height="displayHeight"
-    :sizes="displayHeight ? undefined : '100vw md:768px'"
-    :densities="displayHeight ? 'x1 x2' : undefined"
+    sizes="100vw md:768px"
+    fit="contain"
     format="webp"
-    :quality="65"
+    :quality="75"
     :loading="loading"
     :fetchpriority="fetchpriority"
     v-bind="$attrs"
@@ -87,6 +86,7 @@ const openZoom = () => {
         :src="storagePath"
         :alt="alt"
         sizes="100vw lg:1024px"
+        fit="contain"
         format="webp"
         :quality="85"
         class="w-full h-auto rounded-md cursor-zoom-out"
