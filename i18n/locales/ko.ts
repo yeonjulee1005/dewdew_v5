@@ -202,6 +202,7 @@ export default {
     message: '메시지',
     logo: 'Dewdew 로고',
     weatherCarousel: '날씨 정보 캐러셀',
+    liveVisitors: '실시간 접속자',
   },
   pwa: {
     readyPwa: 'PWA를 사용할 준비가 됬어요!',

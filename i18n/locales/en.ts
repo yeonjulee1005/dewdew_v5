@@ -198,6 +198,7 @@ export default {
     message: 'Message',
     logo: 'Dewdew logo',
     weatherCarousel: 'Weather information carousel',
+    liveVisitors: 'Live visitors',
   },
   pwa: {
     readyPwa: 'PWA is ready!',
