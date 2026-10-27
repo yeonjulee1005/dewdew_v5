@@ -47,7 +47,6 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      htmlAttrs: { lang: 'ko' },
       link: [
         // Pretendard 동적 서브셋 (unicode-range 분할 로딩 — 2MB full font 대비 대폭 절감)
         {
@@ -214,13 +213,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    server: {
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost',
-        port: 4110,
-      },
-    },
     build: {
       rollupOptions: {
         treeshake: {
@@ -353,12 +345,7 @@ export default defineNuxtConfig({
     },
   },
   ogImage: {
-    zeroRuntime: true,
-    compatibility: {
-      dev: { takumi: false, browser: false },
-      runtime: { takumi: false, browser: false },
-      prerender: { takumi: false, browser: false },
-    },
+    enabled: false,
   },
   pinia: {
     storesDirs: [
