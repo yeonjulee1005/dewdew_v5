@@ -20,7 +20,7 @@ type ExtendedUIMessage = {
 
 const { isMobile } = useDevice()
 const { width } = useWindowSize()
-const { url } = useImageStorage()
+const { renderUrl } = useImageStorage()
 const { t } = useI18n()
 const {
   messages,
@@ -369,7 +369,7 @@ onUnmounted(() => {
         <template #leading="{ message }">
           <DdAvatar
             v-if="message.role === 'assistant'"
-            :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
+            :src="renderUrl('/assets/logo/dewdew_v4_logo.webp', { width: 96, height: 96, quality: 80 })"
             size="xl"
             :alt="t('texts.logo')"
           />
@@ -378,7 +378,7 @@ onUnmounted(() => {
         <template #indicator>
           <div class="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 py-2 px-4">
             <DdAvatar
-              :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
+              :src="renderUrl('/assets/logo/dewdew_v4_logo.webp', { width: 96, height: 96, quality: 80 })"
               size="sm"
               :alt="t('texts.logo')"
             />

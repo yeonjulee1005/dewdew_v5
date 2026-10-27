@@ -1,20 +1,18 @@
 <script setup lang="ts">
-const props = defineProps<{
-  helloList: string[]
-}>()
+const { helloList } = useHelloList()
 
 const INTERVAL_MS = 3000
 
-const isMounted = ref(false)
+// SSR·하이드레이션은 첫 인사말(index 0)로 동일하게 그리고, 마운트 후 일정 간격으로 무작위 교체
 const currentHelloIndex = ref(0)
 const timeoutId = ref<number | undefined>(undefined)
 
 const currentHello = computed(() => {
-  return props.helloList[currentHelloIndex.value] || props.helloList[0] || ''
+  return helloList[currentHelloIndex.value] || helloList[0] || ''
 })
 
 const getRandomIndex = (): number => {
-  return Math.floor(Math.random() * props.helloList.length)
+  return Math.floor(Math.random() * helloList.length)
 }
 
 const updateHello = () => {
@@ -23,8 +21,8 @@ const updateHello = () => {
 }
 
 const startRotation = () => {
-  if (props.helloList.length > 0) {
-    updateHello()
+  if (helloList.length > 0) {
+    timeoutId.value = window.setTimeout(updateHello, INTERVAL_MS)
   }
 }
 
@@ -36,7 +34,6 @@ const stopRotation = () => {
 }
 
 onMounted(() => {
-  isMounted.value = true
   startRotation()
 })
 
@@ -51,18 +48,8 @@ onUnmounted(() => {
       name="intro"
       mode="out-in"
     >
-      <span
-        v-if="isMounted"
-        :key="currentHelloIndex"
-      >
+      <span :key="currentHelloIndex">
         {{ currentHello }}
-      </span>
-      <span
-        v-else
-        key="loading"
-        class="opacity-0"
-      >
-        {{ props.helloList[0] || '' }}
       </span>
     </Transition>
   </div>

@@ -3,7 +3,6 @@ import { track } from '@vercel/analytics'
 
 const { path } = useRoute()
 const { isDesktopOrTablet, isMobileOrTablet } = useDevice()
-const { url } = useImageStorage()
 const { t } = useI18n()
 
 const slideoverTrigger = ref(false)
@@ -28,9 +27,10 @@ const handlePagination = (path: string, external: boolean = false) => {
     <header class="h-20 flex items-center justify-between gap-x-4 px-4 shrink-0">
       <NuxtImg
         class="cursor-pointer rounded-full ring-2 ring-amber-500 hover:ring-amber-500/50 transition-all duration-200 ease-in-out m-1.5"
-        :src="url(true, '/assets/logo/dewdew_v4_logo.webp')"
+        provider="supabase"
+        src="/assets/logo/dewdew_v4_logo.webp"
         format="webp"
-        sizes="48px"
+        densities="x1 x2"
         :width="48"
         :height="48"
         loading="eager"
