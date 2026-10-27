@@ -135,7 +135,6 @@ export default defineNuxtConfig({
       supabaseKey: process.env.SUPABASE_KEY ?? '',
       emailJsKey: process.env.EMAILJS_KEY,
       emailJSsTemplate: process.env.EMAILJS_TEMPLATE,
-      partykitHost: process.env.PARTYKIT_HOST,
     },
   },
   sourcemap: {
@@ -251,7 +250,6 @@ export default defineNuxtConfig({
             if (id.includes('@nuxt/content') || id.includes('@nuxtjs/mdc')) return 'content'
             if (id.includes('dayjs')) return 'dayjs'
             if (id.includes('typeit')) return 'typeit'
-            if (id.includes('partysocket')) return 'partykit'
             if (id.includes('@emailjs')) return 'emailjs'
             if (id.includes('yup')) return 'form-validation'
           },
