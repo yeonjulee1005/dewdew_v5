@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const { url } = useImageStorage()
 const { isDesktop } = useDevice()
 
 withDefaults(
@@ -23,14 +22,16 @@ withDefaults(
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="relative w-full flex flex-col gap-y-2">
         <NuxtImg
-          :src="url(true, '/assets/banner/main_banner_v5.webp')"
+          provider="supabase"
+          src="/assets/banner/main_banner_v5.webp"
           class="w-full h-full object-cover rounded-md max-h-[300px] min-h-[100px]"
           format="webp"
           :quality="60"
           :width="1024"
           :height="270"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
-          loading="lazy"
+          sizes="100vw lg:1024px"
+          loading="eager"
+          fetchpriority="high"
           :alt="$t('dynamic.greeting.title', 'SOFTWARE ENGINEER')"
           role="img"
           :aria-label="$t('dynamic.greeting.title', 'SOFTWARE ENGINEER')"
