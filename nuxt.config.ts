@@ -47,7 +47,6 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      htmlAttrs: { lang: 'ko' },
       link: [
         // Pretendard 동적 서브셋 (unicode-range 분할 로딩 — 2MB full font 대비 대폭 절감)
         {
@@ -124,6 +123,8 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV ?? 'development',
     supabaseUrl: process.env.SUPABASE_URL ?? '',
     supabaseKey: process.env.SUPABASE_KEY ?? '',
+    // 기상청 API허브 인증키 (서버 전용 — 클라이언트 노출 금지)
+    kmaApihubKey: process.env.KMA_APIHUB_KEY ?? '',
     public: {
       nodeEnv: process.env.NODE_ENV ?? 'development',
       appVersion: JSON.stringify(packageJson.version),
@@ -134,7 +135,6 @@ export default defineNuxtConfig({
       supabaseKey: process.env.SUPABASE_KEY ?? '',
       emailJsKey: process.env.EMAILJS_KEY,
       emailJSsTemplate: process.env.EMAILJS_TEMPLATE,
-      dataPortalApiKey: process.env.DATA_PORTAL_API_KEY,
       partykitHost: process.env.PARTYKIT_HOST,
     },
   },
@@ -214,13 +214,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    server: {
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost',
-        port: 4110,
-      },
-    },
     build: {
       rollupOptions: {
         treeshake: {
@@ -353,12 +346,7 @@ export default defineNuxtConfig({
     },
   },
   ogImage: {
-    zeroRuntime: true,
-    compatibility: {
-      dev: { takumi: false, browser: false },
-      runtime: { takumi: false, browser: false },
-      prerender: { takumi: false, browser: false },
-    },
+    enabled: false,
   },
   pinia: {
     storesDirs: [

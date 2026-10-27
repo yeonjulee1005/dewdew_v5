@@ -41,11 +41,11 @@ export const useWeatherMapData = () => {
     reh: (value: number | string) => `${value}`,
   }
 
-  const airDiffusionMapData: LivingDataMapType = {
-    25: '매우높음,streamline:smiley-emoji-terrified',
-    50: '높음,streamline:smiley-grumpy',
-    75: '보통,streamline:smiley-kiss',
-    100: '낮음,streamline:smiley-sparks',
+  const visibilityMapData: LivingDataMapType = {
+    0: '매우나쁨,streamline:smiley-emoji-terrified',
+    1: '나쁨,streamline:smiley-grumpy',
+    2: '보통,streamline:smiley-kiss',
+    3: '좋음,streamline:smiley-sparks',
   }
 
   const uvMapData: LivingDataMapType = {
@@ -69,12 +69,57 @@ export const useWeatherMapData = () => {
       return uvMapData[index] as string
     }
     else {
-      return airDiffusionMapData[index] as string
+      return visibilityMapData[index] as string
     }
+  }
+
+  /**
+   * 전운량(1/10) → 하늘상태 코드 (기상청 기준: 0~5 맑음, 6~8 구름많음, 9~10 흐림)
+   */
+  const skyCode = (cloudAmount: number) => {
+    if (cloudAmount <= 5) return 1
+    if (cloudAmount <= 8) return 3
+    return 4
+  }
+
+  /**
+   * 풍향(도) → 16방위 인덱스
+   */
+  const windDirectionIndex = (degree: number) => Math.floor((degree + 11.25) / 22.5) % 16
+
+  /**
+   * GTS 현재일기(WMO 4677) 및 강수량 → 강수형태 코드
+   * 50~59 이슬비, 60~67 비, 68~69 비/눈, 70~79 눈, 80~84 소나기, 85~86 소낙눈, 87~99 소나기·뇌우
+   */
+  const precipitationCode = (weatherCode: number | null, rainfall: number | null) => {
+    if (weatherCode !== null) {
+      if (weatherCode >= 50 && weatherCode <= 59) return 5
+      if (weatherCode >= 60 && weatherCode <= 67) return 1
+      if (weatherCode >= 68 && weatherCode <= 69) return 2
+      if (weatherCode >= 70 && weatherCode <= 79) return 3
+      if (weatherCode >= 85 && weatherCode <= 86) return 7
+      if (weatherCode >= 80) return 1
+    }
+
+    return rainfall !== null && rainfall > 0 ? 1 : 0
+  }
+
+  /**
+   * 시정(km) → 단계 (10km 이상 좋음, 5km 이상 보통, 1km 이상 나쁨, 1km 미만 매우나쁨)
+   */
+  const visibilityLevel = (visibility: number) => {
+    if (visibility >= 10) return 3
+    if (visibility >= 5) return 2
+    if (visibility >= 1) return 1
+    return 0
   }
 
   return {
     weatherMapData,
     loadLivingData,
+    skyCode,
+    windDirectionIndex,
+    precipitationCode,
+    visibilityLevel,
   }
 }

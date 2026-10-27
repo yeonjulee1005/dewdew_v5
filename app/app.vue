@@ -22,11 +22,7 @@ const { genDateFormat } = useDateFormatter()
 
 useAppSeo()
 
-const { geoX, geoY, latitude, longitude, forecastHour, currentLocationCode } = storeToRefs(useLocWeatherStore())
-const { fetchLivingData, fetchWeatherData } = useLocWeatherStore()
-
-const { filteredLocations } = useKorLocation()
-const { dfsXyConvert } = useTranslateCoords()
+const { fetchWeatherData } = useLocWeatherStore()
 
 useHead({
   link: [
@@ -45,23 +41,17 @@ useHead({
 // 위치 변화 임계값 및 상태 관리
 const LOCATION_CHANGE_THRESHOLD = 0.001 // 약 100m
 const lastCoords = ref<{ latitude: number, longitude: number } | null>(null)
-const lastGridCoords = ref<{ x: number, y: number } | null>(null)
 
 /**
  * 위치가 실제로 유의미하게 변경되었는지 확인
  */
-const hasSignificantLocationChange = (newLat: number, newLng: number, newX: number, newY: number): boolean => {
-  // 1. 처음 호출인 경우
-  if (!lastCoords.value || !lastGridCoords.value) {
+const hasSignificantLocationChange = (newLat: number, newLng: number): boolean => {
+  // 처음 호출인 경우
+  if (!lastCoords.value) {
     return true
   }
 
-  // 2. 격자 좌표(nx, ny)가 변했는지 확인 (기상청 API 호출 기준)
-  if (lastGridCoords.value.x !== newX || lastGridCoords.value.y !== newY) {
-    return true
-  }
-
-  // 3. 물리적 거리가 임계값 이상 변했는지 확인 (약 100m)
+  // 물리적 거리가 임계값 이상 변했는지 확인 (약 100m)
   const latDiff = Math.abs(newLat - lastCoords.value.latitude)
   const lngDiff = Math.abs(newLng - lastCoords.value.longitude)
 
@@ -82,69 +72,24 @@ const initWeatherData = () => {
     return
   }
 
-  // 격자 좌표 변환
-  const rs = dfsXyConvert('toXY', lat, lng)
-
-  // 변환 결과 유효성 검사
-  if (rs.x === undefined || rs.y === undefined || rs.lat === undefined || rs.lng === undefined) {
-    return
-  }
-
-  const newGeoX = Math.floor(rs.x)
-  const newGeoY = Math.floor(rs.y)
-  const newLat = rs.lat
-  const newLng = rs.lng
-
   // 유의미한 위치 변화가 없으면 중단 (불필요한 API 호출 방지)
-  if (!hasSignificantLocationChange(newLat, newLng, newGeoX, newGeoY)) {
+  if (!hasSignificantLocationChange(lat, lng)) {
     return
   }
 
-  // 상태 업데이트
-  geoX.value = newGeoX
-  geoY.value = newGeoY
-  latitude.value = newLat
-  longitude.value = newLng
+  lastCoords.value = { latitude: lat, longitude: lng }
 
-  // geoX, geoY가 undefined가 아님을 보장하고 currentLocationCode 설정
-  if (geoX.value !== undefined && geoY.value !== undefined) {
-    currentLocationCode.value = filteredLocations(geoX.value, geoY.value)
-
-    // currentLocationCode가 설정된 후에만 API 호출
-    if (currentLocationCode.value) {
-      // 마지막 위치 저장 (변환된 좌표 사용)
-      lastCoords.value = { latitude: newLat, longitude: newLng }
-      lastGridCoords.value = { x: newGeoX, y: newGeoY }
-
-      // 데이터 호출 (순차적으로 실행하여 중복 호출 방지)
-      // 생활지수 API를 먼저 호출하고, 완료 후 날씨 API 호출
-      fetchLivingData()
-        .catch(() => {
-          // 에러는 store에서 처리하므로 여기서는 무시
-        })
-        .finally(() => {
-          // 생활지수 API 완료 후 날씨 API 호출 (약간의 지연을 두어 API 부하 분산)
-          setTimeout(() => {
-            fetchWeatherData().catch(() => {
-              // 에러는 store에서 처리하므로 여기서는 무시
-            })
-          }, 500) // 0.5초 지연
-        })
-    }
-  }
+  fetchWeatherData(lat, lng).catch(() => {
+    // 에러는 store에서 처리하므로 여기서는 무시
+  })
 }
 
-// 시간 변경 감시 (실제 시간이 바뀔 때만 실행)
+// 시간 변경 감시 (지상관측 자료는 1시간 주기로 갱신)
 const lastHour = ref<string | null>(null)
 watch(() => genDateFormat('HH'), (currentHour) => {
   // 시간이 실제로 바뀌었을 때만 실행
-  if (lastHour.value !== null && lastHour.value !== currentHour) {
-    const newForecastHour = currentHour.concat('00')
-    // forecastHour가 다를 때만 API 호출
-    if (newForecastHour !== forecastHour.value) {
-      fetchLivingData()
-      fetchWeatherData()
-    }
+  if (lastHour.value !== null && lastHour.value !== currentHour && lastCoords.value) {
+    fetchWeatherData(lastCoords.value.latitude, lastCoords.value.longitude)
   }
   lastHour.value = currentHour
 }, { immediate: false })

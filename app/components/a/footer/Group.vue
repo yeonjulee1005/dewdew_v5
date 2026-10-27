@@ -57,7 +57,7 @@ const accordionItems = [
   background-image: var(--zigzag-footer-pattern);
   background-repeat: repeat-x;
 
-  :global(.dark) & {
+  .dark & {
     background-image: var(--zigzag-footer-dark-pattern);
   }
 }

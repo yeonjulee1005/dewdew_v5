@@ -1,6 +1,6 @@
 /**
  * 색상 관련 유틸리티 함수들을 제공하는 컴포저블
- * 날씨, 대기질, 습도 등의 값에 따른 색상 반환 기능을 제공합니다
+ * 날씨, 시정, 습도 등의 값에 따른 색상 반환 기능을 제공합니다
  */
 
 // 색상 상수들
@@ -43,18 +43,18 @@ const PROGRESS_COLORS = ['rose', 'orange', 'amber', 'yellow', 'lime', 'green', '
 
 export const useColorUtils = () => {
   /**
-   * 대기 확산 수치에 따른 색상 반환
-   * @param airDiffusion 대기 확산 수치 (25, 50, 75, 100)
+   * 시정 단계에 따른 색상 반환
+   * @param level 시정 단계 (0: 매우나쁨, 1: 나쁨, 2: 보통, 3: 좋음)
    * @returns Tailwind CSS 클래스명
    */
-  const airDiffusionColor = (airDiffusion: number): string | undefined => {
+  const visibilityColor = (level: number): string | undefined => {
     const colorMap: Record<number, string> = {
-      25: COLOR_CLASSES.rose[600],
-      50: COLOR_CLASSES.orange[600],
-      75: COLOR_CLASSES.sky[600],
-      100: COLOR_CLASSES.emerald[600],
+      0: COLOR_CLASSES.rose[600],
+      1: COLOR_CLASSES.orange[600],
+      2: COLOR_CLASSES.sky[600],
+      3: COLOR_CLASSES.emerald[600],
     }
-    return colorMap[airDiffusion]
+    return colorMap[level]
   }
 
   /**
@@ -167,7 +167,7 @@ export const useColorUtils = () => {
   }
 
   return {
-    airDiffusionColor,
+    visibilityColor,
     uvColor,
     humidityColor,
     weatherColor,

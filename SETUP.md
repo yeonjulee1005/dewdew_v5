@@ -116,8 +116,8 @@ EMAILJS_SERVICE_ID=your_emailjs_service_id
 EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 
-# 공공 API 키 (날씨 정보용)
-DATA_PORTAL_API_KEY=your_api_key
+# 기상청 API허브 인증키 (날씨 위젯용, 서버 전용 — 지상관측·자외선관측·지점정보 활용신청 필요)
+KMA_APIHUB_KEY=your_api_key
 ```
 
 ---
