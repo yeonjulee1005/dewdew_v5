@@ -142,7 +142,7 @@ export const fetchUvObservations = defineCachedFunction(async (tm: string): Prom
 /**
  * 좌표에서 가까운 순으로 지점 정렬
  */
-export const sortStationsByDistance = (type: 'sfc' | 'uv', lat: number, lon: number): KmaStation[] => {
+export const sortStationsByDistance = (type: 'sfc' | 'uv' | 'aws', lat: number, lon: number): KmaStation[] => {
   const cosLat = Math.cos(lat * Math.PI / 180)
   const distance = (station: KmaStation) => (station.lat - lat) ** 2 + ((station.lon - lon) * cosLat) ** 2
 

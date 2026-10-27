@@ -5,7 +5,6 @@
 .nitro
 .cache
 .vercel
-.partykit
 dist
 
 # Node dependencies

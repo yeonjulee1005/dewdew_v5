@@ -142,8 +142,6 @@ bun run lint:fix
 | `bun run supabase:type-data` | data 스키마 타입 생성 |
 | `bun run supabase:deploy-rag-portfolio` | RAG 포트폴리오 함수 배포 |
 | `bun run supabase:deploy-initialize-embeddings` | 임베딩 초기화 함수 배포 |
-| `bun run partykit:dev` | PartyKit 로컬 서버 |
-| `bun run partykit:deploy` | PartyKit 배포 |
 | `bun run fonts:download` | 폰트 다운로드 |
 | `bun run kma:stations` | 기상청 관측 지점정보 갱신 (`server/data/kmaStations.json`) |
 | `bun run version:patch` | YYMM 패치 버전 bump |

@@ -48,12 +48,10 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       link: [
-        // Pretendard 동적 서브셋 (unicode-range 분할 로딩 — 2MB full font 대비 대폭 절감)
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css',
-          crossorigin: 'anonymous',
-        },
+        // Supabase Storage(이미지) 오리진 사전 연결
+        ...(process.env.SUPABASE_URL
+          ? [{ rel: 'preconnect' as const, href: new URL(process.env.SUPABASE_URL).origin, crossorigin: 'anonymous' as const }]
+          : []),
         // Anton preload
         {
           rel: 'preload',
@@ -66,6 +64,8 @@ export default defineNuxtConfig({
     },
   },
   css: [
+    // Pretendard 동적 서브셋 self-host (외부 CDN 연결·렌더링 차단 요청 제거, unicode-range 분할 로딩)
+    'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css',
     '~/assets/scss/style.scss',
     '~/assets/css/main.css',
   ],
@@ -135,7 +135,6 @@ export default defineNuxtConfig({
       supabaseKey: process.env.SUPABASE_KEY ?? '',
       emailJsKey: process.env.EMAILJS_KEY,
       emailJSsTemplate: process.env.EMAILJS_TEMPLATE,
-      partykitHost: process.env.PARTYKIT_HOST,
     },
   },
   sourcemap: {
@@ -240,22 +239,6 @@ export default defineNuxtConfig({
             return true
           },
         },
-        output: {
-          manualChunks(id) {
-            if (id.includes('@egjs/flicking')) return 'carousel'
-            if (id.includes('shiki') || id.includes('syntax-highlight')) return 'syntax-highlight'
-            if (id.includes('@supabase')) return 'supabase'
-            if (id.includes('motion')) return 'animation'
-            if (id.includes('three') || id.includes('Three')) return 'threejs'
-            if (id.includes('@giscus')) return 'giscus'
-            if (id.includes('@nuxt/content') || id.includes('@nuxtjs/mdc')) return 'content'
-            if (id.includes('dayjs')) return 'dayjs'
-            if (id.includes('typeit')) return 'typeit'
-            if (id.includes('partysocket')) return 'partykit'
-            if (id.includes('@emailjs')) return 'emailjs'
-            if (id.includes('yup')) return 'form-validation'
-          },
-        },
       },
       sourcemap: !isProduction, // 프로덕션에서 비활성화
       cssMinify: true,
@@ -333,6 +316,15 @@ export default defineNuxtConfig({
     provider: 'iconify',
   },
   image: {
+    // Supabase Storage 이미지 변환(리사이즈·webp) — <NuxtImg provider="supabase" src="/bucket/path" />
+    providers: {
+      supabase: {
+        provider: 'supabase',
+        options: {
+          baseURL: `${process.env.SUPABASE_URL ?? ''}/storage/v1/render/image/public`,
+        },
+      },
+    },
     format: ['svg', 'png', 'jpg', 'jpeg', 'webp'],
     quality: 80,
     screens: {
