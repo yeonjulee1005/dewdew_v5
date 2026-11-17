@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { MenuDatabase } from '~/types/database.types'
+import type { MenuDatabase } from '~/types/supabase/database.types'
 
 export const useMenuStore = defineStore('useMenuStore', () => {
   /**

@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from '#supabase/server'
-import type { MenuDatabase } from '~/types/database.types'
+import type { MenuDatabase } from '~/types/supabase/database.types'
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient<MenuDatabase>(event)
