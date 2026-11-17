@@ -46,16 +46,17 @@ export type StreamChunk = StreamMetadata | StreamTextChunk
 
 // AI 모델 (Vercel AI Gateway 경유)
 // 서버 허용 목록(supabase/functions/_shared/ai-models.ts)과 동기화한다.
-export type ModelProvider = 'anthropic' | 'openai' | 'google'
+export type ModelProvider = 'anthropic' | 'openai' | 'google' | 'xai'
 
 export type ModelId
   = | 'anthropic/claude-haiku-5.5'
     | 'anthropic/claude-sonnet-5.5'
     | 'openai/gpt-5.6-luna'
     | 'google/gemini-3.5-flash-lite'
+    | 'spacexai/grok-build-0.1'
 
 // 선택 목록의 보조 설명 (i18n: ai.modelTier.*)
-export type ModelTier = 'recommended' | 'premium' | 'fast' | 'light'
+export type ModelTier = 'recommended' | 'premium' | 'fast' | 'light' | 'reasoning'
 
 export interface ModelConfig {
   provider: ModelProvider
@@ -73,6 +74,7 @@ export const AVAILABLE_MODELS: ModelConfig[] = [
   { provider: 'anthropic', model: 'anthropic/claude-sonnet-5.5', label: 'Claude Sonnet 5.5', icon: 'i-simple-icons-claude', iconClass: 'text-[#D97757]', tier: 'premium' },
   { provider: 'openai', model: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna', icon: 'i-simple-icons-openai', iconClass: 'text-neutral-900 dark:text-neutral-100', tier: 'fast' },
   { provider: 'google', model: 'google/gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash-Lite', icon: 'i-simple-icons-googlegemini', iconClass: 'text-[#8E75B2]', tier: 'light' },
+  { provider: 'xai', model: 'spacexai/grok-build-0.1', label: 'Grok Build 0.1', icon: 'i-simple-icons-x', iconClass: 'text-neutral-900 dark:text-neutral-100', tier: 'reasoning' },
 ]
 
 export const DEFAULT_MODEL: ModelConfig = AVAILABLE_MODELS[0]!
