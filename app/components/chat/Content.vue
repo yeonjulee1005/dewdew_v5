@@ -254,6 +254,12 @@ const handleSelectChange = (value: string) => {
   }
 }
 
+// 모델 선택 목록 (보조 설명은 i18n)
+const modelItems = computed(() => availableModels.map(model => ({
+  ...model,
+  description: t(`ai.modelTier.${model.tier}`),
+})))
+
 // 모델 변경 핸들러
 const handleModelChange = (value: string) => {
   const model = availableModels.find(m => m.model === value)
@@ -538,30 +544,33 @@ onUnmounted(() => {
           <div class="flex items-center flex-wrap gap-1.5">
             <DdSelect
               :model-value="selectedModel.model"
-              :items="availableModels"
-              class="w-42"
-              placeholder="모델 선택"
+              :items="modelItems"
+              class="w-fit"
+              :placeholder="$t('ai.selectModel')"
               value-key="model"
               size="md"
               variant="ghost"
               color="neutral"
               :aria-label="$t('ai.selectModel')"
+              :content="{ align: 'start' }"
               :ui="{
                 base: 'w-fit text-md',
+                content: 'min-w-64',
                 itemLabel: 'text-md',
+                itemDescription: 'text-xs text-neutral-500 dark:text-neutral-400',
               }"
               @update:model-value="handleModelChange"
             >
               <template #leading>
                 <Icon
                   :name="selectedModel.icon"
-                  class="w-5 h-5"
+                  :class="['w-5 h-5', selectedModel.iconClass]"
                 />
               </template>
               <template #item-leading="{ item }">
                 <Icon
                   :name="item.icon"
-                  class="w-5 h-5"
+                  :class="['w-5 h-5 shrink-0', item.iconClass]"
                 />
               </template>
             </DdSelect>

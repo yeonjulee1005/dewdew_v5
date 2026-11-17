@@ -1,190 +1,109 @@
-// AI Provider - 멀티 모델 지원 (OpenAI, Anthropic, Google)
+// AI Provider — Vercel AI Gateway (OpenAI 호환 REST)
+// OpenAI·Anthropic·Google 등 provider별 개별 호출을 Gateway 단일 엔드포인트로 통합한다.
+// Edge Runtime 호환을 위해 SDK(npm:ai)를 쓰지 않고 fetch 로 호출한다
+// (@vercel/oidc 가 import 시점에 os.hostname() 을 호출해 Deno 권한 오류가 난다).
+// 필요 환경변수: AI_GATEWAY_API_KEY (Supabase secrets)
 
-export type ModelProvider = 'openai' | 'anthropic' | 'google'
+import type { AIModelId } from './ai-models.ts'
+import { getFallbackModels } from './ai-models.ts'
 
-export type OpenAIModel = 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-4.1-nano' | 'o4-mini'
-export type AnthropicModel = 'claude-sonnet-4-5-20250929' | 'claude-haiku-4-5-20251001'
-export type GoogleModel = 'gemini-3-pro-preview' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite'
+const GATEWAY_BASE_URL = 'https://ai-gateway.vercel.sh/v1'
+const MAX_OUTPUT_TOKENS = 2500
 
-export type ModelName = OpenAIModel | AnthropicModel | GoogleModel
-
-export interface ModelConfig {
-  provider: ModelProvider
-  model: ModelName
-  temperature?: number
-  maxTokens?: number
-}
-
-// API URL
-const API_URLS = {
-  openai: 'https://api.openai.com/v1/chat/completions',
-  anthropic: 'https://api.anthropic.com/v1/messages',
-  google: 'https://generativelanguage.googleapis.com/v1beta/models',
-}
-
-// API 키 가져오기
-const getApiKey = (provider: ModelProvider): string => {
-  const keyNameMap: Record<ModelProvider, string> = {
-    openai: 'OPENAI_API_KEY',
-    anthropic: 'ANTHROPIC_API_KEY',
-    google: 'GOOGLE_GEMINI_API_KEY',
+const getApiKey = (): string => {
+  const apiKey = Deno.env.get('AI_GATEWAY_API_KEY')
+  if (!apiKey) {
+    throw new Error('Missing AI_GATEWAY_API_KEY environment variable')
   }
-
-  const keyName = keyNameMap[provider]
-  const key = Deno.env.get(keyName)
-
-  if (!key) {
-    throw new Error(`Missing ${keyName} environment variable`)
-  }
-  return key
+  return apiKey
 }
 
-// OpenAI 스트리밍
-const createOpenAIStream = async (
-  model: string,
-  messages: Array<{ role: string, content: string }>,
-  systemPrompt: string,
-  temperature: number,
-  maxTokens: number,
-): Promise<ReadableStream<Uint8Array>> => {
-  const response = await fetch(API_URLS.openai, {
+export const gatewayFetch = async (path: string, body: unknown): Promise<Response> => {
+  const response = await fetch(`${GATEWAY_BASE_URL}${path}`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${getApiKey('openai')}`,
+      'Authorization': `Bearer ${getApiKey()}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      model,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages,
-      ],
-      stream: true,
-      temperature,
-      max_completion_tokens: maxTokens,
-    }),
+    body: JSON.stringify(body),
   })
 
   if (!response.ok) {
     const error = await response.text()
-    throw new Error(`OpenAI API error: ${response.status} - ${error}`)
+    throw new Error(`AI Gateway error (${path}): ${response.status} - ${error.slice(0, 500)}`)
   }
-
-  return response.body!
+  return response
 }
 
-// Anthropic 스트리밍
-const createAnthropicStream = async (
-  model: string,
-  messages: Array<{ role: string, content: string }>,
-  systemPrompt: string,
-  temperature: number,
-  maxTokens: number,
-): Promise<ReadableStream<Uint8Array>> => {
-  const response = await fetch(API_URLS.anthropic, {
-    method: 'POST',
-    headers: {
-      'x-api-key': getApiKey('anthropic'),
-      'Content-Type': 'application/json',
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model,
-      system: systemPrompt,
-      messages: messages.map(m => ({
-        role: m.role === 'assistant' ? 'assistant' : 'user',
-        content: m.content,
-      })),
-      stream: true,
-      temperature,
-      max_tokens: maxTokens,
-    }),
-  })
-
-  if (!response.ok) {
-    const error = await response.text()
-    throw new Error(`Anthropic API error: ${response.status} - ${error}`)
-  }
-
-  return response.body!
+export interface ChatStreamMessage {
+  role: 'user' | 'assistant'
+  content: string
 }
 
-// Google Gemini 스트리밍
-const createGoogleStream = async (
-  model: string,
-  messages: Array<{ role: string, content: string }>,
+/**
+ * 텍스트 스트림 생성
+ * - temperature 는 보내지 않는다 (최신 Claude·GPT-5 계열 일부가 미지원)
+ * - 선택 모델 실패 시 Gateway가 폴백 모델을 순서대로 시도
+ * - caching: 'auto' 로 고정 시스템 프롬프트 prefix 캐싱 (지원 provider 한정)
+ */
+export async function* createAIChatStream(
+  model: AIModelId,
+  messages: ChatStreamMessage[],
   systemPrompt: string,
-  temperature: number,
-  maxTokens: number,
-): Promise<ReadableStream<Uint8Array>> => {
-  const apiKey = getApiKey('google')
-  const url = `${API_URLS.google}/${model}:streamGenerateContent?key=${apiKey}&alt=sse`
-
-  // Google 형식으로 메시지 변환
-  const contents = messages.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }],
-  }))
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: systemPrompt }],
+): AsyncIterable<string> {
+  const response = await gatewayFetch('/chat/completions', {
+    model,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      ...messages,
+    ],
+    stream: true,
+    max_tokens: MAX_OUTPUT_TOKENS,
+    providerOptions: {
+      gateway: {
+        models: getFallbackModels(model),
+        caching: 'auto',
+        tags: ['dewdew-rag-portfolio'],
       },
-      contents,
-      generationConfig: {
-        temperature,
-        maxOutputTokens: maxTokens,
-      },
-    }),
+    },
   })
 
-  if (!response.ok) {
-    const error = await response.text()
-    throw new Error(`Google API error: ${response.status} - ${error}`)
+  const reader = response.body!.pipeThrough(new TextDecoderStream()).getReader()
+  let buffer = ''
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      buffer += value
+      // SSE 이벤트는 줄 단위. 마지막 미완성 줄은 다음 청크와 합친다
+      const lines = buffer.split('\n')
+      buffer = lines.pop() ?? ''
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        const data = line.slice(6).trim()
+        if (data === '[DONE]') return
+
+        let parsed: any
+        try {
+          parsed = JSON.parse(data)
+        }
+        catch {
+          continue
+        }
+
+        if (parsed.error) {
+          throw new Error(`AI Gateway stream error (${model}): ${JSON.stringify(parsed.error).slice(0, 500)}`)
+        }
+
+        const content = parsed.choices?.[0]?.delta?.content
+        if (content) yield content
+      }
+    }
   }
-
-  return response.body!
-}
-
-// 통합 스트리밍 생성 함수
-export const createAIChatStream = async (
-  config: ModelConfig,
-  messages: Array<{ role: string, content: string }>,
-  systemPrompt: string,
-): Promise<{ stream: ReadableStream<Uint8Array>, provider: ModelProvider }> => {
-  const { provider, model, temperature = 0.7, maxTokens = 2500 } = config
-
-  let stream: ReadableStream<Uint8Array>
-
-  switch (provider) {
-    case 'openai':
-      stream = await createOpenAIStream(model, messages, systemPrompt, temperature, maxTokens)
-      break
-
-    case 'anthropic':
-      stream = await createAnthropicStream(model, messages, systemPrompt, temperature, maxTokens)
-      break
-
-    case 'google':
-      stream = await createGoogleStream(model, messages, systemPrompt, temperature, maxTokens)
-      break
-
-    default:
-      throw new Error(`Unsupported provider: ${provider}`)
+  finally {
+    reader.releaseLock()
   }
-
-  return { stream, provider }
-}
-
-// 기본 모델 설정 가져오기
-export const getDefaultModelConfig = (): ModelConfig => {
-  const provider = (Deno.env.get('DEFAULT_MODEL_PROVIDER') || 'openai') as ModelProvider
-  const model = (Deno.env.get('DEFAULT_MODEL_NAME') || 'gpt-4o-mini') as ModelName
-
-  return { provider, model }
 }

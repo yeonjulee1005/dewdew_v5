@@ -44,33 +44,38 @@ export interface StreamTextChunk {
 
 export type StreamChunk = StreamMetadata | StreamTextChunk
 
-// AI 모델 타입 (멀티 모델 지원)
-export type ModelProvider = 'openai' | 'anthropic' | 'google'
+// AI 모델 (Vercel AI Gateway 경유)
+// 서버 허용 목록(supabase/functions/_shared/ai-models.ts)과 동기화한다.
+export type ModelProvider = 'anthropic' | 'openai' | 'google'
 
-export type OpenAIModel = 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-4.1-nano' | 'o4-mini'
-export type AnthropicModel = 'claude-sonnet-4-5-20250929' | 'claude-haiku-4-5-20251001'
-export type GoogleModel = 'gemini-3-pro-preview' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite'
+export type ModelId
+  = | 'anthropic/claude-haiku-5.5'
+    | 'anthropic/claude-sonnet-5.5'
+    | 'openai/gpt-5.6-luna'
+    | 'google/gemini-3.5-flash-lite'
 
-export type ModelName = OpenAIModel | AnthropicModel | GoogleModel
+// 선택 목록의 보조 설명 (i18n: ai.modelTier.*)
+export type ModelTier = 'recommended' | 'premium' | 'fast' | 'light'
 
 export interface ModelConfig {
   provider: ModelProvider
-  model: ModelName
+  model: ModelId
   label: string
   icon: string
+  // 브랜드 컬러 (아이콘 색상)
+  iconClass: string
+  tier: ModelTier
 }
 
-// 사용 가능한 모델 목록
+// 사용 가능한 모델 목록 — 첫 번째 항목이 기본 모델
 export const AVAILABLE_MODELS: ModelConfig[] = [
-  // OpenAI - GPT-5 계열 (최신)
-  { provider: 'openai', model: 'gpt-5-mini', label: 'GPT-5 Mini', icon: 'i-simple-icons-openai' },
-  { provider: 'openai', model: 'gpt-5-nano', label: 'GPT-5 Nano', icon: 'i-simple-icons-openai' },
-  // Anthropic - Claude 4.5 계열 (최신)
-  { provider: 'anthropic', model: 'claude-sonnet-4-5-20250929', label: 'Claude Sonnet 4.5', icon: 'i-simple-icons-anthropic' },
-  // Google - Gemini 3 계열 (최신)
-  { provider: 'google', model: 'gemini-3-pro-preview', label: 'Gemini 3 Pro', icon: 'i-simple-icons-googlegemini' },
-  { provider: 'google', model: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash', icon: 'i-simple-icons-googlegemini' },
+  { provider: 'anthropic', model: 'anthropic/claude-haiku-5.5', label: 'Claude Haiku 5.5', icon: 'i-simple-icons-claude', iconClass: 'text-[#D97757]', tier: 'recommended' },
+  { provider: 'anthropic', model: 'anthropic/claude-sonnet-5.5', label: 'Claude Sonnet 5.5', icon: 'i-simple-icons-claude', iconClass: 'text-[#D97757]', tier: 'premium' },
+  { provider: 'openai', model: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna', icon: 'i-simple-icons-openai', iconClass: 'text-neutral-900 dark:text-neutral-100', tier: 'fast' },
+  { provider: 'google', model: 'google/gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash-Lite', icon: 'i-simple-icons-googlegemini', iconClass: 'text-[#8E75B2]', tier: 'light' },
 ]
+
+export const DEFAULT_MODEL: ModelConfig = AVAILABLE_MODELS[0]!
 
 // 초기 인사 응답
 export interface GreetingResponse {
