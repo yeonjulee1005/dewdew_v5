@@ -94,6 +94,7 @@ export default {
       premium: 'Highest answer quality',
       fast: 'Fast responses',
       light: 'Lightweight · ultra fast',
+      reasoning: 'Reasoning · slower responses',
     },
     imageModal: 'Enlarged image',
   },

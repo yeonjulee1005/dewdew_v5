@@ -8,6 +8,7 @@ export const AI_MODEL_IDS = [
   'anthropic/claude-sonnet-5.5',
   'openai/gpt-5.6-luna',
   'google/gemini-3.5-flash-lite',
+  'spacexai/grok-build-0.1',
 ] as const
 
 export type AIModelId = typeof AI_MODEL_IDS[number]

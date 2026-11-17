@@ -97,6 +97,7 @@ export default {
       premium: '가장 높은 답변 품질',
       fast: '빠른 응답',
       light: '경량 · 초고속',
+      reasoning: '추론형 · 응답이 다소 느림',
     },
     imageModal: '확대된 이미지',
   },
