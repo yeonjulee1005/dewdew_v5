@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from '#supabase/server'
-import type { ResumeDatabase } from '~/types/database.types'
+import type { ResumeDatabase } from '~/types/supabase/database.types'
 import { filterStream } from '../../utils/stream-filter'
 
 /**

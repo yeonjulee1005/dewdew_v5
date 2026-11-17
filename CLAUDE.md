@@ -47,7 +47,7 @@ dewdew_v5/
 │   │   └── ai/                   # AI 채팅 관련 페이지
 │   ├── plugins/                  # Vercel Analytics, DOMPurify
 │   ├── stores/                   # Pinia 상태 (날씨·메뉴)
-│   └── types/                    # TypeScript 타입 (supabase, supabase-menu, supabase-resume, supabase-data)
+│   └── types/                    # TypeScript 타입 (chat, weather) · supabase/ 생성 타입 (public, menu, resume)
 ├── server/api/                   # Nuxt Server API 엔드포인트
 │   ├── chat/                     # AI 채팅 API
 │   ├── menu/                     # 메뉴 API

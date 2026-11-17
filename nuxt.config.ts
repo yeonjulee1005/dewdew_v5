@@ -73,9 +73,11 @@ export default defineNuxtConfig({
     name: 'Dewdew Dev Portfolio Website',
     description: 'Dewdew, Software Engineer.',
     // 프로덕션에서는 항상 https://www.dewdew.dev 사용 (Vercel preview URL 제외)
+    // 비운영 빌드: 명시 URL → Vercel preview URL → 운영 URL 순 (localhost는 site-config가 invalid 처리)
     url: isVercelProduction
       ? 'https://www.dewdew.dev'
-      : (process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:4110'),
+      : (process.env.NUXT_PUBLIC_SITE_URL
+        ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://www.dewdew.dev')),
     defaultLocale: 'ko',
     indexable: true,
   },
@@ -570,6 +572,8 @@ export default defineNuxtConfig({
     lintOnStart: true,
   },
   supabase: {
+    // 생성 타입은 auto-import 스캔(app/types 최상위) 밖에 둔다 — 중복 import 경고 방지
+    types: '~/types/supabase/database.types.ts',
     redirect: false,
     redirectOptions: {
       login: '/login',
