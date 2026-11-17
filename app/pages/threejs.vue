@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { track } from '@vercel/analytics'
-import type { ResumeDatabase } from '~/types/supabase-resume'
+import type { ResumeDatabase } from '~/types/supabase/resume'
 
 usePageSeo('threejs')
 

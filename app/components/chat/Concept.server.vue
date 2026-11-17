@@ -1,67 +1,59 @@
 <script setup lang="ts">
-const { url } = useImageStorage()
+// 아키텍처 다이어그램은 ChatArchitectureDiagram(SVG 원본)을 locale × 테마별 webp로 렌더링한 이미지다.
+// 모바일에서도 탭 → 원본 크기로 열어 확대할 수 있도록 이미지 + 링크로 노출한다.
+// 다이어그램 수정 시: ArchitectureDiagram.vue 수정 → 페이지에 임시 마운트 후 1200px 폭 × 2배율로 재렌더링
+//   → public/image/concept/architecture-{ko,en}-{light,dark}.webp 교체
+const { locale, t } = useI18n()
 
-const imageModalOpen = ref(false)
-const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.webp'))
-
-useHead({
-  link: [
-    {
-      rel: 'preload',
-      as: 'image',
-      href: selectedImageSrc.value,
-      fetchpriority: 'high',
-    },
-  ],
-})
+const diagramLocale = computed(() => (locale.value === 'en' ? 'en' : 'ko'))
+const diagramImages = computed(() => [
+  { theme: 'light', class: 'block dark:hidden' },
+  { theme: 'dark', class: 'hidden dark:block' },
+].map(image => ({
+  ...image,
+  src: `/image/concept/architecture-${diagramLocale.value}-${image.theme}.webp`,
+})))
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-col gap-y-4 max-w-4xl mx-auto">
-      <h3 class="text-2xl font-bold break-keep">
-        {{ $t('aiComponents.concept.title') }}
-      </h3>
-      <NuxtImg
-        :src="selectedImageSrc"
-        class="w-full h-full object-cover rounded-md cursor-pointer"
-        format="webp"
-        :quality="50"
-        :width="1024"
-        :height="691"
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
-        alt="chatbot-architecture"
-        loading="eager"
-        fetchpriority="high"
-        preload
-        @click="imageModalOpen = true"
-      />
-      <div class="space-y-1.5">
-        <p
-          v-for="item in $tm('aiComponents.concept.description')"
-          :key="item"
-          class="text-lg text-neutral-500 dark:text-neutral-400 break-keep"
+  <div class="flex flex-col gap-y-4 max-w-5xl mx-auto">
+    <h3 class="text-2xl font-bold break-keep">
+      {{ $t('aiComponents.concept.title') }}
+    </h3>
+    <figure class="w-full">
+      <a
+        v-for="image in diagramImages"
+        :key="image.theme"
+        :href="image.src"
+        target="_blank"
+        rel="noopener"
+        :class="image.class"
+        :aria-label="t('aiComponents.concept.diagram.openFull')"
+      >
+        <img
+          :src="image.src"
+          :alt="t('aiComponents.concept.title')"
+          width="2400"
+          height="1500"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="w-full h-auto rounded-md border border-neutral-200 dark:border-neutral-800"
         >
-          {{ $rt(item) }}
-        </p>
-      </div>
+      </a>
+      <figcaption class="mt-2 text-sm text-neutral-500 dark:text-neutral-400 break-keep">
+        {{ t('aiComponents.concept.diagram.caption') }}
+        <span class="block mt-0.5">{{ t('aiComponents.concept.diagram.openFull') }}</span>
+      </figcaption>
+    </figure>
+    <div class="space-y-1.5">
+      <p
+        v-for="item in $tm('aiComponents.concept.description')"
+        :key="item"
+        class="text-lg text-neutral-500 dark:text-neutral-400 break-keep"
+      >
+        {{ $rt(item) }}
+      </p>
     </div>
-    <!-- 이미지 모달 -->
-    <DdModal
-      v-model:open="imageModalOpen"
-      :ui="{ content: 'max-w-dvw' }"
-      :title="$t('aiComponents.imageModal', '확대된 이미지')"
-    >
-      <template #body>
-        <div class="flex justify-center items-center p-4">
-          <img
-            :src="selectedImageSrc"
-            alt="확대된 이미지"
-            class="max-w-full h-full object-contain"
-            @click="imageModalOpen = false"
-          >
-        </div>
-      </template>
-    </DdModal>
   </div>
 </template>

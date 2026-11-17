@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from '#supabase/server'
-import type { ResumeDatabase } from '~/types/database.types'
+import type { ResumeDatabase } from '~/types/supabase/database.types'
 import { filterStream } from '../../utils/stream-filter'
 
 /**
@@ -64,6 +64,8 @@ export default defineEventHandler(async (event) => {
         body: JSON.stringify({
           message: body.message,
           history: body.history || [],
+          // 허용 목록 검증은 Edge Function(ai-models.ts)에서 수행. 목록 밖이면 기본 모델 사용
+          modelName: typeof body.modelName === 'string' ? body.modelName : undefined,
         }),
       },
     )

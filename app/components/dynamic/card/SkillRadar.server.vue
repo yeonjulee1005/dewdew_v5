@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ResumeDatabase } from '~/types/supabase-resume'
+import type { ResumeDatabase } from '~/types/supabase/resume'
 
 withDefaults(
   defineProps<{

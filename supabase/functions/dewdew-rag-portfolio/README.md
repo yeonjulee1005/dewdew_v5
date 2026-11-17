@@ -24,6 +24,6 @@ supabase/
   // deployment
   supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc
 
-  // secrets
-  supabase secrets set OPENAI_API_KEY=
+  // secrets — 채팅·임베딩 모두 Vercel AI Gateway 경유 (모델 허용 목록: _shared/ai-models.ts)
+  supabase secrets set AI_GATEWAY_API_KEY=
 ```
