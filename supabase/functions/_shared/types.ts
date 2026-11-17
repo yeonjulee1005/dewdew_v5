@@ -208,33 +208,14 @@ export interface RAGContext {
 }
 
 // ============================================
-// AI Model Types (멀티 모델 지원)
-// ============================================
-
-export type ModelProvider = 'openai' | 'anthropic' | 'google'
-
-export type OpenAIModel = 'gpt-5-mini' | 'gpt-5-nano' | 'gpt-4.1-nano' | 'o4-mini'
-export type AnthropicModel = 'claude-sonnet-4-5-20250929' | 'claude-haiku-4-5-20251001'
-export type GoogleModel = 'gemini-3-pro-preview' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite'
-
-export type ModelName = OpenAIModel | AnthropicModel | GoogleModel
-
-export interface ModelConfig {
-  provider: ModelProvider
-  model: ModelName
-  temperature?: number
-  maxTokens?: number
-}
-
-// ============================================
 // API Types
 // ============================================
 
 export interface ChatRequest {
   message: string
   history?: ChatMessage[]
-  modelProvider?: ModelProvider
-  modelName?: ModelName
+  // Gateway 모델 ID (예: 'anthropic/claude-haiku-5.5'). 허용 목록은 ai-models.ts
+  modelName?: string
 }
 
 export interface ChatMessage {

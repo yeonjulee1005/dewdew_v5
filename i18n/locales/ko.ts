@@ -92,6 +92,12 @@ export default {
     scrollRight: '추천 질문 오른쪽으로 스크롤',
     quickQuestion: '빠른 질문 선택',
     selectModel: 'AI 모델 선택',
+    modelTier: {
+      recommended: '추천 · 빠르고 경제적',
+      premium: '가장 높은 답변 품질',
+      fast: '빠른 응답',
+      light: '경량 · 초고속',
+    },
     imageModal: '확대된 이미지',
   },
   aiComponents: {

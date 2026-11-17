@@ -5,7 +5,7 @@ import type {
   StreamTextChunk,
   ModelConfig,
 } from '~/types/chat'
-import { AVAILABLE_MODELS } from '~/types/chat'
+import { AVAILABLE_MODELS, DEFAULT_MODEL } from '~/types/chat'
 
 type ComponentData = {
   type: ComponentType
@@ -22,7 +22,7 @@ export const useChat = () => {
   } | null>(null)
 
   // 모델 선택 상태
-  const selectedModel = ref<ModelConfig>(AVAILABLE_MODELS[0]!)
+  const selectedModel = ref<ModelConfig>(DEFAULT_MODEL)
   const availableModels = AVAILABLE_MODELS
 
   // 초기화 상태
@@ -261,7 +261,6 @@ export const useChat = () => {
             role: m.role,
             content: m.content,
           })),
-          modelProvider: selectedModel.value.provider,
           modelName: selectedModel.value.model,
         }),
         signal: abortController.value.signal,

@@ -3,6 +3,8 @@
 // EmbeddingGemma, OpenAI 등 다양한 임베딩 제공자 지원
 // ============================================
 
+import { gatewayFetch } from './ai-provider.ts'
+
 export type EmbeddingProvider = 'embeddinggemma' | 'openai' | 'gemini'
 
 /**
@@ -96,69 +98,41 @@ export const getEmbeddingGemmaEmbedding = async (text: string): Promise<number[]
 }
 
 /**
- * OpenAI Embeddings API (폴백용)
+ * Vercel AI Gateway 경유 임베딩
+ * 저장된 벡터(resume.document_embeddings)와 같은 공간을 유지하려면 모델·차원을 바꾸지 않는다.
+ * 바꾸면 initialize-embeddings 로 전체 재임베딩이 필요하다.
  */
-const getOpenAIEmbedding = async (text: string): Promise<number[]> => {
-  const apiKey = Deno.env.get('OPENAI_API_KEY')
+const EMBEDDING_DIMENSIONS = 768 // 데이터베이스 벡터 차원
 
-  if (!apiKey) {
-    throw new Error('OPENAI_API_KEY is required')
-  }
-
-  const response = await fetch('https://api.openai.com/v1/embeddings', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'text-embedding-3-small',
-      input: text,
-      dimensions: 768, // 데이터베이스 벡터 차원에 맞춤
-    }),
+const getGatewayEmbedding = async (
+  model: 'openai/text-embedding-3-small' | 'google/text-embedding-005',
+  text: string,
+): Promise<number[]> => {
+  const response = await gatewayFetch('/embeddings', {
+    model,
+    input: text,
+    dimensions: EMBEDDING_DIMENSIONS,
   })
-
-  if (!response.ok) {
-    const error = await response.text()
-    throw new Error(`OpenAI API error: ${response.status} - ${error}`)
-  }
-
   const data = await response.json()
-  return data.data[0].embedding
+  const embedding: number[] | undefined = data.data?.[0]?.embedding
+
+  if (!embedding || embedding.length !== EMBEDDING_DIMENSIONS) {
+    throw new Error(`Unexpected embedding dimensions from ${model}: ${embedding?.length ?? 'none'}`)
+  }
+  return embedding
 }
 
 /**
- * Google Gemini Embeddings API (폴백용)
+ * OpenAI text-embedding-3-small (현재 인덱스·검색 기본 경로)
  */
-const getGeminiEmbedding = async (text: string): Promise<number[]> => {
-  const apiKey = Deno.env.get('GOOGLE_GEMINI_API_KEY')
+const getOpenAIEmbedding = (text: string): Promise<number[]> =>
+  getGatewayEmbedding('openai/text-embedding-3-small', text)
 
-  if (!apiKey) {
-    throw new Error('GOOGLE_GEMINI_API_KEY is required')
-  }
-
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'models/text-embedding-004',
-        content: { parts: [{ text }] },
-      }),
-    },
-  )
-
-  if (!response.ok) {
-    const error = await response.text()
-    throw new Error(`Gemini API error: ${response.status} - ${error}`)
-  }
-
-  const data = await response.json()
-  return data.embedding.values
-}
+/**
+ * Google text-embedding-005 (예비 경로 — 사용 시 재임베딩 필요)
+ */
+const getGeminiEmbedding = (text: string): Promise<number[]> =>
+  getGatewayEmbedding('google/text-embedding-005', text)
 
 /**
  * 통합 임베딩 생성 함수
@@ -191,7 +165,10 @@ export const getEmbedding = async (
       }
       catch (fallbackError) {
         console.error('OpenAI fallback also failed:', fallbackError)
-        throw new Error(`Embedding generation failed: ${error instanceof Error ? error.message : String(error)}`)
+        throw new Error(
+          `Embedding generation failed: ${error instanceof Error ? error.message : String(error)}`,
+          { cause: fallbackError },
+        )
       }
     }
     throw error

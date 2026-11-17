@@ -88,6 +88,13 @@ export default {
       tryAgain: 'Try again',
     },
     placeholder: 'What is your question?',
+    selectModel: 'Select AI model',
+    modelTier: {
+      recommended: 'Recommended · fast & efficient',
+      premium: 'Highest answer quality',
+      fast: 'Fast responses',
+      light: 'Lightweight · ultra fast',
+    },
     imageModal: 'Enlarged image',
   },
   aiComponents: {

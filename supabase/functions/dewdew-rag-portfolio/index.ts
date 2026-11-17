@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createAIChatStream, getDefaultModelConfig } from '../_shared/ai-provider.ts'
+import { createAIChatStream } from '../_shared/ai-provider.ts'
+import { resolveModelId } from '../_shared/ai-models.ts'
 import { fetchRelevantData, getAISettings } from '../_shared/rag.ts'
 import { determineComponentType } from '../_shared/component-mapper.ts'
 import { optimizeHistory, createContextSummary } from '../_shared/history-optimizer.ts'
@@ -11,8 +12,6 @@ import type {
   AISettingsMap,
   StreamMetadata,
   StreamTextChunk,
-  ModelProvider,
-  ModelConfig,
 } from '../_shared/types.ts'
 import { ALLOWED_COMPONENTS } from '../_shared/types.ts'
 
@@ -21,17 +20,6 @@ const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
-
-// 모델 설정 가져오기 (요청에서 또는 기본값)
-const getModelConfig = (request: ChatRequest): ModelConfig => {
-  if (request.modelProvider && request.modelName) {
-    return {
-      provider: request.modelProvider,
-      model: request.modelName,
-    }
-  }
-  return getDefaultModelConfig()
 }
 
 // 시스템 프롬프트 생성
@@ -168,15 +156,13 @@ A: "네! 제 LinkedIn 프로필에서 더 자세한 경력과 이력을 확인�
 ${dataContext}`
 }
 
-// SSE 스트림 생성 (멀티 프로바이더 지원)
+// SSE 스트림 생성 (AI Gateway 텍스트 스트림 → 클라이언트 SSE 포맷)
 const createSSEStream = (
-  aiStream: ReadableStream<Uint8Array>,
+  textStream: AsyncIterable<string>,
   componentType: ComponentType,
   context: RAGContext,
-  provider: ModelProvider,
 ): ReadableStream<Uint8Array> => {
   const encoder = new TextEncoder()
-  const decoder = new TextDecoder()
 
   return new ReadableStream({
     async start(controller) {
@@ -189,119 +175,24 @@ const createSSEStream = (
       const metadataStr = `data: ${JSON.stringify(metadata)}\n\n`
       controller.enqueue(encoder.encode(metadataStr))
 
-      // 2. AI 스트림 처리 (프로바이더별)
-      const reader = aiStream.getReader()
-
+      // 2. AI 텍스트 스트림 → SSE 텍스트 청크
       try {
-        while (true) {
-          const { done, value } = await reader.read()
-          if (done) break
-
-          const chunk = decoder.decode(value, { stream: true })
-          const lines = chunk
-            .split('\n')
-            .filter(line => line.trim() !== '')
-
-          for (const line of lines) {
-            // OpenAI 형식
-            if (provider === 'openai' && line.startsWith('data: ')) {
-              const jsonStr = line.slice(6).trim()
-
-              if (jsonStr === '[DONE]') {
-                controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-                continue
-              }
-
-              try {
-                const parsed = JSON.parse(jsonStr)
-                const content = parsed.choices?.[0]?.delta?.content
-
-                if (content) {
-                  const textChunk: StreamTextChunk = {
-                    type: 'text',
-                    content,
-                  }
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
-                  )
-                }
-              }
-              catch {
-                // JSON 파싱 실패는 무시
-              }
-            }
-
-            // Anthropic 형식
-            if (provider === 'anthropic' && line.startsWith('data: ')) {
-              const jsonStr = line.slice(6).trim()
-
-              if (jsonStr === '[DONE]') {
-                controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-                continue
-              }
-
-              try {
-                const parsed = JSON.parse(jsonStr)
-
-                // content_block_delta 이벤트에서 텍스트 추출
-                if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
-                  const textChunk: StreamTextChunk = {
-                    type: 'text',
-                    content: parsed.delta.text,
-                  }
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
-                  )
-                }
-
-                // message_stop 이벤트
-                if (parsed.type === 'message_stop') {
-                  controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-                }
-              }
-              catch {
-                // JSON 파싱 실패는 무시
-              }
-            }
-
-            // Google Gemini 형식
-            if (provider === 'google' && line.startsWith('data: ')) {
-              const jsonStr = line.slice(6).trim()
-
-              try {
-                const parsed = JSON.parse(jsonStr)
-                const text = parsed.candidates?.[0]?.content?.parts?.[0]?.text
-
-                if (text) {
-                  const textChunk: StreamTextChunk = {
-                    type: 'text',
-                    content: text,
-                  }
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`),
-                  )
-                }
-
-                // 완료 체크
-                if (parsed.candidates?.[0]?.finishReason) {
-                  controller.enqueue(encoder.encode('data: [DONE]\n\n'))
-                }
-              }
-              catch {
-                // JSON 파싱 실패는 무시
-              }
-            }
+        for await (const content of textStream) {
+          if (!content) continue
+          const textChunk: StreamTextChunk = {
+            type: 'text',
+            content,
           }
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(textChunk)}\n\n`))
         }
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'))
       }
       catch (error) {
         console.error('Stream processing error:', error)
         controller.error(error)
+        return
       }
-      finally {
-        reader.releaseLock()
-        controller.close()
-      }
+      controller.close()
     },
   })
 }
@@ -418,24 +309,20 @@ serve(async (req: Request): Promise<Response> => {
     // 5. 시스템 프롬프트 구성
     const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary)
 
-    // 6. 모델 설정 가져오기
-    const modelConfig = getModelConfig(body)
+    // 6. 모델 결정 (허용 목록 밖이면 기본 모델)
+    const modelId = resolveModelId(body.modelName)
 
     // 7. 메시지 구성
     const messages = [
       ...optimizedHistory.map(h => ({ role: h.role, content: h.content })),
-      { role: 'user', content: message },
+      { role: 'user' as const, content: message },
     ]
 
-    // 8. AI 스트리밍 호출 (멀티 프로바이더)
-    const { stream: aiStream, provider } = await createAIChatStream(
-      modelConfig,
-      messages,
-      systemPrompt,
-    )
+    // 8. AI 스트리밍 호출 (Vercel AI Gateway)
+    const textStream = createAIChatStream(modelId, messages, systemPrompt)
 
     // 9. SSE 스트림 응답
-    const sseStream = createSSEStream(aiStream, componentType, context, provider)
+    const sseStream = createSSEStream(textStream, componentType, context)
 
     return new Response(sseStream, {
       headers: {
