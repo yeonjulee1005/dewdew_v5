@@ -1,67 +1,18 @@
-<script setup lang="ts">
-const { url } = useImageStorage()
-
-const imageModalOpen = ref(false)
-const selectedImageSrc = ref(url(true, '/assets/concept/chatbot-architecture.webp'))
-
-useHead({
-  link: [
-    {
-      rel: 'preload',
-      as: 'image',
-      href: selectedImageSrc.value,
-      fetchpriority: 'high',
-    },
-  ],
-})
-</script>
-
 <template>
-  <div>
-    <div class="flex flex-col gap-y-4 max-w-4xl mx-auto">
-      <h3 class="text-2xl font-bold break-keep">
-        {{ $t('aiComponents.concept.title') }}
-      </h3>
-      <NuxtImg
-        :src="selectedImageSrc"
-        class="w-full h-full object-cover rounded-md cursor-pointer"
-        format="webp"
-        :quality="50"
-        :width="1024"
-        :height="691"
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1024px"
-        alt="chatbot-architecture"
-        loading="eager"
-        fetchpriority="high"
-        preload
-        @click="imageModalOpen = true"
-      />
-      <div class="space-y-1.5">
-        <p
-          v-for="item in $tm('aiComponents.concept.description')"
-          :key="item"
-          class="text-lg text-neutral-500 dark:text-neutral-400 break-keep"
-        >
-          {{ $rt(item) }}
-        </p>
-      </div>
+  <div class="flex flex-col gap-y-4 max-w-5xl mx-auto">
+    <h3 class="text-2xl font-bold break-keep">
+      {{ $t('aiComponents.concept.title') }}
+    </h3>
+    <!-- 아키텍처 다이어그램 (인라인 SVG, 라이트/다크 테마 대응) -->
+    <ChatArchitectureDiagram />
+    <div class="space-y-1.5">
+      <p
+        v-for="item in $tm('aiComponents.concept.description')"
+        :key="item"
+        class="text-lg text-neutral-500 dark:text-neutral-400 break-keep"
+      >
+        {{ $rt(item) }}
+      </p>
     </div>
-    <!-- 이미지 모달 -->
-    <DdModal
-      v-model:open="imageModalOpen"
-      :ui="{ content: 'max-w-dvw' }"
-      :title="$t('aiComponents.imageModal', '확대된 이미지')"
-    >
-      <template #body>
-        <div class="flex justify-center items-center p-4">
-          <img
-            :src="selectedImageSrc"
-            alt="확대된 이미지"
-            class="max-w-full h-full object-contain"
-            @click="imageModalOpen = false"
-          >
-        </div>
-      </template>
-    </DdModal>
   </div>
 </template>
