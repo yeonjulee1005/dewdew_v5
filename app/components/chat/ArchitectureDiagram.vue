@@ -7,11 +7,11 @@ const d = (key: string) => t(`aiComponents.concept.diagram.${key}`)
 
 // Edge Function 내부 단계 (RAG 블록 제외)
 const edgeSteps = computed(() => [
-  { n: '⑤', y: 80, title: 'history-optimizer', sub: d('optimizerSub') },
-  { n: '⑥', y: 142, title: 'ai_settings', sub: d('settingsSub') },
-  { n: '⑧', y: 312, title: 'component-mapper', sub: d('mapperSub') },
-  { n: '⑨', y: 374, title: 'ai-models', sub: d('modelsSub') },
-  { n: '⑩', y: 436, title: 'ai-provider', sub: d('providerSub'), accent: true },
+  { n: '5', y: 80, title: 'history-optimizer', sub: d('optimizerSub') },
+  { n: '6', y: 142, title: 'ai_settings', sub: d('settingsSub') },
+  { n: '8', y: 312, title: 'component-mapper', sub: d('mapperSub') },
+  { n: '9', y: 374, title: 'ai-models', sub: d('modelsSub') },
+  { n: '10', y: 436, title: 'ai-provider', sub: d('providerSub'), accent: true },
 ])
 
 const providers = computed(() => [
@@ -26,6 +26,16 @@ const tables = computed(() => [
   { x: 424, title: 'resume.*', sub: d('resumeSub') },
   { x: 576, title: 'document_embeddings', sub: d('embeddingsSub') },
   { x: 728, title: 'ai_settings', sub: d('settingsDbSub') },
+])
+
+// 번호가 붙는 화살표 라벨 — 배지 중심(cx, cy) 기준, 텍스트는 배지 오른쪽
+const numberedLabels = computed(() => [
+  { n: '1', cx: 140, cy: 156, text: d('a1') },
+  { n: '2', cx: 214, cy: 280, text: d('a2') },
+  { n: '3', cx: 362, cy: 454, text: d('a3') },
+  { n: '4', cx: 400, cy: 80, text: d('a4') },
+  { n: '11', cx: 1004, cy: 315, text: d('a9') },
+  { n: '12', cx: 428, cy: 184, text: 'SSE', bold: true },
 ])
 </script>
 
@@ -138,8 +148,9 @@ const tables = computed(() => [
             y="352"
           >{{ d('zoneProviders') }}</text>
           <text
-            x="262"
+            x="866"
             y="602"
+            text-anchor="end"
           >{{ d('zoneDb') }}</text>
         </g>
 
@@ -234,10 +245,17 @@ const tables = computed(() => [
               ? 'fill-amber-50 dark:fill-amber-950/40 stroke-amber-500'
               : 'fill-white dark:fill-neutral-800 stroke-neutral-300 dark:stroke-neutral-600'"
           />
+          <circle
+            cx="526"
+            :cy="step.y + 25"
+            r="12"
+            class="fill-amber-500"
+          />
           <text
-            x="520"
+            x="526"
             :y="step.y + 30"
-            class="fill-amber-600 dark:fill-amber-400 text-[16px] font-bold"
+            text-anchor="middle"
+            class="fill-white text-[14px] font-bold"
           >{{ step.n }}</text>
           <text
             x="546"
@@ -260,11 +278,18 @@ const tables = computed(() => [
           rx="8"
           class="fill-white dark:fill-neutral-800 stroke-neutral-300 dark:stroke-neutral-600"
         />
+        <circle
+          cx="526"
+          cy="221"
+          r="12"
+          class="fill-amber-500"
+        />
         <text
-          x="520"
-          y="228"
-          class="fill-amber-600 dark:fill-amber-400 text-[16px] font-bold"
-        >⑦</text>
+          x="526"
+          y="226"
+          text-anchor="middle"
+          class="fill-white text-[14px] font-bold"
+        >7</text>
         <text
           x="546"
           y="226"
@@ -472,7 +497,7 @@ const tables = computed(() => [
           <!-- ⑩ 스트리밍 요청 → Gateway -->
           <path d="M856,461 H866 a6,6 0 0 1 12,0 H896 V221 H920" />
           <!-- ⑪ 라우팅 · 폴백 → Provider -->
-          <path d="M1044,300 V356" />
+          <path d="M1150,300 V356" />
         </g>
         <!-- ⑫ SSE 응답 (역방향, 점선) -->
         <g
@@ -487,23 +512,30 @@ const tables = computed(() => [
         </g>
 
         <!-- ───────── 화살표 라벨 ───────── -->
+        <g
+          v-for="label in numberedLabels"
+          :key="label.n"
+        >
+          <circle
+            :cx="label.cx"
+            :cy="label.cy"
+            r="12"
+            class="fill-amber-500"
+          />
+          <text
+            :x="label.cx"
+            :y="label.cy + 5"
+            text-anchor="middle"
+            class="fill-white text-[14px] font-bold"
+          >{{ label.n }}</text>
+          <text
+            :x="label.cx + 17"
+            :y="label.cy + 5"
+            class="fill-neutral-700 dark:fill-neutral-200 text-[13px]"
+            :class="label.bold ? 'font-bold' : 'font-semibold'"
+          >{{ label.text }}</text>
+        </g>
         <g class="fill-neutral-600 dark:fill-neutral-300 text-[12px]">
-          <text
-            x="128"
-            y="160"
-          >① {{ d('a1') }}</text>
-          <text
-            x="206"
-            y="290"
-          >② {{ d('a2') }}</text>
-          <text
-            x="348"
-            y="460"
-          >③ {{ d('a3') }}</text>
-          <text
-            x="388"
-            y="88"
-          >④ {{ d('a4') }}</text>
           <text
             x="496"
             y="540"
@@ -512,10 +544,6 @@ const tables = computed(() => [
             x="652"
             y="566"
           >{{ d('a6') }}</text>
-          <text
-            x="1052"
-            y="320"
-          >⑪ {{ d('a9') }}</text>
         </g>
         <g class="fill-amber-700 dark:fill-amber-300 text-[12px] font-semibold">
           <text
@@ -527,16 +555,11 @@ const tables = computed(() => [
             y="226"
           >{{ d('a8') }}</text>
         </g>
-        <g class="fill-neutral-600 dark:fill-neutral-300 text-[12px] font-semibold">
-          <text
-            x="416"
-            y="194"
-          >⑫ SSE</text>
-          <text
-            x="206"
-            y="342"
-          >{{ d('a10') }}</text>
-        </g>
+        <text
+          x="206"
+          y="342"
+          class="fill-neutral-600 dark:fill-neutral-300 text-[12px] font-semibold"
+        >{{ d('a10') }}</text>
       </svg>
     </div>
     <figcaption class="mt-2 text-sm text-neutral-500 dark:text-neutral-400 break-keep">
