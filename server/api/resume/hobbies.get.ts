@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: hobbiesData, error: hobbiesError } = await client
     .schema('resume')
     .from('hobbies')
-    .select('title, description, icon_url, order_index, deleted')
+    .select('id, title, description, icon_url, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: true })
 
@@ -15,5 +15,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusMessage: hobbiesError.message })
   }
 
-  return hobbiesData
+  // ?lang=xx 요청 시 번역본으로 덮어씀 (translate-resume Edge Function, 캐시 우선)
+  return localizeResumeRows(event, 'hobbies', hobbiesData ?? [])
 })

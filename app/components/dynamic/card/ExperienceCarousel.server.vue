@@ -1,25 +1,26 @@
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery, formatYearMonth } = await useContentLocale(() => props.lang)
+
 const { data: experienceData } = await useFetch('/api/resume/experience', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
 })
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-}
+const formatDate = (dateString: string | null) => formatYearMonth(dateString)
 </script>
 
 <template>
@@ -33,7 +34,7 @@ const formatDate = (dateString: string | null) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-xl font-bold">
-          {{ $t('dynamic.experience.title') }}
+          {{ ct('dynamic.experience.title') }}
         </h3>
         <div
           v-if="experienceData && experienceData.length > 0"
@@ -45,13 +46,13 @@ const formatDate = (dateString: string | null) => {
             arrows
             loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
-            :aria-label="$t('dynamic.experience.carousel', '경력 캐러셀')"
+            :aria-label="ct('dynamic.experience.carousel', '경력 캐러셀')"
           >
             <div
               class="flex flex-col h-[300px] overflow-y-auto p-3 rounded-md border border-neutral-200 dark:border-neutral-700 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent"
               role="region"
               tabindex="0"
-              :aria-label="`${$t('dynamic.experience.scrollableRegion', '경력 상세 정보 스크롤 영역')} - ${experience.company_name}`"
+              :aria-label="`${ct('dynamic.experience.scrollableRegion', '경력 상세 정보 스크롤 영역')} - ${experience.company_name}`"
             >
               <div class="flex flex-col gap-y-3 shrink-0">
                 <div class="flex flex-col">
@@ -64,7 +65,7 @@ const formatDate = (dateString: string | null) => {
                       variant="outline"
                       color="info"
                       size="lg"
-                      :label="$t('dynamic.experience.current')"
+                      :label="ct('dynamic.experience.current')"
                     />
                   </div>
                   <div class="flex items-center gap-x-2">
@@ -78,7 +79,7 @@ const formatDate = (dateString: string | null) => {
                     <div class="flex items-center gap-x-2 text-md text-neutral-500 dark:text-neutral-400">
                       <span>{{ formatDate(experience.start_date) }}</span>
                       <span>~</span>
-                      <span>{{ experience.end_date ? formatDate(experience.end_date) : $t('dynamic.experience.present') }}</span>
+                      <span>{{ experience.end_date ? formatDate(experience.end_date) : ct('dynamic.experience.present') }}</span>
                     </div>
                   </div>
                 </div>
@@ -97,7 +98,7 @@ const formatDate = (dateString: string | null) => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.experience.empty') }}
+          {{ ct('dynamic.experience.empty') }}
         </div>
       </div>
     </DdCard>

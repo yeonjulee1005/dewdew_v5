@@ -7,30 +7,33 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const toast = useToast()
 const config = useRuntimeConfig()
-const { t } = useI18n()
 const { patterns } = useValidation()
 const emailRegex = patterns.email
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct } = await useContentLocale(() => props.lang)
+
 const schema = object({
   name: string()
-    .min(2, t('messages.nameFormat'))
-    .max(20, t('messages.nameFormat'))
-    .required(t('messages.nameRequire')),
+    .min(2, ct('messages.nameFormat'))
+    .max(20, ct('messages.nameFormat'))
+    .required(ct('messages.nameRequire')),
   email: string()
-    .required(t('messages.emailRequire'))
-    .matches(emailRegex, t('messages.emailFormat')),
+    .required(ct('messages.emailRequire'))
+    .matches(emailRegex, ct('messages.emailFormat')),
   message: string()
-    .min(20, t('messages.contentFormat'))
-    .required(t('messages.contentRequire')),
+    .min(20, ct('messages.contentFormat'))
+    .required(ct('messages.contentRequire')),
 })
 
 type Schema = InferType<typeof schema>
@@ -55,7 +58,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       event.data,
       config.public.emailJsKey,
     )
-    toast.add({ title: t('messages.successEmailSend'), color: 'success' })
+    toast.add({ title: ct('messages.successEmailSend'), color: 'success' })
     // 폼 초기화
     formData.name = ''
     formData.email = ''
@@ -63,7 +66,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   }
   catch (error) {
     console.error('Email send error:', error)
-    toast.add({ title: t('messages.failEmailSend'), color: 'error' })
+    toast.add({ title: ct('messages.failEmailSend'), color: 'error' })
   }
 }
 </script>
@@ -79,7 +82,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.contact.title') }}
+          {{ ct('dynamic.contact.title') }}
         </h3>
 
         <DdForm
@@ -91,21 +94,21 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
           <DdFormField
             name="name"
             size="xl"
-            :label="$t('texts.name')"
+            :label="ct('texts.name')"
             required
           >
             <DdInput
               v-model="formData.name"
               class="w-full"
               size="xl"
-              :placeholder="$t('placeholder.inputName')"
+              :placeholder="ct('placeholder.inputName')"
             />
           </DdFormField>
 
           <DdFormField
             name="email"
             size="xl"
-            :label="$t('texts.email')"
+            :label="ct('texts.email')"
             required
           >
             <DdInput
@@ -113,14 +116,14 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
               type="email"
               class="w-full"
               size="xl"
-              :placeholder="$t('placeholder.inputEmail')"
+              :placeholder="ct('placeholder.inputEmail')"
             />
           </DdFormField>
 
           <DdFormField
             name="message"
             size="xl"
-            :label="$t('texts.message')"
+            :label="ct('texts.message')"
             required
           >
             <DdTextarea
@@ -129,7 +132,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
               size="xl"
               :rows="5"
               autoresize
-              :placeholder="$t('placeholder.inputContent')"
+              :placeholder="ct('placeholder.inputContent')"
             />
           </DdFormField>
 
@@ -142,7 +145,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
               variant="solid"
               color="primary"
             >
-              {{ $t('texts.send') }}
+              {{ ct('texts.send') }}
             </DdButton>
           </div>
         </DdForm>

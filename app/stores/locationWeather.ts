@@ -108,7 +108,7 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
 
     weatherSecondData.value = {
       pty: getWeatherData('pty', precipitationCode(data.weatherCode, data.rainfall)) ?? '',
-      r1n: data.rainfall !== null && data.rainfall > 0 ? `${data.rainfall}mm` : '강수없음',
+      r1n: data.rainfall !== null && data.rainfall > 0 ? `${data.rainfall}mm` : 'weather.noRain',
       reh: data.humidity !== null ? getWeatherData('reh', data.humidity) ?? '' : '',
     }
   }
@@ -143,6 +143,8 @@ export const useLocWeatherStore = defineStore('useLocWeatherStore', () => {
   }
 }, {
   persist: {
+    // v2: 라벨을 한국어 문자열 → i18n 키로 변경 (이전 세션 값 무효화)
+    key: 'useLocWeatherStore:v2',
     storage: piniaPluginPersistedstate.sessionStorage(),
   },
 })

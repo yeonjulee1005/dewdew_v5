@@ -3,14 +3,18 @@ import { track } from '@vercel/analytics/server'
 
 const { isMobile } = useDevice()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
+
+const { ct } = await useContentLocale(() => props.lang)
 
 const { data: socialLinksData } = await useFetch('/api/resume/socialLinks', {
   method: 'GET',
@@ -45,7 +49,7 @@ const clickSocialLink = (url: string) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.social.title') }}
+          {{ ct('dynamic.social.title') }}
         </h3>
         <DdPageGrid
           v-if="socialLinksData && socialLinksData.length > 0"
@@ -70,7 +74,7 @@ const clickSocialLink = (url: string) => {
           v-else
           class="text-md text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.social.empty') }}
+          {{ ct('dynamic.social.empty') }}
         </div>
       </div>
     </DdCard>

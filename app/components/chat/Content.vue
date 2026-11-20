@@ -16,12 +16,13 @@ type ExtendedUIMessage = {
   }>
   componentType?: ComponentType | null
   componentData?: Record<string, unknown> | null
+  lang?: string | null
 }
 
 const { isMobile } = useDevice()
 const { width } = useWindowSize()
 const { renderUrl } = useImageStorage()
-const { t } = useI18n()
+const { t, tm, rt } = useI18n()
 const {
   messages,
   status,
@@ -39,27 +40,11 @@ const inputMessage = ref('')
 const imageModalOpen = ref(false)
 const selectedImageSrc = ref('')
 
-const suggestions = [
-  '자기소개 해줘요!',
-  '최근 경력이 어떻게 되요?',
-  '어떤 기술적인 고민들을 하고있나요?',
-  '앞으로의 커리어 패스를 어떻게 가져가고 싶어요?',
-  '최근 진행했던 프로젝트를 알려주세요!',
-  'WebGL도 관심이 있나요?',
-  '학력이 어떻게 되요?',
-  '어떤 기술 스택을 즐겨 사용해요?',
-  '보유한 자격증이 있나요?',
-  '커피챗 하고싶어요!',
-  'Github에서 어떤 오픈소스에 기여했었는지 살펴봐줘!',
-  '취미가 뭐에요? 평소에 어떤것을 하면서 리프레쉬 하고 있어요?',
-  '소셜 링크들을 알려주세요!',
-  '이 웹사이트는 어떻게 만들었어요?',
-  '부족한 점이나 단점이 있다면 알려줄 수 있어요?',
-  '종합적으로 생각했을때, 듀듀는 어떤 개발자 인가요?',
-]
+// 빠른 질문 — 사이트 언어(i18n ai.suggestions)를 따른다
+const suggestions = computed(() => (tm('ai.suggestions') as unknown as string[]).map(item => rt(item)))
 
 const suggestionItems = computed(() => {
-  return suggestions.map((suggestion, index) => ({
+  return suggestions.value.map((suggestion, index) => ({
     label: suggestion,
     value: String(index),
   }))
@@ -86,6 +71,7 @@ const uiMessages = computed(() => {
       ],
       componentType: msg.componentType,
       componentData: msg.componentData,
+      lang: msg.lang,
     }
     return result
   })
@@ -109,6 +95,7 @@ const displayMessages = computed(() => {
     ],
     componentType: currentComponent.value?.type,
     componentData: currentComponent.value?.data,
+    lang: currentComponent.value?.lang,
   }
 
   return [
@@ -417,6 +404,7 @@ onUnmounted(() => {
               v-if="(message as ExtendedUIMessage).componentType"
               :component-type="(message as ExtendedUIMessage).componentType"
               :component-data="(message as ExtendedUIMessage).componentData"
+              :lang="(message as ExtendedUIMessage).lang"
               class="w-full"
             />
           </div>

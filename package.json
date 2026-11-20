@@ -6,7 +6,7 @@
   },
   "private": true,
   "type": "module",
-  "version": "1.2611.2",
+  "version": "1.2611.3",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 4110",
@@ -31,6 +31,7 @@
     "supabase:type-data": "supabase gen types typescript --project-id tgtlrqqasaiavynmlxkc --schema data > app/types/supabase/data.ts",
     "supabase:deploy-rag-portfolio": "supabase functions deploy dewdew-rag-portfolio --project-ref tgtlrqqasaiavynmlxkc",
     "supabase:deploy-initialize-embeddings": "supabase functions deploy initialize-embeddings --project-ref tgtlrqqasaiavynmlxkc",
+    "supabase:deploy-translate-resume": "supabase functions deploy translate-resume --project-ref tgtlrqqasaiavynmlxkc",
     "fonts:download": "node scripts/download-fonts.js",
     "kma:stations": "node --env-file=.env scripts/fetch-kma-stations.js"
   },

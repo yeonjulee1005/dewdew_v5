@@ -4,6 +4,7 @@ import {
   summarizeGitHubProfile,
 } from './url-fetcher.ts'
 import { getEmbedding } from './embeddings.ts'
+import { matchKeywords } from './keyword-match.ts'
 import type {
   RAGContext,
   AISettingsMap,
@@ -19,12 +20,6 @@ import type {
   Threejs,
   AISetting,
 } from './types.ts'
-
-// 키워드 매칭 헬퍼
-const matchKeywords = (text: string, keywords: string[]): boolean => {
-  const lowerText = text.toLowerCase()
-  return keywords.some(keyword => lowerText.includes(keyword))
-}
 
 // 년도 추출 헬퍼
 const extractYear = (text: string): number | null => {

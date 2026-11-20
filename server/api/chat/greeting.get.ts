@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
         'Authorization': `Bearer ${config.supabaseKey}`,
       },
       body: JSON.stringify({
-        message: '안녕',
+        // 사이트 언어 인사 → Edge Function 이 같은 언어로 답변하고 카드 lang 도 맞춘다
+        message: getQuery(event).lang === 'en' ? 'Hello!' : '안녕',
         history: [],
       }),
     })

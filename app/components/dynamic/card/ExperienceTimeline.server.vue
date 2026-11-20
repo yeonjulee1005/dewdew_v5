@@ -1,37 +1,36 @@
 <script setup lang="ts">
 import type { TimelineItem } from '@nuxt/ui'
 
-const { t } = useI18n()
-
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery, formatYearMonth } = await useContentLocale(() => props.lang)
+
 const activeItem = ref(0)
 const isAutoPlaying = ref(true)
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null
 
 const { data: experienceData } = await useFetch('/api/resume/experience', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
 })
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-}
+const formatDate = (dateString: string | null) => formatYearMonth(dateString)
 
 const formatDateRange = (startDate: string | null, endDate: string | null, isFirst: boolean = false) => {
   const start = formatDate(startDate)
-  const end = endDate ? formatDate(endDate) : (isFirst ? t('dynamic.experience.present') : ' ')
+  const end = endDate ? formatDate(endDate) : (isFirst ? ct('dynamic.experience.present') : ' ')
   return end ? `${start} ~ ${end}` : start
 }
 
@@ -94,7 +93,7 @@ onUnmounted(() => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-xl font-bold">
-          {{ $t('dynamic.experience.title') }}
+          {{ ct('dynamic.experience.title') }}
         </h3>
         <div
           v-if="timelineItems.length > 0"
@@ -122,7 +121,7 @@ onUnmounted(() => {
                   variant="outline"
                   color="info"
                   size="lg"
-                  :label="$t('dynamic.experience.current')"
+                  :label="ct('dynamic.experience.current')"
                 />
               </div>
             </template>
@@ -144,7 +143,7 @@ onUnmounted(() => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.experience.empty') }}
+          {{ ct('dynamic.experience.empty') }}
         </div>
       </div>
     </DdCard>

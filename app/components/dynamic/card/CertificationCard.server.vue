@@ -1,27 +1,28 @@
 <script setup lang="ts">
 const { isDesktopOrTablet } = useDevice()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery, formatYearMonth } = await useContentLocale(() => props.lang)
+
 const { data: certificationData } = await useFetch('/api/resume/certification', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
 })
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-}
+const formatDate = (dateString: string | null) => formatYearMonth(dateString)
 
 const handleCertificationClick = (url: string | null | undefined) => {
   if (!url) return
@@ -40,7 +41,7 @@ const handleCertificationClick = (url: string | null | undefined) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.certification.title', '인증서') }}
+          {{ ct('dynamic.certification.title', '인증서') }}
         </h3>
         <DdPageGrid
           v-if="certificationData && certificationData.length > 0"
@@ -108,7 +109,7 @@ const handleCertificationClick = (url: string | null | undefined) => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.certification.empty', '인증서가 없습니다.') }}
+          {{ ct('dynamic.certification.empty', '인증서가 없습니다.') }}
         </div>
       </div>
     </DdCard>

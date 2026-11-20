@@ -3,27 +3,28 @@ import { track } from '@vercel/analytics'
 
 const { url } = useImageStorage()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery, formatYearMonth } = await useContentLocale(() => props.lang)
+
 const { data: projectsData } = await useFetch('/api/resume/projects', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
 })
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-}
+const formatDate = (dateString: string | null) => formatYearMonth(dateString)
 
 // 이미지 모달 상태
 const imageModalOpen = ref(false)
@@ -51,7 +52,7 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.project.title') }}
+          {{ ct('dynamic.project.title') }}
         </h3>
 
         <div
@@ -64,13 +65,13 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
             arrows
             loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
-            :aria-label="$t('dynamic.project.carousel', '프로젝트 캐러셀')"
+            :aria-label="ct('dynamic.project.carousel', '프로젝트 캐러셀')"
           >
             <div
               class="flex flex-col h-[520px] overflow-y-auto p-3 rounded-md border border-neutral-200 dark:border-neutral-700 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent"
               role="region"
               tabindex="0"
-              :aria-label="`${$t('dynamic.project.scrollableRegion', '프로젝트 상세 정보 스크롤 영역')} - ${project.title}`"
+              :aria-label="`${ct('dynamic.project.scrollableRegion', '프로젝트 상세 정보 스크롤 영역')} - ${project.title}`"
             >
               <div class="flex flex-col gap-y-4 shrink-0">
                 <div
@@ -106,7 +107,7 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
                         color="primary"
                         @click="track('project_view', { project: project.title })"
                       >
-                        {{ $t('dynamic.project.viewProject') }}
+                        {{ ct('dynamic.project.viewProject') }}
                       </DdButton>
                       <DdButton
                         v-if="project.github_url"
@@ -117,7 +118,7 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
                         color="secondary"
                         @click="track('github_view', { github: project.github_url })"
                       >
-                        {{ $t('dynamic.project.viewGithub') }}
+                        {{ ct('dynamic.project.viewGithub') }}
                       </DdButton>
                     </div>
                     <div class="flex-auto" />
@@ -127,7 +128,7 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
                     >
                       {{ formatDate(project.start_date) }}
                       <span v-if="project.end_date"> ~ {{ formatDate(project.end_date) }}</span>
-                      <span v-else> ~ {{ $t('dynamic.project.present') }}</span>
+                      <span v-else> ~ {{ ct('dynamic.project.present') }}</span>
                     </div>
                   </div>
                   <p
@@ -162,7 +163,7 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
                   class="flex flex-col gap-y-1"
                 >
                   <span class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 uppercase">
-                    {{ $t('dynamic.project.highlights', '주요 특징') }}
+                    {{ ct('dynamic.project.highlights', '주요 특징') }}
                   </span>
                   <ul class="list-disc list-inside text-md text-neutral-800 dark:text-neutral-200 space-y-1">
                     <li
@@ -183,13 +184,13 @@ const handleImageClick = (imageUrl: string | null | undefined) => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.project.empty') }}
+          {{ ct('dynamic.project.empty') }}
         </div>
       </div>
     </DdCard>
     <DdModal
       v-model:open="imageModalOpen"
-      :title="$t('ai.imageModal', '확대된 이미지')"
+      :title="ct('ai.imageModal', '확대된 이미지')"
       :ui="{ content: 'max-w-4xl' }"
     >
       <template #body>
