@@ -121,14 +121,19 @@ const analyzeLatin = async (message: string, text: string): Promise<MessageAnaly
     const answer = await utilityCall(
       `Reply in exactly two lines, nothing else.
 Line 1: the language code of the user's message, one of: ${LATIN_LANGUAGES.join(', ')}.
-Line 2: if the code is not en, a short natural Korean translation of the message; otherwise leave it empty.`,
+Line 2: if the code is not en, a short natural Korean translation of the message; otherwise leave it empty.
+Example for "¿Qué proyectos has hecho?":
+es
+어떤 프로젝트를 했나요?`,
       text,
     )
     // 기대 형식은 2줄이지만, 한 줄로 붙여 답하는 경우("vi: 번역", "vi | 번역")도 허용
     const parsed = answer.trim().replace(/^line\s*1\s*:\s*/i, '').replace(/\nline\s*2\s*:\s*/i, '\n').match(/^\W*([a-z]{2})\b[\s:|\-–—.]*([\s\S]*)$/i)
     const lang = parseCode(parsed?.[1], LATIN_LANGUAGES, 'en')
     const translated = (parsed?.[2] ?? '').replace(/\s+/g, ' ').trim()
-    return { lang, matchQuery: lang !== 'en' && translated ? translated : message }
+    if (lang === 'en') return { lang, matchQuery: message }
+    // 모델이 언어 코드만 답한 경우에만 번역 1회 추가 (정상 응답이면 추가 호출 없음)
+    return { lang, matchQuery: translated || await translateForMatching(message, text) }
   }
   catch (error) {
     console.warn('[language] latin analysis failed, fallback to en:', error)
