@@ -27,11 +27,7 @@ head:
       content: '© 2023 Dewdew'
 ---
 
-# 회고 블로그
-
-::callout{icon="i-lucide-notebook-pen" title="회고 블로그" color="primary"}
-  기술 외적인 포스팅(개발회고, 일상 이야기 등)을 올리기 위한 블로그입니다.<br>
-  본 블로그는 [Nuxt Content](https://content.nuxt.com/)를 이용하여, `markdown`으로 간편하게 작성할 수 있도록 구현되였습니다.
+::blog-intro
 ::
 
 ![블로그 메인](https://api.dewdew.dev/storage/v1/object/public/blog/index-cover.webp){height="400" alt="블로그 메인" loading="eager" fetchpriority="high"}
@@ -53,7 +49,7 @@ head:
 ::card{title="2023년을 회고하며...(20231229)" color="secondary" icon="i-lucide-external-link" to="/blog/20231229" target="_self"}
 ::
 
-::card{title="기술 블로그 가기" color="primary" icon="i-lucide-globe" to="https://www.dewdew.world/tech" target="_blank"}
+::blog-tech-link
 ::
 
 ::

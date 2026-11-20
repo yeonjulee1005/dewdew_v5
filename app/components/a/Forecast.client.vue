@@ -3,6 +3,16 @@ import type { UvData, VisibilityData, WeatherFirstData, WeatherSecondData } from
 
 const { uvData, visibilityData, weatherFirstData, weatherSecondData } = storeToRefs(useLocWeatherStore())
 const { visibilityColor, uvColor, humidityColor, weatherColor, temperatureColor } = useColorUtils()
+const { t, te, locale } = useI18n()
+
+// 스토어 값은 "i18n 키,아이콘" 형식 → 현재 언어 문구 (키가 아니면 값 그대로: 예 "3mm")
+const label = (raw: string | undefined) => {
+  const key = raw?.split(',')[0] ?? ''
+  return key && te(key) ? t(key) : key
+}
+
+// 관측 지점명은 한국어 원문 → 한국어 외 화면에서는 로마자 표기 ("Yeonsu-gu, Incheon")
+const place = (location: string) => (locale.value === 'ko' ? location : romanizeLocation(location))
 
 // 캐러셀 아이템 배열 생성
 const carouselItems = computed(() => {
@@ -41,7 +51,7 @@ const carouselItems = computed(() => {
       item: 'basis-full h-14',
     }"
     class="h-10 w-full max-w-fit"
-    :aria-label="$t('texts.weatherCarousel', '날씨 정보 캐러셀')"
+    :aria-label="$t('texts.weatherCarousel')"
     role="region"
   >
     <!-- UV 데이터 -->
@@ -52,7 +62,7 @@ const carouselItems = computed(() => {
       <div class="flex gap-4">
         <AIconText
           :use-icon="false"
-          :text="(item.data as UvData).location"
+          :text="place((item.data as UvData).location)"
         />
         <AIconText
           :use-icon="false"
@@ -62,7 +72,7 @@ const carouselItems = computed(() => {
           :custom-class="uvColor((item.data as UvData).uvIndex) || undefined"
           :icon-name="(item.data as UvData).uv.split(',')[1]"
           :text-class="uvColor((item.data as UvData).uvIndex) || undefined"
-          :text="(item.data as UvData).uv.split(',')[0]"
+          :text="label((item.data as UvData).uv)"
         />
       </div>
     </div>
@@ -75,7 +85,7 @@ const carouselItems = computed(() => {
       <div class="flex gap-4">
         <AIconText
           :use-icon="false"
-          :text="(item.data as VisibilityData).location"
+          :text="place((item.data as VisibilityData).location)"
         />
         <AIconText
           :use-icon="false"
@@ -85,7 +95,7 @@ const carouselItems = computed(() => {
           :custom-class="visibilityColor((item.data as VisibilityData).visibilityLevel) || undefined"
           :icon-name="(item.data as VisibilityData).visibility.split(',')[1]"
           :text-class="visibilityColor((item.data as VisibilityData).visibilityLevel) || undefined"
-          :text="`${(item.data as VisibilityData).visibility.split(',')[0]} ${(item.data as VisibilityData).visibilityKm}km`"
+          :text="`${label((item.data as VisibilityData).visibility)} ${(item.data as VisibilityData).visibilityKm}km`"
         />
       </div>
     </div>
@@ -100,7 +110,7 @@ const carouselItems = computed(() => {
           v-if="(item.data as WeatherFirstData).sky"
           :custom-class="weatherColor((item.data as WeatherFirstData).sky.split(',')[0] ?? '') || undefined"
           :icon-name="(item.data as WeatherFirstData).sky.split(',')[1]"
-          :text="(item.data as WeatherFirstData).sky.split(',')[0]"
+          :text="label((item.data as WeatherFirstData).sky)"
         />
         <AIconText
           :use-icon="false"
@@ -124,11 +134,11 @@ const carouselItems = computed(() => {
       <div class="flex gap-4">
         <AIconText
           :icon-name="(item.data as WeatherSecondData).pty.split(',')[1]"
-          :text="(item.data as WeatherSecondData).pty.split(',')[0]"
+          :text="label((item.data as WeatherSecondData).pty)"
         />
         <AIconText
           :use-icon="false"
-          :text="(item.data as WeatherSecondData).r1n"
+          :text="label((item.data as WeatherSecondData).r1n)"
         />
         <AIconText
           :custom-class="humidityColor(parseInt((item.data as WeatherSecondData).reh)) || undefined"

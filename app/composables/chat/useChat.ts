@@ -14,6 +14,8 @@ type ComponentData = {
 }
 
 export const useChat = () => {
+  const { t, locale } = useI18n()
+
   const messages = ref<ChatMessage[]>([])
   const isStreaming = ref(false)
   const streamingText = ref('')
@@ -120,7 +122,8 @@ export const useChat = () => {
     abortController.value = new AbortController()
 
     try {
-      const response = await fetch('/api/chat/greeting', {
+      // 사이트 언어로 인사 (en 이면 영어 인사 → 답변·카드도 영어)
+      const response = await fetch(`/api/chat/greeting?lang=${locale.value === 'en' ? 'en' : 'ko'}`, {
         signal: abortController.value.signal,
       })
 
@@ -157,7 +160,7 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: streamingText.value || '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
+        content: streamingText.value || t('ai.greetingFallback'),
         componentType: finalComponentType,
         componentData: finalComponentData,
         lang: componentLang,
@@ -197,7 +200,7 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
+        content: t('ai.greetingFallback'),
         componentType: null,
         componentData: null,
         timestamp: new Date(),
@@ -346,7 +349,7 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: '죄송해요, 오류가 발생했어요. 다시 시도해주세요!',
+        content: t('ai.errorMessage'),
         timestamp: new Date(),
       })
     }

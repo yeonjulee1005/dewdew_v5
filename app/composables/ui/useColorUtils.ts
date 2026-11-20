@@ -110,9 +110,9 @@ export const useColorUtils = () => {
    */
   const weatherColor = (weather: string): string | undefined => {
     const colorMap: Record<string, string> = {
-      '맑음': COLOR_CLASSES.yellow[600],
-      '구름 많음': COLOR_CLASSES.sky[600],
-      '흐림': COLOR_CLASSES.yellow[600],
+      'weather.sky.clear': COLOR_CLASSES.yellow[600],
+      'weather.sky.mostlyCloudy': COLOR_CLASSES.sky[600],
+      'weather.sky.cloudy': COLOR_CLASSES.yellow[600],
     }
     return colorMap[weather]
   }

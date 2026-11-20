@@ -80,6 +80,12 @@ export default {
   },
   blog: {
     recentPost: 'Recent Posts',
+    title: 'Retrospective Blog',
+    introLine1: 'A blog for non-technical posts such as development retrospectives and everyday stories.',
+    introLine2: 'It is built with {nuxtContent} so that posts can be written easily in {markdown}.',
+    techBlog: 'Go to the tech blog',
+    toc: 'Table of contents',
+    notFound: 'The blog post could not be found.',
   },
   ai: {
     error: {
@@ -99,6 +105,26 @@ export default {
     imageModal: 'Enlarged image',
     cardLoading: 'Loading card…',
     cardTranslating: 'Preparing the card in your language…',
+    greetingFallback: 'Hi! I\'m Yeonju Lee (Dewdew). What would you like to know?',
+    errorMessage: 'Sorry, something went wrong. Please try again!',
+    suggestions: [
+      'Please introduce yourself!',
+      'What does your recent career look like?',
+      'What technical challenges are you thinking about?',
+      'How would you like to shape your career path?',
+      'Tell me about your recent projects!',
+      'Are you interested in WebGL too?',
+      'What is your educational background?',
+      'Which tech stack do you enjoy using?',
+      'Do you have any certifications?',
+      'I would like to contact you for a coffee chat!',
+      'Which open source projects have you contributed to on GitHub?',
+      'What are your hobbies? How do you usually recharge?',
+      'Please share your social links!',
+      'How did you build this website?',
+      'Could you share any weaknesses or areas to improve?',
+      'All things considered, who is Dewdew as a developer?',
+    ],
   },
   aiComponents: {
     concept: {
@@ -320,6 +346,43 @@ export default {
     },
     contact: {
       title: 'Send Email',
+    },
+  },
+  weather: {
+    noRain: 'No rain',
+    sky: {
+      clear: 'Clear',
+      mostlyCloudy: 'Mostly cloudy',
+      cloudy: 'Cloudy',
+    },
+    wind: {
+      n: 'N',
+      ne: 'NE',
+      e: 'E',
+      se: 'SE',
+      s: 'S',
+      sw: 'SW',
+      w: 'W',
+      nw: 'NW',
+    },
+    pty: {
+      none: 'None',
+      rain: 'Rain',
+      rainSnow: 'Rain/Snow',
+      snow: 'Snow',
+      drizzle: 'Drizzle',
+      drizzleSnow: 'Drizzle/Snow flurries',
+      snowFlurry: 'Snow flurries',
+    },
+    level: {
+      veryBad: 'Very poor',
+      bad: 'Poor',
+      normal: 'Moderate',
+      good: 'Good',
+      low: 'Low',
+      high: 'High',
+      veryHigh: 'Very high',
+      danger: 'Extreme',
     },
   },
   texts: {

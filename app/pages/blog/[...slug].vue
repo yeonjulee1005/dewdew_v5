@@ -2,7 +2,7 @@
 import { track } from '@vercel/analytics'
 import Giscus from '@giscus/vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const site = useSiteConfig()
 
@@ -307,7 +307,7 @@ watch(() => blog.value, () => {
     <template #right>
       <DdContentToc
         v-if="blog?.title !== 'Blog Home'"
-        title="목차"
+        :title="t('blog.toc')"
         :links="(blog?.body?.toc as any)?.links"
         highlight
         highlight-color="neutral"
@@ -364,7 +364,7 @@ watch(() => blog.value, () => {
           class="text-center py-8"
         >
           <p class="text-lg text-neutral-600 dark:text-neutral-400">
-            블로그 포스트를 찾을 수 없습니다.
+            {{ t('blog.notFound') }}
           </p>
         </div>
       </div>
@@ -382,7 +382,7 @@ watch(() => blog.value, () => {
         emit-metadata="0"
         input-position="top"
         theme="transparent_dark"
-        lang="ko"
+        :lang="locale === 'ko' ? 'ko' : 'en'"
         loading="lazy"
         crossorigin="anonymous"
         async

@@ -80,6 +80,12 @@ export default {
   },
   blog: {
     recentPost: '최근 포스팅',
+    title: '회고 블로그',
+    introLine1: '기술 외적인 포스팅(개발회고, 일상 이야기 등)을 올리기 위한 블로그입니다.',
+    introLine2: '본 블로그는 {nuxtContent}를 이용하여, {markdown}으로 간편하게 작성할 수 있도록 구현되었습니다.',
+    techBlog: '기술 블로그 가기',
+    toc: '목차',
+    notFound: '블로그 포스트를 찾을 수 없습니다.',
   },
   ai: {
     error: {
@@ -102,6 +108,26 @@ export default {
     imageModal: '확대된 이미지',
     cardLoading: '카드를 불러오는 중이에요',
     cardTranslating: '답변 언어로 카드를 준비하고 있어요',
+    greetingFallback: '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
+    errorMessage: '죄송해요, 오류가 발생했어요. 다시 시도해주세요!',
+    suggestions: [
+      '자기소개 해줘요!',
+      '최근 경력이 어떻게 되요?',
+      '어떤 기술적인 고민들을 하고있나요?',
+      '앞으로의 커리어 패스를 어떻게 가져가고 싶어요?',
+      '최근 진행했던 프로젝트를 알려주세요!',
+      'WebGL도 관심이 있나요?',
+      '학력이 어떻게 되요?',
+      '어떤 기술 스택을 즐겨 사용해요?',
+      '보유한 자격증이 있나요?',
+      '커피챗 하고싶어요!',
+      'Github에서 어떤 오픈소스에 기여했었는지 살펴봐줘!',
+      '취미가 뭐에요? 평소에 어떤것을 하면서 리프레쉬 하고 있어요?',
+      '소셜 링크들을 알려주세요!',
+      '이 웹사이트는 어떻게 만들었어요?',
+      '부족한 점이나 단점이 있다면 알려줄 수 있어요?',
+      '종합적으로 생각했을때, 듀듀는 어떤 개발자 인가요?',
+    ],
   },
   aiComponents: {
     concept: {
@@ -323,6 +349,43 @@ export default {
     },
     contact: {
       title: '메일 보내기',
+    },
+  },
+  weather: {
+    noRain: '강수없음',
+    sky: {
+      clear: '맑음',
+      mostlyCloudy: '구름많음',
+      cloudy: '흐림',
+    },
+    wind: {
+      n: '북',
+      ne: '북동',
+      e: '동',
+      se: '남동',
+      s: '남',
+      sw: '남서',
+      w: '서',
+      nw: '서북',
+    },
+    pty: {
+      none: '없음',
+      rain: '비',
+      rainSnow: '비/눈',
+      snow: '눈',
+      drizzle: '빗방울',
+      drizzleSnow: '빗방울/눈날림',
+      snowFlurry: '눈날림',
+    },
+    level: {
+      veryBad: '매우나쁨',
+      bad: '나쁨',
+      normal: '보통',
+      good: '좋음',
+      low: '낮음',
+      high: '높음',
+      veryHigh: '매우높음',
+      danger: '위험',
     },
   },
   texts: {
