@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 동적 컴포넌트 로딩 (코드 스플리팅)
-const Concept = defineAsyncComponent(() => import('~/components/chat/Concept.server.vue'))
+const Concept = defineAsyncComponent(() => import('~/components/chat/Concept.vue'))
 const Greeting = defineAsyncComponent(() => import('~/components/dynamic/card/Greeting.server.vue'))
 const Profile = defineAsyncComponent(() => import('~/components/dynamic/card/Profile.server.vue'))
 const ExperienceCarousel = defineAsyncComponent(() => import('~/components/dynamic/card/ExperienceCarousel.server.vue'))
