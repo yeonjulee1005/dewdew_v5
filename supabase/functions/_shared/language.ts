@@ -1,10 +1,20 @@
-// 사용자 메시지 언어 감지
+// 사용자 메시지 언어 감지 + 키워드 매칭용 질의 정규화
 // - 문자 체계(script)로 판별 가능한 언어는 규칙으로 즉시 결정 (비용 0)
-// - 라틴 문자권은 명백한 영어만 규칙으로, 나머지는 짧은 LLM 분류 1회 (수십 토큰)
-// 결과는 SUPPORTED_LANGUAGES 코드 중 하나. 번역 캐시 키로도 쓰이므로 허용 목록 밖 코드는 만들지 않는다.
+// - 라틴 문자권은 명백한 영어만 규칙으로, 나머지는 짧은 LLM 호출 1회
+// - component-mapper · RAG 1단계 키워드는 한국어·영어만 다루므로,
+//   그 외 언어는 같은 LLM 호출 1회로 질문을 한국어로 옮겨 매칭에만 사용한다 (답변 언어는 원문 기준)
+// 결과 lang 은 SUPPORTED_LANGUAGES 코드 중 하나. 번역 캐시 키로도 쓰이므로 허용 목록 밖 코드는 만들지 않는다.
 
 import { createAICompletion } from './ai-provider.ts'
-import { DEFAULT_MODEL_ID } from './ai-models.ts'
+import type { AIModelId } from './ai-models.ts'
+
+// 보조 호출(언어 판별·질의 번역)은 가장 가벼운 모델 사용. 장애 시 Gateway 폴백 체인이 이어받는다
+const UTILITY_MODEL_ID: AIModelId = 'google/gemini-3.5-flash-lite'
+const UTILITY_MAX_INPUT_CHARS = 300
+const UTILITY_MAX_OUTPUT_TOKENS = 80
+
+// component-mapper 키워드가 직접 다루는 언어 → 질의 번역 불필요
+const KEYWORD_LANGUAGES: LanguageCode[] = ['ko', 'en']
 
 export const SOURCE_LANGUAGE = 'ko'
 
@@ -76,49 +86,92 @@ const guessByScript = (text: string): ScriptGuess => {
   }
 }
 
-const classifyLatinLanguage = async (text: string): Promise<LanguageCode> => {
-  // ASCII 전용 + 흔한 영어 단어 → LLM 호출 없이 영어
-  if (/^[\x20-\x7E\s]*$/.test(text) && ENGLISH_HINT.test(text)) return 'en'
-
-  try {
-    const answer = await createAICompletion(
-      DEFAULT_MODEL_ID,
-      [{ role: 'user', content: text.slice(0, 500) }],
-      `Identify the language of the user's message. Reply with exactly one code from this list and nothing else: ${LATIN_LANGUAGES.join(', ')}. If unsure, reply en.`,
-      { maxTokens: 5, tag: 'language-detect' },
-    )
-    const code = answer.trim().toLowerCase().replace(/[^a-z]/g, '')
-    return isSupportedLanguage(code) ? code : 'en'
-  }
-  catch (error) {
-    console.warn('[language] LLM classification failed, fallback to en:', error)
-    return 'en'
-  }
-}
-
 const stripNoise = (text: string): string =>
   text
     .replace(/https?:\/\/\S+/g, ' ')
     .replace(/\S+@\S+\.\S+/g, ' ')
     .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, ' ')
 
+export interface MessageAnalysis {
+  // 응답 언어
+  lang: LanguageCode
+  // 키워드 매칭(component-mapper · RAG 1단계)에 쓸 질의. 한국어·영어는 원문, 그 외 언어는 한국어 번역
+  matchQuery: string
+}
+
+const parseCode = (raw: string | undefined, allowed: LanguageCode[], fallback: LanguageCode): LanguageCode => {
+  const code = (raw ?? '').trim().toLowerCase().replace(/[^a-z]/g, '')
+  return isSupportedLanguage(code) && allowed.includes(code) ? code : fallback
+}
+
+const utilityCall = (system: string, text: string) =>
+  createAICompletion(
+    UTILITY_MODEL_ID,
+    [{ role: 'user', content: text.slice(0, UTILITY_MAX_INPUT_CHARS) }],
+    system,
+    { maxTokens: UTILITY_MAX_OUTPUT_TOKENS, tag: 'message-analysis' },
+  )
+
+// 라틴 문자권: 언어 판별 + (영어가 아니면) 한국어 번역을 한 번의 호출로
+const analyzeLatin = async (message: string, text: string): Promise<MessageAnalysis> => {
+  // ASCII 전용 + 흔한 영어 단어 → LLM 호출 없이 영어
+  if (/^[\x20-\x7E\s]*$/.test(text) && ENGLISH_HINT.test(text)) return { lang: 'en', matchQuery: message }
+
+  try {
+    const answer = await utilityCall(
+      `Reply in exactly two lines, nothing else.
+Line 1: the language code of the user's message, one of: ${LATIN_LANGUAGES.join(', ')}.
+Line 2: if the code is not en, a short natural Korean translation of the message; otherwise leave it empty.`,
+      text,
+    )
+    const [codeLine, ...rest] = answer.trim().split('\n')
+    const lang = parseCode(codeLine, LATIN_LANGUAGES, 'en')
+    const translated = rest.join(' ').trim()
+    return { lang, matchQuery: lang !== 'en' && translated ? translated : message }
+  }
+  catch (error) {
+    console.warn('[language] latin analysis failed, fallback to en:', error)
+    return { lang: 'en', matchQuery: message }
+  }
+}
+
+// 문자 체계로 언어가 정해진 비한국어·비영어 (ja, zh, ru, …): 한국어 번역만
+const translateForMatching = async (message: string, text: string): Promise<string> => {
+  try {
+    const translated = (await utilityCall('Translate the user\'s message into short, natural Korean. Output only the translation.', text)).trim()
+    return translated || message
+  }
+  catch (error) {
+    console.warn('[language] query translation failed, use original:', error)
+    return message
+  }
+}
+
 /**
- * 사용자 마지막 메시지의 언어 코드를 반환한다.
- * 판별 불가(이모지·숫자·URL만 있는 경우) → 직전 사용자 메시지 언어 → 그것도 없으면 한국어.
+ * 사용자 마지막 메시지의 응답 언어와 키워드 매칭용 질의를 반환한다.
+ * - 한국어 · 명백한 영어: LLM 호출 0회
+ * - 그 외: 가벼운 모델로 1회 (입력 300자 · 출력 80토큰 상한)
+ * - 판별 불가(이모지·숫자·URL만): 직전 사용자 메시지 언어 → 그것도 없으면 한국어. 매칭 질의는 원문
  */
-export const detectLanguage = async (
+export const analyzeMessage = async (
   message: string,
   history: Array<{ role: string, content: string }> = [],
-): Promise<LanguageCode> => {
-  const candidates = [message, ...history.filter(h => h.role === 'user').map(h => h.content).reverse()]
+): Promise<MessageAnalysis> => {
+  const text = stripNoise(message ?? '').trim()
+  const guess = guessByScript(text)
 
-  for (const candidate of candidates) {
-    const text = stripNoise(candidate ?? '')
-    const guess = guessByScript(text)
-    if (!guess) continue
-    if (guess === 'latin') return await classifyLatinLanguage(text.trim())
-    return guess
+  if (guess === 'latin') return await analyzeLatin(message, text)
+  if (guess) {
+    const matchQuery = KEYWORD_LANGUAGES.includes(guess) ? message : await translateForMatching(message, text)
+    return { lang: guess, matchQuery }
   }
 
-  return SOURCE_LANGUAGE
+  // 현재 메시지로 판별 불가 → 직전 사용자 메시지의 문자 체계로 언어만 추정 (추가 호출 없음)
+  for (const previous of history.filter(h => h.role === 'user').map(h => h.content).reverse()) {
+    const previousGuess = guessByScript(stripNoise(previous ?? ''))
+    if (!previousGuess) continue
+    return { lang: previousGuess === 'latin' ? 'en' : previousGuess, matchQuery: message }
+  }
+
+  return { lang: SOURCE_LANGUAGE, matchQuery: message }
 }
