@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { track } from '@vercel/analytics'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery } = await useContentLocale(() => props.lang)
+
 const { data: threejsData } = await useFetch('/api/resume/threejs', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
@@ -92,7 +97,7 @@ onUnmounted(() => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.threejs.title', 'Three.js 작업물') }}
+          {{ ct('dynamic.threejs.title', 'Three.js 작업물') }}
         </h3>
 
         <div
@@ -105,7 +110,7 @@ onUnmounted(() => {
             arrows
             loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 -translate-y-1/4 w-20 h-10', prev: '!left-0', next: '!right-0' }"
-            :aria-label="$t('dynamic.threejs.carousel', 'Three.js 작업물 캐러셀')"
+            :aria-label="ct('dynamic.threejs.carousel', 'Three.js 작업물 캐러셀')"
           >
             <div class="flex flex-col gap-y-4 p-3 rounded-md border border-neutral-200 dark:border-neutral-700">
               <!-- Preview Canvas Container -->
@@ -174,7 +179,7 @@ onUnmounted(() => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.threejs.empty', 'Three.js 작업물 정보가 없습니다.') }}
+          {{ ct('dynamic.threejs.empty', 'Three.js 작업물 정보가 없습니다.') }}
         </div>
       </div>
     </DdCard>

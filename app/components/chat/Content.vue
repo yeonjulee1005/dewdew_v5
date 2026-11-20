@@ -16,6 +16,7 @@ type ExtendedUIMessage = {
   }>
   componentType?: ComponentType | null
   componentData?: Record<string, unknown> | null
+  lang?: string | null
 }
 
 const { isMobile } = useDevice()
@@ -86,6 +87,7 @@ const uiMessages = computed(() => {
       ],
       componentType: msg.componentType,
       componentData: msg.componentData,
+      lang: msg.lang,
     }
     return result
   })
@@ -109,6 +111,7 @@ const displayMessages = computed(() => {
     ],
     componentType: currentComponent.value?.type,
     componentData: currentComponent.value?.data,
+    lang: currentComponent.value?.lang,
   }
 
   return [
@@ -417,6 +420,7 @@ onUnmounted(() => {
               v-if="(message as ExtendedUIMessage).componentType"
               :component-type="(message as ExtendedUIMessage).componentType"
               :component-data="(message as ExtendedUIMessage).componentData"
+              :lang="(message as ExtendedUIMessage).lang"
               class="w-full"
             />
           </div>

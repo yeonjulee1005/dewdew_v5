@@ -226,6 +226,8 @@ export interface ChatMessage {
 export interface StreamMetadata {
   type: 'metadata'
   componentType: ComponentType
+  // 감지된 사용자 메시지 언어 (ISO 639-1, _shared/language.ts SUPPORTED_LANGUAGES)
+  lang: string
   data: RAGContext
 }
 

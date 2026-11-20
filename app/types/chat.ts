@@ -27,6 +27,8 @@ export interface ChatMessage {
   content: string
   componentType?: ComponentType | null
   componentData?: Record<string, any> | null
+  // 응답 언어 (ISO 639-1). 다이나믹 컴포넌트가 이 언어로 콘텐츠를 표시한다
+  lang?: string | null
   timestamp: Date
 }
 
@@ -34,6 +36,7 @@ export interface ChatMessage {
 export interface StreamMetadata {
   type: 'metadata'
   componentType: ComponentType
+  lang?: string
   data: Record<string, any>
 }
 

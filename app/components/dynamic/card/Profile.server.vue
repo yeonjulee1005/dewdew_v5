@@ -2,16 +2,21 @@
 const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery } = await useContentLocale(() => props.lang)
+
 const { data: profilesData } = await useFetch('/api/resume/profile', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
@@ -120,7 +125,7 @@ const personalityData = computed(() => {
             class="flex flex-col gap-y-2"
           >
             <h4 class="text-md font-semibold text-neutral-700 dark:text-neutral-300">
-              {{ $t('dynamic.profile.softSkills') }}
+              {{ ct('dynamic.profile.softSkills') }}
             </h4>
             <div class="flex flex-wrap gap-2">
               <DdBadge
@@ -154,7 +159,7 @@ const personalityData = computed(() => {
           class="flex flex-col gap-y-2"
         >
           <h4 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300">
-            {{ $t('dynamic.profile.strengths') }}
+            {{ ct('dynamic.profile.strengths') }}
           </h4>
           <div class="flex flex-col gap-y-3">
             <div

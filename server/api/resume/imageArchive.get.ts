@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: imageArchiveData, error: imageArchiveError } = await client
     .schema('resume')
     .from('image_archive')
-    .select('title, image_url, year, season, tags, category, order_index, year_description, deleted')
+    .select('id, title, image_url, year, season, tags, category, order_index, year_description, deleted')
     .eq('deleted', false)
     .order('year', { ascending: false })
     .order('order_index', { ascending: true })
@@ -16,5 +16,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusMessage: imageArchiveError.message })
   }
 
-  return imageArchiveData
+  // ?lang=xx 요청 시 번역본으로 덮어씀 (translate-resume Edge Function, 캐시 우선)
+  return localizeResumeRows(event, 'image_archive', imageArchiveData ?? [])
 })

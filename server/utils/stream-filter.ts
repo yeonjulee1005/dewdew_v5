@@ -92,6 +92,8 @@ export const filterStream = async (stream: ReadableStream): Promise<ReadableStre
                 const filtered = {
                   type: 'metadata',
                   componentType: parsed.componentType,
+                  // 응답 언어 코드는 민감 정보가 아니므로 전달 (컴포넌트 콘텐츠 번역용)
+                  ...(typeof parsed.lang === 'string' ? { lang: parsed.lang } : {}),
                   data: {}, // 빈 객체로 전달 (컴포넌트는 자체 API를 통해 데이터를 가져옴)
                 }
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify(filtered)}\n\n`))

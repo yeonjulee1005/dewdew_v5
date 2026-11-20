@@ -2,27 +2,28 @@
 const { isDesktopOrTablet } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery, formatYearMonth } = await useContentLocale(() => props.lang)
+
 const { data: educationData } = await useFetch('/api/resume/education', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
   dedupe: 'defer',
 })
 
-const formatDate = (dateString: string | null) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long' })
-}
+const formatDate = (dateString: string | null) => formatYearMonth(dateString)
 </script>
 
 <template>
@@ -36,7 +37,7 @@ const formatDate = (dateString: string | null) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.education.title') }}
+          {{ ct('dynamic.education.title') }}
         </h3>
         <DdPageGrid
           v-if="educationData && educationData.length > 0"
@@ -76,7 +77,7 @@ const formatDate = (dateString: string | null) => {
                   <div class="flex flex-wrap items-center gap-2 text-md text-neutral-700 dark:text-neutral-300">
                     <span>{{ formatDate(education.start_date) }}</span>
                     <span>~</span>
-                    <span>{{ education.end_date ? formatDate(education.end_date) : $t('dynamic.education.present') }}</span>
+                    <span>{{ education.end_date ? formatDate(education.end_date) : ct('dynamic.education.present') }}</span>
                   </div>
                 </div>
                 <DdSeparator v-if="education.description" />
@@ -106,7 +107,7 @@ const formatDate = (dateString: string | null) => {
           v-else
           class="text-sm text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.education.empty') }}
+          {{ ct('dynamic.education.empty') }}
         </div>
       </div>
     </DdCard>

@@ -4,6 +4,8 @@ import type { ComponentType } from '~/types/chat'
 const props = defineProps<{
   componentType: ComponentType | null | undefined
   componentData: Record<string, any> | null | undefined
+  // 응답 언어 (ISO 639-1). 카드가 이 언어로 콘텐츠·라벨·날짜를 표시한다
+  lang?: string | null
 }>()
 
 // 동적 컴포넌트 (Lazy Loading)
@@ -53,6 +55,7 @@ const shouldRender = computed(() => {
       <component
         :is="componentMap[componentType!]"
         :data="componentData"
+        :lang="lang ?? undefined"
       />
     </div>
   </Transition>

@@ -2,16 +2,21 @@
 const { isMobile } = useDevice()
 const { url } = useImageStorage()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery } = await useContentLocale(() => props.lang)
+
 const { data: imageArchiveData } = await useFetch('/api/resume/imageArchive', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
@@ -126,7 +131,7 @@ const isImageLoading = (imageUrl: string) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.image.archive') }}
+          {{ ct('dynamic.image.archive') }}
         </h3>
 
         <div
@@ -229,7 +234,7 @@ const isImageLoading = (imageUrl: string) => {
                   class="flex gap-1 overflow-x-auto py-2 [scrollbar-width:thin] [-ms-overflow-style:thin] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:dark:bg-neutral-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent"
                   role="region"
                   tabindex="0"
-                  :aria-label="$t('dynamic.image.thumbnailScrollableRegion', '이미지 썸네일 스크롤 영역')"
+                  :aria-label="ct('dynamic.image.thumbnailScrollableRegion', '이미지 썸네일 스크롤 영역')"
                 >
                   <div
                     v-for="(image, index) in getYearImages(item.value)"
@@ -255,7 +260,7 @@ const isImageLoading = (imageUrl: string) => {
                 v-else
                 class="text-md text-neutral-500 dark:text-neutral-400 text-center py-8"
               >
-                {{ $t('dynamic.image.empty') }}
+                {{ ct('dynamic.image.empty') }}
               </div>
             </template>
           </DdTabs>
@@ -265,7 +270,7 @@ const isImageLoading = (imageUrl: string) => {
           v-else
           class="text-md text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.image.empty') }}
+          {{ ct('dynamic.image.empty') }}
         </div>
       </div>
     </DdCard>
