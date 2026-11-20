@@ -1,11 +1,6 @@
 import type { RAGContext, ComponentType } from './types.ts'
 import { ALLOWED_COMPONENTS } from './types.ts'
-
-// 키워드 매칭 헬퍼
-const matchKeywords = (text: string, keywords: string[]): boolean => {
-  const lowerText = text.toLowerCase()
-  return keywords.some(keyword => lowerText.includes(keyword))
-}
+import { matchKeywords } from './keyword-match.ts'
 
 // 카테고리 타입 정의
 type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'threejs' | 'weakness' | 'profile' | 'experience' | 'education' | 'certification' | 'hobby' | 'social' | 'fallback' | 'none'
@@ -36,7 +31,7 @@ const detectCategory = (query: string, context: RAGContext): CategoryType => {
   }
 
   // 5. 스킬
-  if (matchKeywords(query, ['기술', '스택', 'skill', 'stack', '프레임워크', '도구', 'framework', 'tool', '라이브러리', 'library', '기술적', '기술적인', '어떤 기술', '기술 고민', '기술 관심', '기술 역량', '기술 능력', '기술 스택', '사용 기술', '사용하는 기술', '어떤 스택', '어떤 도구', '어떤 프레임워크', '스킬', '기여', '언어', '역량', '능력', 'skillset', '고민', '관심'])) {
+  if (matchKeywords(query, ['기술', '스택', 'skill', 'stack', 'tech', '프레임워크', '도구', 'framework', 'tool', '라이브러리', 'library', '기술적', '기술적인', '어떤 기술', '기술 고민', '기술 관심', '기술 역량', '기술 능력', '기술 스택', '사용 기술', '사용하는 기술', '어떤 스택', '어떤 도구', '어떤 프레임워크', '스킬', '기여', '언어', '역량', '능력', 'skillset', '고민', '관심'])) {
     return 'skill'
   }
 
