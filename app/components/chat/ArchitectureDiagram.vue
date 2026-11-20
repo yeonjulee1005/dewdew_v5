@@ -696,7 +696,7 @@ const onNodeKeydown = (event: KeyboardEvent, id: string) => {
         >{{ label.text }}</text>
       </svg>
     </div>
-    <figcaption class="text-sm text-neutral-500 dark:text-neutral-400 break-keep">
+    <figcaption class="text-base text-neutral-500 dark:text-neutral-400 break-keep">
       {{ d('caption') }}
       <span class="block mt-0.5 sm:hidden">{{ d('scrollHint') }}</span>
     </figcaption>
@@ -710,7 +710,7 @@ const onNodeKeydown = (event: KeyboardEvent, id: string) => {
       <DdButton
         :label="d('overviewTitle')"
         icon="i-lucide-layout-grid"
-        size="sm"
+        size="md"
         color="neutral"
         :variant="activeIndex === null ? 'solid' : 'outline'"
         class="shrink-0"
@@ -722,7 +722,7 @@ const onNodeKeydown = (event: KeyboardEvent, id: string) => {
         v-for="(stage, index) in stages"
         :key="stage.range"
         :label="stage.title"
-        size="sm"
+        size="md"
         :color="index === 7 || index === 3 ? 'info' : 'warning'"
         :variant="activeIndex === index ? 'solid' : 'outline'"
         class="shrink-0"
@@ -731,7 +731,7 @@ const onNodeKeydown = (event: KeyboardEvent, id: string) => {
         @click="selectStage(index)"
       >
         <template #leading>
-          <span class="font-mono text-xs opacity-80">{{ stage.range }}</span>
+          <span class="font-mono text-sm opacity-80">{{ stage.range }}</span>
         </template>
       </DdButton>
     </div>
