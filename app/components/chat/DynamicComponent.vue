@@ -27,6 +27,22 @@ const componentMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
   'threejs-carousel': defineAsyncComponent(() => import('~/components/dynamic/card/ThreejsCarousel.server.vue')),
 }
 
+// 스켈레톤 높이 (실제 카드 높이에 맞춤)
+const SKELETON_SIZE: Partial<Record<ComponentType, 'sm' | 'md' | 'lg'>> = {
+  'greeting-card': 'sm',
+  'social-links': 'sm',
+  'profile-card': 'lg',
+  'experience-list': 'lg',
+  'experience-timeline': 'lg',
+  'project-carousel': 'lg',
+  'image-carousel': 'lg',
+  'threejs-carousel': 'lg',
+  'hobby-carousel': 'lg',
+}
+const skeletonSize = computed(() => (props.componentType && SKELETON_SIZE[props.componentType]) || 'md')
+// 한국어 외 언어는 최초 번역이 수 초 걸릴 수 있다
+const isTranslating = computed(() => !!props.lang && props.lang !== 'ko')
+
 // 컴포넌트 렌더링 조건 체크
 const shouldRender = computed(() => {
   if (!props.componentType || props.componentType === 'chat-response') {
@@ -52,11 +68,20 @@ const shouldRender = computed(() => {
       v-if="shouldRender"
       class="my-3 rounded-xl overflow-hidden"
     >
-      <component
-        :is="componentMap[componentType!]"
-        :data="componentData"
-        :lang="lang ?? undefined"
-      />
+      <!-- 카드는 top-level await(useFetch·번역)로 준비되므로 그동안 스켈레톤 표시 -->
+      <Suspense>
+        <component
+          :is="componentMap[componentType!]"
+          :data="componentData"
+          :lang="lang ?? undefined"
+        />
+        <template #fallback>
+          <ChatCardSkeleton
+            :size="skeletonSize"
+            :translating="isTranslating"
+          />
+        </template>
+      </Suspense>
     </div>
   </Transition>
 </template>

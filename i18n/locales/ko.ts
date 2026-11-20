@@ -100,6 +100,8 @@ export default {
       reasoning: '추론형 · 응답이 다소 느림',
     },
     imageModal: '확대된 이미지',
+    cardLoading: '카드를 불러오는 중이에요',
+    cardTranslating: '답변 언어로 카드를 준비하고 있어요',
   },
   aiComponents: {
     concept: {

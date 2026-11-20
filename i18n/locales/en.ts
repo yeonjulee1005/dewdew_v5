@@ -97,6 +97,8 @@ export default {
       reasoning: 'Reasoning · slower responses',
     },
     imageModal: 'Enlarged image',
+    cardLoading: 'Loading card…',
+    cardTranslating: 'Preparing the card in your language…',
   },
   aiComponents: {
     concept: {
