@@ -1,11 +1,6 @@
 import type { RAGContext, ComponentType } from './types.ts'
 import { ALLOWED_COMPONENTS } from './types.ts'
-
-// 키워드 매칭 헬퍼
-const matchKeywords = (text: string, keywords: string[]): boolean => {
-  const lowerText = text.toLowerCase()
-  return keywords.some(keyword => lowerText.includes(keyword))
-}
+import { matchKeywords } from './keyword-match.ts'
 
 // 카테고리 타입 정의
 type CategoryType = 'greeting' | 'contact' | 'comprehensive' | 'image' | 'skill' | 'project' | 'threejs' | 'weakness' | 'profile' | 'experience' | 'education' | 'certification' | 'hobby' | 'social' | 'fallback' | 'none'

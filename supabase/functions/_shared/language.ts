@@ -124,9 +124,10 @@ Line 1: the language code of the user's message, one of: ${LATIN_LANGUAGES.join(
 Line 2: if the code is not en, a short natural Korean translation of the message; otherwise leave it empty.`,
       text,
     )
-    const [codeLine, ...rest] = answer.trim().split('\n')
-    const lang = parseCode(codeLine, LATIN_LANGUAGES, 'en')
-    const translated = rest.join(' ').trim()
+    // 기대 형식은 2줄이지만, 한 줄로 붙여 답하는 경우("vi: 번역", "vi | 번역")도 허용
+    const parsed = answer.trim().replace(/^line\s*1\s*:\s*/i, '').replace(/\nline\s*2\s*:\s*/i, '\n').match(/^\W*([a-z]{2})\b[\s:|\-–—.]*([\s\S]*)$/i)
+    const lang = parseCode(parsed?.[1], LATIN_LANGUAGES, 'en')
+    const translated = (parsed?.[2] ?? '').replace(/\s+/g, ' ').trim()
     return { lang, matchQuery: lang !== 'en' && translated ? translated : message }
   }
   catch (error) {
