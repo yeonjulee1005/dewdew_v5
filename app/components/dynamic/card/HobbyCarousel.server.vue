@@ -1,14 +1,19 @@
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery } = await useContentLocale(() => props.lang)
+
 const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
@@ -27,7 +32,7 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.hobby.title') }}
+          {{ ct('dynamic.hobby.title') }}
         </h3>
 
         <div
@@ -40,7 +45,7 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
             arrows
             loop
             :ui="{ item: 'basis-full', arrows: 'absolute bottom-0 right-8 w-20 h-10', prev: '!left-0', next: '!right-0' }"
-            :aria-label="$t('dynamic.hobby.carousel', '취미 및 관심사 캐러셀')"
+            :aria-label="ct('dynamic.hobby.carousel', '취미 및 관심사 캐러셀')"
           >
             <DdPageCard
               :title="hobby.title"
@@ -61,7 +66,7 @@ const { data: hobbiesData } = await useFetch('/api/resume/hobbies', {
           v-else
           class="text-md text-neutral-700 dark:text-neutral-300"
         >
-          {{ $t('dynamic.hobby.empty') }}
+          {{ ct('dynamic.hobby.empty') }}
         </div>
       </div>
     </DdCard>

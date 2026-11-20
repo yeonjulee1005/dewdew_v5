@@ -10,16 +10,16 @@ import { AVAILABLE_MODELS, DEFAULT_MODEL } from '~/types/chat'
 type ComponentData = {
   type: ComponentType
   data: Record<string, any>
+  lang?: string | null
 }
 
 export const useChat = () => {
+  const { t, locale } = useI18n()
+
   const messages = ref<ChatMessage[]>([])
   const isStreaming = ref(false)
   const streamingText = ref('')
-  const currentComponent = ref<{
-    type: ComponentType
-    data: Record<string, any>
-  } | null>(null)
+  const currentComponent = ref<ComponentData | null>(null)
 
   // 모델 선택 상태
   const selectedModel = ref<ModelConfig>(DEFAULT_MODEL)
@@ -37,7 +37,7 @@ export const useChat = () => {
   const parseStreamResponse = async (
     response: Response,
     onText: (text: string) => void,
-    onMetadata?: (type: ComponentType, data: Record<string, any>) => void,
+    onMetadata?: (type: ComponentType, data: Record<string, any>, lang: string | null) => void,
   ) => {
     const reader = response.body?.getReader()
     const decoder = new TextDecoder()
@@ -81,7 +81,7 @@ export const useChat = () => {
             if (parsed.type === 'metadata' && onMetadata) {
               const metadata = parsed as StreamMetadata
               // 모든 메타데이터에 대해 onMetadata 호출 (chat-response 포함)
-              onMetadata(metadata.componentType, metadata.data)
+              onMetadata(metadata.componentType, metadata.data, metadata.lang ?? null)
             }
 
             if (parsed.type === 'text') {
@@ -122,7 +122,8 @@ export const useChat = () => {
     abortController.value = new AbortController()
 
     try {
-      const response = await fetch('/api/chat/greeting', {
+      // 사이트 언어로 인사 (en 이면 영어 인사 → 답변·카드도 영어)
+      const response = await fetch(`/api/chat/greeting?lang=${locale.value === 'en' ? 'en' : 'ko'}`, {
         signal: abortController.value.signal,
       })
 
@@ -136,16 +137,18 @@ export const useChat = () => {
 
       let componentType: ComponentType | null = null
       let componentData: Record<string, any> | null = null
+      let componentLang: string | null = null
 
       await parseStreamResponse(
         response,
         (text) => {
           streamingText.value += text
         },
-        (type, data) => {
+        (type, data, lang) => {
           componentType = type
           componentData = data
-          currentComponent.value = { type, data }
+          componentLang = lang
+          currentComponent.value = { type, data, lang }
         },
       )
 
@@ -157,15 +160,16 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: streamingText.value || '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
+        content: streamingText.value || t('ai.greetingFallback'),
         componentType: finalComponentType,
         componentData: finalComponentData,
+        lang: componentLang,
         timestamp: new Date(),
       })
 
       // currentComponent도 업데이트 (컴포넌트가 표시되도록)
       if (finalComponentType !== 'chat-response') {
-        currentComponent.value = { type: finalComponentType, data: finalComponentData }
+        currentComponent.value = { type: finalComponentType, data: finalComponentData, lang: componentLang }
       }
 
       isInitialized.value = true
@@ -175,13 +179,14 @@ export const useChat = () => {
       if (error instanceof Error && error.name === 'AbortError') {
         // 중지된 경우 현재까지 받은 텍스트를 메시지로 저장
         if (streamingText.value.trim()) {
-          const comp = currentComponent.value as ({ type: ComponentType, data: Record<string, any> } | null)
+          const comp = currentComponent.value as ComponentData | null
           messages.value.push({
             id: crypto.randomUUID(),
             role: 'assistant',
             content: streamingText.value,
             componentType: comp ? comp.type : null,
             componentData: comp ? comp.data : null,
+            lang: comp?.lang ?? null,
             timestamp: new Date(),
           })
         }
@@ -195,7 +200,7 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: '안녕하세요! 저는 이연주(듀듀)입니다. 무엇이 궁금하세요?',
+        content: t('ai.greetingFallback'),
         componentType: null,
         componentData: null,
         timestamp: new Date(),
@@ -276,18 +281,20 @@ export const useChat = () => {
 
       let componentType: ComponentType | null = null
       let componentData: Record<string, any> | null = null
+      let componentLang: string | null = null
 
       await parseStreamResponse(
         response,
         (text) => {
           streamingText.value += text
         },
-        (type, data) => {
+        (type, data, lang) => {
           componentType = type
           componentData = data
+          componentLang = lang
           // chat-response가 아닌 경우에만 currentComponent 설정
           if (type !== 'chat-response') {
-            currentComponent.value = { type, data }
+            currentComponent.value = { type, data, lang }
           }
           else {
             currentComponent.value = null
@@ -314,6 +321,7 @@ export const useChat = () => {
         content: streamingText.value,
         componentType: finalComponentType,
         componentData: finalComponentData,
+        lang: componentLang,
         timestamp: new Date(),
       })
     }
@@ -329,6 +337,7 @@ export const useChat = () => {
             content: streamingText.value,
             componentType: comp ? comp.type : null,
             componentData: comp ? comp.data : null,
+            lang: comp?.lang ?? null,
             timestamp: new Date(),
           })
         }
@@ -340,7 +349,7 @@ export const useChat = () => {
       messages.value.push({
         id: crypto.randomUUID(),
         role: 'assistant',
-        content: '죄송해요, 오류가 발생했어요. 다시 시도해주세요!',
+        content: t('ai.errorMessage'),
         timestamp: new Date(),
       })
     }

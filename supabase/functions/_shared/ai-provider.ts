@@ -41,6 +41,39 @@ export interface ChatStreamMessage {
 }
 
 /**
+ * 단발성 텍스트 생성 (비스트리밍) — 언어 감지·번역 등 내부 보조 작업용
+ */
+export const createAICompletion = async (
+  model: AIModelId,
+  messages: ChatStreamMessage[],
+  systemPrompt: string,
+  options: { maxTokens?: number, tag?: string } = {},
+): Promise<string> => {
+  const response = await gatewayFetch('/chat/completions', {
+    model,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      ...messages,
+    ],
+    stream: false,
+    max_tokens: options.maxTokens ?? MAX_OUTPUT_TOKENS,
+    providerOptions: {
+      gateway: {
+        models: getFallbackModels(model),
+        tags: ['dewdew-rag-portfolio', ...(options.tag ? [options.tag] : [])],
+      },
+    },
+  })
+
+  const json = await response.json()
+  const content = json.choices?.[0]?.message?.content
+  if (typeof content !== 'string') {
+    throw new Error(`AI Gateway completion returned no content (${model})`)
+  }
+  return content
+}
+
+/**
  * 텍스트 스트림 생성
  * - temperature 는 보내지 않는다 (최신 Claude·GPT-5 계열 일부가 미지원)
  * - 선택 모델 실패 시 Gateway가 폴백 모델을 순서대로 시도

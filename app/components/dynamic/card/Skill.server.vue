@@ -1,16 +1,21 @@
 <script setup lang="ts">
 const { getSkillIcon } = useSkillIcon()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string
+    // AI 응답 언어 (ISO 639-1). 없으면 사이트 locale
+    lang?: string
   }>(),
   {
     title: '',
   },
 )
 
+const { ct, resumeQuery } = await useContentLocale(() => props.lang)
+
 const { data: skills } = await useFetch('/api/resume/skills', {
+  query: resumeQuery,
   method: 'GET',
   headers: useRequestHeaders(['cookie']),
   immediate: true,
@@ -58,7 +63,7 @@ const categoryColor = (category: string) => {
     <DdCard :ui="{ body: 'p-2.5 sm:p-4' }">
       <div class="flex flex-col gap-y-4">
         <h3 class="text-2xl font-bold">
-          {{ $t('dynamic.skill.title') }}
+          {{ ct('dynamic.skill.title') }}
         </h3>
 
         <div v-if="skills && skills.length > 0">
@@ -106,7 +111,7 @@ const categoryColor = (category: string) => {
           v-else
           class="text-md text-neutral-500 dark:text-neutral-400"
         >
-          {{ $t('dynamic.skill.empty') }}
+          {{ ct('dynamic.skill.empty') }}
         </div>
       </div>
     </DdCard>

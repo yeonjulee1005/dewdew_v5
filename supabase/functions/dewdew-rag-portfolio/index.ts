@@ -4,6 +4,8 @@ import { resolveModelId } from '../_shared/ai-models.ts'
 import { fetchRelevantData, getAISettings } from '../_shared/rag.ts'
 import { determineComponentType } from '../_shared/component-mapper.ts'
 import { optimizeHistory, createContextSummary } from '../_shared/history-optimizer.ts'
+import { analyzeMessage, SUPPORTED_LANGUAGES } from '../_shared/language.ts'
+import type { LanguageCode } from '../_shared/language.ts'
 
 import type {
   ChatRequest,
@@ -28,6 +30,7 @@ const buildSystemPrompt = (
   context: RAGContext,
   componentType: ComponentType,
   contextSummary: string = '',
+  lang: LanguageCode = 'ko',
 ): string => {
   const ownerName = settings.owner_name ?? '이연주(듀듀)'
   const personality = settings.personality ?? '친근하고 열정적인 Software Engineer'
@@ -131,6 +134,7 @@ A: "I built this site with Nuxt 4! The chat you're using right now is powered by
 
 1. [응답 언어 - 최우선 규칙] 반드시 사용자의 **마지막 메시지 언어**로 답변하세요.
    - 영어로 물으면 영어로, 한국어로 물으면 한국어로, 그 외 언어도 동일하게 해당 언어로 답변합니다.
+   - 시스템이 감지한 이번 메시지 언어: ${SUPPORTED_LANGUAGES[lang]} (${lang}). 답변 아래 표시되는 컴포넌트도 이 언어로 표시됩니다.
    - 이 프롬프트·대화 예시·[내 정보] 데이터가 한국어여도 응답 언어는 사용자의 마지막 메시지 언어를 따릅니다.
    - 한국어 데이터는 의미를 정확히 유지하며 사용자 언어로 자연스럽게 옮겨 전달하세요.
    - 회사명·프로젝트명·기술명 등 고유명사는 원문 표기를 유지하세요.
@@ -173,6 +177,7 @@ const createSSEStream = (
   textStream: AsyncIterable<string>,
   componentType: ComponentType,
   context: RAGContext,
+  lang: LanguageCode,
 ): ReadableStream<Uint8Array> => {
   const encoder = new TextEncoder()
 
@@ -182,6 +187,7 @@ const createSSEStream = (
       const metadata: StreamMetadata = {
         type: 'metadata',
         componentType,
+        lang,
         data: context,
       }
       const metadataStr = `data: ${JSON.stringify(metadata)}\n\n`
@@ -240,34 +246,40 @@ serve(async (req: Request): Promise<Response> => {
     const optimizedHistory = optimizeHistory(history, 6)
     const contextSummary = createContextSummary(history)
 
-    // 2. AI 설정 로드
-    const settings = await getAISettings()
+    // 2. 응답 언어 감지 + 키워드 매칭용 질의 (AI 설정 로드와 병렬)
+    //  - lang: 메타데이터로 내려가 다이나믹 컴포넌트가 같은 언어로 콘텐츠를 표시하는 데 쓰인다
+    //  - matchQuery: 한국어·영어는 원문, 그 외 언어는 한국어 번역 (키워드 매칭 전용, 답변은 원문 기준)
+    const [settings, { lang, matchQuery }] = await Promise.all([
+      getAISettings(),
+      analyzeMessage(message, history),
+    ])
+    if (matchQuery !== message) console.log(`[language] ${lang} match query: ${matchQuery}`)
 
-    // 3. RAG: 관련 데이터 검색
-    const context = await fetchRelevantData(message)
+    // 3. RAG: 관련 데이터 검색 (키워드 1단계가 동작하도록 matchQuery 사용)
+    const context = await fetchRelevantData(matchQuery)
 
-    // 4. 컴포넌트 타입 결정
-    let componentType = determineComponentType(message, context)
+    // 4. 컴포넌트 타입 결정 (기존 한국어·영어 키워드 규칙 그대로, 입력만 matchQuery)
+    let componentType = determineComponentType(matchQuery, context)
 
     // greeting 응답인 경우 항상 'greeting-card' 보장
     const isGreetingMessage = ['안녕', '하이', 'hi', 'hello', '반가워', '처음', '인사', '인사말', 'greeting', 'greetings']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     if (isGreetingMessage && componentType === 'chat-response') {
       componentType = 'greeting-card'
     }
 
     // 이미지 관련 질문인 경우 항상 'image-carousel' 보장 (component-mapper에서 이미 처리되지만 안전장치)
     const isImageQuestion = ['사진', '이미지', '갤러리', '아카이브', '앨범', 'image', 'gallery', 'archive', 'album']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     if (isImageQuestion && componentType !== 'image-carousel') {
       componentType = 'image-carousel'
     }
 
     // 학력 관련 질문인 경우 항상 'education-card' 보장
     const isEducationQuestion = ['학력', '학교', '졸업', '전공', '대학', '교육', 'education', 'school', 'graduate', 'major', 'university', '학력이', '학력은', '학력이 어떻게']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     // 경력 키워드가 함께 있으면 제외
-    const hasExperienceKeyword = ['경력', '회사', '일', '직장', 'career', 'company', 'job', 'work', 'experience'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    const hasExperienceKeyword = ['경력', '회사', '일', '직장', 'career', 'company', 'job', 'work', 'experience'].some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     if (isEducationQuestion && !hasExperienceKeyword && componentType !== 'education-card') {
       console.log(`[Component Mapper] Education question detected but got ${componentType}, forcing to education-card`)
       componentType = 'education-card'
@@ -275,16 +287,16 @@ serve(async (req: Request): Promise<Response> => {
 
     // 경력 관련 질문인 경우 항상 'experience-list' 또는 'experience-timeline' 보장
     const isExperienceQuestion = ['경력', '회사', '일', '직장', '커리어', '경험', '이직', 'career', 'company', 'job', 'work', 'experience', 'transition', '이력', '타임라인', 'timeline', '최근 경력', '경력이', '경력은']
-      .some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+      .some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     // 학력 키워드가 함께 있으면 제외
-    const hasEducationKeyword = ['학력', '학교', '졸업', '전공', '대학', 'education', 'school', 'graduate', 'major', 'university'].some(keyword => message.toLowerCase().includes(keyword.toLowerCase()))
+    const hasEducationKeyword = ['학력', '학교', '졸업', '전공', '대학', 'education', 'school', 'graduate', 'major', 'university'].some(keyword => matchQuery.toLowerCase().includes(keyword.toLowerCase()))
     if (isExperienceQuestion && !hasEducationKeyword && componentType !== 'experience-list' && componentType !== 'experience-timeline') {
       console.log(`[Component Mapper] Experience question detected but got ${componentType}, forcing to experience-list`)
       componentType = 'experience-list'
     }
 
     // Three.js 관련 질문인 경우 threejs-carousel 보장 (가장 먼저 체크)
-    const messageLower = message.toLowerCase()
+    const messageLower = matchQuery.toLowerCase()
     const isThreejsQuestion = ['three.js', 'threejs', 'three js', 'webgl', '웹gl', '3d', 'three.js 작업물', 'threejs 작업물', 'three.js 작품', 'threejs 작품', 'three.js 보여줘', 'threejs 보여줘', 'webgl 작업물', '3d 작업물', '3d 작품', 'webgl도', 'webgl도 관심', 'webgl 관심']
       .some(keyword => messageLower.includes(keyword.toLowerCase()))
     // 프로젝트 키워드가 함께 있으면 제외 (Three.js가 더 구체적이므로 우선)
@@ -319,7 +331,7 @@ serve(async (req: Request): Promise<Response> => {
     }
 
     // 5. 시스템 프롬프트 구성
-    const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary)
+    const systemPrompt = buildSystemPrompt(settings, context, componentType, contextSummary, lang)
 
     // 6. 모델 결정 (허용 목록 밖이면 기본 모델)
     const modelId = resolveModelId(body.modelName)
@@ -334,7 +346,7 @@ serve(async (req: Request): Promise<Response> => {
     const textStream = createAIChatStream(modelId, messages, systemPrompt)
 
     // 9. SSE 스트림 응답
-    const sseStream = createSSEStream(textStream, componentType, context)
+    const sseStream = createSSEStream(textStream, componentType, context, lang)
 
     return new Response(sseStream, {
       headers: {

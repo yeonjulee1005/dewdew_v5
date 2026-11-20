@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data: certificationsData, error: certificationsError } = await client
     .schema('resume')
     .from('certifications')
-    .select('title, description, credential_url, expiry_date, issue_date, issuer, order_index, deleted')
+    .select('id, title, description, credential_url, expiry_date, issue_date, issuer, order_index, deleted')
     .eq('deleted', false)
     .order('order_index', { ascending: true })
 
@@ -15,5 +15,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusMessage: certificationsError.message })
   }
 
-  return certificationsData
+  // ?lang=xx 요청 시 번역본으로 덮어씀 (translate-resume Edge Function, 캐시 우선)
+  return localizeResumeRows(event, 'certifications', certificationsData ?? [])
 })

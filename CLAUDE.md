@@ -56,7 +56,8 @@ dewdew_v5/
 ├── supabase/functions/           # Supabase Edge Functions
 │   ├── _shared/                  # 공유 모듈 (RAG, AI provider 등)
 │   ├── dewdew-rag-portfolio/     # RAG 포트폴리오 함수
-│   └── initialize-embeddings/    # 임베딩 초기화 함수
+│   ├── initialize-embeddings/    # 임베딩 초기화 함수
+│   └── translate-resume/         # resume.* 다국어 번역 (translation_cache 캐싱)
 ├── i18n/locales/                 # ko.ts, en.ts
 ├── public/                       # 정적 에셋, manifest
 ├── scripts/                      # 버전 관리 스크립트
@@ -142,6 +143,7 @@ bun run lint:fix
 | `bun run supabase:type-data` | data 스키마 타입 생성 |
 | `bun run supabase:deploy-rag-portfolio` | RAG 포트폴리오 함수 배포 |
 | `bun run supabase:deploy-initialize-embeddings` | 임베딩 초기화 함수 배포 |
+| `bun run supabase:deploy-translate-resume` | resume 번역 함수 배포 |
 | `bun run fonts:download` | 폰트 다운로드 |
 | `bun run kma:stations` | 기상청 관측 지점정보 갱신 (`server/data/kmaStations.json`) |
 | `bun run version:patch` | YYMM 패치 버전 bump |
@@ -199,6 +201,14 @@ bun run lint:fix
 - Supabase Dashboard → Functions → `initialize-embeddings` → Invoke function
 
 벡터 검색이 최신 데이터를 반영하려면 임베딩이 최신 상태여야 합니다.
+
+## 답변 카드 다국어
+
+- 원본은 `resume.*` 한국어 데이터 하나만 유지합니다. 언어별 컬럼을 추가하지 않습니다.
+- AI 응답 언어(`lang`)는 RAG 함수가 감지해 SSE 메타데이터로 전달 → 카드가 `/api/resume/*?lang=xx`로 조회합니다.
+- 번역은 `translate-resume` Edge Function이 수행하고 `resume.translation_cache`에 (테이블, 언어)별로 캐싱합니다.
+- 원본이 바뀌면 해시가 달라져 다음 요청 때 자동으로 재번역됩니다 (수동 작업 불필요).
+- 번역 필드 추가·프롬프트 변경 시 `translate-resume/index.ts`의 `TRANSLATION_VERSION`을 올려 캐시를 무효화합니다.
 
 ---
 
